@@ -65,7 +65,8 @@ module.exports = function (ctx) {
         'Meta',
         'LocalStorage',
         'SessionStorage',
-        'Loading'
+        'Loading',
+        'Dialog'
       ]
 
       // iconSet: 'ionicons-v4'

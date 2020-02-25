@@ -6,6 +6,8 @@ const qLang = lang => {
   switch (lang) {
     case 'en':
       return 'en-us'
+    case 'pt':
+      return lang
     case 'es':
       return lang
     default:
@@ -16,6 +18,8 @@ const qLang = lang => {
 // Lang for veevalidate
 const veeLang = lang => {
   switch (lang) {
+    case 'pt':
+      return 'pt'
     case 'es':
       return 'es'
     case 'en':
@@ -28,6 +32,8 @@ const veeLang = lang => {
 // Lang for moment
 const momentLang = lang => {
   switch (lang) {
+    case 'pt':
+      return 'pt'
     case 'es':
       return 'es'
     case 'en':
@@ -40,6 +46,8 @@ const momentLang = lang => {
 // Lang for local files
 const localLang = lang => {
   switch (lang) {
+    case 'pt':
+      return 'pt'
     case 'es':
       return 'es'
     case 'en':

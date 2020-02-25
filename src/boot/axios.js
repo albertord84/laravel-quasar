@@ -4,9 +4,8 @@ import { master } from '../helpers/master'
 import { Cookies, LocalStorage, Notify } from 'quasar'
 
 export default async ({ Vue, app, ssrContext, store, router }) => {
-  const cookies = process.env.SERVER
-    ? Cookies.parseSSR(ssrContext)
-    : Cookies
+  const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies
+
   // Global axios defaults
   let token = LocalStorage.getItem(master.getAuthTokenName())
   axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
@@ -14,6 +13,7 @@ export default async ({ Vue, app, ssrContext, store, router }) => {
   if (!_.isEmpty(token)) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   }
+
   // Add a request interceptor
   axios.interceptors.request.use((config) => {
     // Do something before request is sent
@@ -22,6 +22,7 @@ export default async ({ Vue, app, ssrContext, store, router }) => {
     // Do something with request error
     return Promise.reject(error)
   })
+
   // Add a response interceptor
   axios.interceptors.response.use((response) => {
     // Do something with response data

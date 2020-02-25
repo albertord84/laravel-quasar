@@ -1,5 +1,6 @@
 
 const routes = [
+
   // Public routes
   {
     path: '/',
@@ -25,6 +26,7 @@ const routes = [
       }
     ]
   },
+
   // Auth routes
   {
     path: '/',

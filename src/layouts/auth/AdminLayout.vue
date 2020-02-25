@@ -2,26 +2,17 @@
   <q-layout view="hHh Lpr lFf">
     <q-header elevated class="glossy">
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          @click="drawer = !drawer"
-          aria-label="Menu">
-          <q-icon name="menu" />
+        <q-btn flat dense round @click="drawer = !drawer" aria-label="Menu">
+          <q-icon name="menu"/>
         </q-btn>
-
         <q-toolbar-title>
-          Laravel 6.0 with Quasar v{{$q.version}} (SPA) by Manfred047
+          <!-- Laravel 6.0 with Quasar v{{$q.version}} (SPA) by Manfred047 -->
+          Physiback
         </q-toolbar-title>
-
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="drawer"
-      bordered
-      content-class="bg-grey-2">
+    <q-drawer v-model="drawer" bordered content-class="bg-grey-2">
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
         <q-list>
           <q-item-label header>Essential Links</q-item-label>

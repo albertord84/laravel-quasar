@@ -6,6 +6,10 @@ export default {
       value: 'es'
     },
     {
+      label: 'Português',
+      value: 'pt'
+    },
+    {
       label: 'English',
       value: 'en'
     }

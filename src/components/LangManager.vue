@@ -1,11 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <q-select
-      v-model="language"
-      :options="languages"
-      emit-value
-      map-options>
-    </q-select>
+    <q-select v-model="language" :options="languages" emit-value map-options></q-select>
   </div>
 </template>
 
@@ -14,16 +9,10 @@ import { mapActions, mapGetters } from 'vuex'
 import _ from 'lodash'
 export default {
   name: 'LangManager',
-  beforeMount () {
-    this.findLang()
-  },
-  watch: {
-    language (item) {
-      this.setLanguage([this.$i18n, item])
+  data () {
+    return {
+      language: 'en'
     }
-  },
-  computed: {
-    ...mapGetters('lang', ['languages', 'getLanguage'])
   },
   methods: {
     ...mapActions('lang', ['setLanguage']),
@@ -32,11 +21,19 @@ export default {
       this.language = _.get(language, ['value'], 'en')
     }
   },
-  data () {
-    return {
-      language: 'en'
+  beforeMount () {
+    this.findLang()
+    console.log(this.language)
+  },
+  watch: {
+    language (item) {
+      this.setLanguage([this.$i18n, item])
     }
+  },
+  computed: {
+    ...mapGetters('lang', ['languages', 'getLanguage'])
   }
+
 }
 </script>
 
