@@ -5,12 +5,15 @@ const master = {
   getAuthTokenName () {
     return process.env.AUTH_TOKEN_NAME
   },
+
   getStorageUserDataName () {
     return 'user_data'
   },
+
   getLangCookieName () {
     return process.env.LANG_COOKIE_NAME
   },
+
   /**
      * Opcion para obtener la url base de la api
      *
@@ -18,9 +21,11 @@ const master = {
      * @returns {string}
      */
   api (url = '') {
+    // let api = 'http://lq.test:8080/api/v1'
     const api = process.env.API_URL
     return `${api}/${url}`
   },
+
   /**
    * Obtiene el conjunto de errores (error 422), si no hay, retorna false.
    *
@@ -42,10 +47,12 @@ const master = {
     }
     return false
   },
+
   hasRule (element, rule) {
     let ruler = _.get(element, ['failedRules', rule])
     return !_.isEmpty(ruler)
   },
+
   /**
      * Toma la lista errores emitida por el server (o custom) y la anexa a los errores de VeeValidate
      *
@@ -66,6 +73,7 @@ const master = {
     }
     observer.setErrors(aux)
   },
+
   onlyNumbers (evt) {
     evt = evt || window.event
     let charCode = (evt.which) ? evt.which : evt.keyCode
@@ -84,6 +92,7 @@ const master = {
         break
     }
   },
+
   /**
      * Formatea un numero determinado
      * @author Locutus (http://locutus.io)
@@ -119,6 +128,7 @@ const master = {
     TheNumber = s.join(dec)
     return TheNumber.replace(regex, '')
   },
+
   /**
      * Formatea un numero determinado basado en el arreglo de datos
      *
@@ -133,6 +143,7 @@ const master = {
     let fix = _.get(data, ['fix'], 2)
     return this.numberFormat(number, decimal, thousand, fix)
   },
+
   /**
      * Retorna un numero con simbolo de moneda
      *
@@ -156,6 +167,7 @@ const master = {
         return `${symbol} ${number}`
     }
   },
+
   /**
      * Retorna un numero con sombolo ISO
      *
@@ -171,6 +183,7 @@ const master = {
     let iso = _.get(data, ['code'], 'MXN')
     return `${iso} ${number}`
   },
+
   /**
      * Permite la ejecucion de una funcin en intervalos de tiempos
      *
@@ -203,6 +216,7 @@ const master = {
       return this.stop().start()
     }
   },
+
   /**
      * Permite cambiar el idioma de Google Recaptcha
      *
@@ -220,6 +234,7 @@ const master = {
       }
     }
   },
+
   bin2hex (s) {
     let i
     let l
@@ -232,6 +247,7 @@ const master = {
     }
     return o
   },
+
   hex2bin (bin) {
     let ret = []
     let i = 0
@@ -247,6 +263,7 @@ const master = {
     }
     return String.fromCharCode.apply(String, ret)
   },
+
   /**
      * Remove all diatrics from the given text.
      * @access public
@@ -274,6 +291,7 @@ const master = {
     })
     return text
   },
+
   /**
    * Search string in object
    *
@@ -285,21 +303,25 @@ const master = {
     const query = this.normalizeToBase(_.get(obj, path, '').toLowerCase())
     return query.indexOf(this.normalizeToBase(terms.toLowerCase())) > -1
   },
+
   regexPassword () {
     return /(^[\S]{8,}$)/
   },
+
   errorToast (message) {
     Notify.create({
       message: message,
       type: 'negative'
     })
   },
+
   successToast (message) {
     Notify.create({
       message: message,
       type: 'positive'
     })
   }
+
 }
 
 export { master }
