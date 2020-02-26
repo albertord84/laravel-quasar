@@ -25,3 +25,8 @@ Route::view('{all}', 'app')
 // Route::get('/', 'WelcomeController@index');
 
 Route::post('register', 'Auth\RegisterController@store');
+
+
+Route::resource('usersRoles', 'UsersRoleController');
+
+Route::resource('usersStatus', 'UsersStatuController');
