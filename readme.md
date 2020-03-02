@@ -19,6 +19,7 @@ En el directorio raiz, ejecuta los siguientes comandos:
 7. php artisan key:generate
 8. php artisan migrate
 9. php artisan passport:install
+9.1 php artisan passport:client --password
 
 10. https://packagist.org/packages/barryvdh/laravel-cors
 "fruitcake/laravel-cors": "^1.0",
@@ -128,6 +129,40 @@ systemctl restart apache2
 
 * Api router: "api.php" en "routes/api/api.php" 
 * Mapa de rutas (si maneja archivos individuales) en: "app/Providers/RouteServiceProvider.php"
+
+##### Generar ID de aplicativo para obtener barer token 
+1 - Ejecutar 9.1 para cada instancia de aplicativo que se vaya a utilizar para obtener:
+php artisan passport:client --password
+
+ What should we name the password grant client? [Laravel Quasar Framework Password Grant Client]:
+ > 
+Password grant client created successfully.
+* "Client ID: 1"
+* "Client secret: xekTJZU3jE8scq3TAWLDgb11zoIMzLnO9R1YVBX8"
+
+2 - Executar POST para: "http://lq.test/api/v1/oauth/token" para obtener:
+{
+    "token_type": "Bearer",
+    "expires_in": 31536000,
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...",
+    "refresh_token": "def50200c5efaf9661c...",
+    "user_data": {
+        "id": 1,
+        "email": "albertord84@gmail.com",
+        "username": "alberto"
+    }
+}
+
+2.1 Parametros para el Postman (Body.Params):
+client_id:1
+client_secret:xekTJZU3jE8scq3TAWLDgb11zoIMzLnO9R1YVBX8
+username:alberto
+password:12341234
+grant_type:password
+
+3 - Usar "access_token" no aplicativo que se ira a conectar en cada peticion al servidor
+
+
 
 #
 

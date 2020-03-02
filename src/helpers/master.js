@@ -21,8 +21,10 @@ const master = {
      * @returns {string}
      */
   api (url = '') {
-    // let api = 'http://lq.test:8080/api/v1'
-    const api = process.env.API_URL
+    let api = 'http://lq.test'
+    // let api = 'http://lq.test:8080'
+    // let api = 'http://lq.test:8080/api/auth/v1'
+    // const api = process.env.API_URL
     return `${api}/${url}`
   },
 

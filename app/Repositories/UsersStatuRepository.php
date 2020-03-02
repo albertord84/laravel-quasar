@@ -3,7 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\UsersStatu;
-use App\Repositories\BaseRepository;
+// use App\Repositories\BaseRepository;
+use InfyOm\Generator\Common\BaseRepository;
 
 /**
  * Class UsersStatuRepository

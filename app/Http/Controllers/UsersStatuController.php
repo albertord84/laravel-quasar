@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUsersStatuRequest;
 use App\Http\Requests\UpdateUsersStatuRequest;
 use App\Repositories\UsersStatuRepository;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
 
-class UsersStatuController extends AppBaseController
+class UsersStatuController extends Controller
 {
     /** @var  UsersStatuRepository */
     private $usersStatuRepository;

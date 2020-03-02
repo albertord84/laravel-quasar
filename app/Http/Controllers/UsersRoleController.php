@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUsersRoleRequest;
 use App\Http\Requests\UpdateUsersRoleRequest;
 use App\Repositories\UsersRoleRepository;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
 
-class UsersRoleController extends AppBaseController
+class UsersRoleController extends Controller
 {
     /** @var  UsersRoleRepository */
     private $usersRoleRepository;

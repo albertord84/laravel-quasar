@@ -17,7 +17,7 @@ Route::name('api.auth.')
     ->group(function () {
 
         Route::post('/oauth/token', 'LoginController@login')
-            ->middleware(['oauth.grant:password', 'oauth.details'])
+            // ->middleware(['oauth.grant:password', 'oauth.details'])
             ->name('login');
 
         Route::apiResource('/recovery', 'ForgotPasswordController')
@@ -30,7 +30,7 @@ Route::name('api.auth.')
         // Route::apiResource('/register', 'RegisterController');
 
         Route::post('/oauth/logout', 'LoginController@logout')
-            ->middleware(['auth:api'])
+            // ->middleware(['auth:api'])
             ->name('logout');
 
         // Route::apiResource('/oauth/change-password', 'ChangePasswordController')

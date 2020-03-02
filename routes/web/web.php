@@ -26,6 +26,10 @@ Route::view('{all}', 'app')
 
 Route::post('register', 'Auth\RegisterController@store');
 
+Route::post('/oauth/token', 'Auth\LoginController@login')
+// ->middleware(['oauth.grant:password', 'oauth.details'])
+->name('login');
+
 
 Route::resource('usersRoles', 'UsersRoleController');
 
