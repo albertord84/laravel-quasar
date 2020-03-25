@@ -2,7 +2,7 @@ export const ptRegister = {
   'title': 'Crear cuenta',
   'success_register': 'Registro completo',
   'form': {
-    'username': 'Nombre de usuario',
+    'username': 'Nombre de usuário',
     'email': 'Correo electrónico',
     'email_confirmation': 'Confirmar Correo electrónico',
     'password': 'Contraseña',

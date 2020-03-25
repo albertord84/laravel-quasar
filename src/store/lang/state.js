@@ -1,5 +1,6 @@
 export default {
-  language: 'en',
+  // language: 'en',
+  language: 'pt',
   langList: [
     {
       label: 'Español',

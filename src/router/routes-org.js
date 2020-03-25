@@ -6,15 +6,14 @@ const routes = [
     path: '/',
     component: () => import('layouts/public/PublicLayout.vue'),
     children: [
-      // {
-      //   path: '',
-      //   name: 'public.index',
-      //   component: () => import('pages/public/Index.vue'),
-      //   meta: { requiresAuth: false }
-      // },
       {
-        // path: '/login',
-        path: '/',
+        path: '',
+        name: 'public.index',
+        component: () => import('pages/public/Index.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/login',
         name: 'public.login',
         component: () => import('pages/public/Login.vue'),
         meta: { requiresAuth: false }
@@ -46,33 +45,33 @@ const routes = [
         meta: { requiresAuth: true }
       }
     ]
-  },
-
-  // Admins routes
-  {
-    path: '/',
-    component: () => import('layouts/public/PublicLayout.vue'),
-    children: [
-      {
-        path: '',
-        name: 'admin.index',
-        component: () => import('pages/public/Index.vue'),
-        meta: { requiresAuth: false }
-      },
-      {
-        path: '/login',
-        name: 'admin.login',
-        component: () => import('pages/public/Login.vue'),
-        meta: { requiresAuth: false }
-      },
-      {
-        path: '/register',
-        name: 'admin.register',
-        component: () => import('pages/public/Register.vue'),
-        meta: { requiresAuth: false }
-      }
-    ]
   }
+
+  // // SuperAdmins routes
+  // {
+  //   path: '/',
+  //   component: () => import('layouts/public/PublicLayout.vue'),
+  //   children: [
+  //     {
+  //       path: '',
+  //       name: 'public.index',
+  //       component: () => import('pages/public/Index.vue'),
+  //       meta: { requiresAuth: false }
+  //     },
+  //     {
+  //       path: '/login',
+  //       name: 'public.login',
+  //       component: () => import('pages/public/Login.vue'),
+  //       meta: { requiresAuth: false }
+  //     },
+  //     {
+  //       path: '/register',
+  //       name: 'public.register',
+  //       component: () => import('pages/public/Register.vue'),
+  //       meta: { requiresAuth: false }
+  //     }
+  //   ]
+  // },
 
 ]
 
