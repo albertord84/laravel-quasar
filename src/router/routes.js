@@ -50,25 +50,37 @@ const routes = [
 
   // Admins routes
   {
-    path: '/',
-    component: () => import('layouts/public/PublicLayout.vue'),
+    path: '/admin',
+    component: () => import('layouts/private/Admin.vue'),
     children: [
       {
-        path: '',
-        name: 'admin.index',
-        component: () => import('pages/public/Index.vue'),
+        path: '/admin/questionaries',
+        name: 'admin.questionaries',
+        component: () => import('pages/private/admin/Questionaries.vue'),
         meta: { requiresAuth: false }
       },
       {
-        path: '/login',
-        name: 'admin.login',
-        component: () => import('pages/public/Login.vue'),
+        path: '/admin/campaigns',
+        name: 'admin.campaigns',
+        component: () => import('pages/private/admin/Campaigns.vue'),
         meta: { requiresAuth: false }
       },
       {
-        path: '/register',
-        name: 'admin.register',
-        component: () => import('pages/public/Register.vue'),
+        path: '/admin/bases',
+        name: 'admin.bases',
+        component: () => import('pages/private/admin/Bases.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/admin/users',
+        name: 'admin.bases',
+        component: () => import('pages/private/admin/Users.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/admin/history',
+        name: 'admin.bases',
+        component: () => import('pages/private/admin/History.vue'),
         meta: { requiresAuth: false }
       }
     ]
