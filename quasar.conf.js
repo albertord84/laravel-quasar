@@ -24,7 +24,7 @@ module.exports = function (ctx) {
     ],
 
     framework: {
-      // all: true, // --- includes everything; for dev only!
+      all: true, // --- includes everything; for dev only!
 
       components: [
         'QLayout',
@@ -78,11 +78,11 @@ module.exports = function (ctx) {
     build: {
       scopeHoisting: true,
       vueRouterMode: 'history',
-      // vueCompiler: true,
+      vueCompiler: true,
       // gzip: true,
       // analyze: true,
       distDir: 'public/quasar',
-      // publicPath: '/quasar/',
+      publicPath: '/quasar/',
       // extractCSS: false,
       extendWebpack (cfg) {
         cfg.module.rules.push({
@@ -102,23 +102,26 @@ module.exports = function (ctx) {
       // https: true,
       port: process.env.PORT | 8080,
       host: process.env.HOST | 'localhost',
-      open: true // opens browser window automatically,
+      // open: true // opens browser window automatically,
     },
 
-    // animations: 'all', // --- includes all animations
-    animations: [],
+    animations: 'all', // --- includes all animations
+    // animations: [],
 
     ssr: {
-      pwa: false
+      pwa: true
     },
 
     pwa: {
       // workboxPluginMode: 'InjectManifest',
-      // workboxOptions: {}, // only for NON InjectManifest
+      workboxOptions: {
+        skipWaiting: true,
+        clientsClaim: true
+      }, // only for NON InjectManifest
       manifest: {
-        // name: 'Quasar App',
-        // short_name: 'Quasar-PWA',
-        // description: 'Best PWA App in town!',
+        name: 'Quasar App',
+        short_name: 'Quasar-PWA',
+        description: 'Best PWA App in town!',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -154,12 +157,12 @@ module.exports = function (ctx) {
     },
 
     cordova: {
-      // id: 'org.cordova.quasar.app'
+      id: 'org.cordova.quasar.app'
       // noIosLegacyBuildFlag: true // uncomment only if you know what you are doing
     },
 
     electron: {
-      // bundler: 'builder', // or 'packager'
+      bundler: 'builder', // or 'packager'
 
       extendWebpack (cfg) {
         // do something with Electron main process Webpack cfg
@@ -182,7 +185,7 @@ module.exports = function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        // appId: 'quasar-app'
+        appId: 'quasar-app'
       }
     }
   }

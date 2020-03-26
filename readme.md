@@ -166,6 +166,117 @@ grant_type:password
 
 #
 
+## Building APK
+
+### Configure cordova for androis on linux
+https://codeburst.io/configuring-cordova-for-android-development-on-linux-6ee4a28cd432
+
+### downloas jdk 8
+https://gist.github.com/hgomez/9650687
+$ wget --no-cookies \
+--no-check-certificate \
+--header "Cookie: oraclelicense=accept-securebackup-cookie" \
+http://download.oracle.com/otn-pub/java/jdk/8u241-b07/1f5b5a70bf22433b84d0e960903adac8/jdk-8u241-linux-x64.tar.gz
+
+$ cd /usr/local
+$ sudo mkdir java && cd java
+$ sudo tar xzvf ~/Downloads/jdk-8u241-linux-x64.tar.gz
+
+Add these two lines to the bottom of the file 
+$ cd ~
+$ vim .bashrc
+
+export JAVA_HOME="/usr/local/java/jdk1.8.0_241"
+PATH=$PATH:$JAVA_HOME/bin
+
+$ source .bashrc
+$ javac -version      # should print 'javac 1.8.0_***'
+
+
+### Android Studio
+https://developer.android.com/studio/index.html
+Linux	commandlinetools-linux-6200805_latest.zip dwonload this
+
+unzim into ~/Android/Sdk/
+or copy the tools folder to  ~/Android/Sdk/
+
+no Move back to the desired location, unzip the files, and execute the script.
+no $ cd /usr/local
+no $ sudo tar xzvf ~/Downloads/android-studio-ide-192.6241897-linux.tar.gz
+no $ cd android-studio/bin
+no $ ./studio.sh
+
+
+
+
+The Android Studio Wizard will open and you can click Next on everything. Now, this one really is going to take a long time.
+When the download finishes, click Finish. On the next screen click Configure > SDK Manager in the bottom right. 
+Select the top three or four SDKs and then click next (you can choose less if you’re running low on storage).
+Again, you’re going to wait. When it finishes, close the Android Studio window. This will also kill the terminal instance.
+We are going to update ~/.bashrc again to add Android to the system path.
+
+Add these three lines to the bottom of the file
+$ cd ~
+$ vim .bashrc
+export ANDROID_HOME="$HOME/Android/Sdk"
+PATH=$PATH:$ANDROID_HOME/tools
+PATH=$PATH:$ANDROID_HOME/platform-tools
+
+### Gradle
+Install with:
+$ sudo apt install gradle
+
+### Cordova
+Install with:
+$ npm install -g cordova
+
+#### Test Cordova
+Create a new temporary Cordova project:
+$ cordova create reqTest
+$ cd reqTest
+Add Android to the list of platforms:
+$ cordova platform add android
+
+Type one final command into the terminal:
+$ cordova requirements
+
+Correct response:
+Android Studio project detected
+Requirements check results for android:
+Java JDK: installed 1.8.0
+Android SDK: installed true
+Android target: installed android-27,android-26
+Gradle: installed /usr/share/gradle/bin/gradle
+
+$ cd ..
+$ rm -r reqTest
+
+
+### Quasar cordova 
+quasar dev -m cordova -T android
+
+cordova platform add android
+
+cordova build --release
+
+### Testing APK
+
+List devices:
+adb devices
+
+Run android:
+cordova run android
+
+### Building PWA
+npm run-script q-pwa-dev
+
+### Building APK
+npm run-script q-apk-dev
+
+### Building iOS
+npm run-script q-ios-dev
+
+
 ## English
 
 #### Coming soon

@@ -18,10 +18,22 @@
       "dev": {
         "spa": {
           "iconHash": "d57dfe50afd121dbc6007c693756fe1e"
+        },
+        "pwa": {
+          "iconHash": "d57dfe50afd121dbc6007c693756fe1e"
+        },
+        "cordova": {
+          "iconHash": "d57dfe50afd121dbc6007c693756fe1e",
+          "splashscreenHash": "c2a2065d639fd1dd4c4d8120b2e70dfb",
+          "splashscreenType": "pure",
+          "backgroundColor": "#000074"
         }
       },
       "build": {
         "spa": {
+          "iconHash": "d57dfe50afd121dbc6007c693756fe1e"
+        },
+        "pwa": {
           "iconHash": "d57dfe50afd121dbc6007c693756fe1e"
         }
       }
