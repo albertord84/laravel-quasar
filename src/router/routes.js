@@ -54,6 +54,12 @@ const routes = [
     component: () => import('layouts/private/Admin.vue'),
     children: [
       {
+        path: '/admin',
+        name: 'admin.dashboard',
+        component: () => import('pages/private/admin/Dashboard.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
         path: '/admin/questionaries',
         name: 'admin.questionaries',
         component: () => import('pages/private/admin/Questionaries.vue'),

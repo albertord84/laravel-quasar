@@ -1,58 +1,177 @@
 <template>
-  <q-page class="page-background">
-    <div class="fixed-center login-form">
-      <div class="">
-        <q-card class="">
-          <q-card-section>
-            <validation-observer ref="observer" v-slot="{ valid }">
-              <q-form>
-                <div class="text-center">
-                  <img src="../../../assets/custom/physiback.png" alt="" width="140em">
-                  <p class="text-h6 text-center q-pb-sm">
-                    {{ $t('login.title') }}
-                  </p>
-                </div>
-
-                <validation-provider vid="username" ref="username" :name="$t('login.form.username')" :rules="form_rules.username" v-slot="{ errors }">
-                  <div class="">
-                    <q-input id="username" name="username" type="text" :label="$t('login.form.username')" v-model="form.username" :error="hasErrors(errors)" :error-message="errors[0]">
-                      <template v-slot:prepend>
-                        <q-icon name="perm_identity" />
-                      </template>
-                    </q-input>
-                  </div>
-                </validation-provider>
-
-                <validation-provider vid="password" ref="password" :name="$t('login.form.password')" :rules="form_rules.password" v-slot="{ errors }">
-                  <div class="">
-                    <q-input id="password" name="password" type="password" :label="$t('login.form.password')" v-model="form.password" :error="hasErrors(errors)" :error-message="errors[0]">
-                      <template v-slot:prepend>
-                        <q-icon name="lock" />
-                      </template>
-                    </q-input>
-                  </div>
-                </validation-provider>
-
-                <div class="text-center">
-                  <q-btn type="submit" :loading="loader" :disable="!valid" :label="$t('login.title')" class="q-mt-md" color="teal" @click="submit">
-                    <template v-slot:loading>
-                      <q-spinner></q-spinner>
-                    </template>
-                  </q-btn>
-                </div>
-                <div class="q-mt-lg text-right">Ainda não tem conta?
-                  <router-link :to="{name: 'public.register'}">Crie uma agora</router-link>
-                </div>
-                <div class="q-mt-sm text-right">
-                  <router-link  :to="{name: 'public.register'}">Recupere sua senha</router-link>
-                </div>
-              </q-form>
-            </validation-observer>
-          </q-card-section>
-        </q-card>
+    <q-page class="bg-gray q-pa-md">
+      <div class="flex justify-between">
+        <h6>Questionários</h6>
+        <q-btn flat round color="primary" icon="help"/>
       </div>
-    </div>
-  </q-page>
+
+      <q-card class="" no-bordered flat>
+        <q-tabs v-model="tab" dense class="text-grey" active-color="orange-10" indicator-color="orange-10" align="left" caps inline-label>
+          <q-tab name="mails" class="text-dark"  icon="horizontal_split"  label="Questionários" />
+          <q-tab name="alarms" class="text-dark" icon="add" label="Novo questionário" />
+        </q-tabs>
+
+        <q-separator />
+
+        <q-tab-panels v-model="tab" animated>
+
+          <q-tab-panel name="mails" class="q-pa-none">
+            <div class="text-h6">Alarms</div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </q-tab-panel>
+
+          <q-tab-panel name="alarms">
+            <div class="row justify-left">
+
+                <div class="col-xs-12 col-md-4 col-lg-3 col-lg-2 my-p2 q-py-md-xl">
+                    <div class="text-center my-p bg-light-green-1">
+                      <h5 class="q-ma-none">Starter</h5>
+                    </div>
+                    <q-list>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label >Resposta com seleção Sim - Não</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta com seleção única</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta com múltipla escolha</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="red-7" name="cancel" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta em escala</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="red-7" name="cancel" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta em texto livre</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="red-7" name="cancel" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Adição de imagens</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="red-7" name="cancel" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Adição de videos</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="red-7" name="cancel" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                    </q-list>
+                    <div>
+                      <q-btn v-show="planeStarter === false" class="q-pa-xs full-width" label="Selecionar" @click="selectPlane(1)" color="orange-8" />
+                      <q-btn v-show="planeStarter === true"  class="q-pa-xs full-width" icon="check" label="Selecionado" color="green" />
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-4 col-lg-3 col-lg-2 my-p2 q-py-md-xl">
+                    <div class="text-center my-p bg-orange-2">
+                      <h5 class="q-ma-none">Ideal</h5>
+                    </div>
+                    <q-list>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label >Resposta com seleção Sim - Não</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta com seleção única</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta com múltipla escolha</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta em escala</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta em texto livre</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Adição de imagens</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="red-7" name="cancel" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Adição de videos</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="red-7" name="cancel" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                    </q-list>
+                    <div>
+                      <q-btn v-show="planeIdeal === false" class="q-pa-xs full-width" label="Selecionar" @click="selectPlane(2)" color="orange-8" />
+                      <q-btn v-show="planeIdeal === true"  class="q-pa-xs full-width" icon="check" label="Selecionado" color="green" />
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-4 col-lg-3 col-lg-2 my-p2 q-py-md-xl">
+                    <div class="text-center my-p bg-orange-7">
+                      <h5 class="q-ma-none">Premium</h5>
+                    </div>
+                    <q-list>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label >Resposta com seleção Sim - Não</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta com seleção única</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta com múltipla escolha</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta em escala</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Resposta em texto livre</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Adição de imagens</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item >
+                          <q-item-section><q-item-label>Adição de videos</q-item-label></q-item-section>
+                          <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+                        </q-item>
+                        <q-separator />
+                    </q-list>
+                    <div>
+                      <q-btn v-show="planePremium === false" class="q-pa-xs full-width" label="Selecionar" @click="selectPlane(3)" color="orange-8" />
+                      <q-btn v-show="planePremium === true"  class="q-pa-xs full-width" icon="check" label="Selecionado" color="green" />
+                    </div>
+                </div>
+
+              </div>
+            </q-tab-panel>
+        </q-tab-panels>
+      </q-card>
+    </q-page>
 </template>
 
 <script>
@@ -60,19 +179,22 @@ import { mapActions, mapGetters } from 'vuex'
 import { AuthService } from '../../../services/AuthService'
 import { master } from '../../../helpers/master'
 import _ from 'lodash'
-import { ValidationObserver } from 'vee-validate'
-import { ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 
 export default {
-  name: 'Login',
+  name: 'Questionaries',
 
   components: {
-    ValidationObserver,
-    ValidationProvider
   },
 
   data () {
     return {
+      tab: 'mails',
+      innerTab: 'innerMails',
+      splitterModel: 20,
+      planeStarter: false,
+      planeIdeal: true,
+      planePremium: false,
+
       loader: false,
       form: {
         username: null,
@@ -83,11 +205,35 @@ export default {
         username: 'required|max:50',
         password: 'required|min:8',
         grant_type: 'required'
+      },
+      window: {
+        width: 0,
+        height: 0
       }
     }
   },
 
   methods: {
+    selectPlane (plane) {
+      switch (plane) {
+        case 1:
+          this.planeStarter = true
+          this.planeIdeal = false
+          this.planePremium = false
+          break
+        case 2:
+          this.planeStarter = false
+          this.planeIdeal = true
+          this.planePremium = false
+          break
+        case 3:
+          this.planeStarter = false
+          this.planeIdeal = false
+          this.planePremium = true
+          break
+      }
+    },
+
     ...mapActions('auth', ['setAuthStatus', 'setUserData', 'storeToken']),
 
     async submit () {
@@ -147,6 +293,15 @@ export default {
     ...mapGetters('auth', ['isAuth'])
   },
 
+  created () {
+    // window.addEventListener('resize', this.handleResize)
+    // this.handleResize()
+  },
+
+  destroyed () {
+    // window.removeEventListener('resize', this.handleResize)
+  },
+
   beforeRouteEnter (to, from, next) {
     next(vm => {
       if (vm.isAuth) {
@@ -165,16 +320,22 @@ export default {
 </script>
 
 <style type="text/stylus" scoped>
-  .image-background {
-    background-image: url('../../../assets/custom/login-background.jpg');
-  }
-  .login-form {
-    width: 350px;
-  }
-  .page-background{
-    background-color: #f5f5f5;
-  }
-  .m-text-muted{
-    color:#6c757d
-  }
+    .image-background {
+      background-image: url('../../../assets/custom/login-background.jpg');
+    }
+    .login-form {
+      width: 350px;
+    }
+    .page-background{
+      background-color: #f5f5f5;
+    }
+    .m-text-muted{
+      color:#6c757d
+    }
+    .my-p{
+      padding: 1.2em;
+    }
+    .my-p2{
+      padding: 0.6em;
+    }
 </style>

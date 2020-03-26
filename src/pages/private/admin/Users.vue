@@ -1,58 +1,15 @@
 <template>
-  <q-page class="page-background">
-    <div class="fixed-center login-form">
-      <div class="">
-        <q-card class="">
-          <q-card-section>
-            <validation-observer ref="observer" v-slot="{ valid }">
-              <q-form>
-                <div class="text-center">
-                  <img src="../../../assets/custom/physiback.png" alt="" width="140em">
-                  <p class="text-h6 text-center q-pb-sm">
-                    {{ $t('login.title') }}
-                  </p>
-                </div>
+    <q-page class="bg-gray q-pa-md">
+      <h6>Usuários</h6>
+      <q-card class="my-card">
+      <q-card-section>
+        <div class="text-h6">Our Changing Planet</div>
+        <div class="text-subtitle2">by John Doe</div>
+      </q-card-section>
 
-                <validation-provider vid="username" ref="username" :name="$t('login.form.username')" :rules="form_rules.username" v-slot="{ errors }">
-                  <div class="">
-                    <q-input id="username" name="username" type="text" :label="$t('login.form.username')" v-model="form.username" :error="hasErrors(errors)" :error-message="errors[0]">
-                      <template v-slot:prepend>
-                        <q-icon name="perm_identity" />
-                      </template>
-                    </q-input>
-                  </div>
-                </validation-provider>
-
-                <validation-provider vid="password" ref="password" :name="$t('login.form.password')" :rules="form_rules.password" v-slot="{ errors }">
-                  <div class="">
-                    <q-input id="password" name="password" type="password" :label="$t('login.form.password')" v-model="form.password" :error="hasErrors(errors)" :error-message="errors[0]">
-                      <template v-slot:prepend>
-                        <q-icon name="lock" />
-                      </template>
-                    </q-input>
-                  </div>
-                </validation-provider>
-
-                <div class="text-center">
-                  <q-btn type="submit" :loading="loader" :disable="!valid" :label="$t('login.title')" class="q-mt-md" color="teal" @click="submit">
-                    <template v-slot:loading>
-                      <q-spinner></q-spinner>
-                    </template>
-                  </q-btn>
-                </div>
-                <div class="q-mt-lg text-right">Ainda não tem conta?
-                  <router-link :to="{name: 'public.register'}">Crie uma agora</router-link>
-                </div>
-                <div class="q-mt-sm text-right">
-                  <router-link  :to="{name: 'public.register'}">Recupere sua senha</router-link>
-                </div>
-              </q-form>
-            </validation-observer>
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
-  </q-page>
+      <q-table title="Treats" dense :data="data" :columns="columns" row-key="name" />
+    </q-card>
+    </q-page>
 </template>
 
 <script>
@@ -60,15 +17,11 @@ import { mapActions, mapGetters } from 'vuex'
 import { AuthService } from '../../../services/AuthService'
 import { master } from '../../../helpers/master'
 import _ from 'lodash'
-import { ValidationObserver } from 'vee-validate'
-import { ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 
 export default {
-  name: 'Login',
+  name: 'Questionaries',
 
   components: {
-    ValidationObserver,
-    ValidationProvider
   },
 
   data () {
@@ -83,11 +36,140 @@ export default {
         username: 'required|max:50',
         password: 'required|min:8',
         grant_type: 'required'
-      }
+      },
+      columns: [
+        {
+          name: 'name',
+          required: true,
+          label: 'Dessert (100g serving)',
+          align: 'left',
+          field: row => row.name,
+          format: val => `${val}`,
+          sortable: true
+        },
+        { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
+        { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
+        { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
+        { name: 'protein', label: 'Protein (g)', field: 'protein' },
+        { name: 'sodium', label: 'Sodium (mg)', field: 'sodium' },
+        { name: 'calcium', label: 'Calcium (%)', field: 'calcium', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+        { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
+      ],
+      data: [
+        {
+          name: 'Frozen Yogurt',
+          calories: 159,
+          fat: 6.0,
+          carbs: 24,
+          protein: 4.0,
+          sodium: 87,
+          calcium: '14%',
+          iron: '1%'
+        },
+        {
+          name: 'Ice cream sandwich',
+          calories: 237,
+          fat: 9.0,
+          carbs: 37,
+          protein: 4.3,
+          sodium: 129,
+          calcium: '8%',
+          iron: '1%'
+        },
+        {
+          name: 'Eclair',
+          calories: 262,
+          fat: 16.0,
+          carbs: 23,
+          protein: 6.0,
+          sodium: 337,
+          calcium: '6%',
+          iron: '7%'
+        },
+        {
+          name: 'Cupcake',
+          calories: 305,
+          fat: 3.7,
+          carbs: 67,
+          protein: 4.3,
+          sodium: 413,
+          calcium: '3%',
+          iron: '8%'
+        },
+        {
+          name: 'Gingerbread',
+          calories: 356,
+          fat: 16.0,
+          carbs: 49,
+          protein: 3.9,
+          sodium: 327,
+          calcium: '7%',
+          iron: '16%'
+        },
+        {
+          name: 'Jelly bean',
+          calories: 375,
+          fat: 0.0,
+          carbs: 94,
+          protein: 0.0,
+          sodium: 50,
+          calcium: '0%',
+          iron: '0%'
+        },
+        {
+          name: 'Lollipop',
+          calories: 392,
+          fat: 0.2,
+          carbs: 98,
+          protein: 0,
+          sodium: 38,
+          calcium: '0%',
+          iron: '2%'
+        },
+        {
+          name: 'Honeycomb',
+          calories: 408,
+          fat: 3.2,
+          carbs: 87,
+          protein: 6.5,
+          sodium: 562,
+          calcium: '0%',
+          iron: '45%'
+        },
+        {
+          name: 'Donut',
+          calories: 452,
+          fat: 25.0,
+          carbs: 51,
+          protein: 4.9,
+          sodium: 326,
+          calcium: '2%',
+          iron: '22%'
+        },
+        {
+          name: 'KitKat',
+          calories: 518,
+          fat: 26.0,
+          carbs: 65,
+          protein: 7,
+          sodium: 54,
+          calcium: '12%',
+          iron: '6%'
+        }
+      ]
     }
   },
 
   methods: {
+    // Height: function (val) {
+    //   return 'height: ' + (this.window.height - val) + 'px'
+    // },
+
+    // handleResize: function () {
+    //   this.window.width = window.innerWidth
+    //   this.window.height = window.innerHeight
+    // },
+
     ...mapActions('auth', ['setAuthStatus', 'setUserData', 'storeToken']),
 
     async submit () {
@@ -147,6 +229,15 @@ export default {
     ...mapGetters('auth', ['isAuth'])
   },
 
+  created () {
+    // window.addEventListener('resize', this.handleResize)
+    // this.handleResize()
+  },
+
+  destroyed () {
+    // window.removeEventListener('resize', this.handleResize)
+  },
+
   beforeRouteEnter (to, from, next) {
     next(vm => {
       if (vm.isAuth) {
@@ -165,16 +256,16 @@ export default {
 </script>
 
 <style type="text/stylus" scoped>
-  .image-background {
-    background-image: url('../../../assets/custom/login-background.jpg');
-  }
-  .login-form {
-    width: 350px;
-  }
-  .page-background{
-    background-color: #f5f5f5;
-  }
-  .m-text-muted{
-    color:#6c757d
-  }
+    .image-background {
+      background-image: url('../../../assets/custom/login-background.jpg');
+    }
+    .login-form {
+      width: 350px;
+    }
+    .page-background{
+      background-color: #f5f5f5;
+    }
+    .m-text-muted{
+      color:#6c757d
+    }
 </style>

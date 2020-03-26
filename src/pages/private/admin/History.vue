@@ -1,58 +1,7 @@
 <template>
-  <q-page class="page-background">
-    <div class="fixed-center login-form">
-      <div class="">
-        <q-card class="">
-          <q-card-section>
-            <validation-observer ref="observer" v-slot="{ valid }">
-              <q-form>
-                <div class="text-center">
-                  <img src="../../../assets/custom/physiback.png" alt="" width="140em">
-                  <p class="text-h6 text-center q-pb-sm">
-                    {{ $t('login.title') }}
-                  </p>
-                </div>
-
-                <validation-provider vid="username" ref="username" :name="$t('login.form.username')" :rules="form_rules.username" v-slot="{ errors }">
-                  <div class="">
-                    <q-input id="username" name="username" type="text" :label="$t('login.form.username')" v-model="form.username" :error="hasErrors(errors)" :error-message="errors[0]">
-                      <template v-slot:prepend>
-                        <q-icon name="perm_identity" />
-                      </template>
-                    </q-input>
-                  </div>
-                </validation-provider>
-
-                <validation-provider vid="password" ref="password" :name="$t('login.form.password')" :rules="form_rules.password" v-slot="{ errors }">
-                  <div class="">
-                    <q-input id="password" name="password" type="password" :label="$t('login.form.password')" v-model="form.password" :error="hasErrors(errors)" :error-message="errors[0]">
-                      <template v-slot:prepend>
-                        <q-icon name="lock" />
-                      </template>
-                    </q-input>
-                  </div>
-                </validation-provider>
-
-                <div class="text-center">
-                  <q-btn type="submit" :loading="loader" :disable="!valid" :label="$t('login.title')" class="q-mt-md" color="teal" @click="submit">
-                    <template v-slot:loading>
-                      <q-spinner></q-spinner>
-                    </template>
-                  </q-btn>
-                </div>
-                <div class="q-mt-lg text-right">Ainda não tem conta?
-                  <router-link :to="{name: 'public.register'}">Crie uma agora</router-link>
-                </div>
-                <div class="q-mt-sm text-right">
-                  <router-link  :to="{name: 'public.register'}">Recupere sua senha</router-link>
-                </div>
-              </q-form>
-            </validation-observer>
-          </q-card-section>
-        </q-card>
-      </div>
-    </div>
-  </q-page>
+    <q-page class="bg-gray q-pa-md">
+      <h6>Histórico</h6>
+    </q-page>
 </template>
 
 <script>
@@ -60,15 +9,11 @@ import { mapActions, mapGetters } from 'vuex'
 import { AuthService } from '../../../services/AuthService'
 import { master } from '../../../helpers/master'
 import _ from 'lodash'
-import { ValidationObserver } from 'vee-validate'
-import { ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 
 export default {
-  name: 'Login',
+  name: 'Questionaries',
 
   components: {
-    ValidationObserver,
-    ValidationProvider
   },
 
   data () {
@@ -83,11 +28,24 @@ export default {
         username: 'required|max:50',
         password: 'required|min:8',
         grant_type: 'required'
+      },
+      window: {
+        width: 0,
+        height: 0
       }
     }
   },
 
   methods: {
+    // Height: function (val) {
+    //   return 'height: ' + (this.window.height - val) + 'px'
+    // },
+
+    // handleResize: function () {
+    //   this.window.width = window.innerWidth
+    //   this.window.height = window.innerHeight
+    // },
+
     ...mapActions('auth', ['setAuthStatus', 'setUserData', 'storeToken']),
 
     async submit () {
@@ -147,6 +105,15 @@ export default {
     ...mapGetters('auth', ['isAuth'])
   },
 
+  created () {
+    // window.addEventListener('resize', this.handleResize)
+    // this.handleResize()
+  },
+
+  destroyed () {
+    // window.removeEventListener('resize', this.handleResize)
+  },
+
   beforeRouteEnter (to, from, next) {
     next(vm => {
       if (vm.isAuth) {
@@ -165,16 +132,16 @@ export default {
 </script>
 
 <style type="text/stylus" scoped>
-  .image-background {
-    background-image: url('../../../assets/custom/login-background.jpg');
-  }
-  .login-form {
-    width: 350px;
-  }
-  .page-background{
-    background-color: #f5f5f5;
-  }
-  .m-text-muted{
-    color:#6c757d
-  }
+    .image-background {
+      background-image: url('../../../assets/custom/login-background.jpg');
+    }
+    .login-form {
+      width: 350px;
+    }
+    .page-background{
+      background-color: #f5f5f5;
+    }
+    .m-text-muted{
+      color:#6c757d
+    }
 </style>
