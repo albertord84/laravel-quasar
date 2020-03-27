@@ -78,9 +78,12 @@ module.exports = function (ctx) {
         'SessionStorage',
         'Loading',
         'Dialog'
-      ]
+      ],
 
-      // iconSet: 'ionicons-v4'
+      iconSet: 'fontawesome-v5'
+
+      // cssAddon: true
+
       // lang: 'de' // Quasar language
     },
 

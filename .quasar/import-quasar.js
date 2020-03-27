@@ -10,10 +10,12 @@
  * Boot files are your "main.js"
  **/
 
+import iconSet from 'quasar/icon-set/fontawesome-v5'
+
 
 import Vue from 'vue'
 
 import {Quasar,QLayout,QHeader,QDrawer,QPageContainer,QPage,QToolbar,QToolbarTitle,QBtn,QIcon,QList,QItem,QItemSection,QItemLabel,QScrollArea,QAvatar,QImg,QFooter,QBtnDropdown,QSelect,QForm,QInput,QCard,QCardSection,QSpinner,QSeparator,QMarkupTable,QTable,QCardActions,QTabPanels,QTabPanel,QTabs,QTab,QSplitter,QBanner,Ripple,ClosePopup,Notify,Cookies,Meta,LocalStorage,SessionStorage,Loading,Dialog} from 'quasar'
 
 
-Vue.use(Quasar, { config: {},components: {QLayout,QHeader,QDrawer,QPageContainer,QPage,QToolbar,QToolbarTitle,QBtn,QIcon,QList,QItem,QItemSection,QItemLabel,QScrollArea,QAvatar,QImg,QFooter,QBtnDropdown,QSelect,QForm,QInput,QCard,QCardSection,QSpinner,QSeparator,QMarkupTable,QTable,QCardActions,QTabPanels,QTabPanel,QTabs,QTab,QSplitter,QBanner},directives: {Ripple,ClosePopup},plugins: {Notify,Cookies,Meta,LocalStorage,SessionStorage,Loading,Dialog} })
+Vue.use(Quasar, { config: {},iconSet: iconSet,components: {QLayout,QHeader,QDrawer,QPageContainer,QPage,QToolbar,QToolbarTitle,QBtn,QIcon,QList,QItem,QItemSection,QItemLabel,QScrollArea,QAvatar,QImg,QFooter,QBtnDropdown,QSelect,QForm,QInput,QCard,QCardSection,QSpinner,QSeparator,QMarkupTable,QTable,QCardActions,QTabPanels,QTabPanel,QTabs,QTab,QSplitter,QBanner},directives: {Ripple,ClosePopup},plugins: {Notify,Cookies,Meta,LocalStorage,SessionStorage,Loading,Dialog} })
