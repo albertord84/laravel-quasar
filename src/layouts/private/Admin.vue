@@ -6,7 +6,7 @@
               <q-btn flat round dense icon="menu" class="q-mr-sm" @click="leftDrawer = !leftDrawer"/>
               <img class="q-ml-sm q-sm-md hover-pointer" src="../../assets/custom/physiback.png" alt="Logo" width="35rem" height="35rem">
               <q-toolbar-title><b class="hover-pointer">PhysiBack</b></q-toolbar-title>
-              <q-btn-dropdown stretch flat icon="account_circle">
+              <q-btn-dropdown stretch shrink  flat icon="account_circle">
                   <q-list>
                       <!-- <q-item-label header>Folders</q-item-label> -->
                       <q-item clickable v-close-menu tabindex="0">
