@@ -1,9 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/custom/nyami-info.jpg"
-      style="width:30vw;max-width:200px;">
+    <img alt="Quasar logo" src="~assets/custom/nyami-info.jpg" style="width:30vw;max-width:200px;">
   </q-page>
 </template>
 
