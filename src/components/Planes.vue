@@ -162,7 +162,6 @@ export default {
     selectPlane (code, name) {
       this.plane.code = code
       this.plane.name = name
-      console.log(11111)
       this.$emit('onselectedplane', this.plane)
     }
   }

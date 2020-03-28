@@ -61,7 +61,10 @@ module.exports = function (ctx) {
         'QTab',
         'QSplitter',
         'QBanner',
-        'QInput'
+        'QInput',
+        'QVideo',
+        'QField',
+        'QBtnGroup'
       ],
 
       directives: [
