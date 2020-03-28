@@ -8,7 +8,7 @@
               <q-form>
                 <div class="">
                   <p class="text-h6 text-center q-pb-sm">
-                    {{ $t('login.title') }}
+                    {{ $t('login.title') + "Me cago en mi madre" }}
                   </p>
                 </div>
                 <validation-provider
