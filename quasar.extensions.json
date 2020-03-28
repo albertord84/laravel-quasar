@@ -17,8 +17,7 @@
     "__internal": {
       "dev": {
         "spa": {
-<<<<<<< HEAD
-          "iconHash": "d57dfe50afd121dbc6007c693756fe1e"
+          "iconHash": "11b8b1844570660ea4e47ab3118593e2"
         },
         "pwa": {
           "iconHash": "d57dfe50afd121dbc6007c693756fe1e"
@@ -28,9 +27,6 @@
           "splashscreenHash": "c2a2065d639fd1dd4c4d8120b2e70dfb",
           "splashscreenType": "pure",
           "backgroundColor": "#000074"
-=======
-          "iconHash": "11b8b1844570660ea4e47ab3118593e2"
->>>>>>> daa0a18e777a1e0c9e8cee6d96f5ec001aa201f6
         }
       },
       "build": {
@@ -38,7 +34,7 @@
           "iconHash": "d57dfe50afd121dbc6007c693756fe1e"
         },
         "pwa": {
-          "iconHash": "d57dfe50afd121dbc6007c693756fe1e"
+          "iconHash": "11b8b1844570660ea4e47ab3118593e2"
         }
       }
     }
