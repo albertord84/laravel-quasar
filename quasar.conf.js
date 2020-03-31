@@ -64,7 +64,8 @@ module.exports = function (ctx) {
         'QInput',
         'QVideo',
         'QField',
-        'QBtnGroup'
+        'QBtnGroup',
+        'QCheckbox'
       ],
 
       directives: [
