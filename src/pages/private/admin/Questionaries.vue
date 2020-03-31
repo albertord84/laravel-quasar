@@ -2,7 +2,7 @@
     <q-page class="bg-gray q-pa-md">
       <div class="flex justify-between">
         <h6>Questionários</h6>
-        <q-btn flat round color="primary" icon="help"/>
+        <!-- <q-btn flat rounded class="q-pa-xs  q-my-lg" color="primary" icon="help"/> -->
       </div>
 
       <q-card no-bordered flat>
@@ -14,13 +14,7 @@
         <q-tab-panels v-model="tab" animated>
 
           <q-tab-panel name="questionaries" class="q-pa-none">
-            <div class="text-h6">Questionários</div>
-              Table to display all questionaries <br><br><br><br>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+            <TableQuestionaries  :questionaries="allQuestionaries"></TableQuestionaries>
           </q-tab-panel>
 
           <q-tab-panel name="crudQuestionary">
@@ -104,7 +98,10 @@ const questionaryItem = {
       'type_id': 4, //  response
       'question': 'Avalie do 1 até o 10 a atitude dos governadores estaduais brasileiro enquanto a medida de isolamento social adotadas para prevenir a expensão do coronavirus, onde 1 é RUIM e 10 é ECXELENTE',
       'json_data': null,
-      'responseOptions': null
+      'responseOptions': [
+        { 'id': 15, 'question_id': 6, 'response': '1', 'is_truth': true }, // inferior limit
+        { 'id': 16, 'question_id': 6, 'response': '10', 'is_truth': true } // superior limit
+      ]
       // response to question will be in Responses table
     },
     { 'id': 7,
@@ -125,7 +122,8 @@ export default {
 
   components: {
     'Planes': require('../../../components/Planes.vue').default,
-    'CrudQuestionary': require('../../../components/CrudQuestionary.vue').default
+    'CrudQuestionary': require('../../../components/CrudQuestionary.vue').default,
+    'TableQuestionaries': require('../../../components/TableQuestionaries.vue').default
   },
 
   data () {
@@ -136,6 +134,8 @@ export default {
       showSelectPlane: true,
       showCrudQuestionary: false,
       questionaryItem: null,
+
+      allQuestionaries: [],
 
       loader: false,
       form: {

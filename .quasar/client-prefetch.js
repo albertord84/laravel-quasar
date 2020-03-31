@@ -13,6 +13,8 @@ import App from 'app/src/App.vue'
 const appOptions = App.options /* Vue.extend() */ || App
 
 
+import { LoadingBar } from 'quasar'
+
 
 
 let appPrefetch = typeof appOptions.preFetch === 'function'
@@ -73,9 +75,13 @@ export function addPreFetchHooks (router, store) {
     }
     const proceed = () => {
       
+      LoadingBar.stop()
+      
       if (routeUnchanged) { next() }
     }
 
+    
+    LoadingBar.start()
     
 
     components

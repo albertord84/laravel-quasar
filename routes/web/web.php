@@ -24,4 +24,13 @@ Route::view('{all}', 'app')
 
 // Route::get('/', 'WelcomeController@index');
 
-Route::post('/register', 'Auth\RegisterController@store');
+Route::post('register', 'Auth\RegisterController@store');
+
+Route::post('/oauth/token', 'Auth\LoginController@login')
+// ->middleware(['oauth.grant:password', 'oauth.details'])
+->name('login');
+
+
+Route::resource('usersRoles', 'UsersRoleController');
+
+Route::resource('usersStatus', 'UsersStatuController');

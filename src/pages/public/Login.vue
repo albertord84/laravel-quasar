@@ -9,7 +9,7 @@
                 <div class="text-center">
                   <img src="../../assets/custom/physiback.png" alt="" width="140em">
                   <p class="text-h6 text-center q-pb-sm">
-                    {{ $t('login.title') }}
+                    {{ $t('login.title') + "Me cago en mi madre" }}
                   </p>
                 </div>
 

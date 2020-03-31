@@ -10,6 +10,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Log;
 
 class InjectGrantClientDetails
 {
@@ -23,9 +24,13 @@ class InjectGrantClientDetails
     public function handle($request, Closure $next)
     {
         with(\Dotenv\Dotenv::create(base_path(),".env"))->load();
+
+        Log::debug("Env PASSWORD_GRANT_CLIENT_ID: " , [env('PASSWORD_GRANT_CLIENT_ID')]);
+        Log::debug("Env PASSWORD_GRANT_CLIENT_SECRET: " , [env('PASSWORD_GRANT_CLIENT_SECRET')]);
+
         $request->request->add([
-            'client_id' => env('PASSWORD_GRANT_CLIENT_ID', ''),
-            'client_secret' => env('PASSWORD_GRANT_CLIENT_SECRET', '')
+            'client_id' => env('PASSWORD_GRANT_CLIENT_ID', '2'),
+            'client_secret' => env('PASSWORD_GRANT_CLIENT_SECRET', '9vIud8YIkjQfqpeNkXL6cWR1g8IrmfPHUMqdEQNQ')
         ]);
         return $next($request);
     }

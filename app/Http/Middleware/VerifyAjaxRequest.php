@@ -24,7 +24,7 @@ class VerifyAjaxRequest
      */
     public function handle($request, Closure $next)
     {
-        throw_if(!$request->ajax(), MethodTypeException::class);
+        // throw_if(!$request->ajax(), MethodTypeException::class);
         return $next($request);
     }
 }

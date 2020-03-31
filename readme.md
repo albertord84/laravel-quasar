@@ -19,6 +19,7 @@ En el directorio raiz, ejecuta los siguientes comandos:
 7. php artisan key:generate
 8. php artisan migrate
 9. php artisan passport:install
+9.1 php artisan passport:client --password
 
 10. https://packagist.org/packages/barryvdh/laravel-cors
 "fruitcake/laravel-cors": "^1.0",
@@ -129,7 +130,152 @@ systemctl restart apache2
 * Api router: "api.php" en "routes/api/api.php" 
 * Mapa de rutas (si maneja archivos individuales) en: "app/Providers/RouteServiceProvider.php"
 
+##### Generar ID de aplicativo para obtener barer token 
+1 - Ejecutar 9.1 para cada instancia de aplicativo que se vaya a utilizar para obtener:
+php artisan passport:client --password
+
+ What should we name the password grant client? [Laravel Quasar Framework Password Grant Client]:
+ > 
+Password grant client created successfully.
+* "Client ID: 1"
+* "Client secret: xekTJZU3jE8scq3TAWLDgb11zoIMzLnO9R1YVBX8"
+
+2 - Executar POST para: "http://lq.test/api/v1/oauth/token" para obtener:
+{
+    "token_type": "Bearer",
+    "expires_in": 31536000,
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...",
+    "refresh_token": "def50200c5efaf9661c...",
+    "user_data": {
+        "id": 1,
+        "email": "albertord84@gmail.com",
+        "username": "alberto"
+    }
+}
+
+2.1 Parametros para el Postman (Body.Params):
+client_id:1
+client_secret:xekTJZU3jE8scq3TAWLDgb11zoIMzLnO9R1YVBX8
+username:alberto
+password:12341234
+grant_type:password
+
+3 - Usar "access_token" no aplicativo que se ira a conectar en cada peticion al servidor
+
+
+
 #
+
+## Building APK
+
+### Configure cordova for androis on linux
+https://codeburst.io/configuring-cordova-for-android-development-on-linux-6ee4a28cd432
+
+### downloas jdk 8
+https://gist.github.com/hgomez/9650687
+$ wget --no-cookies \
+--no-check-certificate \
+--header "Cookie: oraclelicense=accept-securebackup-cookie" \
+http://download.oracle.com/otn-pub/java/jdk/8u241-b07/1f5b5a70bf22433b84d0e960903adac8/jdk-8u241-linux-x64.tar.gz
+
+$ cd /usr/local
+$ sudo mkdir java && cd java
+$ sudo tar xzvf ~/Downloads/jdk-8u241-linux-x64.tar.gz
+
+Add these two lines to the bottom of the file 
+$ cd ~
+$ vim .bashrc
+
+export JAVA_HOME="/usr/local/java/jdk1.8.0_241"
+PATH=$PATH:$JAVA_HOME/bin
+
+$ source .bashrc
+$ javac -version      # should print 'javac 1.8.0_***'
+
+
+### Android Studio
+https://developer.android.com/studio/index.html
+Linux	commandlinetools-linux-6200805_latest.zip dwonload this
+
+unzim into ~/Android/Sdk/
+or copy the tools folder to  ~/Android/Sdk/
+
+no Move back to the desired location, unzip the files, and execute the script.
+no $ cd /usr/local
+no $ sudo tar xzvf ~/Downloads/android-studio-ide-192.6241897-linux.tar.gz
+no $ cd android-studio/bin
+no $ ./studio.sh
+
+
+
+
+The Android Studio Wizard will open and you can click Next on everything. Now, this one really is going to take a long time.
+When the download finishes, click Finish. On the next screen click Configure > SDK Manager in the bottom right. 
+Select the top three or four SDKs and then click next (you can choose less if you’re running low on storage).
+Again, you’re going to wait. When it finishes, close the Android Studio window. This will also kill the terminal instance.
+We are going to update ~/.bashrc again to add Android to the system path.
+
+Add these three lines to the bottom of the file
+$ cd ~
+$ vim .bashrc
+export ANDROID_HOME="$HOME/Android/Sdk"
+PATH=$PATH:$ANDROID_HOME/tools
+PATH=$PATH:$ANDROID_HOME/platform-tools
+
+### Gradle
+Install with:
+$ sudo apt install gradle
+
+### Cordova
+Install with:
+$ npm install -g cordova
+
+#### Test Cordova
+Create a new temporary Cordova project:
+$ cordova create reqTest
+$ cd reqTest
+Add Android to the list of platforms:
+$ cordova platform add android
+
+Type one final command into the terminal:
+$ cordova requirements
+
+Correct response:
+Android Studio project detected
+Requirements check results for android:
+Java JDK: installed 1.8.0
+Android SDK: installed true
+Android target: installed android-27,android-26
+Gradle: installed /usr/share/gradle/bin/gradle
+
+$ cd ..
+$ rm -r reqTest
+
+
+### Quasar cordova 
+quasar dev -m cordova -T android
+
+cordova platform add android
+
+cordova build --release
+
+### Testing APK
+
+List devices:
+adb devices
+
+Run android:
+cordova run android
+
+### Building PWA
+npm run-script q-pwa-dev
+
+### Building APK
+npm run-script q-apk-dev
+
+### Building iOS
+npm run-script q-ios-dev
+
 
 ## English
 
