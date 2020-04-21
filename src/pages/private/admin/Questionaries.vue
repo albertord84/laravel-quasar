@@ -14,7 +14,7 @@
         <q-tab-panels v-model="tab" animated>
 
           <q-tab-panel name="questionaries" class="q-pa-none">
-            <TableQuestionaries  :questionaries="allQuestionaries"></TableQuestionaries>
+            <ShowQuestionaries  :questionaries="allQuestionaries" @edit="editQuestionary" @delete="deleteQuestionary" @reload="reloadQuestionaries" ></ShowQuestionaries>
           </q-tab-panel>
 
           <q-tab-panel name="crudQuestionary">
@@ -36,7 +36,9 @@ import _ from 'lodash'
 const questionaryItem = {
   plane_id: 3,
   criator_id: 1,
-  updater_id: 1,
+  updater_id: 2,
+  created_at: '2020-01-08 13:10:58',
+  updated_at: '2020-01-04 10:51:58',
   name: 'Impato do coronavírus na economia',
   description: 'Questionario para avaliar o posível impato do coronavirus na economia mundial dirigido a insestidores e economistas do mercado Forex',
   observation: 'Esse questionário deve ser aplicado em quatro campanhas diferentes para avaliar as mudanças nas respostas dos targets',
@@ -123,7 +125,7 @@ export default {
   components: {
     'Planes': require('../../../components/Planes.vue').default,
     'CrudQuestionary': require('../../../components/CrudQuestionary.vue').default,
-    'TableQuestionaries': require('../../../components/TableQuestionaries.vue').default
+    'ShowQuestionaries': require('../../../components/ShowQuestionaries.vue').default
   },
 
   data () {
@@ -148,11 +150,44 @@ export default {
         password: 'required|min:8',
         grant_type: 'required'
       }
-
     }
   },
 
   methods: {
+
+    getQuestionaries () {
+      this.action = 'edit'
+      this.plane = this.getPlaneObjectById(questionaryItem.plane_id)
+      this.tab = 'questionaries'
+
+      this.allQuestionaries = []
+      this.allQuestionaries.push(Object.assign({}, questionaryItem))
+      this.allQuestionaries.push(Object.assign({}, questionaryItem))
+      this.allQuestionaries.push(Object.assign({}, questionaryItem))
+
+      // this.loader = true
+      // ApiService.login(this.form)
+      // .then(response => {
+      //   this.storeToken(response)
+      //   this.setAuthStatus(true)
+      //   this.setUserData(_.get(response, ['data', 'user_data'], {}))
+      //   let redirect = _.get(this.$route, ['query', 'redirect'])
+      //   if (redirect) {
+      //     this.$router.replace(redirect)
+      //   } else {
+      //     this.$router.replace({ name: 'auth.user' })
+      //   }
+      // })
+      // .catch(errors => {
+      //   let errArray = master.hasErrors(errors)
+      //   if (errArray) {
+      //     master.setErrors(this.$refs.observer, errArray)
+      //   }
+      // })
+      // .then(() => {
+      //   this.loader = false
+      // })
+    },
 
     selectedPlane (plane) {
       this.initialPlane = plane
@@ -180,6 +215,18 @@ export default {
         { 'code': 3, 'name': 'Premium' }
       ]
       return planes[planeId - 1]
+    },
+
+    editQuestionary () {
+
+    },
+
+    deleteQuestionary () {
+
+    },
+
+    reloadQuestionaries () {
+
     },
 
     // -----------------------------------------------------------------------------
@@ -244,8 +291,9 @@ export default {
 
   beforeMount () {
     // original variables
-    // this.showSelectPlane = true
-    // this.showCrudQuestionary = false
+    this.showSelectPlane = true
+    this.showCrudQuestionary = false
+    this.getQuestionaries()
 
     // test cases
     // test case 1
@@ -264,12 +312,12 @@ export default {
     // this.tab = 'crudQuestionary'
 
     // test case 3
-    this.action = 'edit'
-    this.plane = this.getPlaneObjectById(questionaryItem.plane_id)
-    this.questionaryItem = questionaryItem
-    this.showSelectPlane = false
-    this.showCrudQuestionary = true
-    this.tab = 'crudQuestionary'
+    // this.action = 'edit'
+    // this.plane = this.getPlaneObjectById(questionaryItem.plane_id)
+    // this.questionaryItem = questionaryItem
+    // this.showSelectPlane = false
+    // this.showCrudQuestionary = true
+    // this.tab = 'crudQuestionary'
   },
 
   created () {
