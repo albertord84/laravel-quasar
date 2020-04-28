@@ -1,11 +1,15 @@
 <template>
   <div class="row justify-left">
     <div v-if="tab === 'allQuestionaries'" style="width:100%">
-      <q-table title=" " :data="data" :columns="columns" row-key="name" binary-state-sort :card-container-style="{ backgroundColor: '#ff0000' }" >
+      <q-table title=" " :data="data" :columns="columns" row-key="name" binary-state-sort :card-container-style="{ backgroundColor: '#ff0000'}" >
         <template v-slot:body="props">
           <q-tr :props="props">
               <q-td key="questionayName" :props="props" class="q-pa-none q-ma-none">
                   {{ props.row.name }}
+              </q-td>
+
+              <q-td key="pages" :props="props" class="q-pa-none q-ma-none">
+                {{ props.row.pages.length }}
               </q-td>
 
               <q-td key="criator_id" :props="props" class="q-pa-none q-ma-none">
@@ -22,10 +26,6 @@
 
               <q-td key="updated_at" :props="props" class="q-pa-none q-ma-none">
                 {{ props.row.updated_at }}
-              </q-td>
-
-              <q-td key="pages" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.pages.length }}
               </q-td>
 
               <q-td key="actions" :props="props" class="q-pa-none q-ma-none">
@@ -74,6 +74,14 @@ export default {
           sortable: true
         },
         {
+          label: 'Páginas',
+          field: 'pages',
+          name: 'pages',
+          sortable: true,
+          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+          align: 'center'
+        },
+        {
           label: 'Criador',
           field: 'criator_id',
           name: 'criator_id',
@@ -95,14 +103,6 @@ export default {
           label: 'Data de atualização',
           field: 'updated_at',
           name: 'updated_at',
-          sortable: true,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
-          align: 'center'
-        },
-        {
-          label: 'Páginas',
-          field: 'pages',
-          name: 'pages',
           sortable: true,
           sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
           align: 'center'

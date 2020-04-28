@@ -83,7 +83,7 @@ export default {
       leftDrawer: true,
       menuList: [
         {
-          icon: 'dashboard',
+          icon: 'home',
           label: 'Dashboard',
           link: '/admin',
           selected: 'true',
@@ -105,7 +105,6 @@ export default {
         },
         {
           icon: 'storage',
-          // icon: 'assignment_ind',
           label: 'Bases',
           link: '/admin/bases',
           selected: false,

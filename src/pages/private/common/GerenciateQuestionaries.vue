@@ -14,7 +14,7 @@
         <q-tab-panels v-model="tab" animated>
 
           <q-tab-panel name="questionaries" class="q-pa-none">
-            <ShowQuestionaries  :questionaries="allQuestionaries" @edit="editQuestionary" @delete="deleteQuestionary" @reload="reloadQuestionaries" ></ShowQuestionaries>
+            <TableQuestionaries  :questionaries="allQuestionaries" @edit="editQuestionary" @delete="deleteQuestionary" @reload="reloadQuestionaries" ></TableQuestionaries>
           </q-tab-panel>
 
           <q-tab-panel name="crudQuestionary">
@@ -125,7 +125,7 @@ export default {
   components: {
     'Planes': require('../../../components/Planes.vue').default,
     'CrudQuestionary': require('../../../components/CrudQuestionary.vue').default,
-    'ShowQuestionaries': require('../../../components/ShowQuestionaries.vue').default
+    'TableQuestionaries': require('../../../components/TableQuestionaries.vue').default
   },
 
   data () {

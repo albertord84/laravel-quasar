@@ -1,6 +1,6 @@
 <template>
     <q-page class="bg-gray q-pa-md">
-      <h6>Campanhas</h6>
+      <h6>Resgatar</h6>
     </q-page>
 </template>
 

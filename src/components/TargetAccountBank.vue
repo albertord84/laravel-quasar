@@ -1,6 +1,6 @@
 <template>
     <q-page class="bg-gray q-pa-md">
-      <h6>Bases</h6>
+      <h6>Pagamento</h6>
     </q-page>
 </template>
 
