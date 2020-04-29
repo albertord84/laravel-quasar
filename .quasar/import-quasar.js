@@ -10,10 +10,12 @@
  * Boot files are your "main.js"
  **/
 
+import iconSet from 'quasar/icon-set/fontawesome-v5'
+
 
 import Vue from 'vue'
 
 import Quasar from 'quasar'
 
 
-Vue.use(Quasar, { config: {} })
+Vue.use(Quasar, { config: {},iconSet: iconSet })

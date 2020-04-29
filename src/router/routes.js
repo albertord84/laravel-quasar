@@ -6,14 +6,15 @@ const routes = [
     path: '/',
     component: () => import('layouts/public/PublicLayout.vue'),
     children: [
+      // {
+      //   path: '',
+      //   name: 'public.index',
+      //   component: () => import('pages/public/Index.vue'),
+      //   meta: { requiresAuth: false }
+      // },
       {
-        path: '',
-        name: 'public.index',
-        component: () => import('pages/public/Index.vue'),
-        meta: { requiresAuth: false }
-      },
-      {
-        path: '/login',
+        // path: '/login',
+        path: '/',
         name: 'public.login',
         component: () => import('pages/public/Login.vue'),
         meta: { requiresAuth: false }
@@ -27,7 +28,7 @@ const routes = [
     ]
   },
 
-  // Auth routes
+  // Authentication routes
   {
     path: '/',
     component: () => import('layouts/auth/AdminLayout.vue'),
@@ -43,6 +44,132 @@ const routes = [
         name: 'auth.info',
         component: () => import('pages/auth/Info.vue'),
         meta: { requiresAuth: true }
+      }
+    ]
+  },
+
+  // Admins routes
+  {
+    path: '/superadmin',
+    component: () => import('layouts/private/Superadmin.vue'),
+    children: [
+      {
+        path: '/superadmin',
+        name: 'superadmin.dashboard',
+        component: () => import('pages/private/superadmin/DashboardSuperAdmin.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/superadmin/companies',
+        name: 'superadmin.companies',
+        component: () => import('pages/private/common/GerenciateCompanies.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/superadmin/bases',
+        name: 'superadmin.bases',
+        component: () => import('pages/private/common/GerenciateBases.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/superadmin/users',
+        name: 'superadmin.users',
+        component: () => import('pages/private/common/GerenciateUsers.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/superadmin/questionaries',
+        name: 'superadmin.questionaries',
+        component: () => import('pages/private/common/GerenciateQuestionaries.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/superadmin/campaigns',
+        name: 'superadmin.campaigns',
+        component: () => import('pages/private/common/GerenciateCampaigns.vue'),
+        meta: { requiresAuth: false }
+      }
+    ]
+  },
+
+  // Admins routes
+  {
+    path: '/admin',
+    component: () => import('layouts/private/Admin.vue'),
+    children: [
+      {
+        path: '/admin',
+        name: 'admin.dashboard',
+        component: () => import('pages/private/admin/DashboardAdmin.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/admin/questionaries',
+        name: 'admin.questionaries',
+        component: () => import('pages/private/common/GerenciateQuestionaries.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/admin/campaigns',
+        name: 'admin.campaigns',
+        component: () => import('pages/private/common/GerenciateCampaigns.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/admin/bases',
+        name: 'admin.bases',
+        component: () => import('pages/private/common/GerenciateBases.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/admin/users',
+        name: 'admin.bases',
+        component: () => import('pages/private/common/GerenciateUsers.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/admin/history',
+        name: 'admin.bases',
+        component: () => import('pages/private/admin/HistoryAdmin.vue'),
+        meta: { requiresAuth: false }
+      }
+    ]
+  },
+
+  // Admins routes
+  {
+    path: '/target',
+    component: () => import('layouts/private/Target.vue'),
+    children: [
+      {
+        path: '/target',
+        name: 'target.dashboard',
+        component: () => import('pages/private/target/DashboardTarget.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/target/questionaries',
+        name: 'target.questionaries',
+        component: () => import('pages/private/target/Questionaries.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/target/payment',
+        name: 'target.payment',
+        component: () => import('pages/private/target/Payment.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/target/notifications',
+        name: 'target.notifications',
+        component: () => import('pages/private/target/Notifications.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/target/contactus',
+        name: 'target.contactus',
+        component: () => import('pages/private/target/ContactUs.vue'),
+        meta: { requiresAuth: false }
       }
     ]
   }
