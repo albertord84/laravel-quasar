@@ -49,3 +49,44 @@ Route::resource('questionsTypes', 'QuestionsTypesController');
 Route::resource('responsesTypes', 'ResponsesTypesController');
 
 Route::resource('basesOrigins', 'BasesOriginsController');
+
+Route::resource('usersRoles', 'UsersRolesController');
+
+Route::resource('usersRoles', 'UsersRolesController');
+
+Route::resource('usersRoles', 'UsersRolesController');
+
+Route::resource('usersRoles', 'UsersRolesController');
+
+Route::resource('usersStatuses', 'UsersStatusController');
+
+Route::resource('campaignsStatuses', 'CampaignsStatusController');
+
+Route::resource('extractionsStatuses', 'ExtractionsStatusController');
+
+Route::resource('questionsTypes', 'QuestionsTypesController');
+
+Route::resource('responsesTypes', 'ResponsesTypesController');
+
+Route::resource('basesOrigins', 'BasesOriginsController');
+
+Route::resource('addresses', 'AddressController');
+
+Route::resource('planes', 'PlanesController');
+
+Route::resource('bases', 'BasesController');
+
+Route::resource('companies', 'CompaniesController');
+
+Route::resource('costsCenters', 'CostsCentersController');
+
+Route::resource('users', 'usersController');
+
+Route::resource('usersBases', 'UsersBasesController');
+
+Route::resource('questionnaires', 'QuestionnairesController');
+
+Route::resource('campaigns', 'CampaignsController');
+
+Route::resource('questions', 'QuestionsController');
+
