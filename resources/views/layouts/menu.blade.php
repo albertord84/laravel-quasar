@@ -86,3 +86,11 @@
     <a href="{{ route('accountsBanks.index') }}"><i class="fa fa-edit"></i><span>Accounts Banks</span></a>
 </li>
 
+<li class="{{ Request::is('optionsRespons*') ? 'active' : '' }}">
+    <a href="{{ route('optionsRespons.index') }}"><i class="fa fa-edit"></i><span>Options Respons</span></a>
+</li>
+
+<li class="{{ Request::is('optionsResponses*') ? 'active' : '' }}">
+    <a href="{{ route('optionsResponses.index') }}"><i class="fa fa-edit"></i><span>Options Responses</span></a>
+</li>
+

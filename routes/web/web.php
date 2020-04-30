@@ -101,3 +101,7 @@ Route::resource('recompenses', 'RecompensesController');
 Route::resource('accountsBanks', 'AccountsBanksController');
 
 Route::resource('accountsBanks', 'AccountsBanksController');
+
+Route::resource('optionsRespons', 'OptionsResponsController');
+
+Route::resource('optionsResponses', 'OptionsResponsesController');
