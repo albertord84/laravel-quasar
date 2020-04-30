@@ -34,3 +34,18 @@ Route::post('/oauth/token', 'Auth\LoginController@login')
 Route::resource('usersRoles', 'UsersRoleController');
 
 Route::resource('usersStatus', 'UsersStatuController');
+
+
+Route::resource('usersRoles', 'UsersRoleController');
+
+Route::resource('usersStatus', 'UsersStatuController');
+
+Route::resource('campaignsStatus', 'CampaignsStatuController');
+
+Route::resource('extractionsStatus', 'ExtractionsStatuController');
+
+Route::resource('questionsTypes', 'QuestionsTypesController');
+
+Route::resource('responsesTypes', 'ResponsesTypesController');
+
+Route::resource('basesOrigins', 'BasesOriginsController');
