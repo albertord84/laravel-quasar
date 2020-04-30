@@ -70,3 +70,19 @@
     <a href="{{ route('responsesOptions.index') }}"><i class="fa fa-edit"></i><span>Responses Options</span></a>
 </li>
 
+<li class="{{ Request::is('responses*') ? 'active' : '' }}">
+    <a href="{{ route('responses.index') }}"><i class="fa fa-edit"></i><span>Responses</span></a>
+</li>
+
+<li class="{{ Request::is('extractions*') ? 'active' : '' }}">
+    <a href="{{ route('extractions.index') }}"><i class="fa fa-edit"></i><span>Extractions</span></a>
+</li>
+
+<li class="{{ Request::is('recompenses*') ? 'active' : '' }}">
+    <a href="{{ route('recompenses.index') }}"><i class="fa fa-edit"></i><span>Recompenses</span></a>
+</li>
+
+<li class="{{ Request::is('accountsBanks*') ? 'active' : '' }}">
+    <a href="{{ route('accountsBanks.index') }}"><i class="fa fa-edit"></i><span>Accounts Banks</span></a>
+</li>
+

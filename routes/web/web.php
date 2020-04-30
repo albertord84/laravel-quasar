@@ -90,3 +90,12 @@ Route::resource('campaigns', 'CampaignsController');
 
 Route::resource('questions', 'QuestionsController');
 
+
+
+Route::resource('responses', 'ResponsesController');
+
+Route::resource('extractions', 'ExtractionsController');
+
+Route::resource('recompenses', 'RecompensesController');
+
+Route::resource('accountsBanks', 'AccountsBanksController');
