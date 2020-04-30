@@ -8,15 +8,15 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($usersRoles as $usersRole)
+        @foreach($usersRoles as $usersRoles)
             <tr>
-                <td>{{ $usersRole->name }}</td>
-            <td>{{ $usersRole->decription }}</td>
+                <td>{{ $usersRoles->name }}</td>
+            <td>{{ $usersRoles->decription }}</td>
                 <td>
-                    {!! Form::open(['route' => ['usersRoles.destroy', $usersRole->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['usersRoles.destroy', $usersRoles->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('usersRoles.show', [$usersRole->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a href="{{ route('usersRoles.edit', [$usersRole->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="{{ route('usersRoles.show', [$usersRoles->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{{ route('usersRoles.edit', [$usersRoles->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                     </div>
                     {!! Form::close() !!}

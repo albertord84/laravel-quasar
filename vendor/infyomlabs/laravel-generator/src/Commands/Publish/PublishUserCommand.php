@@ -74,7 +74,8 @@ class PublishUserCommand extends PublishBaseCommand
 
     private function updateRoutes()
     {
-        $path = config('infyom.laravel_generator.path.routes', base_path('routes/web.php'));
+        $path = config('infyom.laravel_generator.path.routes', base_path('routes/web/web.php'));
+        // $path = config('infyom.laravel_generator.path.routes', base_path('routes/web.php'));
 
         $routeContents = file_get_contents($path);
 

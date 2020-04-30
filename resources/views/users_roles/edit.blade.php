@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Users Role
+            Users Roles
         </h1>
    </section>
    <div class="content">
@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($usersRole, ['route' => ['usersRoles.update', $usersRole->id], 'method' => 'patch']) !!}
+                   {!! Form::model($usersRoles, ['route' => ['usersRoles.update', $usersRoles->id], 'method' => 'patch']) !!}
 
                         @include('users_roles.fields')
 
