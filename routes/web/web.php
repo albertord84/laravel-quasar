@@ -99,3 +99,5 @@ Route::resource('extractions', 'ExtractionsController');
 Route::resource('recompenses', 'RecompensesController');
 
 Route::resource('accountsBanks', 'AccountsBanksController');
+
+Route::resource('accountsBanks', 'AccountsBanksController');
