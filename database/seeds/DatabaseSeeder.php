@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersStatusesTableSeeder::class);
         $this->call(CampaignsStatusesTableSeeder::class);
         $this->call(ExtractionsStatusesTableSeeder::class);
-        $this->call(QuestionsTypesTableSeeder::class); // em duda si se necesita
+        $this->call(QuestionsTypesTableSeeder::class);
         $this->call(ResponsesTypesTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
 
@@ -33,12 +33,12 @@ class DatabaseSeeder extends Seeder
         $this->call(AccountsBanksTableSeeder::class);
 
         $this->call(QuestionnairesTableSeeder::class);
-        // $this->call(QuestionsTableSeeder::class);
-        // $this->call(ResponsesOptionsTableSeeder::class);
+        $this->call(QuestionsTableSeeder::class);
+        $this->call(OptionsResponsesTableSeeder::class);
 
         $this->call(CampaignsTableSeeder::class);
 
-        // $this->call(ResponsesTableSeeder::class);
+        $this->call(ResponsesTableSeeder::class);
 
         // $this->call(RecompensesTableSeeder::class);
         // $this->call(ExtractionsTableSeeder::class);

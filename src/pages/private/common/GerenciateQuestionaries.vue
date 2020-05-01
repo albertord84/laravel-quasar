@@ -48,13 +48,13 @@ const questionaryItem = {
       'type_id': 1, // Boolean
       'question': 'Você já ouviu falar do coronavirus?',
       'json_data': null,
-      'responseOptions': []
+      'responseOptions': null
     },
     { 'id': 2,
       'type_id': 1, // Boolean
       'question': 'O coranavirus contagia somente animais?',
       'json_data': null,
-      'responseOptions': []
+      'responseOptions': null
     },
     { 'id': 3,
       'type_id': 2, // Unique selection

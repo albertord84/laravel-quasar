@@ -97,7 +97,7 @@ class QuestionsTableSeeder extends Seeder
           'questionnaire_id' => '2',
           'type_id' => '1', //SINGLE
           'response_type_id' => '3', //MULTIPLE_SELECTION
-          'question' => '',
+          'question' => 'Selecione quais características identificam a ELA ',
           'json_data' => '',
       ]);
       $this->command->info('Question 7 criated');
