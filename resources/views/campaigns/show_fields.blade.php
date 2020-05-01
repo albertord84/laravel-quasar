@@ -82,6 +82,12 @@
     <p>{{ $campaigns->invitations_declined }}</p>
 </div>
 
+<!-- Invitations Send Date Field -->
+<div class="form-group">
+    {!! Form::label('invitations_send_date', 'Invitations Send Date:') !!}
+    <p>{{ $campaigns->invitations_send_date }}</p>
+</div>
+
 <!-- Requested Date Field -->
 <div class="form-group">
     {!! Form::label('requested_date', 'Requested Date:') !!}

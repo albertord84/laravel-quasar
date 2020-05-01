@@ -16,6 +16,7 @@
         <th>Invitations Sent</th>
         <th>Invitations Accepted</th>
         <th>Invitations Declined</th>
+        <th>Invitations Send Date</th>
         <th>Requested Date</th>
         <th>Analyzed Date</th>
         <th>Start Date</th>
@@ -40,6 +41,7 @@
             <td>{{ $campaigns->invitations_sent }}</td>
             <td>{{ $campaigns->invitations_accepted }}</td>
             <td>{{ $campaigns->invitations_declined }}</td>
+            <td>{{ $campaigns->invitations_send_date }}</td>
             <td>{{ $campaigns->requested_date }}</td>
             <td>{{ $campaigns->analyzed_date }}</td>
             <td>{{ $campaigns->start_date }}</td>

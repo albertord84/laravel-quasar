@@ -180,6 +180,18 @@
         "inView": true
     },
     {
+        "name": "invitations_send_date",
+        "dbType": "datetime:nullable",
+        "htmlType": "date",
+        "validations": null,
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
         "name": "requested_date",
         "dbType": "datetime:nullable",
         "htmlType": "date",

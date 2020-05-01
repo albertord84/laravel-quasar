@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Campaigns
  * @package App\Models
- * @version April 30, 2020, 5:12 pm CDT
+ * @version May 1, 2020, 3:01 pm CDT
  *
  * @property integer status_id
  * @property integer criator_id
@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer invitations_sent
  * @property integer invitations_accepted
  * @property integer invitations_declined
+ * @property string|\Carbon\Carbon invitations_send_date
  * @property string|\Carbon\Carbon requested_date
  * @property string|\Carbon\Carbon analyzed_date
  * @property string|\Carbon\Carbon start_date
@@ -58,6 +59,7 @@ class Campaigns extends Model
         'invitations_sent',
         'invitations_accepted',
         'invitations_declined',
+        'invitations_send_date',
         'requested_date',
         'analyzed_date',
         'start_date',
@@ -85,6 +87,7 @@ class Campaigns extends Model
         'invitations_sent' => 'integer',
         'invitations_accepted' => 'integer',
         'invitations_declined' => 'integer',
+        'invitations_send_date' => 'datetime',
         'requested_date' => 'datetime',
         'analyzed_date' => 'datetime',
         'start_date' => 'datetime',

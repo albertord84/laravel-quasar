@@ -22,6 +22,7 @@ $factory->define(Campaigns::class, function (Faker $faker) {
         'invitations_sent' => $faker->randomDigitNotNull,
         'invitations_accepted' => $faker->randomDigitNotNull,
         'invitations_declined' => $faker->randomDigitNotNull,
+        'invitations_send_date' => $faker->date('Y-m-d H:i:s'),
         'requested_date' => $faker->date('Y-m-d H:i:s'),
         'analyzed_date' => $faker->date('Y-m-d H:i:s'),
         'start_date' => $faker->date('Y-m-d H:i:s'),

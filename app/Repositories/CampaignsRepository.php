@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class CampaignsRepository
  * @package App\Repositories
- * @version April 30, 2020, 5:12 pm CDT
+ * @version May 1, 2020, 3:01 pm CDT
 */
 
 class CampaignsRepository extends BaseRepository
@@ -31,6 +31,7 @@ class CampaignsRepository extends BaseRepository
         'invitations_sent',
         'invitations_accepted',
         'invitations_declined',
+        'invitations_send_date',
         'requested_date',
         'analyzed_date',
         'start_date',

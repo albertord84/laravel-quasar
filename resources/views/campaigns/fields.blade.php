@@ -82,6 +82,21 @@
     {!! Form::number('invitations_declined', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Invitations Send Date Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('invitations_send_date', 'Invitations Send Date:') !!}
+    {!! Form::date('invitations_send_date', null, ['class' => 'form-control','id'=>'invitations_send_date']) !!}
+</div>
+
+@push('scripts')
+    <script type="text/javascript">
+        $('#invitations_send_date').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss',
+            useCurrent: false
+        })
+    </script>
+@endpush
+
 <!-- Requested Date Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('requested_date', 'Requested Date:') !!}
