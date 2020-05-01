@@ -23,9 +23,9 @@ class ResponsesTableSeeder extends Seeder
 
       $this->command->info('Creating Responses:');
 
-      $this->createResponsesOfQuestionnnaire1_ByTarget1();
-      $this->createResponsesOfQuestionnnaire2_ByTarget1();
-      $this->createResponsesOfQuestionnnaire3_ByTarget2();
+      // $this->createResponsesOfQuestionnnaire1_ByTarget1();
+      // $this->createResponsesOfQuestionnnaire2_ByTarget1();
+      // $this->createResponsesOfQuestionnnaire3_ByTarget2();
     }
 
     public function createResponsesOfQuestionnnaire1_ByTarget1(){
