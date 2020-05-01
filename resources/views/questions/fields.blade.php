@@ -1,3 +1,9 @@
+<!-- Questionnaire Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('questionnaire_id', 'Questionnaire Id:') !!}
+    {!! Form::number('questionnaire_id', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Type Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('type_id', 'Type Id:') !!}

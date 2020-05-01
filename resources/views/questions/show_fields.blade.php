@@ -1,3 +1,9 @@
+<!-- Questionnaire Id Field -->
+<div class="form-group">
+    {!! Form::label('questionnaire_id', 'Questionnaire Id:') !!}
+    <p>{{ $questions->questionnaire_id }}</p>
+</div>
+
 <!-- Type Id Field -->
 <div class="form-group">
     {!! Form::label('type_id', 'Type Id:') !!}

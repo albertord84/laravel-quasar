@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class QuestionsRepository
  * @package App\Repositories
- * @version April 30, 2020, 5:12 pm CDT
+ * @version May 1, 2020, 12:29 pm CDT
 */
 
 class QuestionsRepository extends BaseRepository
@@ -17,6 +17,7 @@ class QuestionsRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
+        'questionnaire_id',
         'type_id',
         'response_type_id',
         'question',

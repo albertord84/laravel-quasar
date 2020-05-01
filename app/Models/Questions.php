@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Questions
  * @package App\Models
- * @version April 30, 2020, 5:12 pm CDT
+ * @version May 1, 2020, 12:29 pm CDT
  *
+ * @property integer questionnaire_id
  * @property integer type_id
  * @property integer response_type_id
  * @property string question
@@ -30,6 +31,7 @@ class Questions extends Model
 
 
     public $fillable = [
+        'questionnaire_id',
         'type_id',
         'response_type_id',
         'question',
@@ -43,6 +45,7 @@ class Questions extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'questionnaire_id' => 'integer',
         'type_id' => 'integer',
         'response_type_id' => 'integer',
         'question' => 'string',
@@ -55,6 +58,7 @@ class Questions extends Model
      * @var array
      */
     public static $rules = [
+        'questionnaire_id' => 'required',
         'type_id' => 'required',
         'response_type_id' => 'required',
         'question' => 'required'

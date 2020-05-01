@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Questions::class, function (Faker $faker) {
 
     return [
+        'questionnaire_id' => $faker->randomDigitNotNull,
         'type_id' => $faker->randomDigitNotNull,
         'response_type_id' => $faker->randomDigitNotNull,
         'question' => $faker->word,

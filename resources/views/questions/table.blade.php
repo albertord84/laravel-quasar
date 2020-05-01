@@ -2,7 +2,8 @@
     <table class="table" id="questions-table">
         <thead>
             <tr>
-                <th>Type Id</th>
+                <th>Questionnaire Id</th>
+        <th>Type Id</th>
         <th>Response Type Id</th>
         <th>Question</th>
         <th>Json Data</th>
@@ -12,7 +13,8 @@
         <tbody>
         @foreach($questions as $questions)
             <tr>
-                <td>{{ $questions->type_id }}</td>
+                <td>{{ $questions->questionnaire_id }}</td>
+            <td>{{ $questions->type_id }}</td>
             <td>{{ $questions->response_type_id }}</td>
             <td>{{ $questions->question }}</td>
             <td>{{ $questions->json_data }}</td>

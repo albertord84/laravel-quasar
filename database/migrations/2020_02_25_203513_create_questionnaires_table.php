@@ -23,7 +23,7 @@ class CreateQuestionnairesTable extends Migration
             $table->string('name',200)->nullable();
             $table->string('description',300)->nullable();
             $table->string('observation',300)->nullable();
-            $table->integer('released',1)->nullable();
+            $table->integer('released')->nullable();
 
             $table->timestamps();
         });

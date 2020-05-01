@@ -16,6 +16,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
 
+            $table->integer('questionnaire_id')->nullable(false); //fk
             $table->integer('type_id')->nullable(false)->default(1); //fk
             $table->integer('response_type_id')->nullable(false); //fk
 
