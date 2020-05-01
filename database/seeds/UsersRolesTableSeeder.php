@@ -17,9 +17,7 @@ class UsersRolesTableSeeder extends Seeder
       // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
       // DB::table('users_managers')->truncate();
       // DB::table('users_attendants')->truncate();
-
       DB::table('users_roles')->truncate();
-
       // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
       $this->command->info('Creating UsersRoles:');
@@ -28,10 +26,25 @@ class UsersRolesTableSeeder extends Seeder
     }
 
     public function createUserRoles(){
-      // UsersRoles::create([
-      //   'id' => '1',
-      //   'name' => 'ADMIN',
-      //   'description' => 'Role Admin',
-      // ]);
+      UsersRoles::create([
+        'id' => '1',
+        'name' => 'SUPERADMIN',
+        'decription' => 'Role SUPERADMIN',
+      ]);
+      $this->command->info('SUPERADMIN Role created');
+
+      UsersRoles::create([
+        'id' => '2',
+        'name' => 'ADMIN',
+        'decription' => 'Role ADMIN',
+      ]);
+      $this->command->info('ADMIN Role created');
+
+      UsersRoles::create([
+        'id' => '3',
+        'name' => 'TARGET',
+        'decription' => 'Role TARGET',
+      ]);
+      $this->command->info('TARGET Role created');
     }
 }

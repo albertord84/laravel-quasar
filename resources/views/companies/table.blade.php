@@ -2,16 +2,30 @@
     <table class="table" id="companies-table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Responsible Id</th>
+        <th>Address Id</th>
+        <th>Social Reason</th>
+        <th>Fantasy Name</th>
+        <th>Cnpj</th>
+        <th>Phone</th>
+        <th>Phone2</th>
         <th>Decription</th>
+        <th>Observation</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
         <tbody>
         @foreach($companies as $companies)
             <tr>
-                <td>{{ $companies->name }}</td>
+                <td>{{ $companies->responsible_id }}</td>
+            <td>{{ $companies->address_id }}</td>
+            <td>{{ $companies->social_reason }}</td>
+            <td>{{ $companies->fantasy_name }}</td>
+            <td>{{ $companies->cnpj }}</td>
+            <td>{{ $companies->phone }}</td>
+            <td>{{ $companies->phone2 }}</td>
             <td>{{ $companies->decription }}</td>
+            <td>{{ $companies->observation }}</td>
                 <td>
                     {!! Form::open(['route' => ['companies.destroy', $companies->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
