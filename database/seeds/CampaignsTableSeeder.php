@@ -49,7 +49,7 @@ class CampaignsTableSeeder extends Seeder
         // 'start_date' => '2020-05-10 10:00:00',
         // 'end_date' => '2020-05-20 10:00:00',
       ]);
-      $this->command->info('Campaigns 1 created');
+      $this->command->info('Campaign 1 created');
 
       Campaigns::create([
         'id' => '2',
@@ -73,7 +73,7 @@ class CampaignsTableSeeder extends Seeder
         // 'start_date' => '2020-05-10 10:00:00',
         // 'end_date' => '2020-05-20 10:00:00',
       ]);
-      $this->command->info('Campaigns 2 created');
+      $this->command->info('Campaign 2 created');
 
       Campaigns::create([
         'id' => '3',
@@ -97,6 +97,6 @@ class CampaignsTableSeeder extends Seeder
         // 'start_date' => '2020-05-10 10:00:00',
         // 'end_date' => '2020-05-20 10:00:00',
       ]);
-      $this->command->info('Campaigns 23 created');
+      $this->command->info('Campaign 3 created');
     }
 }
