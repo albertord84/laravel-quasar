@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CampaignsStatusTableSeeder extends Seeder
+class CampaignsStatusesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
