@@ -23,7 +23,7 @@ class QuestionnairesTableSeeder extends Seeder
 
       $this->command->info('Creating Questionnaires:');
 
-      // $this->createQuestionnaires();
+      $this->createQuestionnaires();
     }
 
     public function createQuestionnaires(){

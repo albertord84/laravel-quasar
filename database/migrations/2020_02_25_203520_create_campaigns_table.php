@@ -33,6 +33,7 @@ class CreateCampaignsTable extends Migration
             $table->integer('invitations_accepted')->nullable()->default(0);
             $table->integer('invitations_declined')->nullable()->default(0);
 
+            $table->timestamp('invitations_send_date',0)->nullable();
             $table->timestamp('requested_date',0)->nullable();
             $table->timestamp('analyzed_date',0)->nullable();
             $table->timestamp('start_date',0)->nullable();
