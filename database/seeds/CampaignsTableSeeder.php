@@ -44,11 +44,6 @@ class CampaignsTableSeeder extends Seeder
         'invitations_accepted' => '0',
         'invitations_declined' => '0',
 
-        'invitations_send_date' => '0000-00-00 00:00:00',
-        'requested_date' => '0000-00-00 00:00:00',
-        'analyzed_date' => '0000-00-00 00:00:00',
-        'start_date' => '0000-00-00 00:00:00',
-        'end_date' => '0000-00-00 00:00:00',
         // 'requested_date' => '2020-05-01 10:00:00',
         // 'analyzed_date' => '0000-00-00 00:00:00',
         // 'start_date' => '2020-05-10 10:00:00',
