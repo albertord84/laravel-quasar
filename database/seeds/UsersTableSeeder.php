@@ -24,8 +24,8 @@ class UsersTableSeeder extends Seeder
 
         // $faker = new Faker();
         $this->createSuperAdmins();
-        // $this->createAdmins();
-        // $this->createTargets();
+        $this->createAdmins();
+        $this->createTargets();
     }
 
     public function createSuperAdmins(){
@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
           'company_id' => 1,
           'cost_center_id' => 1,
           'address_id' => 1,
-          'username' => 'Sinei',
+          'username' => 'Sidnei',
           'email' => 'sidnei.bertozzi@gmail.com',
           'password' => bcrypt('sidnei.bertozzi123'),
           'role_id' => 1,
@@ -94,4 +94,48 @@ class UsersTableSeeder extends Seeder
       ]);
       $this->command->info('Admin created: [user: albertord84]');
     }
+
+    public function createAdmins(){
+      User::create([
+          'id' => 6,
+          'company_id' => 1,
+          'cost_center_id' => 1,
+          'address_id' => 1,
+          'username' => 'Admin',
+          'email' => 'admin@physiback.com',
+          'password' => bcrypt('admin'),
+          'role_id' => 2,
+          'status_id' => 1,
+      ]);
+      $this->command->info('Admin created: [user: admin@physiback.com]');
+    }
+
+    public function createTargets(){
+      User::create([
+        'id' => 7,
+        'company_id' => 1,
+        'cost_center_id' => 1,
+        'address_id' => 1,
+        'username' => 'Target1',
+        'email' => 'target1@physiback.com',
+        'password' => bcrypt('target1'),
+        'role_id' => 3,
+        'status_id' => 1,
+    ]);
+    $this->command->info('Admin created: [user: target1@physiback.com]');
+
+      User::create([
+        'id' => 8,
+        'company_id' => 1,
+        'cost_center_id' => 1,
+        'address_id' => 1,
+        'username' => 'Target2',
+        'email' => 'target2@physiback.com',
+        'password' => bcrypt('target2'),
+        'role_id' => 3,
+        'status_id' => 1,
+    ]);
+    $this->command->info('Admin created: [user: target2@physiback.com]');
+    }
+
 }

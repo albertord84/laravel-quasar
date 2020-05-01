@@ -23,22 +23,22 @@ class CompaniesTableSeeder extends Seeder
 
       $this->command->info('Creating Companies:');
 
-      $this->createUserRoles();
+      $this->createCompanies();
     }
 
-    public function createUserRoles(){
+    public function createCompanies(){
       Companies::create([
         'id' => '1',
         'responsible_id' => '1',
-        'address_id' => 'Avenida Maracanã',
+        'address_id' => '1',
         'social_reason' => 'Physiback',
         'fantasy_name' => 'Physiback',
-        'cnpj' => '88.495.263/0001-61',
+        'cnpj' => '88495263000161',
         'phone' => '5521965913089',
-        'phone2' => 'Gestão de enquetes online',
+        'phone2' => '',
         'decription' => 'Gestão de enquetes online',
         'observation' => 'Gestão de enquetes online'
       ]);
-      $this->command->info('SUPERADMIN Role created');
+      $this->command->info('Company Physiback created');
     }
 }

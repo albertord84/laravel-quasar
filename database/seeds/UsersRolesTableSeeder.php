@@ -2,6 +2,7 @@
 
 use App\Models\UsersRoles;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UsersRolesTableSeeder extends Seeder
 {

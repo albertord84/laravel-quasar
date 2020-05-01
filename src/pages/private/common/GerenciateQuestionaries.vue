@@ -81,7 +81,7 @@ const questionaryItem = {
       ]
     },
     { 'id': 5,
-      'type_id': 2, // Scale selection
+      'type_id': 4, // Scale selection
       'question': 'Analise a seguinte imagem e escolha a opção que você acha que representa',
       'json_data': {
         'type': 'image', // dummy field constructed in frontend side

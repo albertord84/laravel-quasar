@@ -16,14 +16,18 @@ class CreateQuestionnairesTable extends Migration
         Schema::create('questionnaires', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->integer('plane_id')->nullable(false); //fk
-            $table->integer('criator_id')->nullable(false); //fk
-            $table->integer('updater_id')->nullable(); //fk
+            // $table->integer('plane_id')->nullable(); //fk
+            // $table->integer('criator_id')->nullable(); //fk
+            // $table->integer('updater_id')->nullable(); //fk
+
+            // $table->integer('plane_id')->nullable(false); //fk
+            // $table->integer('criator_id')->nullable(false); //fk
+            // $table->integer('updater_id')->nullable(false); //fk
 
             $table->string('name',200)->nullable(false);
             $table->string('description',300)->nullable();
             $table->string('observation',300)->nullable();
-            $table->integer('released')->nullable(false);
+            $table->integer('released',1)->nullable(false);
 
             $table->timestamps();
         });
