@@ -50,5 +50,53 @@ class CampaignsTableSeeder extends Seeder
         // 'end_date' => '2020-05-20 10:00:00',
       ]);
       $this->command->info('Campaigns 1 created');
+
+      Campaigns::create([
+        'id' => '2',
+        'status_id' => '1',
+        'criator_id' => '6',
+        'updater_id' => '6',
+        'questionary_id' => '2',
+        'base_id' => '1',
+        'name' => 'Cannabis Sativa e ELA',
+        'objetive' => 'Tratamento da ELA com Cannabis Sativa',
+        'description' => 'Essa campanha tem como objetivo avaliar Tratamento da ELA com Cannabis Sativa',
+        'observation' => 'Essa campanha deve ser liberada em Junho de 2020',
+        'response_limit' => '500',
+        'response_amount' => '0',
+        'invitations_sent' => '0',
+        'invitations_accepted' => '0',
+        'invitations_declined' => '0',
+
+        // 'requested_date' => '2020-05-01 10:00:00',
+        // 'analyzed_date' => '0000-00-00 00:00:00',
+        // 'start_date' => '2020-05-10 10:00:00',
+        // 'end_date' => '2020-05-20 10:00:00',
+      ]);
+      $this->command->info('Campaigns 2 created');
+
+      Campaigns::create([
+        'id' => '3',
+        'status_id' => '1',
+        'criator_id' => '6',
+        'updater_id' => '6',
+        'questionary_id' => '2',
+        'base_id' => '1',
+        'name' => 'Cannabis Sativa e ELA',
+        'objetive' => 'Captopril e hiper-tensão arterial',
+        'description' => 'Essa campanha tem como objetivo avaliar Captopril e hiper-tensão arterial',
+        'observation' => 'Essa campanha deve ser liberada em Junho de 2020',
+        'response_limit' => '200',
+        'response_amount' => '0',
+        'invitations_sent' => '0',
+        'invitations_accepted' => '0',
+        'invitations_declined' => '0',
+
+        // 'requested_date' => '2020-05-01 10:00:00',
+        // 'analyzed_date' => '0000-00-00 00:00:00',
+        // 'start_date' => '2020-05-10 10:00:00',
+        // 'end_date' => '2020-05-20 10:00:00',
+      ]);
+      $this->command->info('Campaigns 23 created');
     }
 }
