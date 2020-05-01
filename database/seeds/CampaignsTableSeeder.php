@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Campaigns;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -44,10 +45,10 @@ class CampaignsTableSeeder extends Seeder
         'invitations_accepted' => '0',
         'invitations_declined' => '0',
 
-        // 'requested_date' => '2020-05-01 10:00:00',
-        // 'analyzed_date' => '0000-00-00 00:00:00',
-        // 'start_date' => '2020-05-10 10:00:00',
-        // 'end_date' => '2020-05-20 10:00:00',
+        'requested_date' => new Carbon('2020-05-01 10:00:00'),
+        'analyzed_date' => new Carbon('2000-01-01 00:00:00'),
+        'start_date' => new Carbon('2020-05-01 10:00:00'),
+        'end_date' => new Carbon('2020-05-01 10:00:00'),
       ]);
       $this->command->info('Campaign 1 created');
 
@@ -68,10 +69,10 @@ class CampaignsTableSeeder extends Seeder
         'invitations_accepted' => '0',
         'invitations_declined' => '0',
 
-        // 'requested_date' => '2020-05-01 10:00:00',
-        // 'analyzed_date' => '0000-00-00 00:00:00',
-        // 'start_date' => '2020-05-10 10:00:00',
-        // 'end_date' => '2020-05-20 10:00:00',
+        'requested_date' => new Carbon('2020-05-01 10:00:00'),
+        'analyzed_date' => new Carbon('2000-01-01 00:00:00'),
+        'start_date' => new Carbon('2020-05-10 10:00:00'),
+        'end_date' => new Carbon('2020-05-20 10:00:00'),
       ]);
       $this->command->info('Campaign 2 created');
 
@@ -92,10 +93,10 @@ class CampaignsTableSeeder extends Seeder
         'invitations_accepted' => '0',
         'invitations_declined' => '0',
 
-        // 'requested_date' => '2020-05-01 10:00:00',
-        // 'analyzed_date' => '0000-00-00 00:00:00',
-        // 'start_date' => '2020-05-10 10:00:00',
-        // 'end_date' => '2020-05-20 10:00:00',
+        'requested_date' => new Carbon('2020-05-01 10:00:00'),
+        'analyzed_date' => new Carbon('2000-01-01 00:00:00'),
+        'start_date' => new Carbon('2020-05-10 10:00:00'),
+        'end_date' => new Carbon('2020-05-20 10:00:00'),
       ]);
       $this->command->info('Campaign 3 created');
     }
