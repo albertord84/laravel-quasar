@@ -597,7 +597,7 @@ class ComposerStaticInit54b4055114b3e8f68b009df658a1bcd4
         'App\\Http\\Controllers\\QuestionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/QuestionsController.php',
         'App\\Http\\Controllers\\QuestionsTypesController' => __DIR__ . '/../..' . '/app/Http/Controllers/QuestionsTypesController.php',
         'App\\Http\\Controllers\\RecompensesController' => __DIR__ . '/../..' . '/app/Http/Controllers/RecompensesController.php',
-        'App\\Http\\Controllers\\ResponsesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ResponsesController.php',
+        'App\\Http\\Controllers\\ResponsesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ResponsesController copy.php',
         'App\\Http\\Controllers\\ResponsesTypesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ResponsesTypesController.php',
         'App\\Http\\Controllers\\UsersBasesController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersBasesController.php',
         'App\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',
