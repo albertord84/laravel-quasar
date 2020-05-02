@@ -51,7 +51,7 @@
         "name": "response_option_id",
         "dbType": "integer,false",
         "htmlType": null,
-        "validations": null,
+        "validations": "required",
         "searchable": true,
         "fillable": true,
         "primary": false,
@@ -61,7 +61,7 @@
     },
     {
         "name": "discursive_text",
-        "dbType": "string,2000:nullable",
+        "dbType": "string,4000:nullable",
         "htmlType": "text",
         "validations": null,
         "searchable": true,

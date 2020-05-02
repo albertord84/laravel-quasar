@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Questionnaires
  * @package App\Models
- * @version April 30, 2020, 5:12 pm CDT
+ * @version May 1, 2020, 7:56 pm CDT
  *
  * @property integer plane_id
  * @property integer criator_id
@@ -64,10 +64,7 @@ class Questionnaires extends Model
      * @var array
      */
     public static $rules = [
-        'plane_id' => 'required',
-        'criator_id' => 'required',
-        'name' => 'required',
-        'released' => 'required'
+        
     ];
 
     

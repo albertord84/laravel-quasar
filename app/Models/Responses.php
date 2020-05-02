@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Responses
  * @package App\Models
- * @version April 30, 2020, 5:33 pm CDT
+ * @version May 1, 2020, 7:58 pm CDT
  *
  * @property integer user_id
  * @property integer question_id
@@ -60,7 +60,8 @@ class Responses extends Model
     public static $rules = [
         'user_id' => 'required',
         'question_id' => 'required',
-        'campaign_id' => 'required'
+        'campaign_id' => 'required',
+        'response_option_id' => 'required'
     ];
 
     

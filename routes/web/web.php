@@ -30,78 +30,38 @@ Route::post('/oauth/token', 'Auth\LoginController@login')
 // ->middleware(['oauth.grant:password', 'oauth.details'])
 ->name('login');
 
-
-Route::resource('usersRoles', 'UsersRoleController');
-
-Route::resource('usersStatus', 'UsersStatuController');
-
-
-Route::resource('usersRoles', 'UsersRoleController');
-
-Route::resource('usersStatus', 'UsersStatuController');
-
-Route::resource('campaignsStatus', 'CampaignsStatuController');
-
-Route::resource('extractionsStatus', 'ExtractionsStatuController');
-
-Route::resource('questionsTypes', 'QuestionsTypesController');
-
-Route::resource('responsesTypes', 'ResponsesTypesController');
-
-Route::resource('basesOrigins', 'BasesOriginsController');
-
-Route::resource('usersRoles', 'UsersRolesController');
-
-Route::resource('usersRoles', 'UsersRolesController');
-
-Route::resource('usersRoles', 'UsersRolesController');
-
-Route::resource('usersRoles', 'UsersRolesController');
-
-Route::resource('usersStatuses', 'UsersStatusController');
-
-Route::resource('campaignsStatuses', 'CampaignsStatusController');
-
-Route::resource('extractionsStatuses', 'ExtractionsStatusController');
-
-Route::resource('questionsTypes', 'QuestionsTypesController');
-
-Route::resource('responsesTypes', 'ResponsesTypesController');
-
-Route::resource('basesOrigins', 'BasesOriginsController');
-
 Route::resource('addresses', 'AddressController');
-
-Route::resource('planes', 'PlanesController');
-
-Route::resource('bases', 'BasesController');
+Route::resource('accountsBanks', 'AccountsBanksController');
 
 Route::resource('companies', 'CompaniesController');
-
 Route::resource('costsCenters', 'CostsCentersController');
 
+Route::resource('usersRoles', 'UsersRoleController');
+Route::resource('usersStatus', 'UsersStatuController');
 Route::resource('users', 'usersController');
+Route::resource('usersStatuses', 'UsersStatusController');
 
+Route::resource('bases', 'BasesController');
+Route::resource('basesOrigins', 'BasesOriginsController');
 Route::resource('usersBases', 'UsersBasesController');
 
-Route::resource('questionnaires', 'QuestionnairesController');
 
 Route::resource('campaigns', 'CampaignsController');
+Route::resource('campaignsStatus', 'CampaignsStatuController'); //ver
+Route::resource('campaignsStatuses', 'CampaignsStatusController'); //ver
 
+Route::resource('planes', 'PlanesController');
+Route::resource('questionnaires', 'QuestionnairesController');
 Route::resource('questions', 'QuestionsController');
-
-
-
+Route::resource('questionsTypes', 'QuestionsTypesController');
+Route::resource('optionsRespons', 'OptionsResponsController'); //ver
+Route::resource('optionsResponses', 'OptionsResponsesController'); //ver
 Route::resource('responses', 'ResponsesController');
+Route::resource('responsesTypes', 'ResponsesTypesController');
 
+Route::resource('extractionsStatus', 'ExtractionsStatuController'); //ver
+Route::resource('extractionsStatuses', 'ExtractionsStatusController'); //ver
 Route::resource('extractions', 'ExtractionsController');
 
 Route::resource('recompenses', 'RecompensesController');
 
-Route::resource('accountsBanks', 'AccountsBanksController');
-
-Route::resource('accountsBanks', 'AccountsBanksController');
-
-Route::resource('optionsRespons', 'OptionsResponsController');
-
-Route::resource('optionsResponses', 'OptionsResponsesController');

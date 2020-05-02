@@ -35,7 +35,7 @@ class QuestionnairesTableSeeder extends Seeder
           'name' => 'Avaliação da hidroxocloroquina no tratamento da COVID-19',
           'description' => 'Questionário para avaliar o uso da hidroxocloroquina no tratamento da COVID-19 e seus impatos nos pacientes',
           'observation' => 'Esse questionário deve ser aplicado apenas a médicos intensivistas de UPAs',
-          'released' => '0',
+          'released' => '1',
       ]);
       $this->command->info('Questionnary 1 criated');
 
@@ -47,7 +47,7 @@ class QuestionnairesTableSeeder extends Seeder
           'name' => 'Uso da Cannabis Sativa na restauração neurológica em paciente com ELA',
           'description' => 'Questionário para avaliar o uso da Cannabis Sativa na restauração neurológica em paciente com Esclerose Lateral Amiotrófica (ELA)',
           'observation' => 'Esse questionário deve ser aplicado apenas a médicos neurologistas',
-          'released' => '0',
+          'released' => '1',
       ]);
       $this->command->info('Questionnary 2 criated');
 
