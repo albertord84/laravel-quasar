@@ -4,10 +4,10 @@
     {!! Form::number('user_id', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Question Id Field -->
+<!-- Questionnaire Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('question_id', 'Question Id:') !!}
-    {!! Form::number('question_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('questionnaire_id', 'Questionnaire Id:') !!}
+    {!! Form::number('questionnaire_id', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Campaign Id Field -->

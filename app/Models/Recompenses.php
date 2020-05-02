@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Recompenses
  * @package App\Models
- * @version April 30, 2020, 5:34 pm CDT
+ * @version May 1, 2020, 7:46 pm CDT
  *
  * @property integer user_id
- * @property integer question_id
+ * @property integer questionnaire_id
  * @property integer campaign_id
  * @property number value
  */
@@ -31,7 +31,7 @@ class Recompenses extends Model
 
     public $fillable = [
         'user_id',
-        'question_id',
+        'questionnaire_id',
         'campaign_id',
         'value'
     ];
@@ -44,7 +44,7 @@ class Recompenses extends Model
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
-        'question_id' => 'integer',
+        'questionnaire_id' => 'integer',
         'campaign_id' => 'integer',
         'value' => 'float'
     ];
@@ -56,7 +56,7 @@ class Recompenses extends Model
      */
     public static $rules = [
         'user_id' => 'required',
-        'question_id' => 'required',
+        'questionnaire_id' => 'required',
         'campaign_id' => 'required',
         'value' => 'required'
     ];

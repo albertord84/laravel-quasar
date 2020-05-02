@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ResponsesTableSeeder::class);
 
-        // $this->call(RecompensesTableSeeder::class);
+        $this->call(RecompensesTableSeeder::class);
         // $this->call(ExtractionsTableSeeder::class);
       }
 }

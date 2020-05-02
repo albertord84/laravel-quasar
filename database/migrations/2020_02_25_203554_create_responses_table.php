@@ -19,8 +19,8 @@ class CreateResponsesTable extends Migration
             $table->integer('user_id')->nullable(false); //fk
             $table->integer('question_id')->nullable(false); //fk
             $table->integer('campaign_id')->nullable(false); //fk
-            $table->integer('response_option_id')->nullable(); //fk
-            $table->string('discursive_text', 2000)->nullable(); //fk
+            $table->integer('response_option_id')->default(0);
+            $table->string('discursive_text', 4000)->nullable();
 
             $table->timestamps();
         });

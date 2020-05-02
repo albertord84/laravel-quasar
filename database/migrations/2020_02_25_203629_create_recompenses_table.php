@@ -17,9 +17,8 @@ class CreateRecompensesTable extends Migration
             $table->bigIncrements('id');
 
             $table->integer('user_id')->nullable(false); //fk
-            $table->integer('question_id')->nullable(false); //fk
+            $table->integer('questionnaire_id')->nullable(false); //fk
             $table->integer('campaign_id')->nullable(false); //fk
-
             $table->float('value', 6, 2)->nullable(false);
 
             $table->timestamps();

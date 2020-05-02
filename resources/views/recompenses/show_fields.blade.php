@@ -4,10 +4,10 @@
     <p>{{ $recompenses->user_id }}</p>
 </div>
 
-<!-- Question Id Field -->
+<!-- Questionnaire Id Field -->
 <div class="form-group">
-    {!! Form::label('question_id', 'Question Id:') !!}
-    <p>{{ $recompenses->question_id }}</p>
+    {!! Form::label('questionnaire_id', 'Questionnaire Id:') !!}
+    <p>{{ $recompenses->questionnaire_id }}</p>
 </div>
 
 <!-- Campaign Id Field -->

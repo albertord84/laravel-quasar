@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th>User Id</th>
-        <th>Question Id</th>
+        <th>Questionnaire Id</th>
         <th>Campaign Id</th>
         <th>Value</th>
                 <th colspan="3">Action</th>
@@ -13,7 +13,7 @@
         @foreach($recompenses as $recompenses)
             <tr>
                 <td>{{ $recompenses->user_id }}</td>
-            <td>{{ $recompenses->question_id }}</td>
+            <td>{{ $recompenses->questionnaire_id }}</td>
             <td>{{ $recompenses->campaign_id }}</td>
             <td>{{ $recompenses->value }}</td>
                 <td>

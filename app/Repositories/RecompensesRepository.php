@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class RecompensesRepository
  * @package App\Repositories
- * @version April 30, 2020, 5:34 pm CDT
+ * @version May 1, 2020, 7:46 pm CDT
 */
 
 class RecompensesRepository extends BaseRepository
@@ -18,7 +18,7 @@ class RecompensesRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'user_id',
-        'question_id',
+        'questionnaire_id',
         'campaign_id',
         'value'
     ];

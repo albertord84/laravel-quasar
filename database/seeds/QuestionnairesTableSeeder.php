@@ -59,7 +59,7 @@ class QuestionnairesTableSeeder extends Seeder
           'name' => 'Uso do Captopril em pacientes com hiper-tensão arterial',
           'description' => 'Questionário para avaliar o uso do Captopril em pacientes com hiper-tensão arterial que apresentam doenças cardíacas congênitas',
           'observation' => 'Esse questionário deve ser aplicado apenas a médicos cardiologistas',
-          'released' => '0',
+          'released' => '1',
       ]);
       $this->command->info('Questionnary 3 criated');
     }
