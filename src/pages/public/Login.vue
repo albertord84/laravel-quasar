@@ -109,12 +109,13 @@ export default {
           this.storeToken(response)
           this.setAuthStatus(true)
           this.setUserData(_.get(response, ['data', 'user_data'], {}))
-          let redirect = _.get(this.$route, ['query', 'redirect'])
-          if (redirect) {
-            this.$router.replace(redirect)
-          } else {
-            this.$router.replace({ name: 'auth.user' })
-          }
+          // let redirect = _.get(this.$route, ['query', 'redirect'])
+          // if (redirect) {
+          //   this.$router.replace(redirect)
+          // } else {
+          //   this.$router.replace({ name: 'auth.user' })
+          // }
+          this.$router.replace({ name: 'target.dashboard' })
         })
         .catch(errors => {
           let errArray = master.hasErrors(errors)

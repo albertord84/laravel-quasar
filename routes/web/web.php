@@ -47,20 +47,17 @@ Route::resource('usersBases', 'UsersBasesController');
 
 
 Route::resource('campaigns', 'CampaignsController');
-Route::resource('campaignsStatus', 'CampaignsStatuController'); //ver
-Route::resource('campaignsStatuses', 'CampaignsStatusController'); //ver
+Route::resource('campaignsStatuses', 'CampaignsStatusController');
 
 Route::resource('planes', 'PlanesController');
-Route::resource('questionnaires', 'QuestionnairesController');
+Route::resource('/questionnaires', 'QuestionnairesController');
 Route::resource('questions', 'QuestionsController');
 Route::resource('questionsTypes', 'QuestionsTypesController');
-Route::resource('optionsRespons', 'OptionsResponsController'); //ver
-Route::resource('optionsResponses', 'OptionsResponsesController'); //ver
+Route::resource('optionsResponses', 'OptionsResponsesController');
 Route::resource('responses', 'ResponsesController');
 Route::resource('responsesTypes', 'ResponsesTypesController');
 
-Route::resource('extractionsStatus', 'ExtractionsStatuController'); //ver
-Route::resource('extractionsStatuses', 'ExtractionsStatusController'); //ver
+Route::resource('extractionsStatuses', 'ExtractionsStatusController');
 Route::resource('extractions', 'ExtractionsController');
 
 Route::resource('recompenses', 'RecompensesController');

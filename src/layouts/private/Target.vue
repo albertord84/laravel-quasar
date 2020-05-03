@@ -8,7 +8,7 @@
               <q-toolbar-title><b class="hover-pointer">PhysiBack</b></q-toolbar-title>
               <q-btn-dropdown stretch shrink  flat icon="account_circle">
                   <q-list>
-                      <q-item clickable v-close-menu tabindex="0">
+                      <q-item clickable tabindex="0">
                           <q-item-section>
                             <q-item-label>Editar perfil</q-item-label>
                           </q-item-section>
@@ -17,7 +17,7 @@
                           </q-item-section>
                       </q-item>
 
-                      <q-item clickable v-close-menu tabindex="0">
+                      <q-item clickable @click="logout($router)" tabindex="0">
                           <q-item-section>
                             <q-item-label>Encerrar sessão</q-item-label>
                           </q-item-section>
@@ -64,23 +64,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
-  name: 'LayoutAdmin',
+  name: 'LayoutTarget',
 
   data () {
     return {
-      leftDrawer: false,
+      leftDrawer: true,
       menuList: [
         {
           icon: 'home',
           label: 'Dashboard',
-          link: '/target',
+          link: '/target/dashboard',
           selected: true,
           separator: false
         },
         {
           icon: 'list_alt',
-          label: 'Questionarios',
+          label: 'Questionários',
           link: '/target/questionaries',
           selected: false,
           separator: false
@@ -117,7 +118,9 @@ export default {
           this.menuList[i].selected = true
         }
       })
-    }
+    },
+
+    ...mapActions('auth', ['logout'])
   }
 }
 </script>

@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 const questionaryItem = {
   plane_id: 3,
@@ -128,8 +129,31 @@ export default {
   data () {
     return {
       loader: false,
+      questionniaresUrl: 'questionnaires',
       questionaryItem: null,
-      allQuestionaries: []
+      allQuestionaries: [],
+
+      thumbStyle: {
+        right: '4px',
+        borderRadius: '5px',
+        backgroundColor: '#027be3',
+        width: '5px',
+        opacity: 0.75
+      },
+      contentStyle: {
+        right: '4px',
+        borderRadius: '5px',
+        backgroundColor: '#027be3',
+        width: '5px',
+        opacity: 0.75
+      },
+      contentActiveStyle: {
+        right: '4px',
+        borderRadius: '5px',
+        backgroundColor: '#027be3',
+        width: '5px',
+        opacity: 0.75
+      }
     }
   },
 
@@ -150,28 +174,21 @@ export default {
       this.allQuestionaries.push(Object.assign({}, questionaryItem))
       this.allQuestionaries.push(Object.assign({}, questionaryItem))
 
-      // this.loader = true
-      // ApiService.login(this.form)
-      // .then(response => {
-      //   this.storeToken(response)
-      //   this.setAuthStatus(true)
-      //   this.setUserData(_.get(response, ['data', 'user_data'], {}))
-      //   let redirect = _.get(this.$route, ['query', 'redirect'])
-      //   if (redirect) {
-      //     this.$router.replace(redirect)
-      //   } else {
-      //     this.$router.replace({ name: 'auth.user' })
-      //   }
-      // })
-      // .catch(errors => {
-      //   let errArray = master.hasErrors(errors)
-      //   if (errArray) {
-      //     master.setErrors(this.$refs.observer, errArray)
-      //   }
-      // })
-      // .then(() => {
-      //   this.loader = false
-      // })
+      this.loader = true
+      axios.get(this.questionniaresUrl)
+        .then(response => {
+          console.log('wwwwwwwwwwwwwwwwwwwwwwwwww JR')
+          console.log(response.data)
+        })
+        .catch(errors => {
+          // let errArray = master.hasErrors(errors)
+          // if (errArray) {
+          //   master.setErrors(this.$refs.observer, errArray)
+          // }
+        })
+        .then(() => {
+          this.loader = false
+        })
     },
 
     selectedPlane (plane) {
@@ -217,7 +234,6 @@ export default {
   },
 
   watch: {
-
   },
 
   computed: {
@@ -243,7 +259,8 @@ export default {
 
   meta () {
     return {
-      title: this.$t('page_titles.login_title')
+      title: 'Questionários'
+      // title: this.$t('page_titles.login_title')
     }
   }
 

@@ -50,11 +50,11 @@ const routes = [
 
   // Admins routes
   {
-    path: '/superadmin',
+    path: '/superadmin/dashboard',
     component: () => import('layouts/private/Superadmin.vue'),
     children: [
       {
-        path: '/superadmin',
+        path: '/superadmin/dashboard',
         name: 'superadmin.dashboard',
         component: () => import('pages/private/superadmin/DashboardSuperAdmin.vue'),
         meta: { requiresAuth: false }
@@ -94,11 +94,11 @@ const routes = [
 
   // Admins routes
   {
-    path: '/admin',
+    path: '/admin/dashboard',
     component: () => import('layouts/private/Admin.vue'),
     children: [
       {
-        path: '/admin',
+        path: '/admin/dashboard',
         name: 'admin.dashboard',
         component: () => import('pages/private/admin/DashboardAdmin.vue'),
         meta: { requiresAuth: false }
@@ -138,11 +138,11 @@ const routes = [
 
   // Admins routes
   {
-    path: '/target',
+    path: '/target/dashboard',
     component: () => import('layouts/private/Target.vue'),
     children: [
       {
-        path: '/target',
+        path: '/target/dashboard',
         name: 'target.dashboard',
         component: () => import('pages/private/target/DashboardTarget.vue'),
         meta: { requiresAuth: false }

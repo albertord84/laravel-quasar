@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[10],{"84f2e":function(n,o,r){"use strict";r.r(o),r.d(o,"ptGeneralForm",(function(){return t}));var t={back_btn:"Voltar"}}}]);
