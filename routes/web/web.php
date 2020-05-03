@@ -26,7 +26,7 @@ Route::view('{all}', 'app')
 
 Route::post('register', 'Auth\RegisterController@store');
 
-Route::post('/oauth/token', 'Auth\LoginController@login')
+Route::post('/oauth/token', 'Auth\LaaaaaoginController@login')
 // ->middleware(['oauth.grant:password', 'oauth.details'])
 ->name('login');
 
@@ -50,7 +50,12 @@ Route::resource('campaigns', 'CampaignsController');
 Route::resource('campaignsStatuses', 'CampaignsStatusController');
 
 Route::resource('planes', 'PlanesController');
-Route::resource('/questionnaires', 'QuestionnairesController');
+
+Route::get('/questionnaires', function(){ //testatndo
+  var_dump('chagndo a las rutas');
+});
+Route::resource('questionnaires', 'QuestionnairesController');
+
 Route::resource('questions', 'QuestionsController');
 Route::resource('questionsTypes', 'QuestionsTypesController');
 Route::resource('optionsResponses', 'OptionsResponsesController');

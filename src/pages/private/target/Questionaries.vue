@@ -31,7 +31,9 @@
 </template>
 
 <script>
+// import axios from 'axios'
 import axios from 'axios'
+// import { WebService } from '../../../services/WebService'
 
 const questionaryItem = {
   plane_id: 3,
@@ -175,7 +177,8 @@ export default {
       this.allQuestionaries.push(Object.assign({}, questionaryItem))
 
       this.loader = true
-      axios.get(this.questionniaresUrl)
+      axios.get('web/' + this.questionniaresUrl)
+      // WebService.get(this.questionniaresUrl)
         .then(response => {
           console.log('wwwwwwwwwwwwwwwwwwwwwwwwww JR')
           console.log(response.data)

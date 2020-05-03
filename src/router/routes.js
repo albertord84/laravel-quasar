@@ -123,13 +123,13 @@ const routes = [
       },
       {
         path: '/admin/users',
-        name: 'admin.bases',
+        name: 'admin.users',
         component: () => import('pages/private/common/GerenciateUsers.vue'),
         meta: { requiresAuth: false }
       },
       {
         path: '/admin/history',
-        name: 'admin.bases',
+        name: 'admin.history',
         component: () => import('pages/private/admin/HistoryAdmin.vue'),
         meta: { requiresAuth: false }
       }
