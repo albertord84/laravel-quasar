@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/quasar/precache-manifest.cb45ed506fd105960bca1f0dc267b507.js"
+  "/quasar/precache-manifest.8d92b5aaaa4f1be5313e414b954820b7.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "laravel-quasar"});
