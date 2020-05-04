@@ -271,18 +271,7 @@ export default {
   },
 
   watch: {
-    'form.username' (val) {
-      if (this.$refs.observer.$data.isAuth) {
-        this.$refs.observer.$data.isAuth = false
-        this.$refs.password.reset()
-      }
-    },
-    'form.password' (val) {
-      if (this.$refs.observer.$data.isAuth) {
-        this.$refs.observer.$data.isAuth = false
-        this.$refs.username.reset()
-      }
-    }
+
   },
 
   computed: {
@@ -336,7 +325,8 @@ export default {
 
   meta () {
     return {
-      title: this.$t('page_titles.login_title')
+      title: 'Questionarios'
+      // title: this.$t('page_titles.login_title')
     }
   }
 

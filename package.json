@@ -43,10 +43,13 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "lint": "eslint --ext .js,.vue src",
+
         "q-ssr-build": "quasar build -m ssr",
         "q-ssr-dev": "quasar dev -m ssr",
+
         "q-spa-build": "quasar build",
         "q-spa-dev": "quasar dev -H lq.test",
+
         "q-apk-dev": "quasar dev -m cordova -T android",
         "q-ios-dev": "quasar dev -m cordova -T ios",
         "q-pwa-dev": "quasar build -m pwa -H lq.test"

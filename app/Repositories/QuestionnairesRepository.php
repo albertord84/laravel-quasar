@@ -36,6 +36,12 @@ class QuestionnairesRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
+    public function questionnaires()
+    {
+    }
+
+
+
     /**
      * Configure the Model
      **/

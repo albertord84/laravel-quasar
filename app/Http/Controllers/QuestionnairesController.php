@@ -29,10 +29,15 @@ class QuestionnairesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $questionnaires = $this->questionnairesRepository->all();
+        $User = Auth::check() ? Auth::user() : session('logged_user');
 
-        return view('questionnaires.index')
-            ->with('questionnaires', $questionnaires);
+        // dd('Estoy en QuestionnairesController');
+        $questionnaires = $this->questionnairesRepository->all();
+        return $questionnaires->toJson();
+
+        // $questionnaires = $this->questionnairesRepository->all();
+        // return view('questionnaires.index')
+        //     ->with('questionnaires', $questionnaires);
     }
 
     /**

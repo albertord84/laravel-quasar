@@ -73,7 +73,7 @@ class UsersTableSeeder extends Seeder
           'company_id' => 1,
           'cost_center_id' => 1,
           'address_id' => 1,
-          'username' => 'Jose R',
+          'username' => 'josergm86',
           'email' => 'josergm86@gmail.com',
           'password' => bcrypt('jr24666gm'),
           'role_id' => 1,

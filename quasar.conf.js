@@ -118,9 +118,20 @@ module.exports = function (ctx) {
 
     devServer: {
       // https: true,
-      port: process.env.PORT | 8080,
-      host: process.env.HOST | 'localhost',
+      // port: process.env.PORT | 8080,
+      // host: process.env.HOST | 'localhost',
       // open: true // opens browser window automatically,
+
+      proxy: {
+        // proxy all requests starting with /api to jsonplaceholder
+        '/web': {
+          target: 'http://lq.test',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/web': ''
+          }
+        }
+      }
     },
 
     // animations: 'all', // --- includes all animations

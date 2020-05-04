@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'LayoutAdmin',
 
@@ -135,7 +137,9 @@ export default {
           this.menuList[i].selected = true
         }
       })
-    }
+    },
+
+    ...mapActions('auth', ['logout'])
   }
 }
 </script>
