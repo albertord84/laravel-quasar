@@ -25,6 +25,7 @@ class CreateQuestionnairesTable extends Migration
             $table->string('observation',300)->nullable();
             $table->integer('released')->nullable();
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

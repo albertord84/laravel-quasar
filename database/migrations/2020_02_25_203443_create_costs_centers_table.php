@@ -21,6 +21,7 @@ class CreateCostsCentersTable extends Migration
 
             $table->string('name', 100)->nullable(false);
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

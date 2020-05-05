@@ -27,6 +27,7 @@ class CreateCompaniesTable extends Migration
             $table->string('decription', 300)->nullable();
             $table->string('observation', 300)->nullable();
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

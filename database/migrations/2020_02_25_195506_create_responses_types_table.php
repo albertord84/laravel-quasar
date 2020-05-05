@@ -19,6 +19,7 @@ class CreateResponsesTypesTable extends Migration
             $table->string('name', 25);
             $table->string('decription', 300)->nullable();
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

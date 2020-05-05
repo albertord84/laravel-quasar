@@ -21,6 +21,7 @@ class CreateRecompensesTable extends Migration
             $table->integer('campaign_id')->nullable(false); //fk
             $table->float('value', 6, 2)->nullable(false);
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

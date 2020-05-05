@@ -29,6 +29,7 @@ class CreatePlanesTable extends Migration
             $table->integer('has_video_content')->nullable(false)->default(0);
             $table->integer('has_link_content')->nullable(false)->default(0);
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

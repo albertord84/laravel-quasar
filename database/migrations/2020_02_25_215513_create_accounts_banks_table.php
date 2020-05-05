@@ -26,6 +26,7 @@ class CreateAccountsBanksTable extends Migration
             $table->string('titular_name',150)->nullable(false);
             $table->string('titular_cpf',11)->nullable();
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

@@ -24,6 +24,7 @@ class CreateBasesTable extends Migration
             $table->string('decription',300)->nullable();
             $table->string('json_data',5000)->nullable();
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

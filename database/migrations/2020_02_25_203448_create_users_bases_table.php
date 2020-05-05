@@ -19,6 +19,7 @@ class CreateUsersBasesTable extends Migration
             $table->integer('base_id')->nullable(); //fk
             $table->integer('user_id')->nullable(); //fk
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

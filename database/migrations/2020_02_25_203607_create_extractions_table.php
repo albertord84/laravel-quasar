@@ -22,6 +22,7 @@ class CreateExtractionsTable extends Migration
             $table->float('requested_value', 6, 2)->nullable(false);
             $table->float('payed_value', 6, 2)->nullable();
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

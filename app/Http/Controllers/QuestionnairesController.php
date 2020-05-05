@@ -29,7 +29,7 @@ class QuestionnairesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $User = Auth::check() ? Auth::user() : session('logged_user');
+        // $User = Auth::check() ? Auth::user() : session('logged_user');
 
         // dd('Estoy en QuestionnairesController');
         $questionnaires = $this->questionnairesRepository->all();

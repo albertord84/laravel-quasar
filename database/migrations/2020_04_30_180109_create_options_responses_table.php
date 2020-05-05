@@ -21,7 +21,7 @@ class CreateOptionsResponsesTable extends Migration
             $table->string('response',1000)->nullable(false);
             $table->integer('truth')->nullable(false)->default(0);
 
-
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

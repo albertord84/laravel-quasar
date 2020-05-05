@@ -22,6 +22,7 @@ class CreateResponsesTable extends Migration
             $table->integer('response_option_id')->default(0);
             $table->string('discursive_text', 4000)->nullable();
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

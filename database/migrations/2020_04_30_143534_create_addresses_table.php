@@ -24,6 +24,7 @@ class CreateAddressesTable extends Migration
           $table->string('city', 50)->nullable(false);
           $table->string('uf', 50)->nullable(false);
 
+          $table->timestamp('deleted_at')->nullable();
           $table->timestamps();
         });
     }

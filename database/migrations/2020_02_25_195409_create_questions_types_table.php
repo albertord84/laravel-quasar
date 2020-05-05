@@ -19,6 +19,7 @@ class CreateQuestionsTypesTable extends Migration
             $table->string('name', 15);
             $table->string('decription', 300)->nullable();
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

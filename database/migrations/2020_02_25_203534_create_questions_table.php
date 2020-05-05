@@ -23,6 +23,7 @@ class CreateQuestionsTable extends Migration
             $table->string('question',1000)->nullable(false);
             $table->string('json_data',5000)->nullable();
 
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

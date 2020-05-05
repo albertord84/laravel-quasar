@@ -175,6 +175,21 @@ export default {
       this.allQuestionaries.push(Object.assign({}, questionaryItem))
       this.allQuestionaries.push(Object.assign({}, questionaryItem))
       this.allQuestionaries.push(Object.assign({}, questionaryItem))
+
+      this.loader = true
+      axios.get('web/' + this.questionniaresUrl)
+      // WebService.get(this.questionniaresUrl)
+        .then(response => {
+        })
+        .catch(errors => {
+          // let errArray = master.hasErrors(errors)
+          // if (errArray) {
+          //   master.setErrors(this.$refs.observer, errArray)
+          // }
+        })
+        .then(() => {
+          this.loader = false
+        })
     },
 
     getQuestionaries2 () {
