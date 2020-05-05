@@ -31,8 +31,12 @@ class UsersController extends AppBaseController
     {
         $users = $this->usersRepository->all();
 
-        return view('users.index')
-            ->with('users', $users);
+        dd($users);
+
+        // return $users->toJson();
+
+        // return view('users.index')
+        //     ->with('users', $users);
     }
 
     /**
