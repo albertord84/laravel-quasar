@@ -18,11 +18,11 @@
 |
 */
 
-Route::view('/', 'app');
-Route::view('{all}', 'app')
-    ->where(['all' => '^(?!api).*$']);
+// Route::view('/', 'app');
+// Route::view('{all}', 'app')
+//     ->where(['all' => '^(?!api).*$']);
 
-// Route::get('/', 'WelcomeController@index');
+Route::get('/', 'WelcomeController@index');
 
 Route::post('register', 'Auth\RegisterController@store');
 
@@ -50,10 +50,6 @@ Route::resource('campaigns', 'CampaignsController');
 Route::resource('campaignsStatuses', 'CampaignsStatusController');
 
 Route::resource('planes', 'PlanesController');
-
-Route::get('/questionnaires', function(){ //testatndo
-  var_dump('chagndo a las rutas');
-});
 Route::resource('questionnaires', 'QuestionnairesController');
 
 Route::resource('questions', 'QuestionsController');

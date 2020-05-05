@@ -43,7 +43,7 @@ const userItem = {
 }
 
 export default {
-  name: 'users',
+  name: 'GerenciateUsers',
 
   components: {
     'CrudUsers': require('../../../components/CrudUsers.vue').default,
@@ -53,10 +53,10 @@ export default {
   data () {
     return {
       tab: '',
-      showCrudUsers: false,
-
+      url: 'users',
       userModel: null,
       allUsers: [],
+      showCrudUsers: false,
 
       loader: false
     }
@@ -70,29 +70,6 @@ export default {
       this.allUsers.push(Object.assign({}, userItem))
       this.allUsers.push(Object.assign({}, userItem))
       this.tab = 'users'
-
-      // this.loader = true
-      // ApiService.login(this.form)
-      // .then(response => {
-      //   this.storeToken(response)
-      //   this.setAuthStatus(true)
-      //   this.setUserData(_.get(response, ['data', 'user_data'], {}))
-      //   let redirect = _.get(this.$route, ['query', 'redirect'])
-      //   if (redirect) {
-      //     this.$router.replace(redirect)
-      //   } else {
-      //     this.$router.replace({ name: 'auth.user' })
-      //   }
-      // })
-      // .catch(errors => {
-      //   let errArray = master.hasErrors(errors)
-      //   if (errArray) {
-      //     master.setErrors(this.$refs.observer, errArray)
-      //   }
-      // })
-      // .then(() => {
-      //   this.loader = false
-      // })
     },
 
     editUser () {
