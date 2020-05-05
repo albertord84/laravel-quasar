@@ -30,9 +30,10 @@ class QuestionsController extends AppBaseController
     public function index(Request $request)
     {
         $questions = $this->questionsRepository->all();
+        return $questions->toJson();
 
-        return view('questions.index')
-            ->with('questions', $questions);
+        // return view('questions.index')
+        //     ->with('questions', $questions);
     }
 
     /**

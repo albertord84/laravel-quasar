@@ -31,8 +31,10 @@ class QuestionnairesController extends AppBaseController
     {
         $questionnaires = $this->questionnairesRepository->all();
 
-        return view('questionnaires.index')
-            ->with('questionnaires', $questionnaires);
+        return $questionnaires->toJson();
+
+        // return view('questionnaires.index')
+        //     ->with('questionnaires', $questionnaires);
     }
 
     /**

@@ -30,9 +30,10 @@ class CampaignsStatusController extends AppBaseController
     public function index(Request $request)
     {
         $campaignsStatuses = $this->campaignsStatusRepository->all();
+        return $campaignsStatuses->toJson();
 
-        return view('campaigns_statuses.index')
-            ->with('campaignsStatuses', $campaignsStatuses);
+        // return view('campaigns_statuses.index')
+        //     ->with('campaignsStatuses', $campaignsStatuses);
     }
 
     /**

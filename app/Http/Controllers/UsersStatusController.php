@@ -30,9 +30,10 @@ class UsersStatusController extends AppBaseController
     public function index(Request $request)
     {
         $usersStatuses = $this->usersStatusRepository->all();
+        return $usersStatuses->toJson();
 
-        return view('users_statuses.index')
-            ->with('usersStatuses', $usersStatuses);
+        // return view('users_statuses.index')
+        //     ->with('usersStatuses', $usersStatuses);
     }
 
     /**

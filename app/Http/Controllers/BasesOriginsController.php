@@ -30,9 +30,10 @@ class BasesOriginsController extends AppBaseController
     public function index(Request $request)
     {
         $basesOrigins = $this->basesOriginsRepository->all();
+        return $basesOrigins->toJson();
 
-        return view('bases_origins.index')
-            ->with('basesOrigins', $basesOrigins);
+        // return view('bases_origins.index')
+        //     ->with('basesOrigins', $basesOrigins);
     }
 
     /**

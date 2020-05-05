@@ -30,9 +30,10 @@ class ResponsesController extends AppBaseController
     public function index(Request $request)
     {
         $responses = $this->responsesRepository->all();
+        return $responses->toJson();
 
-        return view('responses.index')
-            ->with('responses', $responses);
+        // return view('responses.index')
+        //     ->with('responses', $responses);
     }
 
     /**

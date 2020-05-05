@@ -30,9 +30,10 @@ class UsersRolesController extends AppBaseController
     public function index(Request $request)
     {
         $usersRoles = $this->usersRolesRepository->all();
+        return $usersRoles->toJson();
 
-        return view('users_roles.index')
-            ->with('usersRoles', $usersRoles);
+        // return view('users_roles.index')
+        //     ->with('usersRoles', $usersRoles);
     }
 
     /**

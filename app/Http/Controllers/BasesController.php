@@ -30,9 +30,10 @@ class BasesController extends AppBaseController
     public function index(Request $request)
     {
         $bases = $this->basesRepository->all();
+        return $bases->toJson();
 
-        return view('bases.index')
-            ->with('bases', $bases);
+        // return view('bases.index')
+        //     ->with('bases', $bases);
     }
 
     /**

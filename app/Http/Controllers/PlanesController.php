@@ -30,9 +30,10 @@ class PlanesController extends AppBaseController
     public function index(Request $request)
     {
         $planes = $this->planesRepository->all();
+        return $planes->toJson();
 
-        return view('planes.index')
-            ->with('planes', $planes);
+        // return view('planes.index')
+        //     ->with('planes', $planes);
     }
 
     /**

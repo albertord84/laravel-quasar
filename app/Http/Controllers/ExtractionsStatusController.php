@@ -30,9 +30,10 @@ class ExtractionsStatusController extends AppBaseController
     public function index(Request $request)
     {
         $extractionsStatuses = $this->extractionsStatusRepository->all();
+        return $extractionsStatuses->toJson();
 
-        return view('extractions_statuses.index')
-            ->with('extractionsStatuses', $extractionsStatuses);
+        // return view('extractions_statuses.index')
+        //     ->with('extractionsStatuses', $extractionsStatuses);
     }
 
     /**

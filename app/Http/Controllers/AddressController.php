@@ -30,9 +30,10 @@ class AddressController extends AppBaseController
     public function index(Request $request)
     {
         $addresses = $this->addressRepository->all();
+        return $addresses->toJson();
 
-        return view('addresses.index')
-            ->with('addresses', $addresses);
+        // return view('addresses.index')
+        //     ->with('addresses', $addresses);
     }
 
     /**

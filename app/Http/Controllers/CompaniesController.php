@@ -30,9 +30,10 @@ class CompaniesController extends AppBaseController
     public function index(Request $request)
     {
         $companies = $this->companiesRepository->all();
+        return $companies->toJson();
 
-        return view('companies.index')
-            ->with('companies', $companies);
+        // return view('companies.index')
+        //     ->with('companies', $companies);
     }
 
     /**

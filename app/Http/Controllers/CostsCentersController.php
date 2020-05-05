@@ -30,9 +30,10 @@ class CostsCentersController extends AppBaseController
     public function index(Request $request)
     {
         $costsCenters = $this->costsCentersRepository->all();
+        return $costsCenters->toJson();
 
-        return view('costs_centers.index')
-            ->with('costsCenters', $costsCenters);
+        // return view('costs_centers.index')
+        //     ->with('costsCenters', $costsCenters);
     }
 
     /**

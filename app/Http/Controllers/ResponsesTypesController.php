@@ -30,9 +30,10 @@ class ResponsesTypesController extends AppBaseController
     public function index(Request $request)
     {
         $responsesTypes = $this->responsesTypesRepository->all();
+        return $responsesTypes->toJson();
 
-        return view('responses_types.index')
-            ->with('responsesTypes', $responsesTypes);
+        // return view('responses_types.index')
+        //     ->with('responsesTypes', $responsesTypes);
     }
 
     /**
