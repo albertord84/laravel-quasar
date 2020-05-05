@@ -37,7 +37,7 @@ return array(
     'App\\Http\\Controllers\\QuestionsController' => $baseDir . '/app/Http/Controllers/QuestionsController.php',
     'App\\Http\\Controllers\\QuestionsTypesController' => $baseDir . '/app/Http/Controllers/QuestionsTypesController.php',
     'App\\Http\\Controllers\\RecompensesController' => $baseDir . '/app/Http/Controllers/RecompensesController.php',
-    'App\\Http\\Controllers\\ResponsesController' => $baseDir . '/app/Http/Controllers/ResponsesController copy.php',
+    'App\\Http\\Controllers\\ResponsesController' => $baseDir . '/app/Http/Controllers/ResponsesController.php',
     'App\\Http\\Controllers\\ResponsesTypesController' => $baseDir . '/app/Http/Controllers/ResponsesTypesController.php',
     'App\\Http\\Controllers\\UsersBasesController' => $baseDir . '/app/Http/Controllers/UsersBasesController.php',
     'App\\Http\\Controllers\\UsersController' => $baseDir . '/app/Http/Controllers/UsersController.php',
