@@ -15,6 +15,7 @@ $factory->define(Address::class, function (Faker $faker) {
         'district' => $faker->word,
         'city' => $faker->word,
         'uf' => $faker->word,
+        'deleted_at' => $faker->date('Y-m-d H:i:s'),
         'created_at' => $faker->date('Y-m-d H:i:s'),
         'updated_at' => $faker->date('Y-m-d H:i:s')
     ];

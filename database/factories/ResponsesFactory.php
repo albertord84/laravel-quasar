@@ -13,6 +13,7 @@ $factory->define(Responses::class, function (Faker $faker) {
         'campaign_id' => $faker->randomDigitNotNull,
         'response_option_id' => $faker->randomDigitNotNull,
         'discursive_text' => $faker->word,
+        'deleted_at' => $faker->date('Y-m-d H:i:s'),
         'created_at' => $faker->date('Y-m-d H:i:s'),
         'updated_at' => $faker->date('Y-m-d H:i:s')
     ];

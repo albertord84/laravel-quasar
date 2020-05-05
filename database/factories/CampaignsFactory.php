@@ -27,6 +27,7 @@ $factory->define(Campaigns::class, function (Faker $faker) {
         'analyzed_date' => $faker->date('Y-m-d H:i:s'),
         'start_date' => $faker->date('Y-m-d H:i:s'),
         'end_date' => $faker->date('Y-m-d H:i:s'),
+        'deleted_at' => $faker->date('Y-m-d H:i:s'),
         'created_at' => $faker->date('Y-m-d H:i:s'),
         'updated_at' => $faker->date('Y-m-d H:i:s')
     ];

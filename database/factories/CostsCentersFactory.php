@@ -11,6 +11,7 @@ $factory->define(CostsCenters::class, function (Faker $faker) {
         'company_id' => $faker->randomDigitNotNull,
         'admin_id' => $faker->randomDigitNotNull,
         'name' => $faker->word,
+        'deleted_at' => $faker->date('Y-m-d H:i:s'),
         'created_at' => $faker->date('Y-m-d H:i:s'),
         'updated_at' => $faker->date('Y-m-d H:i:s')
     ];

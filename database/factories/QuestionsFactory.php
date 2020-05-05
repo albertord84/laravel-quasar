@@ -13,6 +13,7 @@ $factory->define(Questions::class, function (Faker $faker) {
         'response_type_id' => $faker->randomDigitNotNull,
         'question' => $faker->word,
         'json_data' => $faker->word,
+        'deleted_at' => $faker->date('Y-m-d H:i:s'),
         'created_at' => $faker->date('Y-m-d H:i:s'),
         'updated_at' => $faker->date('Y-m-d H:i:s')
     ];

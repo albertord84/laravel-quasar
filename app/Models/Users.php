@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Users
  * @package App\Models
- * @version May 1, 2020, 7:56 pm CDT
+ * @version May 5, 2020, 5:26 pm CDT
  *
  * @property integer company_id
  * @property integer cost_center_id
@@ -26,12 +26,12 @@ class Users extends Model
     use SoftDeletes;
 
     public $table = 'users';
-
+    
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
 
-    // protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at'];
 
 
 
@@ -83,9 +83,5 @@ class Users extends Model
         'password' => 'required'
     ];
 
-    // METHODS
-
-
-
-
+    
 }

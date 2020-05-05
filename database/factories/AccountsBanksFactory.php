@@ -16,6 +16,7 @@ $factory->define(AccountsBanks::class, function (Faker $faker) {
         'dig' => $faker->word,
         'titular_name' => $faker->word,
         'titular_cpf' => $faker->word,
+        'deleted_at' => $faker->date('Y-m-d H:i:s'),
         'created_at' => $faker->date('Y-m-d H:i:s'),
         'updated_at' => $faker->date('Y-m-d H:i:s')
     ];

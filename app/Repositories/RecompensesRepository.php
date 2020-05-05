@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class RecompensesRepository
  * @package App\Repositories
- * @version May 1, 2020, 7:58 pm CDT
+ * @version May 5, 2020, 5:33 pm CDT
 */
 
 class RecompensesRepository extends BaseRepository

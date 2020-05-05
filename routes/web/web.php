@@ -37,7 +37,6 @@ Route::resource('companies', 'CompaniesController');
 Route::resource('costsCenters', 'CostsCentersController');
 
 Route::resource('usersRoles', 'UsersRolesController');
-Route::resource('usersStatus', 'UsersStatusController');
 Route::resource('users', 'UsersController');
 Route::resource('usersStatuses', 'UsersStatusController');
 

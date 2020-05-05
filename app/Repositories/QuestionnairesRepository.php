@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class QuestionnairesRepository
  * @package App\Repositories
- * @version May 1, 2020, 7:56 pm CDT
+ * @version May 5, 2020, 5:27 pm CDT
 */
 
 class QuestionnairesRepository extends BaseRepository
@@ -35,12 +35,6 @@ class QuestionnairesRepository extends BaseRepository
     {
         return $this->fieldSearchable;
     }
-
-    public function questionnaires()
-    {
-    }
-
-
 
     /**
      * Configure the Model

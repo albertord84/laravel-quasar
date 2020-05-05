@@ -14,6 +14,7 @@ $factory->define(Bases::class, function (Faker $faker) {
         'name' => $faker->word,
         'decription' => $faker->word,
         'json_data' => $faker->word,
+        'deleted_at' => $faker->date('Y-m-d H:i:s'),
         'created_at' => $faker->date('Y-m-d H:i:s'),
         'updated_at' => $faker->date('Y-m-d H:i:s')
     ];

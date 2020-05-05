@@ -12,6 +12,7 @@ $factory->define(Extractions::class, function (Faker $faker) {
         'user_id' => $faker->randomDigitNotNull,
         'requested_value' => $faker->randomDigitNotNull,
         'payed_value' => $faker->randomDigitNotNull,
+        'deleted_at' => $faker->date('Y-m-d H:i:s'),
         'created_at' => $faker->date('Y-m-d H:i:s'),
         'updated_at' => $faker->date('Y-m-d H:i:s')
     ];
