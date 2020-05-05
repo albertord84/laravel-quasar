@@ -277,6 +277,10 @@ npm run-script q-apk-dev
 npm run-script q-ios-dev
 
 
+## Inspect Quasar Config
+quasar inspect
+
+
 ## English
 
 #### Coming soon

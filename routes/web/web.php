@@ -26,7 +26,7 @@ Route::get('/', 'WelcomeController@index');
 
 Route::post('register', 'Auth\RegisterController@store');
 
-Route::post('/oauth/token', 'Auth\LaaaaaoginController@login')
+Route::post('/oauth/token', 'Auth\LoginController@login')
 // ->middleware(['oauth.grant:password', 'oauth.details'])
 ->name('login');
 
@@ -36,9 +36,9 @@ Route::resource('accountsBanks', 'AccountsBanksController');
 Route::resource('companies', 'CompaniesController');
 Route::resource('costsCenters', 'CostsCentersController');
 
-Route::resource('usersRoles', 'UsersRoleController');
-Route::resource('usersStatus', 'UsersStatuController');
-Route::resource('users', 'usersController');
+Route::resource('usersRoles', 'UsersRolesController');
+Route::resource('usersStatus', 'UsersStatusController');
+Route::resource('users', 'UsersController');
 Route::resource('usersStatuses', 'UsersStatusController');
 
 Route::resource('bases', 'BasesController');
