@@ -7,7 +7,7 @@
       <q-card no-bordered flat class="q-mt-none gt-sm">
         <q-tab-panels value="questionaries">
           <q-tab-panel name="questionaries" class="q-pa-none">
-            <TableQuestionaries  :questionaries="allQuestionaries" @edit="editQuestionary" @delete="deleteQuestionary" @reload="reloadQuestionaries" ></TableQuestionaries>
+            <TableQuestionnaires  :questionaries="allQuestionaries" @edit="editQuestionary" @delete="deleteQuestionary" @reload="reloadQuestionaries" ></TableQuestionnaires>
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -31,7 +31,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 import axios from 'axios'
 // import { WebService } from '../../../services/WebService'
 
@@ -125,7 +124,7 @@ export default {
   name: 'Questionaries',
 
   components: {
-    'TableQuestionaries': require('../../../components/TableQuestionaries.vue').default
+    'TableQuestionnaires': require('../../../components/TableQuestionnaires.vue').default
   },
 
   data () {

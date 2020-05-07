@@ -12,6 +12,12 @@ use Response;
 
 class CampaignsStatusController extends AppBaseController
 {
+
+    const CREATED = 1;
+    const ACTIVED = 2;
+    const PAUSED = 3;
+    const DELETED  = 4;
+
     /** @var  CampaignsStatusRepository */
     private $campaignsStatusRepository;
 

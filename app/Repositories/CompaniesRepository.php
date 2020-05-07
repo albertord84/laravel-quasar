@@ -4,6 +4,9 @@ namespace App\Repositories;
 
 use App\Models\Companies;
 use App\Repositories\BaseRepository;
+use Auth;
+
+use App\Http\Controllers\UsersRolesController;
 
 /**
  * Class CompaniesRepository
@@ -36,6 +39,10 @@ class CompaniesRepository extends BaseRepository
     public function getFieldsSearchable()
     {
         return $this->fieldSearchable;
+    }
+
+    public function getCompanies() {
+        $this->with('costCenters')->orderBy('updated_at', 'desc');
     }
 
     /**

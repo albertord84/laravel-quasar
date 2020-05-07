@@ -12,6 +12,13 @@ use Response;
 
 class ResponsesTypesController extends AppBaseController
 {
+
+    const BOOLEAN_TYPE = 1;
+    const UNIQUE_SELECTION = 2;
+    const MULTIPLE_SELECTION = 3;
+    const SCALE_SELECTION = 4;
+    const DISCURSIVE = 5;
+
     /** @var  ResponsesTypesRepository */
     private $responsesTypesRepository;
 

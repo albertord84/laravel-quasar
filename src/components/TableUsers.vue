@@ -8,8 +8,8 @@
                 {{ props.row.email }}
               </q-td>
 
-              <q-td key="status_id" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.status_id }}
+              <q-td key="statusName" :props="props" class="q-pa-none q-ma-none">
+                  {{ props.row.statusName }}
               </q-td>
 
               <q-td key="company_id" :props="props" class="q-pa-none q-ma-none">
@@ -74,8 +74,8 @@ export default {
         },
         {
           label: 'Estatus',
-          field: 'status_id',
-          name: 'status_id',
+          field: 'statusName',
+          name: 'statusName',
           align: 'center'
         },
         {
@@ -133,7 +133,6 @@ export default {
   },
 
   beforeMount () {
-    console.log(this.users)
     this.data = this.users
   }
 }

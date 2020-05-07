@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-left">
-    <div v-if="tab === 'allQuestionaries'" style="width:100%">
+    <div v-if="tab === 'allQuestionnaires'" style="width:100%">
       <q-table title=" " :data="data" :columns="columns" row-key="name" binary-state-sort :card-container-style="{ backgroundColor: '#ff0000'}" >
         <template v-slot:body="props">
           <q-tr :props="props">
@@ -47,10 +47,10 @@
 
 <script>
 export default {
-  name: 'TableQuestionaries',
+  name: 'TableQuestionnaires',
 
   props: {
-    questionaries: null
+    questionnaires: null
   },
 
   components: {
@@ -59,7 +59,7 @@ export default {
 
   data () {
     return {
-      tab: 'allQuestionaries',
+      tab: 'allQuestionnaires',
       action: '',
       questionaryItem: null,
 
@@ -139,7 +139,7 @@ export default {
   },
 
   beforeMount () {
-    this.data = this.questionaries
+    this.data = this.questionnaires
   }
 }
 </script>

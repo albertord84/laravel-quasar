@@ -12,6 +12,13 @@ use Response;
 
 class UsersStatusController extends AppBaseController
 {
+    const ACTIVE = 1;
+    const DELETED = 2;
+    const INACTIVE = 3;
+    const PENDING = 4;
+    const BEGINNER = 5;
+    const PAUSED = 6;
+
     /** @var  UsersStatusRepository */
     private $usersStatusRepository;
 

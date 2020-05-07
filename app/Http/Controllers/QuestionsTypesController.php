@@ -12,6 +12,11 @@ use Response;
 
 class QuestionsTypesController extends AppBaseController
 {
+    const SINGLE = 1;
+    const IMAGE = 1;
+    const VIDEO = 1;
+    const URL = 1;
+
     /** @var  QuestionsTypesRepository */
     private $questionsTypesRepository;
 

@@ -106,7 +106,6 @@ export default {
       this.loader = true
       AuthService.login(this.form)
         .then(response => {
-          console.log(response.data)
           this.storeToken(response)
           this.setAuthStatus(true)
           this.setUserData(_.get(response, ['data', 'user_data'], {}))
@@ -116,9 +115,10 @@ export default {
           // } else {
           //   this.$router.replace({ name: 'auth.user' })
           // }
-          this.$router.replace({ name: 'target.dashboard' })
-          // this.$router.replace({ name: 'superadmin.companies' })
-          // this.$router.replace({ name: 'superadmin.companies' })
+
+          this.$router.replace({ name: 'superadmin.companies' })
+          // this.$router.replace({ name: 'admin.dashboard' })
+          // this.$router.replace({ name: 'target.dashboard' })
         })
         .catch(errors => {
           let errArray = master.hasErrors(errors)

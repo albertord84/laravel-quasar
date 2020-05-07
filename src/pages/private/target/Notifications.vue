@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import { AuthService } from '../../../services/AuthService'
-import { master } from '../../../helpers/master'
-import _ from 'lodash'
+// import { mapActions, mapGetters } from 'vuex'
+// import { AuthService } from '../../../services/AuthService'
+// import { master } from '../../../helpers/master'
+// import _ from 'lodash'
 
 export default {
   name: 'Questionaries',
@@ -38,81 +38,23 @@ export default {
   },
 
   methods: {
-    // Height: function (val) {
-    //   return 'height: ' + (this.window.height - val) + 'px'
-    // },
 
-    // handleResize: function () {
-    //   this.window.width = window.innerWidth
-    //   this.window.height = window.innerHeight
-    // },
-
-    ...mapActions('auth', ['setAuthStatus', 'setUserData', 'storeToken']),
-
-    async submit () {
-      const isValid = await this.$refs.observer.validate()
-      if (!isValid) {
-        return false
-      }
-      this.login()
-    },
-
-    hasErrors (errors) {
-      return !_.isEmpty(errors)
-    },
-
-    login () {
-      this.loader = true
-      AuthService.login(this.form)
-        .then(response => {
-          this.storeToken(response)
-          this.setAuthStatus(true)
-          this.setUserData(_.get(response, ['data', 'user_data'], {}))
-          let redirect = _.get(this.$route, ['query', 'redirect'])
-          if (redirect) {
-            this.$router.replace(redirect)
-          } else {
-            this.$router.replace({ name: 'auth.user' })
-          }
-        })
-        .catch(errors => {
-          let errArray = master.hasErrors(errors)
-          if (errArray) {
-            master.setErrors(this.$refs.observer, errArray)
-          }
-        })
-        .then(() => {
-          this.loader = false
-        })
-    }
   },
 
   watch: {
-    'form.username' (val) {
-      if (this.$refs.observer.$data.isAuth) {
-        this.$refs.observer.$data.isAuth = false
-        this.$refs.password.reset()
-      }
-    },
-    'form.password' (val) {
-      if (this.$refs.observer.$data.isAuth) {
-        this.$refs.observer.$data.isAuth = false
-        this.$refs.username.reset()
-      }
-    }
+
   },
 
   computed: {
-    ...mapGetters('auth', ['isAuth'])
+
   },
 
   created () {
-    // window.addEventListener('resize', this.handleResize)
-    // this.handleResize()
+
   },
 
   destroyed () {
-    // window.removeEventListener('resize', this.handleResize)
+
   },
 
   beforeRouteEnter (to, from, next) {
@@ -125,7 +67,8 @@ export default {
 
   meta () {
     return {
-      title: this.$t('page_titles.login_title')
+      title: 'Notificações'
+      // title: this.$t('page_titles.login_title')
     }
   }
 

@@ -40,5 +40,21 @@ class CompaniesTableSeeder extends Seeder
         'observation' => 'Gestão de enquetes online'
       ]);
       $this->command->info('Company Physiback created');
+
+      for($i=2; $i<120; $i++){
+        Companies::create([
+          'id' => "$i",
+          'responsible_id' => '1',
+          'address_id' => '1',
+          'social_reason' => "Company $i",
+          'fantasy_name' => "Company $i Fantasy name",
+          'cnpj' => '88495263000161',
+          'phone' => '5521965913089',
+          'phone2' => '',
+          'decription' => 'Gestão de enquetes online',
+          'observation' => 'Gestão de enquetes online'
+        ]);
+        $this->command->info("Company $i created");
+      }
     }
 }

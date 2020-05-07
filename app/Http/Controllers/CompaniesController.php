@@ -29,7 +29,9 @@ class CompaniesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $companies = $this->companiesRepository->all();
+        // $companies = $this->companiesRepository->all();
+
+        $companies = $this->companiesRepository->getCompanies();
         return $companies->toJson();
 
         // return view('companies.index')

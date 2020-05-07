@@ -21,33 +21,14 @@
                           </q-item-section>
                       </q-item>
 
-                      <q-item clickable v-close-menu tabindex="0">
-                          <!-- <q-item-section avatar>
-                            <q-avatar icon="folder" color="secondary" text-color="white" ></q-avatar>
-                          </q-item-section> -->
+                      <q-item clickable @click="logout($router)" tabindex="0">
                           <q-item-section>
                             <q-item-label>Encerrar sessão</q-item-label>
-                            <!-- <q-item-label caption>February 22, 2016</q-item-label> -->
                           </q-item-section>
                           <q-item-section side>
                             <q-icon name="exit_to_app" class="cl-orange-14" ></q-icon>
                           </q-item-section>
                       </q-item>
-
-                      <!-- <q-separator inset spaced ></q-separator>
-                      <q-item-label header>Files</q-item-label>
-                      <q-item  clickable v-close-menu tabindex="0">
-                          <q-item-section avatar>
-                              <q-avatar icon="assignment" color="primary" text-color="white" ></q-avatar>
-                          </q-item-section>
-                          <q-item-section>
-                              <q-item-label>Vacation</q-item-label>
-                              <q-item-label caption>February 22, 2016</q-item-label>
-                          </q-item-section>
-                          <q-item-section side>
-                              <q-icon name="info" ></q-icon>
-                          </q-item-section>
-                      </q-item> -->
                   </q-list>
               </q-btn-dropdown>
           </q-toolbar>
@@ -88,7 +69,7 @@ export default {
         {
           icon: 'home',
           label: 'Dashboard',
-          link: '/superadmin',
+          link: '/superadmin/dashboard',
           selected: 'true',
           separator: false
         },
@@ -116,7 +97,7 @@ export default {
         {
           icon: 'list_alt',
           label: 'Questionários',
-          link: '/superadmin/questionaries',
+          link: '/superadmin/questionnaires',
           selected: false,
           separator: false
         },

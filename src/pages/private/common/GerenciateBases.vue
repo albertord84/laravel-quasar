@@ -27,18 +27,7 @@
 </template>
 
 <script>
-
-const baseItem = {
-  id: 1,
-  origin_id: 1,
-  company_id: 1,
-  criator_id: 1,
-  name: 'Endocrinologistas',
-  decription: 'Asociação brasileira Endocrinologia',
-  json_data: 1,
-  created_at: '2020-10-10 10:10',
-  updated_at: '2020-10-10 10:10'
-}
+import axios from 'axios'
 
 export default {
   name: 'Bases',
@@ -50,6 +39,7 @@ export default {
 
   data () {
     return {
+      url: 'bases',
       tab: '',
       showCrudBase: false,
 
@@ -63,34 +53,18 @@ export default {
   methods: {
 
     getBases () {
-      this.allBases = []
-      this.allBases.push(Object.assign({}, baseItem))
-      this.allBases.push(Object.assign({}, baseItem))
-      this.allBases.push(Object.assign({}, baseItem))
-      this.tab = 'bases'
-
-      // this.loader = true
-      // ApiService.login(this.form)
-      // .then(response => {
-      //   this.storeToken(response)
-      //   this.setAuthStatus(true)
-      //   this.setUserData(_.get(response, ['data', 'user_data'], {}))
-      //   let redirect = _.get(this.$route, ['query', 'redirect'])
-      //   if (redirect) {
-      //     this.$router.replace(redirect)
-      //   } else {
-      //     this.$router.replace({ name: 'auth.user' })
-      //   }
-      // })
-      // .catch(errors => {
-      //   let errArray = master.hasErrors(errors)
-      //   if (errArray) {
-      //     master.setErrors(this.$refs.observer, errArray)
-      //   }
-      // })
-      // .then(() => {
-      //   this.loader = false
-      // })
+      this.loader = true
+      axios.get('web/' + this.url)
+        .then(response => {
+          this.allBases = []
+          this.allBases = response.data
+          this.tab = 'bases'
+        })
+        .catch(errors => {
+        })
+        .then(() => {
+          this.loader = false
+        })
     },
 
     editBase () {
@@ -130,7 +104,7 @@ export default {
 
   meta () {
     return {
-      title: 'Empresas' // title: this.$t('page_titles.login_title')
+      title: 'Bases' // title: this.$t('page_titles.login_title')
     }
   }
 

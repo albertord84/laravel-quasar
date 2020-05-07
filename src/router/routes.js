@@ -48,7 +48,7 @@ const routes = [
     ]
   },
 
-  // Admins routes
+  // Superadmins routes
   {
     path: '/superadmin/dashboard',
     component: () => import('layouts/private/Superadmin.vue'),
@@ -78,9 +78,9 @@ const routes = [
         meta: { requiresAuth: false }
       },
       {
-        path: '/superadmin/questionaries',
-        name: 'superadmin.questionaries',
-        component: () => import('pages/private/common/GerenciateQuestionaries.vue'),
+        path: '/superadmin/questionnaires',
+        name: 'superadmin.questionnaires',
+        component: () => import('pages/private/common/GerenciateQuestionnaires.vue'),
         meta: { requiresAuth: false }
       },
       {
@@ -104,9 +104,9 @@ const routes = [
         meta: { requiresAuth: false }
       },
       {
-        path: '/admin/questionaries',
-        name: 'admin.questionaries',
-        component: () => import('pages/private/common/GerenciateQuestionaries.vue'),
+        path: '/admin/questionnaires',
+        name: 'admin.questionnaires',
+        component: () => import('pages/private/common/GerenciateQuestionnaires.vue'),
         meta: { requiresAuth: false }
       },
       {
@@ -136,7 +136,7 @@ const routes = [
     ]
   },
 
-  // Admins routes
+  // Targets routes
   {
     path: '/target/dashboard',
     component: () => import('layouts/private/Target.vue'),
@@ -148,9 +148,9 @@ const routes = [
         meta: { requiresAuth: false }
       },
       {
-        path: '/target/questionaries',
-        name: 'target.questionaries',
-        component: () => import('pages/private/target/Questionaries.vue'),
+        path: '/target/questionnaires',
+        name: 'target.questionnaires',
+        component: () => import('pages/private/target/Questionnaires.vue'),
         meta: { requiresAuth: false }
       },
       {

@@ -15,7 +15,7 @@
 
         <q-tab-panels v-model="tab" animated>
             <q-tab-panel name="companies" class="q-pa-none">
-              <TableCompanies :companies="allCompanies" @edit="editCompany" @delete="deleteCompany" @reload="reloadCompanies" ></TableCompanies>
+              <TableCompanies :companies="companies" @edit="editCompany" @delete="deleteCompany" @reload="reloadCompanies" ></TableCompanies>
             </q-tab-panel>
 
             <q-tab-panel name="crudCompanies">
@@ -27,21 +27,22 @@
 </template>
 
 <script>
+// import axios from 'axios'
 
-const companyItem = {
-  id: 1,
-  responsible_id: 1,
-  address_id: 1,
-  social_reason: 'BioCuba Farma',
-  fantasy_name: 'Labiofam',
-  cnpj: '88.495.263/0001-60',
-  phone: '5521965913089',
-  phone2: '',
-  decription: 'Produtos biofarmaceuticos',
-  observation: 'Produção e comercialização de produtos para imunologia molecular',
-  created_at: '2020-10-10 10:10',
-  updated_at: '2020-10-10 10:10'
-}
+// const companyItem = {
+//   id: 1,
+//   responsible_id: 1,
+//   address_id: 1,
+//   social_reason: 'BioCuba Farma',
+//   fantasy_name: 'Labiofam',
+//   cnpj: '88.495.263/0001-60',
+//   phone: '5521965913089',
+//   phone2: '',
+//   decription: 'Produtos biofarmaceuticos',
+//   observation: 'Produção e comercialização de produtos para imunologia molecular',
+//   created_at: '2020-10-10 10:10',
+//   updated_at: '2020-10-10 10:10'
+// }
 
 export default {
   name: 'Companies',
@@ -57,45 +58,13 @@ export default {
       showCrudCompany: false,
 
       companyModel: null,
-      allCompanies: [],
+      companies: [],
 
       loader: false
     }
   },
 
   methods: {
-
-    getCampaigns () {
-      this.allCompanies = []
-      this.allCompanies.push(Object.assign({}, companyItem))
-      this.allCompanies.push(Object.assign({}, companyItem))
-      this.allCompanies.push(Object.assign({}, companyItem))
-      this.tab = 'companies'
-
-      // this.loader = true
-      // ApiService.login(this.form)
-      // .then(response => {
-      //   this.storeToken(response)
-      //   this.setAuthStatus(true)
-      //   this.setUserData(_.get(response, ['data', 'user_data'], {}))
-      //   let redirect = _.get(this.$route, ['query', 'redirect'])
-      //   if (redirect) {
-      //     this.$router.replace(redirect)
-      //   } else {
-      //     this.$router.replace({ name: 'auth.user' })
-      //   }
-      // })
-      // .catch(errors => {
-      //   let errArray = master.hasErrors(errors)
-      //   if (errArray) {
-      //     master.setErrors(this.$refs.observer, errArray)
-      //   }
-      // })
-      // .then(() => {
-      //   this.loader = false
-      // })
-    },
-
     editCompany () {
     },
 
@@ -114,7 +83,7 @@ export default {
 
   beforeMount () {
     this.showCrudCompany = false
-    this.getCampaigns()
+    this.tab = 'companies'
   },
 
   created () {

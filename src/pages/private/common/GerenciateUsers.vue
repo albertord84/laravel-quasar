@@ -15,7 +15,7 @@
 
         <q-tab-panels v-model="tab" animated>
             <q-tab-panel name="users" class="q-pa-none">
-              <TableBases :users="allUsers" @edit="editUser" @delete="deleteUser" @reload="reloadUsers" ></TableBases>
+              <TableUsers :users="users" @edit="editUser" @delete="deleteUser" @reload="reloadUsers" ></TableUsers>
             </q-tab-panel>
 
             <q-tab-panel name="crudUsers">
@@ -27,35 +27,32 @@
 </template>
 
 <script>
-
-const userItem = {
-  id: 1,
-  company_id: 1,
-  cost_center_id: 1,
-  address_id: 1,
-  role_id: 1,
-  status_id: 1,
-  username: '',
-  email: 'josergm86@gmail.com',
-  password: '***********',
-  created_at: '2020-10-10 10:10',
-  updated_at: '2020-10-10 10:10'
-}
+import axios from 'axios'
 
 export default {
   name: 'GerenciateUsers',
 
   components: {
     'CrudUsers': require('../../../components/CrudUsers.vue').default,
-    'TableBases': require('../../../components/TableUsers.vue').default
+    'TableUsers': require('../../../components/TableUsers.vue').default
   },
 
   data () {
     return {
       tab: '',
-      url: 'users',
-      userModel: null,
-      allUsers: [],
+      users: [],
+      usersStatuses: [],
+      userModel: {
+        id: 1,
+        company_id: 1,
+        cost_center_id: 1,
+        address_id: 1,
+        role_id: 1,
+        status_id: 1,
+        username: '',
+        email: '',
+        password: ''
+      },
       showCrudUsers: false,
 
       loader: false
@@ -65,11 +62,36 @@ export default {
   methods: {
 
     getUsers () {
-      this.allUsers = []
-      this.allUsers.push(Object.assign({}, userItem))
-      this.allUsers.push(Object.assign({}, userItem))
-      this.allUsers.push(Object.assign({}, userItem))
-      this.tab = 'users'
+      this.loader = true
+      axios.get('web/' + 'users')
+        .then(response => {
+          response.data.some((item, i) => {
+            item.statusName = this.usersStatuses[item.status_id]
+          })
+          this.users = response.data
+          this.tab = 'users'
+        })
+        .catch(errors => {
+        })
+        .then(() => {
+          this.loader = false
+        })
+    },
+
+    getUsersStatuses () {
+      this.loader = true
+      axios.get('web/' + 'usersStatuses')
+        .then(response => {
+          this.usersStatuses = []
+          response.data.some((item, i) => {
+            this.usersStatuses[i + 1] = item.name
+          })
+        })
+        .catch(errors => {
+        })
+        .then(() => {
+          this.loader = false
+        })
     },
 
     editUser () {
@@ -90,6 +112,7 @@ export default {
 
   beforeMount () {
     this.showCrudUsers = false
+    this.getUsersStatuses()
     this.getUsers()
   },
 

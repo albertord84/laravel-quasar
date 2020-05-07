@@ -1,26 +1,27 @@
 <template>
     <q-page class="bg-gray q-pa-md">
       <div class="flex justify-between">
-        <h6>Campanhas</h6>
+        <h6>Questionários</h6>
         <!-- <q-btn flat rounded class="q-pa-xs  q-my-lg" color="primary" icon="help"/> -->
       </div>
 
       <q-card no-bordered flat>
         <q-tabs v-model="tab" dense class="text-grey" active-color="orange-10" indicator-color="orange-10" align="left" caps inline-label>
-            <q-tab name="campaigns" class="text-dark" @click="1"  icon="horizontal_split"  label="Campanhas" />
-            <q-tab name="crudCampaigns" class="text-dark" icon="add" label="Nova campanha" />
+          <q-tab name="questionaries" class="text-dark" @click="restartPlaneCriation"  icon="horizontal_split"  label="Questionários" />
+          <q-tab name="crudQuestionary" class="text-dark" icon="add" label="Novo questionário" />
         </q-tabs>
-
         <q-separator/>
-
         <q-tab-panels v-model="tab" animated>
-            <q-tab-panel name="campaigns" class="q-pa-none">
-              <TableCampaigns :campaigns="campaigns" @edit="editCampaign" @delete="deleteCampaign" @reload="reloadCampaigns" ></TableCampaigns>
-            </q-tab-panel>
 
-            <q-tab-panel name="crudCampaigns">
-              <CrudCampaigns :action="'insert'" :campaignItem="{}"></CrudCampaigns>
-            </q-tab-panel>
+          <q-tab-panel name="questionaries" class="q-pa-none">
+            <TableQuestionnaires  :questionaries="questionnaires" @edit="editQuestionary" @delete="deleteQuestionary" @reload="reloadQuestionaries" ></TableQuestionnaires>
+          </q-tab-panel>
+
+          <q-tab-panel name="crudQuestionary">
+            <Planes v-if="showSelectPlane" :plane="initialPlane" @onselectedplane="selectedPlane"></Planes>
+            <CrudQuestionary v-if="showCrudQuestionary" :action="'display'" :plane="plane" :questionaryItem="questionaryItem" @onchangeplane="changePlane"></CrudQuestionary>
+          </q-tab-panel>
+
         </q-tab-panels>
       </q-card>
     </q-page>
@@ -44,13 +45,13 @@ import axios from 'axios'
 //       'type_id': 1, // Boolean
 //       'question': 'Você já ouviu falar do coronavirus?',
 //       'json_data': null,
-//       'responseOptions': []
+//       'responseOptions': null
 //     },
 //     { 'id': 2,
 //       'type_id': 1, // Boolean
 //       'question': 'O coranavirus contagia somente animais?',
 //       'json_data': null,
-//       'responseOptions': []
+//       'responseOptions': null
 //     },
 //     { 'id': 3,
 //       'type_id': 2, // Unique selection
@@ -77,7 +78,7 @@ import axios from 'axios'
 //       ]
 //     },
 //     { 'id': 5,
-//       'type_id': 2, // Scale selection
+//       'type_id': 4, // Scale selection
 //       'question': 'Analise a seguinte imagem e escolha a opção que você acha que representa',
 //       'json_data': {
 //         'type': 'image', // dummy field constructed in frontend side
@@ -115,71 +116,25 @@ import axios from 'axios'
 //   ]
 // }
 
-// const campaignItem = {
-//   id: 1,
-//   status_id: 1,
-//   criator_id: 1,
-//   updater_id: 1,
-//   questionary_id: 1,
-//   base_id: 1,
-//   name: 'Influência do coronavirus',
-//   objetive: '',
-//   description: '',
-//   observation: '',
-//   response_limit: 50,
-//   response_amount: 23,
-//   invitations_sent: 100,
-//   invitations_accepted: 80,
-//   invitations_declined: 13,
-//   requested_date: '2020-10-10 10:10',
-//   analyzed_date: '2020-10-10 10:10',
-//   start_date: '2020-10-20 10:10',
-//   end_date: '2020-10-25 10:10',
-//   created_at: '2020-10-10 10:10',
-//   updated_at: '2020-10-10 10:10',
-
-//   questionaries: [
-//     questionaryItem
-//   ]
-// }
-
 export default {
-  name: 'Campaigns',
+  name: 'Questionaries',
 
   components: {
-    'CrudCampaigns': require('../../../components/CrudCampaigns.vue').default,
-    'TableCampaigns': require('../../../components/TableCampaigns.vue').default
+    'Planes': require('../../../components/Planes.vue').default,
+    'CrudQuestionary': require('../../../components/CrudQuestionary.vue').default,
+    'TableQuestionnaires': require('../../../components/TableQuestionnaires.vue').default
   },
 
   data () {
     return {
-      tab: '',
-      showCrudCampaign: false,
+      tab: 'questionaries',
+      plane: [],
+      initialPlane: { 'code': 0, 'name': '' },
+      showSelectPlane: true,
+      showCrudQuestionary: false,
 
-      campaignModel: {
-        id: 0,
-        status_id: 0,
-        criator_id: 0,
-        updater_id: 0,
-        questionary_id: 0,
-        base_id: 0,
-        name: '',
-        objetive: '',
-        description: '',
-        observation: '',
-        response_limit: 0,
-        response_amount: 0,
-        invitations_sent: 0,
-        invitations_accepted: 0,
-        invitations_declined: 0,
-        requested_date: '',
-        analyzed_date: '2000-04-29 00:00:00',
-        start_date: '2000-04-29 00:00:00',
-        end_date: '2000-04-29 00:00:00',
-        created_at: '2000-04-29 00:00:00',
-        updated_at: '2000-04-29 00:00:00'
-      },
-      campaigns: [],
+      questionaryItem: null,
+      questionnaires: [],
 
       loader: false
     }
@@ -187,12 +142,17 @@ export default {
 
   methods: {
 
-    getCampaigns () {
+    getQuestionaries () {
+      this.action = 'edit'
+
       this.loader = true
-      axios.get('web/' + 'campaigns')
+      axios.get('web/' + 'questionnaires')
         .then(response => {
-          this.campaigns = response.data
-          this.tab = 'campaigns'
+          // response.data.some((item, i) => {
+          // var plane = this.getPlaneObjectById(item.plane_id)
+          // })
+          this.questionnaires = response.data
+          this.tab = 'questionnaires'
         })
         .catch(errors => {
         })
@@ -201,25 +161,84 @@ export default {
         })
     },
 
-    editCampaign () {
+    selectedPlane (plane) {
+      this.initialPlane = plane
+      this.plane = plane
+      this.showSelectPlane = false
+      this.showCrudQuestionary = true
     },
 
-    deleteCampaign () {
+    restartPlaneCriation () {
+      this.initialPlane.code = 0
+      this.plane = []
+      this.showSelectPlane = true
+      this.showCrudQuestionary = false
     },
 
-    reloadCampaigns () {
+    changePlane () {
+      this.showSelectPlane = true
+      this.showCrudQuestionary = false
+    },
+
+    getPlaneObjectById (planeId) {
+      var planes = [
+        { 'code': 1, 'name': 'Starter' },
+        { 'code': 2, 'name': 'Ideal' },
+        { 'code': 3, 'name': 'Premium' }
+      ]
+      return planes[planeId - 1]
+    },
+
+    editQuestionary () {
+
+    },
+
+    deleteQuestionary () {
+
+    },
+
+    reloadQuestionaries () {
+
     }
   },
 
   watch: {
+
   },
 
   computed: {
+
   },
 
   beforeMount () {
-    this.showCrudCampaign = false
-    this.getCampaigns()
+    // original variables
+    this.showSelectPlane = true
+    this.showCrudQuestionary = false
+    this.getQuestionaries()
+
+    // test cases
+    // test case 1
+    // this.action = 'criate'
+    // this.plane = this.initialPlane
+    // this.showSelectPlane = false
+    // this.showCrudQuestionary = true
+    // this.tab = 'crudQuestionary'
+
+    // test case 2
+    // this.action = 'display'
+    // this.plane = this.getPlaneObjectById(questionaryItem.plane_id)
+    // this.questionaryItem = questionaryItem
+    // this.showSelectPlane = false
+    // this.showCrudQuestionary = true
+    // this.tab = 'crudQuestionary'
+
+    // test case 3
+    // this.action = 'edit'
+    // this.plane = this.getPlaneObjectById(questionaryItem.plane_id)
+    // this.questionaryItem = questionaryItem
+    // this.showSelectPlane = false
+    // this.showCrudQuestionary = true
+    // this.tab = 'crudQuestionary'
   },
 
   created () {
@@ -238,8 +257,7 @@ export default {
 
   meta () {
     return {
-      title: 'Campanhas'
-      // title: this.$t('page_titles.login_title')
+      title: 'Questionários' // title: this.$t('page_titles.login_title')
     }
   }
 

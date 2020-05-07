@@ -12,6 +12,10 @@ use Response;
 
 class UsersRolesController extends AppBaseController
 {
+    const SUPERADMIN = 1;
+    const ADMIN = 2;
+    const TARGET = 3;
+
     /** @var  UsersRolesRepository */
     private $usersRolesRepository;
 
