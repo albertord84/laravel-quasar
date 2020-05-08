@@ -9,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use App\Http\Controllers\UsersRolesController;
 
 class UsersController extends AppBaseController
 {
@@ -154,4 +155,18 @@ class UsersController extends AppBaseController
 
         return redirect(route('users.index'));
     }
+
+
+
+    public function getUsersByRole(Request $request)
+    {
+        $filter = $request['filter'] ?? '';
+        $role_id = $request['role_id'] ?? 0;
+        $users = $this->usersRepository->getUsersByRole($filter, $role_id);
+        return $users->toJson();
+
+        // return view('users.index')
+        //     ->with('users', $users);
+    }
+
 }

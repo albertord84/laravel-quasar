@@ -31,8 +31,10 @@ class CompaniesController extends AppBaseController
     {
         // $companies = $this->companiesRepository->all();
 
-        $companies = $this->companiesRepository->getCompanies();
-        return $companies->toJson();
+        $strFilter = $request['filter'] ?? '';
+        $page = $request['page'] ?? 0;
+        $respCompanies = $this->companiesRepository->getCompanies($strFilter, $page);
+        return $respCompanies->toJson();
 
         // return view('companies.index')
         //     ->with('companies', $companies);
@@ -147,13 +149,13 @@ class CompaniesController extends AppBaseController
         if (empty($companies)) {
             Flash::error('Companies not found');
 
-            return redirect(route('companies.index'));
+            // return redirect(route('companies.index'));
         }
 
         $this->companiesRepository->delete($id);
 
         Flash::success('Companies deleted successfully.');
 
-        return redirect(route('companies.index'));
+        // return redirect(route('companies.index'));
     }
 }

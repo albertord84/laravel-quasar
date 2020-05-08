@@ -4,44 +4,40 @@ import axios from 'axios'
 // import JwtService from './jwt.service'
 
 const WebService = {
-  // init () {
-  //   Vue.use(VueAxios, axios)
-  //   Vue.axios.defaults.baseURL = '' // Vue.axios.defaults.baseURL = 'api/'
-  //   Vue.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-  // },
+  /*
+  init () {
+    Vue.use(VueAxios, axios)
+    Vue.axios.defaults.baseURL = '' // Vue.axios.defaults.baseURL = 'api/'
+    Vue.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+  },
 
-  // setHeader () {
-  //   Vue.axios.defaults.headers.common['Authorization'] = `Bearer ${JwtService.getToken()}`
-  // },
+  setHeader () {
+    Vue.axios.defaults.headers.common['Authorization'] = `Bearer ${JwtService.getToken()}`
+  },
 
-  // query (resource, params) {
-  //   return Vue.axios.get(resource, params).catch(error => {
-  //     throw new Error(`[RWV] ApiService ${error}`)
-  //   })
-  // },
+  query (resource, params) {
+    return Vue.axios.get(resource, params).catch(error => {
+      throw new Error(`[RWV] ApiService ${error}`)
+    })
+  },
+  */
 
   get (resource, slug = '') {
     // if (JwtService.getToken() !== null) {
     //   this.setHeader()
-    // } else {
     // }
     let params = ''
-    if (!isNaN(slug) && slug) {
-      params = '?' + slug
+    if (Object.keys(slug).length) {
+      params = '?'
+      Object.keys(slug).some((item, i) => {
+        params = params + item + '=' + slug[item] + '&'
+      })
     }
-    if (typeof (slug) === 'object') {
-      params = '?' + params.keys(slug).filter(key => (slug[key] != null && slug[key] !== 'null'))
-        .map(key => key + '=' + slug[key]).join('&')
-    }
+    params = params.substr(0, params.length - 1)
     return axios.get(`${resource}${params}`)
   },
 
   post (resource, params) {
-    // if (JwtService.getToken() !== null) {
-    //   this.setHeader()
-    // } else {
-
-    // }
     return axios.post(`${resource}`, params)
   },
 

@@ -31,14 +31,18 @@ Route::post('/oauth/token', 'Auth\LoginController@login')
 ->name('login');
 
 Route::resource('addresses', 'AddressController');
+Route::get('getAddressByCEP/{cep}', 'AddressController@getAddressByCEP');
+
 Route::resource('accountsBanks', 'AccountsBanksController');
 
 Route::resource('companies', 'CompaniesController');
 Route::resource('costsCenters', 'CostsCentersController');
 
 Route::resource('usersRoles', 'UsersRolesController');
-Route::resource('users', 'UsersController');
 Route::resource('usersStatuses', 'UsersStatusController');
+
+Route::resource('users', 'UsersController');
+Route::get('getUsersByRole', 'UsersController@getUsersByRole');
 
 Route::resource('bases', 'BasesController');
 Route::resource('basesOrigins', 'BasesOriginsController');

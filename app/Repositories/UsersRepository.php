@@ -39,6 +39,20 @@ class UsersRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
+    public function getUsersByRole($filter = '', $role_id = 0) {
+      return $this->model()
+          ::where(function($query) use ($filter){
+            if ($filter != '') {
+              $query->where('username', $filter)
+              ->orWhere('email', 'LIKE', '%'. $filter.'%');
+            }})
+          ->where(function($query) use ($role_id){
+            if ($role_id) {
+              $query->where('role_id', $role_id);
+            }})
+          ->get();
+    }
+
     /**
      * Configure the Model
      **/

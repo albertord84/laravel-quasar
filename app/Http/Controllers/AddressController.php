@@ -154,4 +154,13 @@ class AddressController extends AppBaseController
 
         return redirect(route('addresses.index'));
     }
+
+    public function getAddressByCEP($cep){
+      try{
+          $datas = file_get_contents('https://viacep.com.br/ws/'.$cep.'/json/');
+          return $datas; //ja esta em json
+      } catch (\Throwable $th) {
+          return response()->json(['error' => 'Erro validando CEP'], 401);
+      }
+  }
 }

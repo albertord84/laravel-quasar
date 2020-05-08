@@ -7,19 +7,18 @@
 
       <q-card no-bordered flat>
         <q-tabs v-model="tab" dense class="text-grey" active-color="orange-10" indicator-color="orange-10" align="left" caps inline-label>
-            <q-tab name="companies" class="text-dark" icon="horizontal_split"  label="Empresas" />
-            <q-tab name="crudCompanies" class="text-dark" icon="add" label="Nova empresa" />
+            <q-tab name="showCompanies" class="text-dark" icon="horizontal_split"  label="Empresas" @click="showTabCompanies"/>
+            <q-tab name="crudCompanies" class="text-dark" :icon="iconActionCompany" :label="crudTabTitle" />
         </q-tabs>
 
         <q-separator/>
 
         <q-tab-panels v-model="tab" animated>
-            <q-tab-panel name="companies" class="q-pa-none">
-              <TableCompanies :companies="companies" @edit="editCompany" @delete="deleteCompany" @reload="reloadCompanies" ></TableCompanies>
+            <q-tab-panel name="showCompanies" class="q-pa-none">
+              <TableCompanies @editCompany="editCompany"></TableCompanies>
             </q-tab-panel>
-
             <q-tab-panel name="crudCompanies">
-              <CrudCompanies :action="'insert'" :companyItem="{}"></CrudCompanies>
+              <CrudCompanies :action="action" :company="company" @reloadCompanies="reloadCompanies"></CrudCompanies>
             </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -27,22 +26,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
-
-// const companyItem = {
-//   id: 1,
-//   responsible_id: 1,
-//   address_id: 1,
-//   social_reason: 'BioCuba Farma',
-//   fantasy_name: 'Labiofam',
-//   cnpj: '88.495.263/0001-60',
-//   phone: '5521965913089',
-//   phone2: '',
-//   decription: 'Produtos biofarmaceuticos',
-//   observation: 'Produção e comercialização de produtos para imunologia molecular',
-//   created_at: '2020-10-10 10:10',
-//   updated_at: '2020-10-10 10:10'
-// }
 
 export default {
   name: 'Companies',
@@ -55,23 +38,33 @@ export default {
   data () {
     return {
       tab: '',
-      showCrudCompany: false,
-
-      companyModel: null,
       companies: [],
-
-      loader: false
+      crudTabTitle: '',
+      action: '',
+      iconActionCompany: ''
     }
   },
 
   methods: {
-    editCompany () {
+
+    showTabCompanies () {
+      this.company = {}
+      this.crudTabTitle = 'Nova empresa'
+      this.action = 'insert'
+      this.iconActionCompany = 'add'
+      this.tab = 'showCompanies'
     },
 
-    deleteCompany () {
+    editCompany (company) {
+      this.company = Object.assign({}, company)
+      this.crudTabTitle = 'Editar empresa'
+      this.action = 'edit'
+      this.iconActionCompany = 'edit'
+      this.tab = 'crudCompanies'
     },
 
     reloadCompanies () {
+      this.showTabCompanies()
     }
   },
 
@@ -82,8 +75,7 @@ export default {
   },
 
   beforeMount () {
-    this.showCrudCompany = false
-    this.tab = 'companies'
+    this.showTabCompanies()
   },
 
   created () {

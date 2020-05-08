@@ -16,18 +16,20 @@
         <template v-slot:top>
           <div class="col-4">
             <q-input  v-model="filter" label-color="orange-8" color="orange-8" placeholder="Buscar ...">
-              <template v-slot:append >
-                <q-icon name="search" class="pointer-hover"/>
-              </template>
+              <!-- <template v-slot:append >
+                <q-icon name="search" class="pointer-hover" @click.prevent="filterCompanies"/>
+              </template> -->
             </q-input>
           </div>
-          <div class="col-4 text-right">
-            <q-btn flat dense icon-right="first_page" title="Página inicial" no-caps @click="getCompanies(0)" :disable="page==0"/>
-            <q-btn flat dense icon-right="navigate_before"  title="Página anterior" no-caps @click="getCompanies(page-1)" :disable="page==0"/>
-            <q-btn flat dense class="q-px-sm"  title="Página atual" no-caps>{{page+1}}</q-btn>
-            <q-btn flat dense icon-right="navigate_next"  title="Página seguinte" no-caps @click="getCompanies(page+1)" :disable="page==lastPage"/>
-            <q-btn flat dense icon-right="last_page"  title="Página final" no-caps @click="getCompanies('last')" :disable="page==lastPage"/>
+
+          <div class="col-4 text-center">
+            <q-btn flat dense class="q-ml-lg" icon-right="navigate_before"  title="Página anterior" no-caps @click="getCompanies(page-1)" :disable="page==0"/>
+            <q-btn flat dense class="q-px-sm "  title="Página atual" no-caps>
+              {{page+1}}
+            </q-btn>
+            <q-btn flat dense icon-right="navigate_next"  title="Página seguinte" no-caps @click="getCompanies(page+1)" :disable="!hasMorePage"/>
           </div>
+
           <div class="col-4 text-right">
             <q-btn color="orange-8" icon-right="archive" label="Exportar" title="Exportar para CSV" no-caps @click="exportTable"/>
           </div>
@@ -60,12 +62,25 @@
 
               <q-td key="actions" :props="props" class="q-pa-none q-ma-none">
                 <div style="margin-left:-3px">
-                  <q-icon color="primary" size="sm" class="pointer-hover q-mr-sm" title="Ver/Editar questionário" name="account_balance_wallet" @click="editCompany(props.row)" />
-                  <q-icon color="red" size="sm" class="pointer-hover" name="delete" title="Eliminar questionário" @click.prevent="deleteCompany(props.row)"/>
+                  <q-icon color="primary" size="sm" class="pointer-hover q-mr-sm" title="Ver/Editar empresa" name="account_balance_wallet" @click="editCompany(props.row)" />
+                  <q-icon color="red" size="sm" class="pointer-hover" name="delete" title="Eliminar empresa" @click.prevent="confirmDeleteCompany(props.row)"/>
                 </div>
               </q-td>
 
           </q-tr>
+        </template>
+
+        <template v-slot:bottom>
+          <div class="col-12 text-center q-mt-md">
+            <q-btn flat dense class="q-ml-lg" icon-right="navigate_before"  title="Página anterior" no-caps @click="getCompanies(page-1)" :disable="page==0"/>
+            <q-btn flat dense class="q-px-sm "  title="Página atual" no-caps>
+              {{page+1}}
+            </q-btn>
+            <q-btn flat dense icon-right="navigate_next"  title="Página seguinte" no-caps @click="getCompanies(page+1)" :disable="!hasMorePage"/>
+          </div>
+        </template>
+
+        <template v-slot:pagination>
         </template>
 
         <template v-slot:no-data="{ icon, message, filter }">
@@ -77,14 +92,35 @@
             <q-icon size="2em" :name="filter ? 'filter_b_and_w' : icon" />
           </div>
         </template>
-
       </q-table>
+
+      <q-dialog v-model="modalConfirmDelete" persistent transition-show="flip-down" transition-hide="flip-up">
+        <q-card>
+          <q-card-section class="row items-center">
+            <q-icon name="warning" class="text-red" style="font-size: 1.9rem;" />
+            <span v-if="company" class="q-ml-sm">Confirma que deseja eliminar a empresa "{{company.fantasy_name}}"?</span>
+          </q-card-section>
+
+          <q-card-section v-show="isDeleting" class="text-center">
+            <q-spinner-ios color="orange-8" size="1.9rem" />
+          </q-card-section>
+
+          <q-card-actions align="right">
+            <q-btn flat label="Eliminar" color="primary" @click.prevent="deleteCompany">
+            </q-btn>
+            <q-btn flat label="Cancelar" color="primary" v-close-popup />
+          </q-card-actions>
+
+        </q-card>
+      </q-dialog>
+
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import { WebService } from '../services/WebService.js'
 import { exportFile } from 'quasar'
 
 function wrapCsvValue (val, formatFn) {
@@ -108,7 +144,6 @@ export default {
   name: 'TableCompanies',
 
   props: {
-    companies: null
   },
 
   components: {
@@ -117,8 +152,7 @@ export default {
   data () {
     return {
       action: '',
-      companyItem: null,
-
+      company: null,
       data: [],
       columns: [
         {
@@ -161,14 +195,6 @@ export default {
           align: 'center',
           sortable: true
         },
-        // {
-        //   label: 'Páginas',
-        //   field: 'pages',
-        //   name: 'pages',
-        //   sortable: true,
-        //   sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
-        //   align: 'center'
-        // },
         {
           label: 'Ações',
           field: 'actions',
@@ -179,29 +205,27 @@ export default {
       filter: '',
       loading: false,
       page: 0,
-      lastPage: 0,
-      pagination: {
-        rowsPerPage: 0
-        // prevPage: this.getCompanies(this.page - 1),
-        // nextPage: this.getCompanies(this.page + 1)
-      }
+      hasMorePage: false,
+      strFilter: 0,
+      pagination: { rowsPerPage: 0 },
+      modalConfirmDelete: false,
+      isDeleting: false
     }
   },
 
   methods: {
     getCompanies (page) {
       this.loading = true
-      axios.get('web/' + 'companies', {
+      // axios.get('web/' + 'companies', {
+      WebService.get('web/' + 'companies', {
         'filter': this.filter,
         'page': page
       })
         .then(response => {
-          this.data = response.data.companies
-          if (response.data.total % process.env.MIX_APP_PAGE_LENGTH > 0) {
-            this.lastPage = parseInt(response.data.total / process.env.MIX_APP_PAGE_LENGTH)
-          } else {
-            this.lastPage = parseInt(response.data.total / process.env.MIX_APP_PAGE_LENGTH) - 1
-          }
+          let tmp = Object.values(response.data)
+          this.data = tmp
+          this.page = page
+          this.hasMorePage = tmp.length
         })
         .catch(errors => {
         })
@@ -210,17 +234,36 @@ export default {
         })
     },
 
-    editCompany () {
+    filterCompanies () {
+      if (this.filter.trim().length) {
+        this.getCompanies(0)
+      }
+    },
+
+    editCompany (company) {
+      this.$emit('editCompany', company)
     },
 
     deleteCompany () {
+      if (this.company) {
+        this.isDeleting = true
+        WebService.delete('web/' + 'companies/' + this.company.id)
+          .then(response => {
+            this.modalConfirmDelete = false
+            this.$q.notify({ type: 'positive', message: `Empresa eliminada com sucesso.`, position: 'top-right' })
+            this.getCompanies(this.page)
+          })
+          .catch(errors => {
+          })
+          .then(() => {
+            this.isDeleting = false
+          })
+      }
     },
 
-    reloadCompanies () {
-    },
-
-    showSelectedCompany (company) {
-      this.action = 'edit'
+    confirmDeleteCompany (company) {
+      this.company = company
+      this.modalConfirmDelete = true
     },
 
     exportTable () {
@@ -249,8 +292,14 @@ export default {
 
   },
 
+  watch: {
+    filter (value) {
+      this.getCompanies(0)
+    }
+  },
+
   beforeMount () {
-    this.getCompanies()
+    this.getCompanies(0)
   }
 }
 </script>
