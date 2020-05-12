@@ -7,6 +7,7 @@ use App\Repositories\BaseRepository;
 use Auth;
 
 use App\Http\Controllers\UsersRolesController;
+use App\Models\CostsCenters;
 
 /**
  * Class CompaniesRepository
@@ -42,7 +43,6 @@ class CompaniesRepository extends BaseRepository
     }
 
     public function getCompanies($strFilter = '', $page = 0) {
-
         $page_length = env('APP_PAGE_LENGTH', 100);
         $start = $page_length * $page;
         $Companies = $this->model()
@@ -60,7 +60,9 @@ class CompaniesRepository extends BaseRepository
             ->get()
             ->slice($start, $page_length)
             ->each(function(Companies $Company) {
-                    $Company->CostCenters = null; //TODO-Alberto: obter os centros de costos de cada empresa
+                    $Company->CostCenters = null; //TODO-Alberto: obter todos os centros de costos de cada empresa en forma de Collection
+                    $Company->Address = null; //TODO-Alberto: obter o endereço de cada empresa
+                    $Company->Admin = null; //TODO-Alberto: obter os admin de cada empresa
                 });
 
         return $Companies;

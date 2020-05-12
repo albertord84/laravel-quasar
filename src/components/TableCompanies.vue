@@ -8,7 +8,7 @@
           binary-state-sort
           :card-container-style="{ backgroundColor: '#ff0000' }"
           :dense="$q.screen.lt.md"
-          :loading="loading"
+          :loading="isLoading"
           :pagination="pagination"
           :rows-per-page-options="[0]"
           >
@@ -25,7 +25,8 @@
           <div class="col-4 text-center">
             <q-btn flat dense class="q-ml-lg" icon-right="navigate_before"  title="Página anterior" no-caps @click="getCompanies(page-1)" :disable="page==0"/>
             <q-btn flat dense class="q-px-sm "  title="Página atual" no-caps>
-              {{page+1}}
+              <span v-if="!isLoading" color="orange">{{page+1}}</span>
+              <q-spinner-pie v-if="isLoading" color="orange" />
             </q-btn>
             <q-btn flat dense icon-right="navigate_next"  title="Página seguinte" no-caps @click="getCompanies(page+1)" :disable="!hasMorePage"/>
           </div>
@@ -203,7 +204,7 @@ export default {
         }
       ],
       filter: '',
-      loading: false,
+      isLoading: false,
       page: 0,
       hasMorePage: false,
       strFilter: 0,
@@ -215,7 +216,7 @@ export default {
 
   methods: {
     getCompanies (page) {
-      this.loading = true
+      this.isLoading = true
       // axios.get('web/' + 'companies', {
       WebService.get('web/' + 'companies', {
         'filter': this.filter,
@@ -230,7 +231,7 @@ export default {
         .catch(errors => {
         })
         .then(() => {
-          this.loading = false
+          this.isLoading = false
         })
     },
 

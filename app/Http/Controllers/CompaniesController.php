@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 
+use App\Repositories\AddressRepository;
+use App\Repositories\CostsCentersRepository;
+use App\Repositories\UsersRepository;
+
 class CompaniesController extends AppBaseController
 {
     /** @var  CompaniesRepository */
@@ -65,7 +69,8 @@ class CompaniesController extends AppBaseController
 
         Flash::success('Companies saved successfully.');
 
-        return redirect(route('companies.index'));
+        $companies->toJson();
+        // return redirect(route('companies.index'));
     }
 
     /**
@@ -123,14 +128,15 @@ class CompaniesController extends AppBaseController
         if (empty($companies)) {
             Flash::error('Companies not found');
 
-            return redirect(route('companies.index'));
+            // return redirect(route('companies.index'));
         }
 
         $companies = $this->companiesRepository->update($request->all(), $id);
 
         Flash::success('Companies updated successfully.');
 
-        return redirect(route('companies.index'));
+        $companies->toJson();
+        // return redirect(route('companies.index'));
     }
 
     /**
@@ -156,6 +162,40 @@ class CompaniesController extends AppBaseController
 
         Flash::success('Companies deleted successfully.');
 
+        return true;
         // return redirect(route('companies.index'));
+    }
+
+    public function criateFullCompany (Request $request) {
+      $inputCompany = $request['company'];
+      $inputAddress = $request['address'];
+      $inputAdmin = $request['admin'];
+
+        // 1. criar endereço
+      $Address = (new AddressRepository(app()))->create($inputAddress);
+
+      // 2. criar empresa
+      $inputCompany['address_id'] = $Address->id;
+      $inputCompany['responsible_id'] = $inputAdmin['id'];
+      $Company = $this->companiesRepository->create($inputCompany);
+
+      // 3. criar primeiro centro de custo
+      $CostCenter = (new CostsCentersRepository(app()))->create(array(
+            'company_id' => $Company->id,
+            'admin_id' => $inputAdmin['id'],
+            'name' => 'Centro de custo 1'
+      ));
+
+      // 4. atualizar o cost_center_id e company_id do admin
+      $Admin = (new UsersRepository(app()))->find($inputAdmin['id']);
+      $Admin->company_id = $Company->id;
+      $Admin->cost_center_id = $CostCenter->id;
+      $Admin->save();
+
+      $Company->Address = $Address;
+      $Company->CostCenter = $CostCenter;
+      $Company->Admin = $Admin;
+
+      return $Company;
     }
 }

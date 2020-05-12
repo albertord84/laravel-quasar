@@ -7,19 +7,18 @@
 
       <q-card no-bordered flat>
         <q-tabs v-model="tab" dense class="text-grey" active-color="orange-10" indicator-color="orange-10" align="left" caps inline-label>
-            <q-tab name="campaigns" class="text-dark" @click="1"  icon="horizontal_split"  label="Campanhas" />
-            <q-tab name="crudCampaigns" class="text-dark" icon="add" label="Nova campanha" />
+            <q-tab name="showCampaigns" class="text-dark"  icon="horizontal_split"  label="Campanhas" @click="showTabCampaigns"/>
+            <q-tab name="crudCampaigns" class="text-dark" :icon="iconActionCompany" :label="crudTabTitle"/>
         </q-tabs>
 
         <q-separator/>
 
         <q-tab-panels v-model="tab" animated>
-            <q-tab-panel name="campaigns" class="q-pa-none">
-              <TableCampaigns :campaigns="campaigns" @edit="editCampaign" @delete="deleteCampaign" @reload="reloadCampaigns" ></TableCampaigns>
+            <q-tab-panel name="showCampaigns" class="q-pa-none">
+              <TableCampaigns @editCampaign="editCampaign"></TableCampaigns>
             </q-tab-panel>
-
             <q-tab-panel name="crudCampaigns">
-              <CrudCampaigns :action="'insert'" :campaignItem="{}"></CrudCampaigns>
+              <CrudCampaigns :action="action" :campaign="campaign" @reloadCampaigns="reloadCampaigns"></CrudCampaigns>
             </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -27,7 +26,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 // const questionaryItem = {
 //   plane_id: 3,
@@ -154,60 +152,32 @@ export default {
   data () {
     return {
       tab: '',
-      showCrudCampaign: false,
-
-      campaignModel: {
-        id: 0,
-        status_id: 0,
-        criator_id: 0,
-        updater_id: 0,
-        questionary_id: 0,
-        base_id: 0,
-        name: '',
-        objetive: '',
-        description: '',
-        observation: '',
-        response_limit: 0,
-        response_amount: 0,
-        invitations_sent: 0,
-        invitations_accepted: 0,
-        invitations_declined: 0,
-        requested_date: '',
-        analyzed_date: '2000-04-29 00:00:00',
-        start_date: '2000-04-29 00:00:00',
-        end_date: '2000-04-29 00:00:00',
-        created_at: '2000-04-29 00:00:00',
-        updated_at: '2000-04-29 00:00:00'
-      },
       campaigns: [],
-
-      loader: false
+      crudTabTitle: '',
+      action: '',
+      iconActionCCampaigns: ''
     }
   },
 
   methods: {
-
-    getCampaigns () {
-      this.loader = true
-      axios.get('web/' + 'campaigns')
-        .then(response => {
-          this.campaigns = response.data
-          this.tab = 'campaigns'
-        })
-        .catch(errors => {
-        })
-        .then(() => {
-          this.loader = false
-        })
+    showTabCampaigns () {
+      this.campaign = {}
+      this.crudTabTitle = 'Nova campanha'
+      this.action = 'insert'
+      this.iconActionCompany = 'add'
+      this.tab = 'showCampaigns'
     },
 
-    editCampaign () {
-    },
-
-    deleteCampaign () {
+    editCampaign (campaign) {
+      this.campaign = Object.assign({}, campaign)
+      this.crudTabTitle = 'Editar campanha'
+      this.action = 'edit'
+      this.iconActionCompany = 'edit'
+      this.tab = 'crudCampaigns'
     },
 
     reloadCampaigns () {
+      this.showTabCampaigns()
     }
   },
 
@@ -218,8 +188,7 @@ export default {
   },
 
   beforeMount () {
-    this.showCrudCampaign = false
-    this.getCampaigns()
+    this.showTabCampaigns()
   },
 
   created () {
@@ -238,8 +207,7 @@ export default {
 
   meta () {
     return {
-      title: 'Campanhas'
-      // title: this.$t('page_titles.login_title')
+      title: 'Campanhas' // title: this.$t('page_titles.login_title')
     }
   }
 

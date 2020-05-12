@@ -36,13 +36,15 @@ Route::get('getAddressByCEP/{cep}', 'AddressController@getAddressByCEP');
 Route::resource('accountsBanks', 'AccountsBanksController');
 
 Route::resource('companies', 'CompaniesController');
+Route::put('criateFullCompany', 'CompaniesController@criateFullCompany');
+
 Route::resource('costsCenters', 'CostsCentersController');
 
 Route::resource('usersRoles', 'UsersRolesController');
 Route::resource('usersStatuses', 'UsersStatusController');
 
 Route::resource('users', 'UsersController');
-Route::get('getUsersByRole', 'UsersController@getUsersByRole');
+Route::post('signInUser', 'UsersController@signInUser');
 
 Route::resource('bases', 'BasesController');
 Route::resource('basesOrigins', 'BasesOriginsController');

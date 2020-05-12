@@ -103,6 +103,7 @@ return array(
     'App\\Http\\Requests\\UpdateusersRequest' => $baseDir . '/app/Http/Requests/UpdateusersRequest.php',
     'App\\Http\\Resources\\User\\UserResource' => $baseDir . '/app/Http/Resources/User/UserResource.php',
     'App\\Library\\Master' => $baseDir . '/app/Library/Master.php',
+    'App\\Mail\\EmailSigninUser' => $baseDir . '/app/Mail/EmailSigninUser.php',
     'App\\Models\\AccountsBanks' => $baseDir . '/app/Models/AccountsBanks.php',
     'App\\Models\\Address' => $baseDir . '/app/Models/Address.php',
     'App\\Models\\Bases' => $baseDir . '/app/Models/Bases.php',

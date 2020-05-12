@@ -16,14 +16,14 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->integer('company_id')->nullable(false); //->index('fk_users_company');
-            $table->integer('cost_center_id')->nullable(false); //->index('fk_users_company');
-            $table->integer('address_id')->nullable(false); //->index('fk_users_company');
-            $table->integer('role_id')->nullable(false); //->index('fk_users_company');
+            $table->integer('company_id')->nullable(false)->default(0); //->index('fk_users_company');
+            $table->integer('cost_center_id')->nullable(false)->default(0); //->index('fk_users_company');
+            $table->integer('address_id')->nullable(false)->default(0); //->index('fk_users_company');
+            $table->integer('role_id')->nullable(false)->default(3); //->index('fk_users_company');
             $table->integer('status_id')->nullable(false)->default(1); //->index('fk_users_company');
 
-            $table->string('username', 50)->unique();
-            $table->string('email', 50)->unique();
+            $table->string('username', 150)->unique();
+            $table->string('email', 150)->unique();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('deleted_at')->nullable();

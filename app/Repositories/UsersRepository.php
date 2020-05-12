@@ -2,8 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Mail\EmailSigninUser;
 use App\Models\Users;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Class UsersRepository
@@ -39,7 +41,30 @@ class UsersRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
-    public function getUsersByRole($filter = '', $role_id = 0) {
+    public function signInUser($input) {
+      // 1. cria admin
+      $User = $this->model()::create($input); // $User= $this->model()::find(4);
+
+      // 2. envia credenciais de acesso por email
+      $User->password = rand(100001, 999999);
+      Mail
+        ::to($User->email)
+        // ->cc('copy@email.com')
+        ->send(new EmailSigninUser($User, 'Cadastro Physiback'));
+      $User->password = bcrypt($User->password);
+
+      // 3. Salvar senha cifrada
+      $User->save();
+
+      return $User;
+    }
+
+    public function filterUsers($input) {
+      $filter = $input['filter'] ?? '';
+      $role_id = $input['role_id'] ?? 0;
+      $company_id = $input['company_id'] ?? 0;
+      $cost_center_id = $input['cost_center_id'] ?? 0;
+      $status_id = $input['status_id'] ?? 0;
       return $this->model()
           ::where(function($query) use ($filter){
             if ($filter != '') {
@@ -49,6 +74,18 @@ class UsersRepository extends BaseRepository
           ->where(function($query) use ($role_id){
             if ($role_id) {
               $query->where('role_id', $role_id);
+            }})
+          ->where(function($query) use ($company_id){
+            if ($company_id) {
+              $query->where('company_id', $company_id);
+            }})
+          ->where(function($query) use ($cost_center_id){
+            if ($cost_center_id) {
+              $query->where('cost_center_id', $cost_center_id);
+            }})
+          ->where(function($query) use ($status_id){
+            if ($status_id) {
+              $query->where('status_id', $status_id);
             }})
           ->get();
     }

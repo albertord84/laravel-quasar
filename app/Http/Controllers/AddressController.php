@@ -156,6 +156,7 @@ class AddressController extends AppBaseController
     }
 
     public function getAddressByCEP($cep){
+      // $cep = $request ?? '';
       try{
           $datas = file_get_contents('https://viacep.com.br/ws/'.$cep.'/json/');
           return $datas; //ja esta em json

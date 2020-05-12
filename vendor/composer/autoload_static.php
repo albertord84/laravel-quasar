@@ -664,6 +664,7 @@ class ComposerStaticInit54b4055114b3e8f68b009df658a1bcd4
         'App\\Http\\Requests\\UpdateusersRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateusersRequest.php',
         'App\\Http\\Resources\\User\\UserResource' => __DIR__ . '/../..' . '/app/Http/Resources/User/UserResource.php',
         'App\\Library\\Master' => __DIR__ . '/../..' . '/app/Library/Master.php',
+        'App\\Mail\\EmailSigninUser' => __DIR__ . '/../..' . '/app/Mail/EmailSigninUser.php',
         'App\\Models\\AccountsBanks' => __DIR__ . '/../..' . '/app/Models/AccountsBanks.php',
         'App\\Models\\Address' => __DIR__ . '/../..' . '/app/Models/Address.php',
         'App\\Models\\Bases' => __DIR__ . '/../..' . '/app/Models/Bases.php',
