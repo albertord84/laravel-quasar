@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //athomics
         $this->call(UsersRolesTableSeeder::class);
         $this->call(UsersStatusesTableSeeder::class);
         $this->call(CampaignsStatusesTableSeeder::class);
@@ -18,19 +19,18 @@ class DatabaseSeeder extends Seeder
         $this->call(QuestionsTypesTableSeeder::class);
         $this->call(ResponsesTypesTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
-
-        $this->call(BasesOriginsTableSeeder::class);
-        $this->call(BasesTableSeeder::class);
-
         $this->call(PlanesTableSeeder::class);
+        $this->call(BasesOriginsTableSeeder::class);
 
+        // dependents
         $this->call(CompaniesTableSeeder::class);
         $this->call(CostsCentersTableSeeder::class);
+        $this->call(BasesTableSeeder::class);
+
 
         $this->call(UsersTableSeeder::class);
         $this->call(UsersBasesTableSeeder::class);
 
-        $this->call(AccountsBanksTableSeeder::class);
 
         $this->call(QuestionnairesTableSeeder::class);
         $this->call(QuestionsTableSeeder::class);
@@ -42,5 +42,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RecompensesTableSeeder::class);
         $this->call(ExtractionsTableSeeder::class);
+        $this->call(AccountsBanksTableSeeder::class);
       }
 }

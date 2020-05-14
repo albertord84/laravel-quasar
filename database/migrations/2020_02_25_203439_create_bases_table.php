@@ -17,8 +17,8 @@ class CreateBasesTable extends Migration
             $table->integer('id', true);
 
             $table->integer('origin_id')->nullable()->index('fk_bases_bases_origins')->default(1); //fk
-            $table->integer('company_id')->nullable()->index('fk_bases_companies');
-            $table->integer('criator_id')->nullable()->index('fk_bases_users');
+            $table->integer('company_id')->nullable()->index('fk_bases_companies')->default(1);;
+            $table->integer('criator_id')->nullable()->index('fk_bases_users')->default(1);;
 
             $table->string('name',100)->nullable(false);
             $table->string('decription',300)->nullable();
