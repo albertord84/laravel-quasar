@@ -39,7 +39,7 @@ class AddForeignKeysToBasesTable extends Migration
     public function down()
     {
         Schema::table('bases', function (Blueprint $table) {
-              $table->dropForeign('fk_users_accounts_banks');
+              $table->dropForeign('fk_bases_bases_origins');
               $table->dropForeign('fk_bases_companies');
               // $table->dropForeign('fk_bases_users');
         });
