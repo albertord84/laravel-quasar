@@ -26,10 +26,10 @@ class AddForeignKeysToResponsesTable extends Migration
                 ->references('id')->on('campaigns')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
-          $table->foreign('response_option_id', 'fk_responses_options_responses') //responses x options_responses
-                ->references('id')->on('options_responses')
-                ->onUpdate('NO ACTION')
-                ->onDelete('NO ACTION');
+          // $table->foreign('response_option_id', 'fk_responses_options_responses') //responses x options_responses
+          //       ->references('id')->on('options_responses')
+          //       ->onUpdate('NO ACTION')
+          //       ->onDelete('NO ACTION');
         });
     }
 
@@ -44,7 +44,7 @@ class AddForeignKeysToResponsesTable extends Migration
               $table->dropForeign('fk_recompenses_users');
               $table->dropForeign('fk_responses_questions');
               $table->dropForeign('fk_recompenses_campaigns');
-              $table->dropForeign('fk_responses_options_responses');
+              // $table->dropForeign('fk_responses_options_responses');
         });
     }
 }

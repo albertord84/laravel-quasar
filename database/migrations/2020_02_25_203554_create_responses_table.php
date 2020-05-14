@@ -19,7 +19,7 @@ class CreateResponsesTable extends Migration
             $table->integer('user_id')->nullable()->index('fk_responses_users');
             $table->integer('question_id')->nullable()->index('fk_responses_questions');
             $table->integer('campaign_id')->nullable()->index('fk_responses_campaigns');
-            $table->integer('response_option_id')->nullable()->index('fk_responses_options_responses')->default(0);
+            $table->integer('response_option_id')->nullable();//->index('fk_responses_options_responses')->default(0);
 
             $table->string('discursive_text', 4000)->nullable();
 

@@ -68,6 +68,9 @@ class ResponsesTableSeeder extends Seeder
       $this->command->info('Response of Question 4');
     }
 
+
+
+
     public function createResponsesOfQuestionnnaire2_ByTarget1(){
       Responses::create([
         'id' => '5',
@@ -97,16 +100,17 @@ class ResponsesTableSeeder extends Seeder
           'response_option_id' => '16',
           'discursive_text' => '',
       ]);
-      $this->command->info('Response of Question 7');
+      $this->command->info('Response of Question 7-1');
       Responses::create([
-          'id' => '8',
-          'user_id' => '7',
-          'question_id' => '7',
-          'campaign_id' => '2',
-          'response_option_id' => '18',
-          'discursive_text' => '',
-      ]);
-      $this->command->info('Response of Question 8');
+        'id' => '8',
+        'user_id' => '7',
+        'question_id' => '7',
+        'campaign_id' => '2',
+        'response_option_id' => '18',
+        'discursive_text' => '',
+        ]);
+      $this->command->info('Response of Question 7-2');
+
 
       Responses::create([
           'id' => '9',
@@ -116,8 +120,12 @@ class ResponsesTableSeeder extends Seeder
           // 'response_option_id' => '',
           'discursive_text' => '7',
       ]);
-      $this->command->info('Response of Question 9');
+      $this->command->info('Response of Question 8');
     }
+
+
+
+
 
     public function createResponsesOfQuestionnnaire3_ByTarget2(){
         Responses::create([
@@ -128,7 +136,7 @@ class ResponsesTableSeeder extends Seeder
           'response_option_id' => '22',
           'discursive_text' => '',
         ]);
-        $this->command->info('Response of Question 10');
+        $this->command->info('Response of Question 9');
 
         Responses::create([
             'id' => '11',
@@ -138,7 +146,7 @@ class ResponsesTableSeeder extends Seeder
             'response_option_id' => '23',
             'discursive_text' => '',
         ]);
-        $this->command->info('Response of Question 11');
+        $this->command->info('Response of Question 10');
 
         Responses::create([
             'id' => '12',
@@ -148,7 +156,7 @@ class ResponsesTableSeeder extends Seeder
             'response_option_id' => '26',
             'discursive_text' => '',
         ]);
-        $this->command->info('Response of Question 12');
+        $this->command->info('Response of Question 11-1');
         Responses::create([
             'id' => '13',
             'user_id' => '8',
@@ -157,7 +165,7 @@ class ResponsesTableSeeder extends Seeder
             'response_option_id' => '27',
             'discursive_text' => '',
         ]);
-        $this->command->info('Response of Question 13');
+        $this->command->info('Response of Question 11-2');
 
         Responses::create([
             'id' => '14',
@@ -167,7 +175,7 @@ class ResponsesTableSeeder extends Seeder
             // 'response_option_id' => '',
             'discursive_text' => '8',
         ]);
-        $this->command->info('Response of Question 14');
+        $this->command->info('Response of Question 12');
 
         Responses::create([
             'id' => '15',
@@ -177,6 +185,6 @@ class ResponsesTableSeeder extends Seeder
             // 'response_option_id' => '',
             'discursive_text' => 'O captopril é um inibidor da ECA - enzima conversora da angiotensina, que impede a angiotensina I de ser convertida em angiotensina II. Com a ausência da angiotensina II não há vasoconstricção periférica, diminuindo a resistência vascular periférica e promovendo uma diminuição da pressão arterial. Os efeitos benéficos do captopril na hipertensão e na insuficiência cardíaca parecem resultar principalmente da supressão do sistema renina-angiotensina-aldosterona, resultando em concentrações séricas diminuídas de angiotensina II e aldosterona.',
         ]);
-        $this->command->info('Response of Question 15');
+        $this->command->info('Response of Question 13');
     }
 }
