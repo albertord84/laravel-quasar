@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+// use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -24,7 +25,7 @@ class AccountsBanks extends Model
     use SoftDeletes;
 
     public $table = 'accounts_banks';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -74,5 +75,9 @@ class AccountsBanks extends Model
         'titular_name' => 'required'
     ];
 
-    
+    public function accountBank() {
+      return $this->belongsTo('App\Models\Users');
+    }
+
+
 }

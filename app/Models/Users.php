@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+// use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 /**
  * Class Users
@@ -26,7 +28,7 @@ class Users extends Model
     use SoftDeletes;
 
     public $table = 'users';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -83,5 +85,7 @@ class Users extends Model
         'password' => 'required'
     ];
 
-    
+    public function accountBank() {
+      return $this->hasOne('App\Models\AccountsBanks');
+    }
 }

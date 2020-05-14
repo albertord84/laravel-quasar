@@ -41,9 +41,9 @@ class AddForeignKeysToResponsesTable extends Migration
     public function down()
     {
         Schema::table('responses', function (Blueprint $table) {
-              $table->dropForeign('fk_recompenses_users');
+              $table->dropForeign('fk_responses_users');
               $table->dropForeign('fk_responses_questions');
-              $table->dropForeign('fk_recompenses_campaigns');
+              $table->dropForeign('fk_responses_campaigns');
               // $table->dropForeign('fk_responses_options_responses');
         });
     }
