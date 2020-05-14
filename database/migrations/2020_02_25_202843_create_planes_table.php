@@ -14,7 +14,7 @@ class CreatePlanesTable extends Migration
     public function up()
     {
         Schema::create('planes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id', true);
 
             $table->string('name',45)->nullable(false);
             $table->float('price', 6, 2)->nullable(false);

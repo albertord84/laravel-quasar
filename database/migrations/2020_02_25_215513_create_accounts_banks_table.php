@@ -14,7 +14,7 @@ class CreateAccountsBanksTable extends Migration
     public function up()
     {
         Schema::create('accounts_banks', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id', true);
 
             $table->integer('user_id')->nullable()->index('fk_accounts_banks_users');
 

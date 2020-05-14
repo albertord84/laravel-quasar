@@ -14,7 +14,7 @@ class CreateRecompensesTable extends Migration
     public function up()
     {
         Schema::create('recompenses', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id', true);
 
             $table->integer('user_id')->nullable(false); //fk
             $table->integer('questionnaire_id')->nullable(false); //fk

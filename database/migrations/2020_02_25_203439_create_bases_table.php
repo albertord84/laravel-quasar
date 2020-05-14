@@ -14,7 +14,7 @@ class CreateBasesTable extends Migration
     public function up()
     {
         Schema::create('bases', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id', true);
 
             $table->integer('origin_id')->nullable(false)->default(1); //fk
             $table->integer('company_id')->nullable(false); //fk

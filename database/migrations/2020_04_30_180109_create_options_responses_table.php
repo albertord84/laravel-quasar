@@ -14,7 +14,7 @@ class CreateOptionsResponsesTable extends Migration
     public function up()
     {
         Schema::create('options_responses', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id', true);
 
             $table->integer('question_id')->nullable(false); //fk
 

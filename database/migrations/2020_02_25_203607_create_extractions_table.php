@@ -14,7 +14,7 @@ class CreateExtractionsTable extends Migration
     public function up()
     {
         Schema::create('extractions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id', true);
 
             $table->integer('status_id')->nullable(false); //fk
             $table->integer('user_id')->nullable(false); //fk

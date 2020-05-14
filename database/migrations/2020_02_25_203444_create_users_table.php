@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id', true);
 
             $table->integer('company_id')->nullable(false)->default(0); //->index('fk_users_company');
             $table->integer('cost_center_id')->nullable(false)->default(0); //->index('fk_users_company');

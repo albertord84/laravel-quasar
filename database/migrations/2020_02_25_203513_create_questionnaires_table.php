@@ -14,7 +14,7 @@ class CreateQuestionnairesTable extends Migration
     public function up()
     {
         Schema::create('questionnaires', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id', true);
 
             $table->integer('plane_id')->nullable(); //fk
             $table->integer('criator_id')->nullable(); //fk

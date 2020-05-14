@@ -14,7 +14,7 @@ class CreateExtractionsStatusesTable extends Migration
     public function up()
     {
         Schema::create('extractions_status', function (Blueprint $table) {
-          $table->bigIncrements('id');
+          $table->integer('id', true);
 
           $table->string('name', 15);
           $table->string('decription', 300)->nullable();

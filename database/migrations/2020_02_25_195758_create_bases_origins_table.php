@@ -14,7 +14,7 @@ class CreateBasesOriginsTable extends Migration
     public function up()
     {
         Schema::create('bases_origins', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id', true);
 
             $table->string('name', 25);
             $table->string('decription', 300)->nullable();

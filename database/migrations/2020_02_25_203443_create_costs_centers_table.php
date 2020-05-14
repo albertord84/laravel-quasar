@@ -14,7 +14,7 @@ class CreateCostsCentersTable extends Migration
     public function up()
     {
         Schema::create('costs_centers', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id', true);
 
             $table->integer('company_id')->nullable(false); //fk
             $table->integer('admin_id')->nullable(false);  //fk
