@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CostsCentersTableSeeder::class);
         $this->call(BasesTableSeeder::class);
 
-
         $this->call(UsersTableSeeder::class);
         $this->call(UsersBasesTableSeeder::class);
 
