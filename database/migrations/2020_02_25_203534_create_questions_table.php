@@ -16,9 +16,9 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('questionnaire_id')->nullable(false); //fk
-            $table->integer('type_id')->nullable(false)->default(1); //fk
-            $table->integer('response_type_id')->nullable(false); //fk
+            $table->integer('questionnaire_id')->nullable()->index('fk_questions_questionnaires');
+            $table->integer('type_id')->nullable()->index('fk_questions_questions_types');
+            $table->integer('response_type_id')->nullable()->index('fk_questions_responses_types');
 
             $table->string('question',1000)->nullable(false);
             $table->string('json_data',5000)->nullable();

@@ -16,9 +16,9 @@ class CreateQuestionnairesTable extends Migration
         Schema::create('questionnaires', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('plane_id')->nullable(); //fk
-            $table->integer('criator_id')->nullable(); //fk
-            $table->integer('updater_id')->nullable(); //fk
+            $table->integer('plane_id')->nullable()->index('fk_questionnaires_planes');
+            $table->integer('criator_id')->nullable()->index('fk_questionnaires_users_criator');
+            $table->integer('updater_id')->nullable()->index('fk_questionnaires_users_updater');
 
             $table->string('name',200)->nullable();
             $table->string('description',300)->nullable();

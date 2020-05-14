@@ -16,8 +16,8 @@ class CreateExtractionsTable extends Migration
         Schema::create('extractions', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('status_id')->nullable(false); //fk
-            $table->integer('user_id')->nullable(false); //fk
+            $table->integer('status_id')->nullable()->index('fk_extractions_extractions_status');
+            $table->integer('user_id')->nullable()->index('fk_extractions_users');
 
             $table->float('requested_value', 6, 2)->nullable(false);
             $table->float('payed_value', 6, 2)->nullable();

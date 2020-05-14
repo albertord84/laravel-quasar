@@ -16,8 +16,8 @@ class CreateUsersBasesTable extends Migration
         Schema::create('users_bases', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('base_id')->nullable(); //fk
-            $table->integer('user_id')->nullable(); //fk
+            $table->integer('base_id')->nullable()->index('fk_users_bases_bases');
+            $table->integer('user_id')->nullable()->index('fk_users_bases_users');
 
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();

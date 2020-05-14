@@ -16,9 +16,9 @@ class CreateBasesTable extends Migration
         Schema::create('bases', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('origin_id')->nullable(false)->default(1); //fk
-            $table->integer('company_id')->nullable(false); //fk
-            $table->integer('criator_id')->nullable(false); //fk
+            $table->integer('origin_id')->nullable()->index('fk_bases_bases_origins')->default(1); //fk
+            $table->integer('company_id')->nullable()->index('fk_bases_companies');
+            $table->integer('criator_id')->nullable()->index('fk_bases_users');
 
             $table->string('name',100)->nullable(false);
             $table->string('decription',300)->nullable();

@@ -16,8 +16,8 @@ class CreateCostsCentersTable extends Migration
         Schema::create('costs_centers', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('company_id')->nullable(false); //fk
-            $table->integer('admin_id')->nullable(false);  //fk
+            $table->integer('company_id')->nullable()->index('fk_costs_centers_companies');
+            $table->integer('admin_id')->nullable()->index('fk_costs_centers_users');
 
             $table->string('name', 100)->nullable(false);
 

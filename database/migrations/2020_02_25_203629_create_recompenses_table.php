@@ -16,9 +16,9 @@ class CreateRecompensesTable extends Migration
         Schema::create('recompenses', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('user_id')->nullable(false); //fk
-            $table->integer('questionnaire_id')->nullable(false); //fk
-            $table->integer('campaign_id')->nullable(false); //fk
+            $table->integer('user_id')->nullable()->index('fk_recompenses_users');
+            $table->integer('questionnaire_id')->nullable()->index('fk_recompenses_questionnaires');
+            $table->integer('campaign_id')->nullable()->index('fk_recompenses_campaigns');
             $table->float('value', 6, 2)->nullable(false);
 
             $table->timestamp('deleted_at')->nullable();

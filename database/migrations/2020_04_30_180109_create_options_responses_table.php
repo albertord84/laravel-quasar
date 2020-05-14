@@ -16,7 +16,7 @@ class CreateOptionsResponsesTable extends Migration
         Schema::create('options_responses', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('question_id')->nullable(false); //fk
+            $table->integer('question_id')->nullable()->index('fk_options_responses_questions');
 
             $table->string('response',1000)->nullable(false);
             $table->integer('truth')->nullable(false)->default(0);

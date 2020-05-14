@@ -16,10 +16,11 @@ class CreateResponsesTable extends Migration
         Schema::create('responses', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('user_id')->nullable(false); //fk
-            $table->integer('question_id')->nullable(false); //fk
-            $table->integer('campaign_id')->nullable(false); //fk
-            $table->integer('response_option_id')->default(0);
+            $table->integer('user_id')->nullable()->index('fk_responses_users');
+            $table->integer('question_id')->nullable()->index('fk_responses_questions');
+            $table->integer('campaign_id')->nullable()->index('fk_responses_campaigns');
+            $table->integer('response_option_id')->nullable()->index('fk_responses_options_responses')->default(0);
+
             $table->string('discursive_text', 4000)->nullable();
 
             $table->timestamp('deleted_at')->nullable();

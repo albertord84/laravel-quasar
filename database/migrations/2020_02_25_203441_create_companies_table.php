@@ -16,8 +16,8 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('responsible_id')->nullable();// fk  ->index('fk_users_company');
-            $table->integer('address_id')->nullable();// fk  ->index('fk_users_company');
+            $table->integer('responsible_id')->nullable()->index('fk_companies_users_responsible');
+            $table->integer('address_id')->nullable()->index('fk_companies_address');
 
             $table->string('social_reason', 300)->nullable(false);
             $table->string('fantasy_name', 100)->nullable(false);

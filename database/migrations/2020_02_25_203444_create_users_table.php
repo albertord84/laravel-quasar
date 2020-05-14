@@ -16,11 +16,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('company_id')->nullable(false)->default(0); //->index('fk_users_company');
-            $table->integer('cost_center_id')->nullable(false)->default(0); //->index('fk_users_company');
-            $table->integer('address_id')->nullable(false)->default(0); //->index('fk_users_company');
-            $table->integer('role_id')->nullable(false)->default(3); //->index('fk_users_company');
-            $table->integer('status_id')->nullable(false)->default(1); //->index('fk_users_company');
+            $table->integer('company_id')->nullable()->index('fk_users_companies');
+            $table->integer('cost_center_id')->nullable()->index('fk_users_costs_centers');
+            $table->integer('address_id')->nullable()->index('fk_users_address');
+            $table->integer('role_id')->nullable()->index('fk_users_users_roles');
+            $table->integer('status_id')->nullable()->index('fk_users_users_status');
 
             $table->string('username', 150)->unique();
             $table->string('email', 150)->unique();

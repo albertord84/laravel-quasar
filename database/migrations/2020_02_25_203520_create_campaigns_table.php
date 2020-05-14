@@ -16,11 +16,11 @@ class CreateCampaignsTable extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->integer('id', true);
 
-            $table->integer('status_id')->nullable(false); //fk
-            $table->integer('criator_id')->nullable(false); //fk
-            $table->integer('updater_id')->nullable(); //fk
-            $table->integer('questionary_id')->nullable(false); //fk
-            $table->integer('base_id')->nullable(); //fk
+            $table->integer('status_id')->nullable()->index('fk_campaigns_campaigns_status');
+            $table->integer('criator_id')->nullable()->index('fk_campaigns_users_criator');
+            $table->integer('updater_id')->nullable()->index('fk_campaigns_users_updater');
+            $table->integer('questionary_id')->nullable()->index('fk_campaigns_questionnaires');
+            $table->integer('base_id')->nullable()->index('fk_campaigns_bases');
 
             $table->string('name',200)->nullable(false);
             $table->string('objetive',300)->nullable();
