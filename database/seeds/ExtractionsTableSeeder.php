@@ -15,11 +15,9 @@ class ExtractionsTableSeeder extends Seeder
     {
       $this->command->info('Truncate Extractions Table...');
 
-      // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-      // DB::table('users_managers')->truncate();
-      // DB::table('users_attendants')->truncate();
+      DB::statement('SET FOREIGN_KEY_CHECKS=0;');
       DB::table('extractions')->truncate();
-      // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+      DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
       $this->command->info('Creating Extractions:');
 
