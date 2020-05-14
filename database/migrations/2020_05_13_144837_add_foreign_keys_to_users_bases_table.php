@@ -14,7 +14,14 @@ class AddForeignKeysToUsersBasesTable extends Migration
     public function up()
     {
         Schema::table('users_bases', function (Blueprint $table) {
-            //
+          $table->foreign('base_id', 'fk_users_bases_bases') //users_bases x bases
+                ->references('id')->on('bases')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
+          $table->foreign('user_id', 'fk_users_bases_users') //users_bases x users
+                ->references('id')->on('users')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
         });
     }
 
@@ -26,7 +33,8 @@ class AddForeignKeysToUsersBasesTable extends Migration
     public function down()
     {
         Schema::table('users_bases', function (Blueprint $table) {
-            //
+              $table->dropForeign('fk_users_bases_bases');
+              $table->dropForeign('fk_users_bases_users');
         });
     }
 }

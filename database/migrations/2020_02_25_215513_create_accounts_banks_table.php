@@ -16,7 +16,7 @@ class CreateAccountsBanksTable extends Migration
         Schema::create('accounts_banks', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->integer('user_id')->nullable(false); //fk
+            $table->integer('user_id')->nullable()->index('fk_accounts_banks_users');
 
             $table->string('bank',100)->nullable(false);
             $table->string('agency',30)->nullable(false);

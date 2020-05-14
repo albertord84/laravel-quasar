@@ -14,7 +14,10 @@ class AddForeignKeysToOptionsResponsesTable extends Migration
     public function up()
     {
         Schema::table('options_responses', function (Blueprint $table) {
-            //
+          $table->foreign('question_id', 'fk_options_responses_questions') //options_responses x questions
+                ->references('id')->on('questions')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
         });
     }
 
@@ -26,7 +29,7 @@ class AddForeignKeysToOptionsResponsesTable extends Migration
     public function down()
     {
         Schema::table('options_responses', function (Blueprint $table) {
-            //
+              $table->dropForeign('fk_options_responses_questions');
         });
     }
 }

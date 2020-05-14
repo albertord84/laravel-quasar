@@ -14,8 +14,10 @@ class AddForeignKeysToAccountsBanksTable extends Migration
     public function up()
     {
         Schema::table('accounts_banks', function (Blueprint $table) {
-
-          // user_id
+          $table->foreign('user_id', 'fk_accounts_banks_users')   //accounts_banks x users
+                ->references('id')->on('users')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
         });
     }
 
@@ -27,7 +29,7 @@ class AddForeignKeysToAccountsBanksTable extends Migration
     public function down()
     {
         Schema::table('accounts_banks', function (Blueprint $table) {
-            //
+          $table->dropForeign('fk_accounts_banks_users');
         });
     }
 }
