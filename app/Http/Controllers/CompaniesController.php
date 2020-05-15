@@ -33,15 +33,13 @@ class CompaniesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        // $companies = $this->companiesRepository->all();
+      $input = $request->all();
+      $respCompanies = $this->companiesRepository->filterCompanies($input);
+      return $respCompanies->toJson();
 
-        $strFilter = $request['filter'] ?? '';
-        $page = $request['page'] ?? 0;
-        $respCompanies = $this->companiesRepository->getCompanies($strFilter, $page);
-        return $respCompanies->toJson();
-
-        // return view('companies.index')
-        //     ->with('companies', $companies);
+      // $companies = $this->companiesRepository->all();
+      // return view('companies.index')
+      //     ->with('companies', $companies);
     }
 
     /**

@@ -29,8 +29,9 @@ class CampaignsController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $campaigns = $this->campaignsRepository->all();
-        return $campaigns->toJson();
+        $input = $request->all();
+        $users = $this->campaignsRepository->filterCampaigns($input);
+        return $users->toJson();
 
         // return view('campaigns.index')
         //     ->with('campaigns', $campaigns);

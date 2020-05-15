@@ -283,6 +283,7 @@ export default {
         return
       }
       this.isCreatingAdmin = true
+      this.userModel.password = 'tmp'
       WebService.post('web/signInUser', this.userModel)
         .then(response => {
           this.isCreatingCompany = false

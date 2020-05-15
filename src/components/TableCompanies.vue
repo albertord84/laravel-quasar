@@ -217,7 +217,6 @@ export default {
   methods: {
     getCompanies (page) {
       this.isLoading = true
-      // axios.get('web/' + 'companies', {
       WebService.get('web/' + 'companies', {
         'filter': this.filter,
         'page': page
