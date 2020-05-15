@@ -29,7 +29,8 @@ class CostsCentersController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $costsCenters = $this->costsCentersRepository->all();
+        $input = $request->all();
+        $costsCenters = $this->costsCentersRepository->filterCostsCenters($input);
         return $costsCenters->toJson();
 
         // return view('costs_centers.index')

@@ -29,7 +29,8 @@ class QuestionsController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $questions = $this->questionsRepository->all();
+        $input = $request->all();
+        $questions = $this->questionsRepository->filterQuestions($input);
         return $questions->toJson();
 
         // return view('questions.index')

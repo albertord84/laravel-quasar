@@ -29,9 +29,11 @@ class AccountsBanksController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $accountsBanks = $this->accountsBanksRepository->all();
+        $input = $request->all();
+        $accountsBanks = $this->accountsBanksRepository->filterAccountsBanks($input);
         return $accountsBanks->toJson();
 
+        // $accountsBanks = $this->accountsBanksRepository->all();
         // return view('accounts_banks.index')
         //     ->with('accountsBanks', $accountsBanks);
     }

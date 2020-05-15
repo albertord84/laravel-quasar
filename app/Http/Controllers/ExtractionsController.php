@@ -29,8 +29,10 @@ class ExtractionsController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $extractions = $this->extractionsRepository->all();
+        $input = $request->all();
+        $extractions = $this->extractionsRepository->filterExtractions($input);
         return $extractions->toJson();
+
 
         // return view('extractions.index')
         //     ->with('extractions', $extractions);

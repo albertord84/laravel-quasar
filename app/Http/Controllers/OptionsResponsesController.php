@@ -29,8 +29,10 @@ class OptionsResponsesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $optionsResponses = $this->optionsResponsesRepository->all();
+        $input = $request->all();
+        $optionsResponses = $this->optionsResponsesRepository->filterOptionsResponses($input);
         return $optionsResponses->toJson();
+
 
         // return view('options_responses.index')
         //     ->with('optionsResponses', $optionsResponses);

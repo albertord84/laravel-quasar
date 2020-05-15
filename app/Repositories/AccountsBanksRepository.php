@@ -37,7 +37,7 @@ class AccountsBanksRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
-    public function filterUsersBases($input) {
+    public function filterAccountsBanks($input) {
       $filter = $input['filter'] ?? '';
       $page = $input['page'] ??  0;
       $id = $input['id'] ?? 0;

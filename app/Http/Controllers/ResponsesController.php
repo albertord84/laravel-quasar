@@ -29,7 +29,8 @@ class ResponsesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $responses = $this->responsesRepository->all();
+        $input = $request->all();
+        $responses = $this->responsesRepository->filterResponses($input);
         return $responses->toJson();
 
         // return view('responses.index')

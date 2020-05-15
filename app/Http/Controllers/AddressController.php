@@ -29,8 +29,12 @@ class AddressController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $addresses = $this->addressRepository->all();
+        $input = $request->all();
+        $addresses = $this->addressRepository->filterAddress($input);
         return $addresses->toJson();
+
+        // $addresses = $this->addressRepository->all();
+        // return $addresses->toJson();
 
         // return view('addresses.index')
         //     ->with('addresses', $addresses);

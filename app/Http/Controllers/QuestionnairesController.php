@@ -29,8 +29,8 @@ class QuestionnairesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $questionnaires = $this->questionnairesRepository->all();
-
+        $input = $request->all();
+        $questionnaires = $this->questionnairesRepository->filterQuestionnaires($input);
         return $questionnaires->toJson();
 
         // return view('questionnaires.index')

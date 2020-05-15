@@ -29,7 +29,8 @@ class RecompensesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $recompenses = $this->recompensesRepository->all();
+        $input = $request->all();
+        $recompenses = $this->recompensesRepository->filterRecompenses($input);
         return $recompenses->toJson();
 
         // return view('recompenses.index')
