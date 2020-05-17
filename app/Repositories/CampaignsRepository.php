@@ -66,7 +66,7 @@ class CampaignsRepository extends BaseRepository
       $created_at = $input['created_at'] ?? 0;
       $updated_at = $input['updated_at'] ?? 0;
 
-      $page_length = env('APP_PAGE_LENGTH', 100);
+      $page_length = env('APP_PAGE_LENGTH', 20);
       $start = $page_length * $page;
 
       return $this->model()

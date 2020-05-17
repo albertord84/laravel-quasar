@@ -65,6 +65,7 @@ module.exports = function (ctx) {
         'QVideo',
         'QField',
         'QBtnGroup',
+        'QDatetime',
         'QCheckbox'
       ],
 

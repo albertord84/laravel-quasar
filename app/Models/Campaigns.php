@@ -35,7 +35,7 @@ class Campaigns extends Model
     use SoftDeletes;
 
     public $table = 'campaigns';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -55,16 +55,17 @@ class Campaigns extends Model
         'description',
         'observation',
         'response_limit',
-        'response_amount',
-        'invitations_sent',
-        'invitations_accepted',
-        'invitations_declined',
+        // 'response_amount',
+        // 'invitations_sent',
+        // 'invitations_accepted',
+        // 'invitations_declined',
         'invitations_send_date',
-        'requested_date',
-        'analyzed_date',
+        // 'requested_date',
+        // 'analyzed_date',
         'start_date',
         'end_date'
     ];
+
 
     /**
      * The attributes that should be casted to native types.
@@ -107,5 +108,5 @@ class Campaigns extends Model
         'response_limit' => 'required'
     ];
 
-    
+
 }

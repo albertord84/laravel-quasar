@@ -51,7 +51,7 @@ class CompaniesRepository extends BaseRepository
         $created_at = $input['created'] ?? 0;
         $updated_at = $input['updated'] ?? 0;
 
-        $page_length = env('APP_PAGE_LENGTH', 100);
+        $page_length = env('APP_PAGE_LENGTH', 20);
         $start = $page_length * $page;
 
         $Companies = $this->model()

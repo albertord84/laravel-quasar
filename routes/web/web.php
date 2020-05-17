@@ -44,7 +44,7 @@ Route::resource('usersRoles', 'UsersRolesController');
 Route::resource('usersStatuses', 'UsersStatusController');
 
 Route::resource('users', 'UsersController');
-Route::post('signInUser', 'UsersController@signInUser');
+Route::put('signInUser', 'UsersController@signInUser');
 
 Route::resource('bases', 'BasesController');
 Route::resource('basesOrigins', 'BasesOriginsController');
@@ -52,6 +52,8 @@ Route::resource('usersBases', 'UsersBasesController');
 
 
 Route::resource('campaigns', 'CampaignsController');
+Route::put('criateFullCampaign', 'CampaignsController@criateFullCampaign');
+
 Route::resource('campaignsStatuses', 'CampaignsStatusController');
 
 Route::resource('planes', 'PlanesController');

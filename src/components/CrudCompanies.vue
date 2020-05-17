@@ -284,7 +284,7 @@ export default {
       }
       this.isCreatingAdmin = true
       this.userModel.password = 'tmp'
-      WebService.post('web/signInUser', this.userModel)
+      WebService.put('web/signInUser', this.userModel)
         .then(response => {
           this.isCreatingCompany = false
           this.userModel = response.data
@@ -330,7 +330,7 @@ export default {
 
     selectUserByEmail (email) {
       if (email.trim() === '') {
-        return
+        return null
       }
       var resp = null
       this.listAdmins.some((item, i) => {
