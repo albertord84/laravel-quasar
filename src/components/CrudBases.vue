@@ -86,7 +86,7 @@
           </q-card-section>
 
           <q-card-actions align="right">
-            <a href="quasar/external_files/planilha_base_usuarios.csv" ref="lnkDownloadTemplate" download style="disssplay:none"></a>
+            <a :href="'http://' + app_host + '/external_files/planilha_base_usuarios.csv'" ref="lnkDownloadTemplate" download></a>
             <q-btn flat label="Descarregar planilha" color="orange-8" @click="downloadTemplate">
             </q-btn>
             <q-btn flat label="Cancelar" color="gray" v-close-popup />
@@ -142,7 +142,8 @@ export default {
         role_id: 1
       },
 
-      isCreatingBase: false
+      isCreatingBase: false,
+      app_host: ''
     }
   },
 
@@ -338,8 +339,7 @@ export default {
     },
 
     downloadTemplate () {
-      // this.modalHelpCSVFile = false
-      console.log(1)
+      this.modalHelpCSVFile = false
       this.$refs.lnkDownloadTemplate.click()
     }
   },
@@ -350,6 +350,8 @@ export default {
   beforeMount () {
     this.getBasesOrigins()
     this.getCompanies()
+    this.app_host = process.env.HOST
+    // this.app_host = process.env.MIX_APP_URL  // TODO: Jose R
 
     this.userLoggued.role_id = 1 // TODO-JR: obter o usuário logado
   },

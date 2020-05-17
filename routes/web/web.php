@@ -47,7 +47,7 @@ Route::resource('users', 'UsersController');
 Route::put('signInUser', 'UsersController@signInUser');
 
 Route::resource('bases', 'BasesController');
-Route::resource('criateFullBase', 'BasesController@criateFullBase');
+Route::put('criateFullBase', 'BasesController@criateFullBase');
 
 Route::resource('basesOrigins', 'BasesOriginsController');
 Route::resource('usersBases', 'UsersBasesController');
