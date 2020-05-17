@@ -52,10 +52,10 @@
 
       <div class="col-1">
         <div class="q-mt-xl">
-        <q-btn text-color="white" class="q-pa-sm q-mt-sm q-mb-sm bg-orange-8"
-            label="" title="Criar administrador" icon="person_add" @click.prevent="isCreatingAdmin = false, modalCriateAdmin = true">
-        </q-btn>
-      </div>
+          <q-btn text-color="white" class="q-pa-sm q-mt-sm q-mb-sm bg-orange-8"
+              label="" title="Criar administrador" icon="person_add" @click.prevent="isCreatingAdmin = false, modalCriateAdmin = true">
+          </q-btn>
+        </div>
       </div>
 
       <!-- Telefone 1 -->
@@ -168,12 +168,12 @@
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="Criar" :loading="isCreatingAdmin" color="orange-9" style="width:120px" @click.prevent="createAdmin">
+            <q-btn flat label="Criar" :loading="isCreatingAdmin" color="orange-8" style="width:120px" @click.prevent="createAdmin">
               <template v-slot:loading>
                 <q-spinner></q-spinner>
               </template>
             </q-btn>
-            <q-btn flat label="Cancelar" color="grey-9" style="width:120px" v-close-popup />
+            <q-btn flat label="Cancelar" color="gray" style="width:120px" v-close-popup />
           </q-card-actions>
 
         </q-card>

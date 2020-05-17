@@ -15,11 +15,7 @@
 
         <template v-slot:top>
           <div class="col-4">
-            <q-input  v-model="filter" label-color="orange-8" color="orange-8" placeholder="Buscar ...">
-              <!-- <template v-slot:append >
-                <q-icon name="search" class="pointer-hover" @click.prevent="filterCampaigns"/>
-              </template> -->
-            </q-input>
+            <q-input  v-model="filter" label-color="orange-8" color="orange-8" placeholder="Buscar ..."></q-input>
           </div>
 
           <div class="col-4 text-center">
@@ -118,9 +114,9 @@
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="Eliminar" color="primary" @click.prevent="deleteCampaign">
+            <q-btn flat label="Eliminar" color="orange-8" @click.prevent="deleteCampaign">
             </q-btn>
-            <q-btn flat label="Cancelar" color="primary" v-close-popup />
+            <q-btn flat label="Cancelar" color="gray" v-close-popup />
           </q-card-actions>
 
         </q-card>

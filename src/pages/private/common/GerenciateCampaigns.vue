@@ -38,7 +38,7 @@ export default {
   data () {
     return {
       tab: '',
-      campaigns: [],
+      campaign: [],
       crudTabTitle: '',
       action: '',
       iconActionCCampaigns: ''

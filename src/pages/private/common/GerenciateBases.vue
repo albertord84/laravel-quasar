@@ -7,19 +7,19 @@
 
       <q-card no-bordered flat>
         <q-tabs v-model="tab" dense class="text-grey" active-color="orange-10" indicator-color="orange-10" align="left" caps inline-label>
-            <q-tab name="bases" class="text-dark" icon="horizontal_split"  label="Bases" />
-            <q-tab name="crudBases" class="text-dark" icon="add" label="Nova base" />
+            <q-tab name="showBases" class="text-dark" icon="horizontal_split"  label="Bases" @click="showTabBases"/>
+            <q-tab name="crudBases" class="text-dark" :icon="iconActionBases" :label="crudTabTitle" />
         </q-tabs>
 
         <q-separator/>
 
         <q-tab-panels v-model="tab" animated>
-            <q-tab-panel name="bases" class="q-pa-none">
-              <TableBases :bases="allBases" @edit="editBase" @delete="deleteBase" @reload="reloadBases" ></TableBases>
+            <q-tab-panel name="showBases" class="q-pa-none">
+              <TableBases  @editBase="editBase" ></TableBases>
             </q-tab-panel>
 
             <q-tab-panel name="crudBases">
-              <CrudBases :action="'insert'" :baseItem="{}"></CrudBases>
+              <CrudBases :action="action" :base="base" @reloadBases="reloadBases"></CrudBases>
             </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   name: 'Bases',
@@ -39,41 +38,33 @@ export default {
 
   data () {
     return {
-      url: 'bases',
       tab: '',
-      showCrudBase: false,
-
-      companyModel: null,
-      allBases: [],
-
-      loader: false
+      base: {},
+      crudTabTitle: '',
+      action: '',
+      iconActionBases: ''
     }
   },
 
   methods: {
-
-    getBases () {
-      this.loader = true
-      axios.get('web/' + this.url)
-        .then(response => {
-          this.allBases = []
-          this.allBases = response.data
-          this.tab = 'bases'
-        })
-        .catch(errors => {
-        })
-        .then(() => {
-          this.loader = false
-        })
+    showTabBases () {
+      this.base = {}
+      this.crudTabTitle = 'Nova base'
+      this.action = 'insert'
+      this.iconActionBases = 'add'
+      this.tab = 'showBases'
     },
 
-    editBase () {
-    },
-
-    deleteBase () {
+    editBase (base) {
+      this.base = Object.assign({}, base)
+      this.crudTabTitle = 'Editar base'
+      this.action = 'edit'
+      this.iconActionCompany = 'edit'
+      this.tab = 'crudBases'
     },
 
     reloadBases () {
+      this.showTabBases()
     }
   },
 
@@ -84,8 +75,7 @@ export default {
   },
 
   beforeMount () {
-    this.showCrudBase = false
-    this.getBases()
+    this.showTabBases()
   },
 
   created () {
