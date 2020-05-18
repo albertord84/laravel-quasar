@@ -18,7 +18,7 @@
           </q-tab-panel>
 
           <q-tab-panel name="crudQuestionary">
-            <CrudQuestionary :action="action" :user="user" @reloadUsers="reloadUsers"></CrudQuestionary>
+            <CrudQuestionary :action="action" :questionary="questionary" @reloadQuestionnaires="reloadQuestionnaires"></CrudQuestionary>
           </q-tab-panel>
 
         </q-tab-panels>
@@ -51,7 +51,7 @@ export default {
       this.questionary = {}
       this.crudTabTitle = 'Novo questionário'
       this.action = 'insert'
-      this.iconActionUsers = 'add'
+      this.iconActionQuestionnaires = 'add'
       this.tab = 'showQuestionaries'
     },
 
@@ -59,11 +59,11 @@ export default {
       this.questionary = Object.assign({}, questionary)
       this.crudTabTitle = 'Editar questionário'
       this.action = 'edit'
-      this.iconActionUsers = 'edit'
+      this.iconActionQuestionnaires = 'edit'
       this.tab = 'crudQuestionary'
     },
 
-    reloadUsers () {
+    reloadQuestionnaires () {
       this.showTabQuestionnaires()
     }
   },

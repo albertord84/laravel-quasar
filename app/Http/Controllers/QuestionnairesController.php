@@ -155,4 +155,9 @@ class QuestionnairesController extends AppBaseController
 
         return redirect(route('questionnaires.index'));
     }
+
+    public function fullQuestionary($questionaryId) {
+      $Questionary = $this->questionnairesRepository->fullQuestionary($questionaryId);
+      return ($Questionary)? $Questionary->toJson() : null;
+    }
 }

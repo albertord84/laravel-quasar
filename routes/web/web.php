@@ -60,8 +60,10 @@ Route::resource('campaignsStatuses', 'CampaignsStatusController');
 
 Route::resource('planes', 'PlanesController');
 Route::resource('questionnaires', 'QuestionnairesController');
+Route::get('fullQuestionary/{id}', 'QuestionnairesController@fullQuestionary');
 
 Route::resource('questions', 'QuestionsController');
+
 Route::resource('questionsTypes', 'QuestionsTypesController');
 Route::resource('optionsResponses', 'OptionsResponsesController');
 Route::resource('responses', 'ResponsesController');

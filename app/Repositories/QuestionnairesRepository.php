@@ -2,7 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Models\OptionsResponses;
 use App\Models\Questionnaires;
+use App\Models\Questions;
+use App\Repositories\QuestionsRepository;
 use App\Repositories\BaseRepository;
 
 /**
@@ -100,8 +103,26 @@ class QuestionnairesRepository extends BaseRepository
           ->get()
           ->slice($start, $page_length)
           ->each(function(Questionnaires $Questionnary) {
-            // $Questionnary->Questions = null;
       });
+    }
+
+    public function fullQuestionary($questionaryId) {
+      // 1. buscar o questionário
+      $Questionary = $this->find($questionaryId);
+      if($Questionary){
+        // 2. buscar as questões do questionário
+        $Questionary->pages = Questions
+              ::where('questionnaire_id', $questionaryId)
+              ->get()
+              ->each(function(Questions $Question) {
+                  $Question->responseOptions = OptionsResponses::where('question_id', $Question->id)->get();
+              });
+
+        // 3. buscar as OptionsResponses de cada questão
+        return $Questionary;
+      } else {
+        return null;
+      }
     }
 
     /**

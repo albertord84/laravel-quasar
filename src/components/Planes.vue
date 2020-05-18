@@ -154,7 +154,6 @@ export default {
 
   data () {
     return {
-
     }
   },
 
@@ -162,7 +161,7 @@ export default {
     selectPlane (code, name) {
       this.plane.code = code
       this.plane.name = name
-      this.$emit('onselectedplane', this.plane)
+      this.$emit('selectedPlane', this.plane)
     }
   }
 }
