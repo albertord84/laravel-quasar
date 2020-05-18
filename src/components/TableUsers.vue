@@ -143,7 +143,6 @@ export default {
   name: 'TableUsers',
 
   props: {
-    user: null
   },
 
   components: {
@@ -151,6 +150,7 @@ export default {
 
   data () {
     return {
+      user: null,
       action: '',
       data: [],
       columns: [

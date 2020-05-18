@@ -57,8 +57,8 @@ class QuestionnairesRepository extends BaseRepository
           ::where(function($query) use ($filter){
             if ($filter != '') {
               $query->where('name', 'LIKE', '%'. $filter.'%')
-                    ->where('description', 'LIKE', '%'. $filter.'%')
-                    ->where('observation', 'LIKE', '%'. $filter.'%');
+                    ->orWhere('description', 'LIKE', '%'. $filter.'%')
+                    ->orWhere('observation', 'LIKE', '%'. $filter.'%');
             }})
           ->where(function($query) use ($id){
             if ($id) {

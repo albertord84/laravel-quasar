@@ -141,7 +141,6 @@ export default {
   name: 'TableBases',
 
   props: {
-    base: null
   },
 
   components: {
@@ -149,6 +148,7 @@ export default {
 
   data () {
     return {
+      base: null,
       action: '',
       data: [],
       columns: [

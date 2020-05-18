@@ -141,7 +141,6 @@ export default {
   name: 'TableCompanies',
 
   props: {
-    company: null
   },
 
   components: {
@@ -149,6 +148,7 @@ export default {
 
   data () {
     return {
+      company: null,
       action: '',
       data: [],
       columns: [
