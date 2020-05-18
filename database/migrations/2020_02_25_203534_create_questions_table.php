@@ -17,7 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('id', true);
 
             $table->integer('questionnaire_id')->nullable()->index('fk_questions_questionnaires');
-            $table->integer('type_id')->nullable()->index('fk_questions_questions_types');
+            $table->integer('content_type_id')->nullable()->index('fk_questions_questions_types');
             $table->integer('response_type_id')->nullable()->index('fk_questions_responses_types');
 
             $table->string('question',1000)->nullable(false);

@@ -30,7 +30,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '1',
           'questionnaire_id' => '1',
-          'type_id' => '1', //SINGLE
+          'content_type_id' => '1', //SINGLE
           'response_type_id' => '1', //BOOLEAN
           'question' => 'A cloroquina cura o coronavírus?',
           'json_data' => '',
@@ -40,7 +40,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '2',
           'questionnaire_id' => '1',
-          'type_id' => '1', //SINGLE
+          'content_type_id' => '1', //SINGLE
           'response_type_id' => '1', //BOOLEAN
           'question' => 'A cloroquina surte efeito contra o coronavírus?',
           'json_data' => '',
@@ -50,7 +50,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '3',
           'questionnaire_id' => '1',
-          'type_id' => '1', //SINGLE
+          'content_type_id' => '1', //SINGLE
           'response_type_id' => '2', //UNIQUE_SELECTION
           'question' => 'Se tem efeito em laboratório, por que poderia não funcionar quando administrado em pessoas?',
           'json_data' => '',
@@ -61,7 +61,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '4',
           'questionnaire_id' => '1',
-          'type_id' => '1', //SINGLE
+          'content_type_id' => '1', //SINGLE
           'response_type_id' => '2', //UNIQUE_SELECTION
           'question' => 'A Covid-19 não tem cura e causa a morte de milhares de pessoas. Neste caso, um medicamento que mostra algum efeito não é melhor que nenhum?',
           'json_data' => '',
@@ -73,7 +73,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '5',
           'questionnaire_id' => '2',
-          'type_id' => '1', //SINGLE
+          'content_type_id' => '1', //SINGLE
           'response_type_id' => '1', //BOOLEAN
           'question' => 'Os chamados tratamentos alternativos e/ou complementares para a ELA incluem o uso de Cannabis?',
           'json_data' => '',
@@ -83,7 +83,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '6',
           'questionnaire_id' => '2',
-          'type_id' => '1', //SINGLE
+          'content_type_id' => '1', //SINGLE
           'response_type_id' => '2', //UNIQUE_SELECTION
           'question' => 'A Cannabis é um antistamínico, estupefaciente, antibiótico, anticolinérgico? Selecione a resposta correta.',
           'json_data' => '',
@@ -93,7 +93,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '7',
           'questionnaire_id' => '2',
-          'type_id' => '1', //SINGLE
+          'content_type_id' => '1', //SINGLE
           'response_type_id' => '3', //MULTIPLE_SELECTION
           'question' => 'Selecione quais características identificam a ELA ',
           'json_data' => '',
@@ -104,7 +104,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '8',
           'questionnaire_id' => '2',
-          'type_id' => '1', //SINGLE
+          'content_type_id' => '1', //SINGLE
           'response_type_id' => '4', //SCALE_SELECTION
           'question' => 'Na escala de 1 até 10, como você avalia os efeitos do Cannabis na restauração neurológica dos paciente, onde 1 é Péssimo e 10 é Ótimo',
           'json_data' => '',
@@ -116,7 +116,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '9',
           'questionnaire_id' => '3',
-          'type_id' => '1', //SINGLE
+          'content_type_id' => '1', //SINGLE
           'response_type_id' => '1', //BOOLEAN
           'question' => 'O uso do captopril pode preceder a elevação da pressão arterial?',
           'json_data' => '',
@@ -126,7 +126,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '10',
           'questionnaire_id' => '3',
-          'type_id' => '2', //IMAGE
+          'content_type_id' => '2', //IMAGE
           'response_type_id' => '2', //UNIQUE_SELECTION
           'question' => 'A seguinte imagem mostra um ECG que mostra uma arritmia cardiaca. Qual arritmia é? ',
           'json_data' => json_encode([
@@ -140,7 +140,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '11',
           'questionnaire_id' => '3',
-          'type_id' => '3', //VIDEO
+          'content_type_id' => '3', //VIDEO
           'response_type_id' => '3', //MULTIPLE_SELECTION
           'question' => 'Assista o video e selecione quais das seguintes possibilidades são as corretas.',
           'json_data' => json_encode([
@@ -155,7 +155,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '12',
           'questionnaire_id' => '3',
-          'type_id' => '4', //URL
+          'content_type_id' => '4', //URL
           'response_type_id' => '4', //SCALE_SELECTION
           'question' => 'Analise o artigo científico acessivel desde a URL anterior. Depois avalie a improtância do artigo na escala de 0 até 10, onde 0 é Ruim e 10 é Excelente.',
           'json_data' => json_encode([
@@ -169,7 +169,7 @@ class QuestionsTableSeeder extends Seeder
       Questions::create([
           'id' => '13',
           'questionnaire_id' => '3',
-          'type_id' => '1', //SINGLE
+          'content_type_id' => '1', //SINGLE
           'response_type_id' => '5', //DISCURSIVE
           'question' => 'Quais são as suas experiências na indicação do Captopril para o tratmento da hiper-tensão arterial?',
           'json_data' => '',

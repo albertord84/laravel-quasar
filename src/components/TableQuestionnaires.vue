@@ -57,7 +57,7 @@
               </q-td>
 
               <q-td key="actions" :props="props" class="q-pa-none q-ma-none">
-                <div style="margin-left:-3px">
+                <div style="margin-left:-3px; text-align: right">
                   <q-icon color="green-9" size="sm" v-show="props.row.released" class="pointer-hover q-mr-sm" title="Criar uma copia" name="dynamic_feed" @click="duplicateQuestionary(props.row)" />
                   <q-icon color="primary" size="sm" class="pointer-hover q-mr-sm" title="Ver/Editar" name="account_balance_wallet" @click="editQuestionary(props.row)" />
                   <q-icon color="red" size="sm" class="pointer-hover" name="delete" title="Eliminar" @click="confirmDeleteQuestionary(props.row)"/>

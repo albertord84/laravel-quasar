@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @version May 5, 2020, 5:27 pm CDT
  *
  * @property integer questionnaire_id
- * @property integer type_id
+ * @property integer content_type_id
  * @property integer response_type_id
  * @property string question
  * @property string json_data
@@ -21,7 +21,7 @@ class Questions extends Model
     use SoftDeletes;
 
     public $table = 'questions';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -32,7 +32,7 @@ class Questions extends Model
 
     public $fillable = [
         'questionnaire_id',
-        'type_id',
+        'content_type_id',
         'response_type_id',
         'question',
         'json_data'
@@ -46,7 +46,7 @@ class Questions extends Model
     protected $casts = [
         'id' => 'integer',
         'questionnaire_id' => 'integer',
-        'type_id' => 'integer',
+        'content_type_id' => 'integer',
         'response_type_id' => 'integer',
         'question' => 'string',
         'json_data' => 'string'
@@ -59,10 +59,10 @@ class Questions extends Model
      */
     public static $rules = [
         'questionnaire_id' => 'required',
-        'type_id' => 'required',
+        'content_type_id' => 'required',
         'response_type_id' => 'required',
         'question' => 'required'
     ];
 
-    
+
 }

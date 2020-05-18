@@ -11,18 +11,18 @@
             <q-btn flat color="primary" label="Trocar plano" @click.prevent="emitQuestionaryChangePlane"/>
           </q-banner>
           <div class="col-12 flex q-my-md justify-between">
-            <span class="q-mt-sm" style="font-size:1.2rem">Questionário</span>
+            <span class="q-mt-sm" style="font-size:1.2rem">Questionário <q-icon v-if="questionaryModel.released" color="red" title="Questionário já liberado" size="1.2rem" name="info" class="q-mb-sm q-ml-xs pointer-hover" @click="releasedQuestionaryExplanation"/></span>
           </div>
           <!-- Título do questionário -->
           <q-separator  class="col-12 q-pa-none q-ma-none"></q-separator>
           <div class="col-12 q-mt-lg">
             <b>Título do questionário</b>
-            <q-input filled square v-model="questionaryModel.name" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm"/>
+            <q-input filled square v-model="questionaryModel.name" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm" :disable="questionaryModel.released === 1"/>
           </div>
           <!-- Introdução/Descrição -->
           <div class="col-12 q-mt-lg">
             <b>Introdução/Descrição</b>
-            <q-input filled square autogrow v-model="questionaryModel.description" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm"/>
+            <q-input filled square autogrow v-model="questionaryModel.description" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm" :disable="questionaryModel.released === 1"/>
           </div>
 
           <!-- ------------------------------------------------------------------------------------------- -->
@@ -71,10 +71,11 @@
 
                             <q-tab-panel name="contentTab" class="q-pa-none">
                               <div v-if="(selectedPageIndex>-1 || isCreatingNewPage)">
-                                  <!-- <h1>GGGGGGGGGGG</h1> -->
+
                                   <span v-if="isCreatingNewPage" style="font-size:1.3rem" class="q-py-md">Página nova</span>
                                   <span v-if="!isCreatingNewPage && selectedPageIndex > -1" style="font-size:1.3rem" class="q-py-md">Página {{selectedPageIndex+1}}</span>
 
+                                  <!-- Container para gerenciamento das mídias para o Plano 3 -->
                                   <div v-if="plane.code === 3">
                                     <div v-if="questionaryModel.pages[selectedPageIndex].json_data === null || questionaryModel.pages[selectedPageIndex].json_data === ''" class="flex justify-between q-pt-md">
                                       <b class="q-pt-md">Nenhuma mídia adicionada</b>
@@ -93,7 +94,7 @@
                                     <div v-if="isEditingMidia || isAddingMidia">
                                         <span class="q-pt-md">Insira a URL da mídia ou Suba um arquivo</span>
                                         <div class="flex justify-between q-col-8 q-pt-xs">
-                                            <q-input filled square v-model="questionaryModel.json_data" label="URL da mídia online"  label-color="orange-8" class="q-col-8" style="width:100%" color="orange-8">
+                                            <q-input filled square v-model="questionaryModel.json_data" label="URL da mídia online"  label-color="orange-8" class="q-col-8" style="width:100%" color="orange-8" :disable="questionaryModel.released === 1">
                                                 <template v-slot:after>
                                                     <q-btn color="orange-8" @click="triggerUploadMidia" class="q-py-sm"><i class="fas fa-upload" title="Selecionar arquivo a subir" style="font-size:1.3rem; padding:0.1rem"></i></q-btn>
                                                 </template>
@@ -112,25 +113,27 @@
                                         </div>
                                     </div>
                                   </div>
-
                                   <q-separator color="orange-8" style="padding-top:2px" class="q-mt-lg"/>
 
+                                  <!-- Container para o mostrar e editar cada pergunta -->
+                                  <!-- Pergunta -->
                                   <div class="q-pt-md">
-                                    <b>Pergunta</b>
-                                    <q-input filled square autogrow v-model="questionaryModel.pages[selectedPageIndex].question" label-color="orange-8"
-                                              color="orange-8" class="col-12 q-mt-sm"/>
+                                      <b>Pergunta</b>
+                                      <q-input filled square autogrow v-model="questionaryModel.pages[selectedPageIndex].question" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm" :disable="questionaryModel.released === 1"/>
                                   </div>
 
+                                  <!-- Tipo de resposta -->
                                   <div class="q-pt-md">
-                                    <b>Tipo de resposta</b>
-                                    <q-select filled square v-model="questionaryModel.pages[selectedPageIndex].type_id" :options="pageOptions"
-                                              @input="configureResponseOptions" option-value="id" label-color="orange-8" option-label="desc"
-                                              option-disable="inactive" emit-value map-options class="q-mt-sm" color="orange-8"></q-select>
+                                      <b>Tipo de resposta</b>
+                                      <q-select filled square v-model="questionaryModel.pages[selectedPageIndex].response_type_id" :options="pageOptions"
+                                                @input="configureResponseOptions" option-value="id" label-color="orange-8" option-label="desc"
+                                                option-disable="inactive" emit-value map-options class="q-mt-sm" color="orange-8" :disable="questionaryModel.released === 1">
+                                      </q-select>
                                   </div>
 
-                                  <div v-if="[2, 3].includes(questionaryModel.pages[selectedPageIndex].type_id)" >
+                                  <div v-if="[2, 3].includes(questionaryModel.pages[selectedPageIndex].response_type_id)" >
                                     <div class="flex justify-between q-pt-sm">
-                                      <b class="q-pt-md">Opções de resposta</b>
+                                      <span class="q-pt-md"><b>Opções de resposta</b> <q-icon color="primary" size="1.2rem" name="help" class="q-mb-sm q-ml-xs pointer-hover" @click="responseOptionExplanation"/> </span>
                                       <div>
                                         <q-btn text-color="orange-8" class="q-pa-sm" flat dense title="Criar opção de resposta" label="Adicionar resposta" icon="add_circle" @click.prevent="isAddingResponseOption=!isAddingResponseOption"/>
                                       </div>
@@ -138,11 +141,12 @@
 
                                     <div class="flex justify-between q-col-8 q-pt-xs">
                                       <div v-for="(option, index) in questionaryModel.pages[selectedPageIndex].responseOptions" v-bind:key="index" style="width:100%">
-                                          <q-input filled square autogrow v-model="option.response" label=" " label-color="orange-8" color="orange-8">
+                                          <q-input filled square autogrow v-model="option.response" label=" " label-color="orange-8" color="orange-8" :disable="questionaryModel.released === 1">
                                             <template v-slot:prepend>
                                               <div>
-                                                <span style="font-size:1rem" >{{index + 1}}. </span>
-                                                <q-checkbox  v-model="option.is_truth"  @input="(questionaryModel.pages[selectedPageIndex].type_id === 2 && option.is_truth)? checkOnlyOption(index,1) : null" dense flat :title="option.is_truth ? 'Opção verdadeira': 'Opção falsa'" color="primary"/>
+                                                <span style="font-size:1rem">{{index + 1}}. Tuth -> {{option.truth}} </span>
+                                                <q-checkbox v-model="option.truth" dense flat :title="option.truth ? 'Opção verdadeira': 'Opção falsa'" color="primary"
+                                                            @input="(questionaryModel.pages[selectedPageIndex].response_type_id === 2 && option.truth)? checkOnlyOption(index,1) : null"/>
                                               </div>
                                             </template>
                                             <template v-slot:append>
@@ -158,9 +162,9 @@
 
                                     <div v-if="isAddingResponseOption">
                                         <div class="flex justify-between q-col-8 q-pt-sm">
-                                          <q-input filled square v-model="newResponseOption.response" label=" " @keydown.enter.prevent="addResponseOption" label-color="orange-8" style="width:100%" color="orange-8">
+                                          <q-input filled square v-model="newResponseOption.response" label=" " @keydown.enter.prevent="addResponseOption" label-color="orange-8" style="width:100%" color="orange-8" :disable="questionaryModel.released === 1">
                                             <template v-slot:prepend>
-                                              <q-checkbox v-model="newResponseOption.is_truth" @input="(newResponseOption.is_truth)? checkOnlyOption(0,0) : null" title="Marcar somente se essa opção é verdadeira" dense color="primary" />
+                                              <q-checkbox v-model="newResponseOption.truth" @input="(newResponseOption.truth)? checkOnlyOption(0,0) : null" title="Marcar somente se essa opção é verdadeira" dense color="primary" />
                                             </template>
                                             <template v-slot:after>
                                               <q-btn color="orange-8" @click.prevent="addResponseOption" class="q-py-sm" title="Adicionar opção de resposta">
@@ -172,7 +176,7 @@
                                     </div>
                                   </div>
 
-                                  <div v-if="[4].includes(questionaryModel.pages[selectedPageIndex].type_id)">
+                                  <div v-if="[4].includes(questionaryModel.pages[selectedPageIndex].response_type_id)">
                                     <div class="flex justify-between q-pt-sm">
                                       <b class="q-pt-md">{{(action === 'insert')? 'Estabelecer escala' : 'Escala estabelecida'}}</b>
                                       <div v-if="action === 'insert'">
@@ -183,7 +187,7 @@
                                     <div class="flex justify-between align-bottom align-items-end">
                                         <div class="">
                                           <span style="font-size:0.9rem"> Limite inferior</span>
-                                          <q-input filled square v-model="questionaryModel.pages[selectedPageIndex].responseOptions[0].response" label=" " label-color="orange-8" color="orange-8">
+                                          <q-input filled square v-model="questionaryModel.pages[selectedPageIndex].responseOptions[0].response" label=" " label-color="orange-8" color="orange-8" :disable="questionaryModel.released === 1">
                                               <template v-slot:prepend>
                                                 <q-icon name="vertical_align_bottom" />
                                               </template>
@@ -191,11 +195,11 @@
                                         </div>
                                         <div class="">
                                           <span style="font-size:0.9rem"> Limite superior</span>
-                                          <q-input filled square v-model="questionaryModel.pages[selectedPageIndex].responseOptions[1].response" label=" " label-color="orange-8" color="orange-8">
+                                          <q-input filled square v-model="questionaryModel.pages[selectedPageIndex].responseOptions[1].response" label=" " label-color="orange-8" color="orange-8" :disable="questionaryModel.released === 1">
                                               <template v-slot:prepend>
                                                 <q-icon name="vertical_align_top" />
                                               </template>
-                                            </q-input>
+                                          </q-input>
                                         </div>
                                         <div class="">
                                           <q-btn color="orange-8" @click.prevent="addResponseOption" class="q-py-sm q-mt-lg" :title="(action === 'insert') ? 'Adicionar escala' : 'Atualizar escala'">
@@ -253,7 +257,7 @@ export default {
   data () {
     return {
       showPlanesComponent: null,
-      plane: null,
+      plane: { 'code': 0, 'name': 'None' },
 
       questionaryModel: {
         plane_id: 0,
@@ -265,24 +269,25 @@ export default {
         released: 0,
         pages: null // carregar em caso de edição
       },
-      editPage: null,
-      newPage: {
+      questionModel: {
         'id': 0,
-        'type_id': 0, // 0: basic, 2: image, 3: video
+        'questionnaire_id': 0,
+        'content_type_id': 0, // 0: basic, 2: image, 3: video, 4: url
+        'response_type_id': 0,
         'question': '',
         'json_data': null
       },
 
       responseOptions: [],
       newResponseOptionScale: [
-        { 'id': 0, 'question_id': 0, 'response': '', 'is_truth': true },
-        { 'id': 0, 'question_id': 0, 'response': '', 'is_truth': true }
+        { 'id': 0, 'question_id': 0, 'response': '', 'truth': true },
+        { 'id': 0, 'question_id': 0, 'response': '', 'truth': true }
       ],
       newResponseOption: {
         'id': 0,
         'question_id': 0,
         'response': '',
-        'is_truth': false
+        'truth': false
       },
 
       pageOptions: [
@@ -300,6 +305,7 @@ export default {
       isEditingMidia: false,
       isAddingMidia: false,
       isAddingResponseOption: false,
+
       selectedPageIndex: -1,
       showPainelPageList: false,
       tab: 'contentTab'
@@ -309,7 +315,11 @@ export default {
   methods: {
     // -------------------questionary functions-----------------------
     addQuestionary () {
-      alert('enviado dados para o servidor')
+      if (this.questionaryModel.released) {
+        this.releasedQuestionaryExplanation()
+      } else {
+        alert('enviado dados para o servidor')
+      }
     },
 
     getFullQuestionary (questionarId) {
@@ -317,6 +327,10 @@ export default {
       WebService.get('web/' + 'fullQuestionary/' + questionarId)
         .then(response => {
           this.selectedPageIndex = (response.data.pages && response.data.pages.length) ? 0 : -1
+          this.plane = this.getPlaneArrayByPlaneId(response.data.plane_id)
+          response.data.pages.some((page, i) => {
+            page.json_data = (page.json_data && page.json_data !== '') ? JSON.parse(page.json_data) : ''
+          })
           this.questionaryModel = response.data
         })
         .catch(errors => {
@@ -329,18 +343,27 @@ export default {
     },
 
     emitQuestionaryChangePlane () {
-      this.$emit('onchangeplane')
+      if (this.questionaryModel.released) {
+        this.releasedQuestionaryExplanation()
+      } else {
+        this.$emit('changePlane')
+      }
     },
 
     // -------------------pages functions-----------------------------
     showCriateNewPage () {
-      this.tab = 'contentTab'
-      this.isCreatingNewPage = true
+      if (this.questionaryModel.released) {
+        this.releasedQuestionaryExplanation()
+      } else {
+        this.tab = 'contentTab'
+        this.isCreatingNewPage = true
+      }
     },
 
     showSelectedPage (index) {
       this.isCreatingNewPage = false
       this.selectedPageIndex = index
+      console.log(this.questionaryModel.pages[index])
       this.tab = 'contentTab'
     },
 
@@ -389,19 +412,18 @@ export default {
 
     // -------------------responseOptions functions-------------------
     configureResponseOptions () {
-
     },
 
     checkOnlyOption (index, isnew) {
-      if (this.questionaryModel.pages[this.selectedPageIndex].type_id === 2) {
+      if (this.questionaryModel.pages[this.selectedPageIndex].response_type_id === 2) {
         this.questionaryModel.pages[this.selectedPageIndex].responseOptions.some((item, i) => {
-          item.is_truth = false
+          item.truth = false
         })
         if (isnew) {
-          this.questionaryModel.pages[this.selectedPageIndex].responseOptions[index].is_truth = true
-          this.newResponseOption.is_truth = false
+          this.questionaryModel.pages[this.selectedPageIndex].responseOptions[index].truth = true
+          this.newResponseOption.truth = false
         } else {
-          this.newResponseOption.is_truth = true
+          this.newResponseOption.truth = true
         }
       }
     },
@@ -410,7 +432,7 @@ export default {
       if (this.newResponseOption.response.trim() !== '') {
         this.questionaryModel.pages[this.selectedPageIndex].responseOptions.push(Object.assign({}, this.newResponseOption))
         this.newResponseOption.response = ''
-        this.newResponseOption.is_truth = false
+        this.newResponseOption.truth = false
       }
     },
 
@@ -425,7 +447,6 @@ export default {
       }).onOk(() => {
         this.responseOptions.splice(index, 1)
         console.log(this.responseOptions)
-        // console.log('>>>> OK')
       }).onOk(() => {
         console.log('>>>> second OK catcher')
       }).onCancel(() => {
@@ -448,7 +469,6 @@ export default {
       })) return true
       else return false
     },
-
     isVideo (str) {
       if (this.videoExtensions.some((ext, i) => {
         if (str.includes(ext)) {
@@ -457,38 +477,31 @@ export default {
       })) return true
       else return false
     },
-
-    triggerPositive () {
-      this.$q.notify({
-        type: 'positive',
-        message: `This is a "positive" type notification.`
+    responseOptionExplanation () {
+      this.$q.dialog({
+        title: 'Sobre as Opções de resposta',
+        color: 'orange-8',
+        message: 'Aqui você pode criar várias opções de resposta para a pergunta formulada, segunbdo o tipo de resposta selecionado. Marque a opção (ou as opções) certa para facilitar a revisão automática das respostas.',
+        transitionShow: 'flip-down',
+        transitionHide: 'flip-up',
+        ok: 'Aceitar'
       })
     },
-    triggerNegative () {
-      this.$q.notify({
-        type: 'negative',
-        message: `This is a "negative" type notification.`
+    releasedQuestionaryExplanation () {
+      this.$q.dialog({
+        title: 'Questionário já liberado',
+        color: 'orange-8',
+        message: 'Esse questionário já foi liberado em uma campanha anterior e não pode ser editado. Para modificar esse questionário você deve "Criar uma cópia" dele. Para isso, clique no botão "Criar uma cópia" do respeitivo questionário na tabela de Questionários. ',
+        transitionShow: 'flip-down',
+        transitionHide: 'flip-up',
+        ok: 'Aceitar'
       })
     },
-    triggerWarning () {
-      this.$q.notify({
-        type: 'warning',
-        message: `This is a "warning" type notification.`
-      })
-    },
-    triggerInfo () {
-      this.$q.notify({
-        type: 'info',
-        message: `This is a "info" type notification.`
-      })
-    },
-
     // -------------------plane functions--------------------
     selectedPlane (plane) {
       this.plane = plane
       this.showPlanesComponent = false
     },
-
     getPlaneArrayByPlaneId (planeId) {
       var plane
       switch (planeId) {
@@ -496,10 +509,10 @@ export default {
           plane = { 'code': 0, 'name': 'None' }
           break
         case 1:
-          plane = { 'code': 1, 'name': 'Ideal' }
+          plane = { 'code': 1, 'name': 'Starter' }
           break
         case 2:
-          plane = { 'code': 2, 'name': 'Starter' }
+          plane = { 'code': 2, 'name': 'Ideal' }
           break
         case 3:
           plane = { 'code': 3, 'name': 'Premium' }
@@ -516,7 +529,6 @@ export default {
   beforeMount () {
     if (this.action === 'edit') {
       this.getFullQuestionary(this.questionary.id)
-      this.plane = this.getPlaneArrayByPlaneId(this.questionaryModel.plane_id)
       this.showPlanesComponent = false
     } else
     if (this.action === 'insert') {
@@ -536,5 +548,8 @@ export default {
   }
   .my-p2{
     padding: 0.6em;
+  }
+  .pointer-hover:hover{
+    cursor: pointer;
   }
 </style>

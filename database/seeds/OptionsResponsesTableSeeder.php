@@ -79,7 +79,7 @@ class OptionsResponsesTableSeeder extends Seeder
       OptionsResponses::create([
           'id' => '5',
           'question_id' => '3',
-          'response' => 'Opção de resposta 1',
+          'response' => 'Opção de resposta 3-1',
           'truth' => '0'
       ]);
       $this->command->info('OptionsResponse 1 for Question 3 criated');
@@ -87,7 +87,7 @@ class OptionsResponsesTableSeeder extends Seeder
       OptionsResponses::create([
           'id' => '6',
           'question_id' => '3',
-          'response' => 'Opção de resposta 2',
+          'response' => 'Opção de resposta 3-2',
           'truth' => '1'
       ]);
       $this->command->info('OptionsResponse 2 for Question 3 criated');
@@ -95,7 +95,7 @@ class OptionsResponsesTableSeeder extends Seeder
       OptionsResponses::create([
           'id' => '7',
           'question_id' => '3',
-          'response' => 'Opção de resposta 3',
+          'response' => 'Opção de resposta 3-3',
           'truth' => '0'
       ]);
       $this->command->info('OptionsResponse 3 for Question 3 criated');
