@@ -117,7 +117,7 @@ import axios from 'axios'
 // }
 
 export default {
-  name: 'Questionaries',
+  name: 'GerentiateQuestionaries',
 
   components: {
     'Planes': require('../../../components/Planes.vue').default,

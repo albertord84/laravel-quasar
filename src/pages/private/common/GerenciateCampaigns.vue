@@ -28,7 +28,7 @@
 <script>
 
 export default {
-  name: 'Campaigns',
+  name: 'GerentiateCampaigns',
 
   components: {
     'CrudCampaigns': require('../../../components/CrudCampaigns.vue').default,

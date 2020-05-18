@@ -18,10 +18,10 @@ class AddForeignKeysToUsersTable extends Migration
                 ->references('id')->on('companies')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
-          $table->foreign('cost_center_id', 'fk_users_costs_centers') //users x costs_centers
-                ->references('id')->on('costs_centers')
-                ->onUpdate('NO ACTION')
-                ->onDelete('NO ACTION');
+          // $table->foreign('cost_center_id', 'fk_users_costs_centers') //users x costs_centers
+          //       ->references('id')->on('costs_centers')
+          //       ->onUpdate('NO ACTION')
+          //       ->onDelete('NO ACTION');
           $table->foreign('address_id', 'fk_users_address') //users x address
                 ->references('id')->on('address')
                 ->onUpdate('NO ACTION')
@@ -46,7 +46,7 @@ class AddForeignKeysToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
                 $table->dropForeign('fk_users_companies');
-                $table->dropForeign('fk_users_costs_centers');
+                // $table->dropForeign('fk_users_costs_centers');
                 $table->dropForeign('fk_users_address');
                 $table->dropForeign('fk_users_users_roles');
                 $table->dropForeign('fk_users_users_status');

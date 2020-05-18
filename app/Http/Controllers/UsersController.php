@@ -123,9 +123,9 @@ class UsersController extends AppBaseController
         // return redirect(route('users.index'));
     }
 
-    public function signInUser(CreateUsersRequest $request) {
+    public function criateFullUser(Request $request) {
         $input = $request->all();
-        $user = $this->usersRepository->signInUser($input);
+        $user = $this->usersRepository->criateFullUser($input);
         return $user->toJson();
 
         // Flash::success('Users saved successfully.');

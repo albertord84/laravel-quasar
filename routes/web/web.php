@@ -44,10 +44,10 @@ Route::resource('usersRoles', 'UsersRolesController');
 Route::resource('usersStatuses', 'UsersStatusController');
 
 Route::resource('users', 'UsersController');
-Route::put('signInUser', 'UsersController@signInUser');
+Route::put('criateFullUser', 'UsersController@criateFullUser');
 
 Route::resource('bases', 'BasesController');
-Route::put('criateFullBase', 'BasesController@criateFullBase');
+Route::put('bases/{id}/baseFromCSV', 'BasesController@baseFromCSV');
 
 Route::resource('basesOrigins', 'BasesOriginsController');
 Route::resource('usersBases', 'UsersBasesController');

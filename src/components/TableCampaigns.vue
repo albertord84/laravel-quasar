@@ -150,6 +150,7 @@ export default {
   name: 'TableCamapigns',
 
   props: {
+    campaign: null
   },
 
   components: {
@@ -158,7 +159,6 @@ export default {
   data () {
     return {
       action: '',
-      campaign: null,
       data: [],
       columns: [
         {

@@ -27,38 +27,38 @@ class UsersStatusesTableSeeder extends Seeder
     public function createUserStatus(){
       UsersStatus::create([
           'id' => '1',
+          'name' => 'BEGINNER',
+          'decription' => 'UsersStatus BEGINNER',
+      ]);
+      $this->command->info('UsersStatus BEGINNER');
+
+      UsersStatus::create([
+          'id' => '2',
           'name' => 'ACTIVE',
           'decription' => 'UsersStatus ACTIVE',
       ]);
       $this->command->info('UsersStatus ACTIVE');
 
       UsersStatus::create([
-          'id' => '2',
+          'id' => '3',
           'name' => 'DELETED',
           'decription' => 'UsersStatus DELETED',
       ]);
       $this->command->info('UsersStatus DELETED');
 
       UsersStatus::create([
-          'id' => '3',
+          'id' => '4',
           'name' => 'INACTIVE',
           'decription' => 'UsersStatus INACTIVE',
       ]);
       $this->command->info('UsersStatus INACTIVE');
 
       UsersStatus::create([
-          'id' => '4',
+          'id' => '5',
           'name' => 'PENDING',
           'decription' => 'UsersStatus PENDING',
       ]);
       $this->command->info('UsersStatus PENDING');
-
-      UsersStatus::create([
-          'id' => '5',
-          'name' => 'BEGINNER',
-          'decription' => 'UsersStatus BEGINNER',
-      ]);
-      $this->command->info('UsersStatus BEGINNER');
 
       UsersStatus::create([
           'id' => '6',

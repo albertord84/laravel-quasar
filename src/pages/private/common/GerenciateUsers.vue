@@ -7,19 +7,19 @@
 
       <q-card no-bordered flat>
         <q-tabs v-model="tab" dense class="text-grey" active-color="orange-10" indicator-color="orange-10" align="left" caps inline-label>
-            <q-tab name="users" class="text-dark" icon="horizontal_split"  label="Usuários" />
-            <q-tab name="crudUsers" class="text-dark" icon="add" label="Novos usuários" />
+            <q-tab name="showUsers" class="text-dark" icon="horizontal_split"  label="Usuários" @click="showTabUsers"/>
+            <q-tab name="crudUsers" class="text-dark" :icon="iconActionUsers" :label="crudTabTitle"/>
         </q-tabs>
 
         <q-separator/>
 
         <q-tab-panels v-model="tab" animated>
-            <q-tab-panel name="users" class="q-pa-none">
-              <TableUsers :users="users" @edit="editUser" @delete="deleteUser" @reload="reloadUsers" ></TableUsers>
+            <q-tab-panel name="showUsers" class="q-pa-none">
+              <TableUsers @editUser="editUser"></TableUsers>
             </q-tab-panel>
 
             <q-tab-panel name="crudUsers">
-              <CrudUsers :action="'insert'" :userItem="{}"></CrudUsers>
+              <CrudUsers :action="action" :user="user" @reloadUsers="reloadUsers"></CrudUsers>
             </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   name: 'GerenciateUsers',
@@ -40,67 +39,32 @@ export default {
   data () {
     return {
       tab: '',
-      users: [],
-      usersStatuses: [],
-      userModel: {
-        id: 1,
-        company_id: 1,
-        cost_center_id: 1,
-        address_id: 1,
-        role_id: 1,
-        status_id: 1,
-        username: '',
-        email: '',
-        password: ''
-      },
-      showCrudUsers: false,
-
-      loader: false
+      user: {},
+      crudTabTitle: '',
+      action: '',
+      iconActionUsers: ''
     }
   },
 
   methods: {
-
-    getUsers () {
-      this.loader = true
-      axios.get('web/' + 'users')
-        .then(response => {
-          response.data.some((item, i) => {
-            item.statusName = this.usersStatuses[item.status_id]
-          })
-          this.users = response.data
-          this.tab = 'users'
-        })
-        .catch(errors => {
-        })
-        .then(() => {
-          this.loader = false
-        })
+    showTabUsers () {
+      this.user = {}
+      this.crudTabTitle = 'Novo usuário'
+      this.action = 'insert'
+      this.iconActionUsers = 'add'
+      this.tab = 'showUsers'
     },
 
-    getUsersStatuses () {
-      this.loader = true
-      axios.get('web/' + 'usersStatuses')
-        .then(response => {
-          this.usersStatuses = []
-          response.data.some((item, i) => {
-            this.usersStatuses[i + 1] = item.name
-          })
-        })
-        .catch(errors => {
-        })
-        .then(() => {
-          this.loader = false
-        })
-    },
-
-    editUser () {
-    },
-
-    deleteUser () {
+    editUser (user) {
+      this.user = Object.assign({}, user)
+      this.crudTabTitle = 'Editar usuário'
+      this.action = 'edit'
+      this.iconActionUsers = 'edit'
+      this.tab = 'crudUsers'
     },
 
     reloadUsers () {
+      this.showTabUsers()
     }
   },
 
@@ -111,9 +75,7 @@ export default {
   },
 
   beforeMount () {
-    this.showCrudUsers = false
-    this.getUsersStatuses()
-    this.getUsers()
+    this.showTabUsers()
   },
 
   created () {

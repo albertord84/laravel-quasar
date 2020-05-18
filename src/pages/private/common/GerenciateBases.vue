@@ -29,7 +29,7 @@
 <script>
 
 export default {
-  name: 'Bases',
+  name: 'GerentiateBases',
 
   components: {
     'CrudBases': require('../../../components/CrudBases.vue').default,
@@ -59,7 +59,7 @@ export default {
       this.base = Object.assign({}, base)
       this.crudTabTitle = 'Editar base'
       this.action = 'edit'
-      this.iconActionCompany = 'edit'
+      this.iconActionBases = 'edit'
       this.tab = 'crudBases'
     },
 

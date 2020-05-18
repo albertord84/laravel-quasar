@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Mail\EmailSigninUser;
+use App\Models\Address;
 use App\Models\Users;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Mail;
@@ -41,16 +42,30 @@ class UsersRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
-    public function signInUser($input) {
+    public function criateFullUser($input) {
+      $userModel = $input['userModel'];
+      $addressModel = ($input['addressModel'] && $input['addressModel']['cep'] != '') ? $input['addressModel'] : null;
+      $sendRegisterEmail = $input['sendRegisterEmail'] ?? null;
+
+      $Address = null;
+      if($addressModel){
+        $Address = (new AddressRepository(app()))->create($addressModel);
+      }
+
       // 1. cria admin
-      $User = $this->model()::create($input); // $User= $this->model()::find(4);
+      if ($Address){
+        $userModel['address_id'] = $Address->id;
+      }
+      $User = $this->model()::create($userModel); // $User= $this->model()::find(4);
 
       // 2. envia credenciais de acesso por email
       $User->password = rand(100001, 999999);
-      Mail
-        ::to($User->email)
-        // ->cc('copy@email.com')
-        ->send(new EmailSigninUser($User, 'Cadastro Physiback'));
+      if ($sendRegisterEmail && $sendRegisterEmail == 'Sim'){
+        Mail
+          ::to($User->email)
+          // ->cc('copy@email.com')
+          ->send(new EmailSigninUser($User, 'Cadastro Physiback'));
+      }
       $User->password = bcrypt($User->password);
 
       // 3. Salvar senha cifrada

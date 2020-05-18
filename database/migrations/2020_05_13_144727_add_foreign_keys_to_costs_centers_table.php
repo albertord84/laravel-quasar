@@ -18,10 +18,10 @@ class AddForeignKeysToCostsCentersTable extends Migration
                 ->references('id')->on('companies')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
-          // $table->foreign('admin_id', 'fk_costs_centers_users') //costs_centers x users
-          //       ->references('id')->on('users')
-          //       ->onUpdate('NO ACTION')
-          //       ->onDelete('NO ACTION');
+          $table->foreign('admin_id', 'fk_costs_centers_users') //costs_centers x users
+                ->references('id')->on('users')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
         });
     }
 
@@ -34,7 +34,7 @@ class AddForeignKeysToCostsCentersTable extends Migration
     {
         Schema::table('costs_centers', function (Blueprint $table) {
               $table->dropForeign('fk_costs_centers_companies');
-              // $table->dropForeign('fk_costs_centers_users');
+              $table->dropForeign('fk_costs_centers_users');
         });
     }
 }

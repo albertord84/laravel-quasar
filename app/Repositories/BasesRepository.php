@@ -2,8 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UsersRolesController;
+use App\Http\Controllers\UsersStatusController;
 use App\Models\Bases;
 use App\Repositories\BaseRepository;
+use App\Models\Users;
+use App\Models\UsersBases;
 
 /**
  * Class BasesRepository
@@ -94,6 +99,109 @@ class BasesRepository extends BaseRepository
           ->each(function(Bases $Base) {
                   // $Base->Admin = null;
           });
+    }
+
+    public function inputUserFromCSV($fileInputCSV, $base_id){
+        // $User = Auth::check() ? Auth::user() : session('logged_user');
+        $file = $fileInputCSV->file('file');
+        if (!$file) {
+          abort(302, "Error uploading file!");
+        } else {
+            //1. Converter o arquivo a um array de usuários
+            $wrongCSVContent = false;
+            $Users = $this->csv_to_array($file->getRealPath(), ',');
+            if($Users){
+              if(count($Users)>1 && count($Users[1])<2 ){
+                $Users = $this->csv_to_array($file->getRealPath(), ';');
+                if(!$Users)
+                  $wrongCSVContent = true;
+              }
+            } else{
+              $wrongCSVContent = true;
+            }
+            unlink($file->getRealPath());
+            if($wrongCSVContent){
+              return $response["message0"] = array(
+                "code" => "error",
+                "cnt" => "Os dados no arquivo não estão no formato correto. Por favor, confira."
+              );
+            }
+
+            // 2. Insertar ou actualizar cada usuário
+            $i=2;
+            $cntUserInvalid=0;
+            $cntUserException=0;
+            $cntUserUpdated=0;
+            $cntUserCriated=0;
+            foreach($Users as $user){
+                try{
+                    // 2.1 Validar dados. Se dados são válidos então
+                    $json_data = [];
+                    foreach ($user as $key => $value){
+                      $user[$key] = trim($value);
+                      if($key != 'Nome' && $key != 'Email')
+                        $json_data[$key] = $user[$key];
+                    }
+                    if (!isset($user['Email']) && filter_var($user['Email'], FILTER_VALIDATE_EMAIL)  && isset($user['Nome']) && preg_match("/^[a-z A-Z0-9çÇáÁéÉíÍóÓúÚàÀèÈìÌòÒùÙãÃõÕâÂêÊôÔûÛñ\._-]{2,250}$/" , $user['Nome']) ) {
+                      $cntUserInvalid++;
+                    } else{
+                        // - formatar o objeto de dados do usuário
+                        $User = Users::where('email', $user['email'])->first();
+                        $newUserFlag = false;
+                        if(!$User){
+                          $newUserFlag = true;
+                          $User = new Users();
+                          $User->role_id = UsersRolesController::TARGET;
+                          $User->status_id = UsersStatusController::BEGINNER;
+                          $User->email = $user['Email'];
+                        }
+                        $User->username = $user['Nome'];
+                        $User->json_data = json_encode($json_data);
+
+                        $User->save();
+                        $User = $User->where('email', $user['email'])->first();
+
+                        if($newUserFlag){
+                          UsersBasesRepository::create( ['base_id' => $base_id, 'user_id' => $User->id]);
+                          $cntUserCriated++;
+                        }else {
+                          $cntUserUpdated++;
+                        }
+                      }
+                } catch (\Throwable $th) {
+                  $cntUserException++;
+                }
+            }
+      }
+      $response = array(
+            'cntUserInvalid' => $cntUserInvalid,
+            'cntUserException' => $cntUserException,
+            'cntUserUpdated' => $cntUserUpdated,
+            'cntUserCriated' => $cntUserCriated
+      );
+      return json_encode($response);
+    }
+
+    public function csv_to_array($filename='', $delimiter=',') {
+      if(!file_exists($filename) || !is_readable($filename))
+        return FALSE;
+      $header = NULL;
+      $data = array();
+      if (($handle = fopen($filename, 'r')) !== FALSE) {
+          while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE) {
+          if(!$header)
+              $header = $row;
+          else {
+              try{
+                  $data[] = array_combine($header, $row);
+              } catch (\Throwable $th) {
+                  return null;
+              }
+          }
+        }
+        fclose($handle);
+      }
+      return $data;
     }
 
     /**

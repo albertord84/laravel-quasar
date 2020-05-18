@@ -39,13 +39,14 @@ class Users extends Model
 
     public $fillable = [
         'company_id',
-        'cost_center_id',
+        // 'cost_center_id',
         'address_id',
         'role_id',
         'status_id',
         'username',
         'email',
         'password',
+        'json_data',
         'email_verified_at',
         'remember_token'
     ];
@@ -58,7 +59,7 @@ class Users extends Model
     protected $casts = [
         'id' => 'integer',
         'company_id' => 'integer',
-        'cost_center_id' => 'integer',
+        // 'cost_center_id' => 'integer',
         'address_id' => 'integer',
         'role_id' => 'integer',
         'status_id' => 'integer',
@@ -76,13 +77,13 @@ class Users extends Model
      */
     public static $rules = [
         'company_id' => 'required',
-        'cost_center_id' => 'required',
+        // 'cost_center_id' => 'required',
         'address_id' => 'required',
         'role_id' => 'required',
         'status_id' => 'required',
         'username' => 'required',
         'email' => 'required',
-        'password' => 'required'
+        // 'password' => 'required'
     ];
 
     public function accountBank() {

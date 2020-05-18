@@ -28,7 +28,7 @@
 <script>
 
 export default {
-  name: 'Companies',
+  name: 'GerentiateCompanies',
 
   components: {
     'CrudCompanies': require('../../../components/CrudCompanies.vue').default,

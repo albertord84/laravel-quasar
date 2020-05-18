@@ -58,12 +58,12 @@ class BasesController extends AppBaseController
     public function store(CreateBasesRequest $request)
     {
         $input = $request->all();
-
         $bases = $this->basesRepository->create($input);
+        return $bases->toJson();
 
-        Flash::success('Bases saved successfully.');
+        // Flash::success('Bases saved successfully.');
 
-        return redirect(route('bases.index'));
+        // return redirect(route('bases.index'));
     }
 
     /**
@@ -155,5 +155,18 @@ class BasesController extends AppBaseController
         Flash::success('Bases deleted successfully.');
 
         return redirect(route('bases.index'));
+    }
+
+    public function baseFromCSV($id, Request $request)
+    {
+      $fileInputCSV = $request->file('fileInputCSV');
+      dd($fileInputCSV);
+      if ($fileInputCSV) {
+        try {
+          $resultFileInputCSV = $this->basesRepository->inputUserFromCSV($fileInputCSV, $id);
+        } catch (\Throwable $th) {}
+        return $resultFileInputCSV;
+      }
+      return null;
     }
 }

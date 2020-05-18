@@ -47,11 +47,11 @@
       </div>
 
       <!-- Arquivo csv para base -->
-      <div class="col-11 q-px-xs q-mt-lg">
+      <div class="col-5 q-px-xs q-mt-lg">
         <span>Selecionar arquivo CSV da base (*) <q-icon color="primary" size="1.2rem" name="help" class="q-mb-sm q-ml-xs" @click="modalHelpCSVFile = true"/></span>
         <q-input filled square v-model="fileInputCSVFullPath" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm" >
           <template v-slot:append>
-            <q-icon v-show="fileInputCSV" name="highlight_off" color="red" class="pointer-hover" @click.prevent="fileInputCSV = null, fileInputCSVFullPath = ''"/>
+            <q-icon v-show="fileInputCSV" name="cancel" color="grey-8" style="font-size:1.7rem" class="pointer-hover" @click.prevent="fileInputCSV = null, fileInputCSVFullPath = ''"/>
           </template>
         </q-input>
       </div>
@@ -106,7 +106,7 @@ export default {
 
   props: {
     action: null,
-    company: null
+    base: null
   },
 
   data () {
@@ -150,13 +150,28 @@ export default {
   methods: {
 
     addBase () {
-      if (!this.validateBaseModel()) {
+      if (!this.validateBaseModel() || this.isCreatingBase) {
         return
       }
       this.isCreatingBase = true
-      WebService.put('web/criateFullBase', {
-        campaign: this.baseModel
-      })
+      WebService.post('web/bases', this.baseModel)
+        .then(response => {
+          this.sendSCVFile(response.data.id)
+        })
+        .catch(error => {
+          this.$q.notify({ type: 'negative', message: `Erro criando base.`, position: 'top-right' })
+          this.isCreatingBase = false
+          console.log(error)
+        })
+        .finally(() => {
+          this.isCreatingBase = false
+        })
+    },
+
+    sendSCVFile (baseId) {
+      let formData = new FormData()
+      formData.append('fileInputCSV', this.fileInputCSV)
+      WebService.put('web/bases/' + baseId + '/baseFromCSV', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
         .then(response => {
           this.isCreatingBase = false
           this.$q.notify({ type: 'positive', color: 'teal-3', message: `Base criada com sucesso.`, position: 'top-right' })

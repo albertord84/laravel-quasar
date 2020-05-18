@@ -165,6 +165,10 @@
               <span>Email (*)</span>
               <q-input filled square v-model="userModel.email" style="min-width:400px; max-width:80%" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm"/>
             </div>
+            <div class="col-12 q-px-xs q-mt-lg">
+              <span>Enviar email de cadastro? </span>
+              <q-select v-model="sendRegisterEmail" :options="['Sim', 'Não']" filled class="col-6 q-mt-sm" label-color="orange-8" color="orange-8" fill-input input-debounce="0" label=" "></q-select>
+            </div>
           </q-card-section>
 
           <q-card-actions align="right">
@@ -240,6 +244,8 @@ export default {
       stringOptionsUF: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO', 'DF'],
       optionsUF: [],
 
+      sendRegisterEmail: 'Não',
+
       isValidatingCEP: false,
       isCreatingCompany: false,
       isCreatingAdmin: false
@@ -249,10 +255,7 @@ export default {
   methods: {
 
     addCompany () {
-      if (!this.validateCompanyModel()) {
-        return
-      }
-      if (!this.validateAddressModel()) {
+      if (!this.validateCompanyModel() || !this.validateAddressModel() || this.isCreatingCompany) {
         return
       }
 
@@ -284,7 +287,10 @@ export default {
       }
       this.isCreatingAdmin = true
       this.userModel.password = 'tmp'
-      WebService.put('web/signInUser', this.userModel)
+      WebService.put('web/criateFullUser', {
+        'userModel': this.userModel,
+        'sendRegisterEmail': this.sendRegisterEmail
+      })
         .then(response => {
           this.isCreatingCompany = false
           this.userModel = response.data

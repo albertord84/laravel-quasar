@@ -24,12 +24,13 @@ class DatabaseSeeder extends Seeder
 
         // dependents
         $this->call(CompaniesTableSeeder::class);
-        $this->call(CostsCentersTableSeeder::class);
+
         $this->call(BasesTableSeeder::class);
 
         $this->call(UsersTableSeeder::class);
         $this->call(UsersBasesTableSeeder::class);
 
+        $this->call(CostsCentersTableSeeder::class);
 
         $this->call(QuestionnairesTableSeeder::class);
         $this->call(QuestionsTableSeeder::class);
