@@ -42,7 +42,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '1',
           'question_id' => '1',
           'response' => 'true',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 1 for Question 1 criated');
 
@@ -50,7 +50,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '2',
           'question_id' => '1',
           'response' => 'false',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 2 for Question 1 criated');
     }
@@ -61,7 +61,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '3',
           'question_id' => '2',
           'response' => 'true',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 1 for Question 2 criated');
 
@@ -69,7 +69,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '4',
           'question_id' => '2',
           'response' => 'false',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 2 for Question 2 criated');
     }
@@ -80,7 +80,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '5',
           'question_id' => '3',
           'response' => 'Opção de resposta 3-1',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 1 for Question 3 criated');
 
@@ -88,7 +88,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '6',
           'question_id' => '3',
           'response' => 'Opção de resposta 3-2',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 2 for Question 3 criated');
 
@@ -96,7 +96,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '7',
           'question_id' => '3',
           'response' => 'Opção de resposta 3-3',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 3 for Question 3 criated');
     }
@@ -107,7 +107,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '8',
           'question_id' => '4',
           'response' => 'Opção de resposta 4-1',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 1 for Question 4 criated');
 
@@ -115,7 +115,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '9',
           'question_id' => '4',
           'response' => 'Opção de resposta 4-2',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 2 for Question 4 criated');
 
@@ -123,7 +123,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '10',
           'question_id' => '4',
           'response' => 'Opção de resposta 4-3',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 3 for Question 4 criated');
     }
@@ -134,7 +134,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '11',
           'question_id' => '5',
           'response' => 'true',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 1 for Question 5 criated');
 
@@ -142,7 +142,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '12',
           'question_id' => '5',
           'response' => 'false',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 2 for Question 5 criated');
     }
@@ -153,7 +153,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '13',
           'question_id' => '6',
           'response' => 'Opção de resposta 6-1',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 1 for Question 6 criated');
 
@@ -161,7 +161,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '14',
           'question_id' => '6',
           'response' => 'Opção de resposta 6-2',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 2 for Question 6 criated');
 
@@ -169,7 +169,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '15',
           'question_id' => '6',
           'response' => 'Opção de resposta 6-3',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 3 for Question 6 criated');
     }
@@ -180,7 +180,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '16',
           'question_id' => '7',
           'response' => 'Opção de resposta 7-1',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 1 for Question 7 criated');
 
@@ -188,7 +188,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '17',
           'question_id' => '7',
           'response' => 'Opção de resposta 7-2',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 2 for Question 7 criated');
 
@@ -196,7 +196,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '18',
           'question_id' => '7',
           'response' => 'Opção de resposta 7-3',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 3 for Question 7 criated');
     }
@@ -207,7 +207,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '19',
           'question_id' => '8',
           'response' => '1',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 1 for Question 8 criated');
 
@@ -215,7 +215,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '20',
           'question_id' => '8',
           'response' => '10',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 2 for Question 8 criated');
     }
@@ -226,7 +226,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '21',
           'question_id' => '9',
           'response' => 'true',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 1 for Question 9 criated');
 
@@ -234,7 +234,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '22',
           'question_id' => '9',
           'response' => 'false',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 2 for Question 9 criated');
     }
@@ -245,7 +245,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '23',
           'question_id' => '10',
           'response' => 'Opção de resposta 10-1',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 1 for Question 10 criated');
 
@@ -253,7 +253,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '24',
           'question_id' => '10',
           'response' => 'Opção de resposta 10-2',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 2 for Question 10 criated');
 
@@ -261,7 +261,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '25',
           'question_id' => '10',
           'response' => 'Opção de resposta 10-3',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 3 for Question 10 criated');
     }
@@ -272,7 +272,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '26',
           'question_id' => '11',
           'response' => 'Opção de resposta 11-1',
-          'truth' => '0'
+          'truth' => false
       ]);
       $this->command->info('OptionsResponse 1 for Question 11 criated');
 
@@ -280,7 +280,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '27',
           'question_id' => '11',
           'response' => 'Opção de resposta 11-2',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 2 for Question 11 criated');
 
@@ -288,7 +288,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '28',
           'question_id' => '11',
           'response' => 'Opção de resposta 11-3',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 3 for Question 11 criated');
     }
@@ -299,7 +299,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '29',
           'question_id' => '12',
           'response' => '1',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 1 for Question 12 criated');
 
@@ -307,7 +307,7 @@ class OptionsResponsesTableSeeder extends Seeder
           'id' => '30',
           'question_id' => '12',
           'response' => '10',
-          'truth' => '1'
+          'truth' => true
       ]);
       $this->command->info('OptionsResponse 2 for Question 12 criated');
     }

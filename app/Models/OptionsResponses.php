@@ -19,7 +19,7 @@ class OptionsResponses extends Model
     use SoftDeletes;
 
     public $table = 'options_responses';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -43,7 +43,7 @@ class OptionsResponses extends Model
         'id' => 'integer',
         'question_id' => 'integer',
         'response' => 'string',
-        'truth' => 'integer'
+        'truth' => 'boolean'
     ];
 
     /**
@@ -57,5 +57,5 @@ class OptionsResponses extends Model
         'truth' => 'required'
     ];
 
-    
+
 }

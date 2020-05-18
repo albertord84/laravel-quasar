@@ -144,7 +144,7 @@
                                           <q-input filled square autogrow v-model="option.response" label=" " label-color="orange-8" color="orange-8" :disable="questionaryModel.released === 1">
                                             <template v-slot:prepend>
                                               <div>
-                                                <span style="font-size:1rem">{{index + 1}}. Tuth -> {{option.truth}} </span>
+                                                <span style="font-size:1rem">{{index + 1}}. </span>
                                                 <q-checkbox v-model="option.truth" dense flat :title="option.truth ? 'Opção verdadeira': 'Opção falsa'" color="primary"
                                                             @input="(questionaryModel.pages[selectedPageIndex].response_type_id === 2 && option.truth)? checkOnlyOption(index,1) : null"/>
                                               </div>

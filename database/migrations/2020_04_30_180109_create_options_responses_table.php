@@ -18,8 +18,8 @@ class CreateOptionsResponsesTable extends Migration
 
             $table->integer('question_id')->nullable()->index('fk_options_responses_questions');
 
-            $table->string('response',1000)->nullable(false);
-            $table->integer('truth')->nullable(false)->default(0);
+            $table->string('response',1000)->nullable();
+            $table->boolean('truth')->nullable()->default(false);
 
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
