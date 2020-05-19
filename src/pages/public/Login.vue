@@ -106,6 +106,7 @@ export default {
       this.loader = true
       AuthService.login(this.form)
         .then(response => {
+          console.log(response)
           this.storeToken(response)
           this.setAuthStatus(true)
           this.setUserData(_.get(response, ['data', 'user_data'], {}))

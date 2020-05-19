@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\User\UserResource;
 use App\Library\Master;
+use App\Models\Users;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -33,9 +35,21 @@ class LoginController extends Controller
         // }
         // if (isset($data['access_token'])) {
             $user = new User();
-            $data['user_data'] = UserResource::make($user->findForPassport($request->input('username')));
-            return json_encode($data);
-            // return $tokenResponse->setContent($data);
+            $username = $request->input('username');
+            $data['user_data'] = UserResource::make($user->findForPassport($request->input($username)));
+            // return json_encode($data);
+
+            Log::debug("Login: ", [Users::where('email', $username)
+              ->orWhere('username', $username)
+              ->first()]);
+
+            $modelUser = Users::where('email', $username)
+                    ->orWhere('username', $username)
+                    ->first();
+
+            $modelUser->password = '';
+
+            return $modelUser;
         // }
         // return $tokenResponse;
     }
