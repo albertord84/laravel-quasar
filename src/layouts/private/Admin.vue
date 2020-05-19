@@ -88,9 +88,9 @@ export default {
           separator: false
         },
         {
-          icon: 'storage',
-          label: 'Bases',
-          link: '/admin/bases',
+          icon: 'apartment',
+          label: 'Centros de custo',
+          link: '/admin/costcenters',
           selected: false,
           separator: false
         },
@@ -98,6 +98,20 @@ export default {
           icon: 'group',
           label: 'Usuários',
           link: '/admin/users',
+          selected: false,
+          separator: false
+        },
+        {
+          icon: 'storage',
+          label: 'Bases',
+          link: '/admin/bases',
+          selected: false,
+          separator: false
+        },
+        {
+          icon: 'money',
+          label: 'Recompensa',
+          link: '/admin/recompenses',
           selected: false,
           separator: false
         },

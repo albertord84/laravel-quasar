@@ -116,15 +116,27 @@ const routes = [
         meta: { requiresAuth: false }
       },
       {
-        path: '/admin/bases',
-        name: 'admin.bases',
-        component: () => import('pages/private/common/GerenciateBases.vue'),
+        path: '/admin/costcenters', // ---
+        name: 'admin.costcenters',
+        component: () => import('pages/private/common/GerenciateCostCenters.vue'),
         meta: { requiresAuth: false }
       },
       {
         path: '/admin/users',
         name: 'admin.users',
         component: () => import('pages/private/common/GerenciateUsers.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/admin/bases',
+        name: 'admin.bases',
+        component: () => import('pages/private/common/GerenciateBases.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/admin/recompenses', // ---
+        name: 'admin.recompenses',
+        component: () => import('pages/private/common/GerenciateRecompenses.vue'),
         meta: { requiresAuth: false }
       },
       {
