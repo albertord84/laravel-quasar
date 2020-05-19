@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('role_id')->nullable()->index('fk_users_users_roles');
             $table->integer('status_id')->nullable()->index('fk_users_users_status');
 
-            $table->string('username', 150)->nullable(false);;
+            $table->string('username', 150)->nullable(false)->default('');
             $table->string('email', 150)->unique();
             $table->string('password')->nullable();
             $table->string('json_data')->nullable()->default('');

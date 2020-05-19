@@ -5,7 +5,7 @@ namespace App\Models;
 // use Eloquent as Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class Users
@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|\Carbon\Carbon email_verified_at
  * @property string remember_token
  */
-class Users extends Model
+class Users extends Authenticatable
 {
     use SoftDeletes;
 
