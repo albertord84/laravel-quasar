@@ -39,7 +39,7 @@ class User extends Authenticatable
         'id' => 'integer',
         'username' => 'string',
         'email' => 'string',
-        'password' => 'string',
+        // 'password' => 'string',
         'email_verified_at' => 'datetime',
     ];
 
