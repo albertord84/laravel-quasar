@@ -6,12 +6,13 @@ const routes = [
     path: '/',
     component: () => import('layouts/public/PublicLayout.vue'),
     children: [
-      // {
-      //   path: '',
-      //   name: 'public.index',
-      //   component: () => import('pages/public/Index.vue'),
-      //   meta: { requiresAuth: false }
-      // },
+      {
+        path: '',
+        name: 'public.index',
+        // component: () => import('pages/public/Index.vue'),
+        component: () => import('pages/public/Login.vue'),
+        meta: { requiresAuth: false }
+      },
       {
         // path: '/login',
         path: '/',
