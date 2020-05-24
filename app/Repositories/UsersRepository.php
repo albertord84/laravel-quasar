@@ -44,7 +44,7 @@ class UsersRepository extends BaseRepository
 
     public function criateFullUser($input) {
       $userModel = $input['userModel'];
-      $addressModel = ($input['addressModel'] && $input['addressModel']['cep'] != '') ? $input['addressModel'] : null;
+      $addressModel = (isset($input['addressModel']) && isset($input['addressModel']['cep']) && $input['addressModel']['cep']!= '') ? $input['addressModel'] : null;
       $sendRegisterEmail = $input['sendRegisterEmail'] ?? null;
 
       $Address = null;

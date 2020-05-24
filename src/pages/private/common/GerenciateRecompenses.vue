@@ -1,25 +1,25 @@
 <template>
     <q-page class="bg-gray q-pa-md">
       <div class="flex justify-between">
-        <h6>Bases</h6>
+        <h6>Recompensas</h6>
         <!-- <q-btn flat rounded class="q-pa-xs  q-my-lg" color="primary" icon="help"/> -->
       </div>
 
       <q-card no-bordered flat>
         <q-tabs v-model="tab" dense class="text-grey" active-color="orange-10" indicator-color="orange-10" align="left" caps inline-label>
-            <q-tab name="showBases" class="text-dark" icon="horizontal_split"  label="Bases" @click="showTabBases"/>
-            <q-tab name="crudBases" class="text-dark" :icon="iconActionBases" :label="crudTabTitle" />
+            <q-tab name="showRecompenses" class="text-dark" icon="horizontal_split"  label="Recompensas" @click="showTabRecompenses"/>
+            <q-tab name="crudRecompenses" class="text-dark" :icon="iconActionRecompenses" :label="crudTabTitle" />
         </q-tabs>
 
         <q-separator/>
 
         <q-tab-panels v-model="tab" animated>
-            <q-tab-panel name="showBases" class="q-pa-none">
-              <TableBases  @editBase="editBase" ></TableBases>
+            <q-tab-panel name="showRecompenses" class="q-pa-none">
+              <TableRecompenses  @editRecompense="editRecompense" ></TableRecompenses>
             </q-tab-panel>
 
-            <q-tab-panel name="crudBases">
-              <CrudBases :action="action" :base="base" @reloadBases="reloadBases"></CrudBases>
+            <q-tab-panel name="crudRecompenses">
+              <CrudRecompenses :action="action" :recompense="recompense" @reloadRecompenses="reloadRecompenses"></CrudRecompenses>
             </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -29,42 +29,42 @@
 <script>
 
 export default {
-  name: 'GerentiateBases',
+  name: 'GerentiateRecompenses',
 
   components: {
-    'CrudBases': require('../../../components/CrudBases.vue').default,
-    'TableBases': require('../../../components/TableBases.vue').default
+    'CrudRecompenses': require('../../../components/CrudRecompenses.vue').default,
+    'TableRecompenses': require('../../../components/TableRecompenses.vue').default
   },
 
   data () {
     return {
       tab: '',
-      base: {},
+      recompense: {},
       crudTabTitle: '',
       action: '',
-      iconActionBases: ''
+      iconActionRecompenses: ''
     }
   },
 
   methods: {
-    showTabBases () {
-      this.base = {}
-      this.crudTabTitle = 'Nova base'
+    showTabRecompenses () {
+      this.recompense = {}
+      this.crudTabTitle = 'Nova recompensa'
       this.action = 'insert'
-      this.iconActionBases = 'add'
-      this.tab = 'showBases'
+      this.iconActionRecompenses = 'add'
+      this.tab = 'showRecompenses'
     },
 
-    editBase (base) {
-      this.base = Object.assign({}, base)
-      this.crudTabTitle = 'Editar base'
+    editRecompense (recompense) {
+      this.recompense = Object.assign({}, recompense)
+      this.crudTabTitle = 'Editar recompensa'
       this.action = 'edit'
-      this.iconActionBases = 'edit'
-      this.tab = 'crudBases'
+      this.iconActionRecompenses = 'edit'
+      this.tab = 'crudRecompenses'
     },
 
-    reloadBases () {
-      this.showTabBases()
+    reloadRecompenses () {
+      this.showTabRecompenses()
     }
   },
 
@@ -75,7 +75,7 @@ export default {
   },
 
   beforeMount () {
-    this.showTabBases()
+    this.showTabRecompenses()
   },
 
   created () {
@@ -94,7 +94,7 @@ export default {
 
   meta () {
     return {
-      title: 'Bases' // title: this.$t('page_titles.login_title')
+      title: 'Recompensas' // title: this.$t('page_titles.login_title')
     }
   }
 

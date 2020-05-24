@@ -29,8 +29,8 @@
               </q-btn-dropdown>
           </q-toolbar>
           <q-toolbar class="flex justify-between q-px-md xs">
-            <q-btn :to="'/target'"  flat round dense icon="home" class="q-mr-sm"/>
-            <q-btn :to="'/target/questionaries'"  flat round dense icon="list_alt" class="q-mr-sm">
+            <q-btn :to="'/target/dashboard'"  flat round dense icon="home" class="q-mr-sm"/>
+            <q-btn :to="'/target/questionnaires'"  flat round dense icon="list_alt" class="q-mr-sm">
               <q-badge color="green-13" text-color="white" multi-line floating>2</q-badge>
             </q-btn>
             <q-btn :to="'/target/payment'"  flat round dense icon="money" class="q-mr-sm"/>
@@ -82,7 +82,7 @@ export default {
         {
           icon: 'list_alt',
           label: 'Questionários',
-          link: '/target/questionaries',
+          link: '/target/questionnaires',
           selected: false,
           separator: false
         },

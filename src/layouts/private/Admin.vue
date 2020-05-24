@@ -109,13 +109,6 @@ export default {
           separator: false
         },
         {
-          icon: 'money',
-          label: 'Recompensa',
-          link: '/admin/recompenses',
-          selected: false,
-          separator: false
-        },
-        {
           icon: 'history',
           label: 'Histórico',
           link: '/admin/history',

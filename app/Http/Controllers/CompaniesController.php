@@ -184,10 +184,9 @@ class CompaniesController extends AppBaseController
             'name' => 'Centro de custo 1'
       ));
 
-      // 4. atualizar o cost_center_id e company_id do admin
+      // 4. atualizar o company_id do admin
       $Admin = (new UsersRepository(app()))->find($inputAdmin['id']);
       $Admin->company_id = $Company->id;
-      $Admin->cost_center_id = $CostCenter->id;
       $Admin->save();
 
       $Company->Address = $Address;

@@ -107,6 +107,13 @@ export default {
           link: '/superadmin/campaigns',
           selected: false,
           separator: false
+        },
+        {
+          icon: 'money',
+          label: 'Recompensas',
+          link: '/superadmin/recompenses',
+          selected: false,
+          separator: false
         }
       ]
     }
