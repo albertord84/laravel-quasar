@@ -34,7 +34,8 @@ class UsersTableSeeder extends Seeder
           'address_id' => 1,
           'username' => 'Sidnei',
           'email' => 'sidnei.bertozzi@gmail.com',
-          'password' => bcrypt('sidnei.bertozzi123'),
+          'password' => 'sidnei.bertozzi123',
+          // 'password' => bcrypt('sidnei.bertozzi123'),
           'role_id' => 1,
           'status_id' => 2,
       ]);
@@ -47,7 +48,8 @@ class UsersTableSeeder extends Seeder
           'address_id' => 1,
           'username' => 'Andrê',
           'email' => 'almmarques@gmail.com',
-          'password' => bcrypt('almmarques123'),
+          'password' => 'almmarques123',
+          // 'password' => bcrypt('almmarques123'),
           'role_id' => 1,
           'status_id' => 2,
       ]);
@@ -60,7 +62,8 @@ class UsersTableSeeder extends Seeder
           'address_id' => 1,
           'username' => 'Igor',
           'email' => 'ibuenaga@gmail.com',
-          'password' => bcrypt('ibuenaga123'),
+          'password' => 'ibuenaga123',
+          // 'password' => bcrypt('ibuenaga123'),
           'role_id' => 1,
           'status_id' => 2,
       ]);
@@ -73,7 +76,8 @@ class UsersTableSeeder extends Seeder
           'address_id' => 1,
           'username' => 'josergm86',
           'email' => 'josergm86@gmail.com',
-          'password' => bcrypt('jr24666gm'),
+          'password' => 'jr24666gm',
+          // 'password' => bcrypt('jr24666gm'),
           'role_id' => 1,
           'status_id' => 2,
       ]);
@@ -86,7 +90,8 @@ class UsersTableSeeder extends Seeder
           'address_id' => 1,
           'username' => 'alberto',
           'email' => 'albertord84@gmail.com',
-          'password' => bcrypt('12345678'),
+          'password' => '12345678',
+          // 'password' => bcrypt('12345678'),
           'role_id' => 1,
           'status_id' => 2,
       ]);
@@ -101,7 +106,8 @@ class UsersTableSeeder extends Seeder
           'address_id' => 1,
           'username' => 'Admin',
           'email' => 'admin@physiback.com',
-          'password' => bcrypt('admin'),
+          'password' => 'admin',
+          // 'password' => bcrypt('admin'),
           'role_id' => 2,
           'status_id' => 2,
       ]);
@@ -116,7 +122,8 @@ class UsersTableSeeder extends Seeder
         'address_id' => 1,
         'username' => 'Target1',
         'email' => 'target1@physiback.com',
-        'password' => bcrypt('target1'),
+        'password' => 'target1',
+        // 'password' => bcrypt('target1'),
         'role_id' => 3,
         'status_id' => 2,
     ]);
@@ -129,7 +136,8 @@ class UsersTableSeeder extends Seeder
         'address_id' => 1,
         'username' => 'Target2',
         'email' => 'target2@physiback.com',
-        'password' => bcrypt('target2'),
+        'password' => 'target2',
+        // 'password' => bcrypt('target2'),
         'role_id' => 3,
         'status_id' => 2,
     ]);

@@ -6,6 +6,8 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UsersRolesController;
 use App\Http\Controllers\UsersStatusController;
 use App\Models\Bases;
+use App\Models\BasesOrigins;
+use App\Models\Companies;
 use App\Repositories\BaseRepository;
 use App\Models\Users;
 use App\Models\UsersBases;
@@ -97,7 +99,8 @@ class BasesRepository extends BaseRepository
           ->get()
           ->slice($start, $page_length)
           ->each(function(Bases $Base) {
-                  // $Base->Admin = null;
+                $Base->BaseOrigin = BasesOrigins::where('id', $Base->origin_id)->get()->first();
+                $Base->Company = Companies::where('id', $Base->company_id)->get()->first();
           });
     }
 
@@ -202,6 +205,18 @@ class BasesRepository extends BaseRepository
         fclose($handle);
       }
       return $data;
+    }
+
+    public function deleteFullBase($request){
+      $base = $request['base'];
+
+      // Eliminar todas los UserBases
+      UsersBases::where('base_id', $base['id'])->delete();
+
+      // Eliminar la base
+      $this->delete($base['id']);
+
+      return true;
     }
 
     /**

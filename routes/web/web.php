@@ -35,18 +35,25 @@ Route::get('getAddressByCEP/{cep}', 'AddressController@getAddressByCEP');
 
 Route::resource('accountsBanks', 'AccountsBanksController');
 
+
 Route::resource('companies', 'CompaniesController');
 Route::put('criateFullCompany', 'CompaniesController@criateFullCompany');
+Route::put('updateFullCompany', 'CompaniesController@updateFullCompany');
+Route::delete('deleteFullCompany', 'CompaniesController@deleteFullCompany');
 
 Route::resource('costsCenters', 'CostsCentersController');
+
 
 Route::resource('usersRoles', 'UsersRolesController');
 Route::resource('usersStatuses', 'UsersStatusController');
 
 Route::resource('users', 'UsersController');
 Route::put('criateFullUser', 'UsersController@criateFullUser');
+Route::put('updateFullUser', 'UsersController@updateFullUser');
+Route::delete('deleteFullUser', 'UsersController@deleteFullUser');
 
 Route::resource('bases', 'BasesController');
+Route::delete('deleteFullBase', 'BasesController@deleteFullBase');
 Route::put('bases/{id}/baseFromCSV', 'BasesController@baseFromCSV');
 
 Route::resource('basesOrigins', 'BasesOriginsController');

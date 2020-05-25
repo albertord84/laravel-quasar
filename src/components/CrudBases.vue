@@ -20,7 +20,7 @@
         </q-select>
       </div>
 
-      <!-- Empresa -->
+      <!-- Para superadmins: Empresa -->
       <div class="col-6 q-px-xs q-mt-lg" v-if="userLoggued.role_id == 1">
         <span>Atribuir empresa (*) </span>
         <q-select v-model="selectedBaseCompany" :options="optionsCompanies" @filter="filterFnAutoselectCompany" @filter-abort="abortFilterFnCompany" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
@@ -70,7 +70,7 @@
       <q-separator  class="col-12 q-pa-none q-ma-none"></q-separator>
       <div class="q-my-md">
         <q-btn text-color="white" :loading="isCreatingBase" class="q-pa-sm q-mb-sm bg-orange-8"
-            label="Guardar base"  title="Guardar base" icon="save" @click.prevent="addBase">
+            label="Guardar base"  title="Guardar base" icon="save" @click.prevent="saveBase">
           <template v-slot:loading>
             <q-spinner></q-spinner>
           </template>
@@ -149,23 +149,45 @@ export default {
 
   methods: {
 
-    addBase () {
+    saveBase () {
       if (!this.validateBaseModel() || this.isCreatingBase) {
         return
       }
       this.isCreatingBase = true
-      WebService.post('web/bases', this.baseModel)
-        .then(response => {
-          this.sendSCVFile(response.data.id)
-        })
-        .catch(error => {
-          this.$q.notify({ type: 'negative', message: `Erro criando base.`, position: 'top-right' })
-          this.isCreatingBase = false
-          console.log(error)
-        })
-        .finally(() => {
-          this.isCreatingBase = false
-        })
+      if (this.action === 'insert') {
+        WebService.post('web/bases', this.baseModel)
+          .then(response => {
+            this.sendSCVFile(response.data.id)
+          })
+          .catch(error => {
+            this.$q.notify({ type: 'negative', message: `Erro criando base.`, position: 'top-right' })
+            this.isCreatingBase = false
+            console.log(error)
+          })
+          .finally(() => {
+            this.isCreatingBase = false
+          })
+      } else {
+        WebService.put('web/bases/' + this.baseModel.id, this.baseModel)
+          .then(response => {
+            if (this.fileInputCSV) {
+              this.sendSCVFile(response.data.id)
+            } else {
+              this.isCreatingBase = false
+              var text = (this.action === 'insert') ? 'criada' : 'atualizada'
+              this.$q.notify({ type: 'positive', color: 'teal-3', message: `Base ` + text + ` com sucesso.`, position: 'top-right' })
+              this.$emit('reloadBases')
+            }
+          })
+          .catch(error => {
+            this.$q.notify({ type: 'negative', message: `Erro atualizando base.`, position: 'top-right' })
+            this.isCreatingBase = false
+            console.log(error)
+          })
+          .finally(() => {
+            this.isCreatingBase = false
+          })
+      }
     },
 
     sendSCVFile (baseId) {
@@ -174,11 +196,13 @@ export default {
       WebService.put('web/bases/' + baseId + '/baseFromCSV', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
         .then(response => {
           this.isCreatingBase = false
-          this.$q.notify({ type: 'positive', color: 'teal-3', message: `Base criada com sucesso.`, position: 'top-right' })
+          var text = (this.action === 'insert') ? 'criada' : 'atualizada'
+          this.$q.notify({ type: 'positive', color: 'teal-3', message: `Base ` + text + ` com sucesso.`, position: 'top-right' })
           this.$emit('reloadBases')
         })
         .catch(error => {
-          this.$q.notify({ type: 'negative', message: `Erro criando base.`, position: 'top-right' })
+          var text = (this.action === 'insert') ? 'criando' : 'atualizando'
+          this.$q.notify({ type: 'negative', message: `Erro ` + text + ` base.`, position: 'top-right' })
           this.isCreatingBase = false
           console.log(error)
         })
@@ -188,11 +212,9 @@ export default {
     },
 
     prepareToUpdateBase () {
-      // --------------
-    },
-
-    updateBase () {
-      // --------------
+      this.baseModel = this.base
+      this.selectedBaseOrigin = this.base.BaseOrigin.name
+      this.selectedBaseCompany = this.base.Company.fantasy_name
     },
 
     getBasesOrigins () {
@@ -333,7 +355,7 @@ export default {
         return false
       }
 
-      if (!this.fileInputCSV) {
+      if (this.action === 'insert' && !this.fileInputCSV) {
         this.$q.notify({ type: 'negative', message: `Deve selecionar um arquivo CSV com a base de usuários.`, position: 'top-right' })
         return false
       }
@@ -366,9 +388,11 @@ export default {
     this.getBasesOrigins()
     this.getCompanies()
     this.app_host = process.env.HOST
-    // this.app_host = process.env.MIX_APP_URL  // TODO: Jose R
 
     this.userLoggued.role_id = 1 // TODO-JR: obter o usuário logado
+    if (this.action === 'edit') {
+      this.prepareToUpdateBase()
+    }
   },
 
   mounted () {

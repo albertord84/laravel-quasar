@@ -127,9 +127,14 @@ class UsersController extends AppBaseController
         $input = $request->all();
         $user = $this->usersRepository->criateFullUser($input);
         return $user->toJson();
+    }
 
-        // Flash::success('Users saved successfully.');
-        // return redirect(route('users.index'));
+    public function updateFullUser(Request $request) {
+      return  $this->usersRepository->updateFullUser($request);
+    }
+
+    public function deleteFullUser(Request $request) {
+      return  $this->usersRepository->deleteFullUser($request);
     }
 
 }

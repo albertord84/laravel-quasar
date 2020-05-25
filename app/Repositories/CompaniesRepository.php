@@ -7,7 +7,9 @@ use App\Repositories\BaseRepository;
 use Auth;
 
 use App\Http\Controllers\UsersRolesController;
+use App\Models\Address;
 use App\Models\CostsCenters;
+use App\Models\Users;
 
 /**
  * Class CompaniesRepository
@@ -37,8 +39,7 @@ class CompaniesRepository extends BaseRepository
      *
      * @return array
      */
-    public function getFieldsSearchable()
-    {
+    public function getFieldsSearchable(){
         return $this->fieldSearchable;
     }
 
@@ -88,12 +89,85 @@ class CompaniesRepository extends BaseRepository
             ->get()
             ->slice($start, $page_length)
             ->each(function(Companies $Company) {
-                    $Company->CostCenters = null; //TODO-Alberto: obter todos os centros de costos de cada empresa en forma de Collection
-                    $Company->Address = null; //TODO-Alberto: obter o endereço de cada empresa
-                    $Company->Admin = null; //TODO-Alberto: obter os admin de cada empresa
+                    $Company->CostCenters = CostsCenters::where('company_id',$Company->id)->get();
+                    $Company->Address = Address::where('id',$Company->address_id)->get()->first();
+                    $Company->Admin = Users::where('id',$Company->responsible_id)->get()->first();
             });
 
         return $Companies;
+    }
+
+    public function criateFullCompany ($request) {
+      $inputCompany = $request['company'];
+      $inputAddress = $request['address'];
+      $inputAdmin = $request['admin'];
+
+      // 1. criar endereço
+      $Address = (new AddressRepository(app()))->create($inputAddress);
+
+      // 2. criar empresa
+      $inputCompany['address_id'] = $Address->id;
+      $inputCompany['responsible_id'] = $inputAdmin['id'];
+      $Company = $this->create($inputCompany);
+
+      // 3. criar primeiro centro de custo
+      $CostCenter = (new CostsCentersRepository(app()))->create(array(
+            'company_id' => $Company->id,
+            'admin_id' => $inputAdmin['id'],
+            'name' => 'Centro de custo 1'
+      ));
+
+      // 4. atualizar o company_id do admin
+      $Admin = (new UsersRepository(app()))->find($inputAdmin['id']);
+      $Admin->company_id = $Company->id;
+      $Admin->save();
+
+      $Company->Address = $Address;
+      $Company->CostCenter = $CostCenter;
+      $Company->Admin = $Admin;
+
+      return $Company;
+    }
+
+    public function updateFullCompany ($request) {
+      $inputCompany = $request['company'];
+      $inputAddress = $request['address'];
+
+      // 1. atualizar dados do endereço da empresa
+      $Address = Address::where('id', $inputCompany['address_id'])->first()->update($inputAddress);
+
+      // 2. atualizar dados da empresa
+      $Company = $this->update($inputCompany, $inputCompany['id']);
+
+      return $Company;
+    }
+
+    public function deleteFullCompany ($request) {
+      return true;
+
+      $Company = $request['company'];
+
+      //Eliminar em cascada Campanhas->Questionários->Questões->Opções de Respostas->Respostas
+
+      // Eliminar todos os centros de custo
+      $CostCenter = CostsCenters::where('company_id', $Company->id)->delete();
+
+      // Eliminar Administradores da empresa
+      $Users = Users::where('id', $Company->company_id)->delete();
+
+      // Eliminar o endereço
+      $Address = Address::where('id', $Company->address_id)->delete();
+
+      // 2. criar empresa
+      $inputCompany['address_id'] = $Address->id;
+      $inputCompany['responsible_id'] = $inputAdmin['id'];
+      $Company = $this->create($inputCompany);
+
+
+
+      $Company->Address = $Address;
+      $Company->CostCenter = $CostCenter;
+      $Company->Admin = $Admin;
     }
 
     /**

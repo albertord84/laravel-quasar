@@ -13,6 +13,7 @@ use Response;
 use App\Repositories\AddressRepository;
 use App\Repositories\CostsCentersRepository;
 use App\Repositories\UsersRepository;
+use Illuminate\Support\Facades\Auth;
 
 class CompaniesController extends AppBaseController
 {
@@ -33,6 +34,8 @@ class CompaniesController extends AppBaseController
      */
     public function index(Request $request)
     {
+      // dd(Auth::guard('web'));
+
       $input = $request->all();
       $respCompanies = $this->companiesRepository->filterCompanies($input);
       return $respCompanies->toJson();
@@ -165,34 +168,14 @@ class CompaniesController extends AppBaseController
     }
 
     public function criateFullCompany (Request $request) {
-      $inputCompany = $request['company'];
-      $inputAddress = $request['address'];
-      $inputAdmin = $request['admin'];
+      return $this->companiesRepository->criateFullCompany($request);
+    }
 
-        // 1. criar endereço
-      $Address = (new AddressRepository(app()))->create($inputAddress);
+    public function updateFullCompany (Request $request) {
+      return $this->companiesRepository->updateFullCompany($request);
+    }
 
-      // 2. criar empresa
-      $inputCompany['address_id'] = $Address->id;
-      $inputCompany['responsible_id'] = $inputAdmin['id'];
-      $Company = $this->companiesRepository->create($inputCompany);
-
-      // 3. criar primeiro centro de custo
-      $CostCenter = (new CostsCentersRepository(app()))->create(array(
-            'company_id' => $Company->id,
-            'admin_id' => $inputAdmin['id'],
-            'name' => 'Centro de custo 1'
-      ));
-
-      // 4. atualizar o company_id do admin
-      $Admin = (new UsersRepository(app()))->find($inputAdmin['id']);
-      $Admin->company_id = $Company->id;
-      $Admin->save();
-
-      $Company->Address = $Address;
-      $Company->CostCenter = $CostCenter;
-      $Company->Admin = $Admin;
-
-      return $Company;
+    public function deleteFullCompany (Request $request) {
+      return $this->companiesRepository->deleteFullCompany($request);
     }
 }

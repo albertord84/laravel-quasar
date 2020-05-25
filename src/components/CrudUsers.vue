@@ -47,7 +47,7 @@
       </div>
 
       <!-- Empresa -->
-      <div class="col-6 q-px-xs q-mt-lg">
+      <div class="col-6 q-px-xs q-mt-lg" v-if="userLoggued.role_id === 1">
         <span>Atribuir empresa (*) </span>
         <q-select v-model="selectedUserCompany" :options="optionsCompanies" @filter="filterFnAutoselectCompany" @filter-abort="abortFilterFnCompany" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
           <template v-slot:no-option>
@@ -61,7 +61,7 @@
       </div>
 
       <!-- Eviar email de cadastro -->
-      <div class="col-6 q-px-xs q-mt-lg" >
+      <div class="col-6 q-px-xs q-mt-lg" v-if="action === 'insert'">
         <span>Enviar email de cadastro? </span>
         <q-select v-model="sendRegisterEmail" :options="['Sim', 'Não']" filled class="col-6 q-mt-sm" label-color="orange-8" color="orange-8" fill-input input-debounce="0" label=" "></q-select>
       </div>
@@ -136,7 +136,7 @@
       <q-separator  class="col-12 q-pa-none q-ma-none"></q-separator>
       <div class="q-my-md">
         <q-btn text-color="white" :loading="isCreatingUser" class="q-pa-sm q-mb-sm bg-orange-8"
-            label="Guardar usuário"  title="Guardar usuário" icon="save" @click.prevent="addUser">
+            label="Guardar usuário"  title="Guardar usuário" icon="save" @click.prevent="saveUser">
           <template v-slot:loading>
             <q-spinner></q-spinner>
           </template>
@@ -166,8 +166,8 @@ export default {
         address_id: 1,
         role_id: 1,
         status_id: 1,
-        username: 'JoseRGM',
-        email: 'jgonzalez@id.uff.br',
+        username: '',
+        email: '',
         json_datas: ''
       },
       addressModel: {
@@ -218,7 +218,7 @@ export default {
 
   methods: {
 
-    addUser () {
+    saveUser () {
       if (!this.validateUserModel() || this.isCreatingUser) {
         return
       }
@@ -226,18 +226,21 @@ export default {
         return
       }
       this.isCreatingUser = true
-      WebService.put('web/criateFullUser', {
+      let url = (this.action === 'insert') ? 'criateFullUser' : 'updateFullUser'
+      WebService.put('web/' + url, {
         'userModel': this.userModel,
         'addressModel': this.addressModel,
         'sendRegisterEmail': this.sendRegisterEmail
       })
         .then(response => {
           this.isCreatingUser = false
-          this.$q.notify({ type: 'positive', color: 'teal-3', message: `Usuário criada com sucesso.`, position: 'top-right' })
+          let text = (this.action === 'insert') ? 'criado' : 'atualizado'
+          this.$q.notify({ type: 'positive', color: 'teal-3', message: `Usuário ` + text + ` com sucesso.`, position: 'top-right' })
           this.$emit('reloadUsers')
         })
         .catch(error => {
-          this.$q.notify({ type: 'negative', message: `Erro criando usuário.`, position: 'top-right' })
+          let text = (this.action === 'insert') ? 'criando' : 'atualizando'
+          this.$q.notify({ type: 'negative', message: `Erro ` + text + ` usuário.`, position: 'top-right' })
           this.isCreatingUser = false
           console.log(error)
         })
@@ -245,9 +248,26 @@ export default {
           this.isCreatingUser = false
         })
     },
-    prepareToUpdateUser () {
-      // --------------
+
+    prepareUserToUpdate () {
+      if (this.user.Address) {
+        this.addressModel = this.user.Address
+      }
+      if (this.user.Address) {
+        this.addressModel = this.user.Address
+      }
+      if (this.user.UsersRole) {
+        this.selectedUserRole = this.user.UsersRole.name
+      }
+      if (this.user.UsersStatus) {
+        this.selectedUserStatus = this.user.UsersStatus.name
+      }
+      if (this.user.Company) {
+        this.selectedUserCompany = this.user.Company.fantasy_name
+      }
+      this.userModel = this.user
     },
+
     updateUser () {
       // --------------
     },
@@ -257,7 +277,13 @@ export default {
         .then(response => {
           this.stringOptionsUserRol = []
           response.data.some((item, i) => {
-            this.stringOptionsUserRol.push(item.name)
+            if (item.id === 1) {
+              if (this.userLoggued.role_id === 1) {
+                this.stringOptionsUserRol.push(item.name)
+              }
+            } else {
+              this.stringOptionsUserRol.push(item.name)
+            }
           })
           this.listUserRole = response.data
         })
@@ -266,6 +292,7 @@ export default {
         .then(() => {
         })
     },
+
     getUsersStatus () {
       WebService.get('web/' + 'usersStatuses')
         .then(response => {
@@ -280,6 +307,7 @@ export default {
         .then(() => {
         })
     },
+
     getCompanies () {
       WebService.get('web/' + 'companies')
         .then(response => {
@@ -307,6 +335,7 @@ export default {
       })
       return resp
     },
+
     selectedUserStatuByName (statu) {
       if (statu.trim() === '') {
         return null
@@ -319,6 +348,7 @@ export default {
       })
       return resp
     },
+
     selectedCompanyByName (company) {
       if (company.trim() === '') {
         return null
@@ -355,9 +385,11 @@ export default {
         )
       }, 300)
     },
+
     abortFilterFnUsersRoles () {
       this.selectedUserRole = ''
     },
+
     filterFnAutoselectUsersStatuses (val, update, abort) {
       // call abort() at any time if you can't retrieve data somehow
       setTimeout(() => {
@@ -381,9 +413,11 @@ export default {
         )
       }, 300)
     },
+
     abortFilterFnUsersStatuses () {
       this.selectedUserStatus = ''
     },
+
     filterFnAutoselectCompany (val, update, abort) {
       // call abort() at any time if you can't retrieve data somehow
       setTimeout(() => {
@@ -407,9 +441,11 @@ export default {
         )
       }, 300)
     },
+
     abortFilterFnCompany () {
       this.selectedUserCompany = ''
     },
+
     filterFnAutoselectUF (val, update, abort) {
       // call abort() at any time if you can't retrieve data somehow
       setTimeout(() => {
@@ -433,6 +469,7 @@ export default {
         )
       }, 300)
     },
+
     abortFilterFnUF () {
       this.addressModel.uf = ''
     },
@@ -490,7 +527,7 @@ export default {
         this.$q.notify({ type: 'negative', message: `O campo Tipo de usuário é obrigatório.`, position: 'top-right' })
         return false
       } else {
-        this.userModel.origin_id = this.selectedUserRol.id
+        this.userModel.role_id = this.selectedUserRol.id
       }
 
       this.selectedUserStatu = this.selectedUserStatuByName(this.selectedUserStatus)
@@ -557,11 +594,14 @@ export default {
   },
 
   beforeMount () {
+    this.userLoggued.role_id = 2 // TODO-JR: obter o usuário logado
     this.getUsersRoles()
     this.getUsersStatus()
     this.getCompanies()
 
-    this.userLoggued.role_id = 1 // TODO-JR: obter o usuário logado
+    if (this.action === 'edit') {
+      this.prepareUserToUpdate()
+    }
   },
 
   mounted () {

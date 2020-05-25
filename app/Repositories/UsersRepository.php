@@ -4,8 +4,12 @@ namespace App\Repositories;
 
 use App\Mail\EmailSigninUser;
 use App\Models\Address;
+use App\Models\Companies;
 use App\Models\Users;
+use App\Models\UsersRoles;
+use App\Models\UsersStatus;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -37,44 +41,14 @@ class UsersRepository extends BaseRepository
      *
      * @return array
      */
-    public function getFieldsSearchable()
-    {
+    public function getFieldsSearchable() {
         return $this->fieldSearchable;
     }
 
-    public function criateFullUser($input) {
-      $userModel = $input['userModel'];
-      $addressModel = (isset($input['addressModel']) && isset($input['addressModel']['cep']) && $input['addressModel']['cep']!= '') ? $input['addressModel'] : null;
-      $sendRegisterEmail = $input['sendRegisterEmail'] ?? null;
-
-      $Address = null;
-      if($addressModel){
-        $Address = (new AddressRepository(app()))->create($addressModel);
-      }
-
-      // 1. cria admin
-      if ($Address){
-        $userModel['address_id'] = $Address->id;
-      }
-      $User = $this->model()::create($userModel); // $User= $this->model()::find(4);
-
-      // 2. envia credenciais de acesso por email
-      $User->password = rand(100001, 999999);
-      if ($sendRegisterEmail && $sendRegisterEmail == 'Sim'){
-        Mail
-          ::to($User->email)
-          // ->cc('copy@email.com')
-          ->send(new EmailSigninUser($User, 'Cadastro Physiback'));
-      }
-      $User->password = bcrypt($User->password);
-
-      // 3. Salvar senha cifrada
-      $User->save();
-
-      return $User;
-    }
-
     public function filterUsers($input) {
+      dd(Auth::guard('web'));
+      // $userLogued->role_id = 2;
+
       $filter = $input['filter'] ?? '';
       $role_id = $input['role_id'] ?? 0;
       $id = $input['id'] ?? 0;
@@ -135,10 +109,64 @@ class UsersRepository extends BaseRepository
           ->get()
           ->slice($start, $page_length)
           ->each(function(Users $User) {
-                  $User->CostCenters = null; //TODO-Alberto: obter todos os centros de costos de cada empresa en forma de Collection
-                  $User->Address = null; //TODO-Alberto: obter o endereço de cada empresa
-                  $User->Admin = null; //TODO-Alberto: obter os admin de cada empresa
+              $User->Address = Address::where('id', $User->address_id)->get()->first();
+              $User->UsersRole = UsersRoles::where('id', $User->role_id)->get()->first();
+              $User->UsersStatus = UsersStatus::where('id', $User->status_id)->get()->first();
+              $User->Company = Companies::where('id', $User->company_id)->get()->first();
           });
+    }
+
+    public function criateFullUser($input) {
+      $userModel = $input['userModel'];
+      $addressModel = (isset($input['addressModel']) && isset($input['addressModel']['cep']) && $input['addressModel']['cep']!= '') ? $input['addressModel'] : null;
+      $sendRegisterEmail = $input['sendRegisterEmail'] ?? null;
+
+      $Address = null;
+      if($addressModel){
+        $Address = (new AddressRepository(app()))->create($addressModel);
+      }
+
+      // 1. cria admin
+      if ($Address){
+        $userModel['address_id'] = $Address->id;
+      }
+      $User = $this->model()::create($userModel); // $User= $this->model()::find(4);
+
+      // 2. envia credenciais de acesso por email
+      $User->password = rand(100001, 999999);
+      if ($sendRegisterEmail && $sendRegisterEmail == 'Sim'){
+        Mail
+          ::to($User->email)
+          // ->cc('copy@email.com')
+          ->send(new EmailSigninUser($User, 'Cadastro Physiback'));
+      }
+      // $User->password = bcrypt($User->password);
+
+      // 3. Salvar senha cifrada
+      $User->save();
+
+      return $User;
+    }
+
+    public function updateFullUser($input) {
+      $userModel = $input['userModel'];
+      $addressModel = (isset($input['addressModel']) && isset($input['addressModel']['cep']) && $input['addressModel']['cep']!= '') ? $input['addressModel'] : null;
+
+      // atualizar endereço
+      if($addressModel){
+        $Address = Address::where('id', $addressModel['id'])->first()->update($addressModel);
+      }
+
+      $User = $this->update($userModel, $userModel['id']);
+
+      return $User;
+    }
+
+    public function deleteFullUser($request){
+      // eliminar respostas a questionários e recompensas se é target
+
+      //eliminar o usuário
+      return true;
     }
 
     /**

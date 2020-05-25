@@ -243,7 +243,9 @@ export default {
     deleteCompany () {
       if (this.company) {
         this.isDeleting = true
-        WebService.delete('web/' + 'companies/' + this.company.id)
+        WebService.delete('web/deleteFullCompany', {
+          company: this.company
+        })
           .then(response => {
             this.modalConfirmDelete = false
             this.$q.notify({ type: 'positive', message: `Empresa eliminada com sucesso.`, position: 'top-right' })

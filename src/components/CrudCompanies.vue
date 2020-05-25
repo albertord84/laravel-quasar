@@ -140,7 +140,7 @@
       <q-separator  class="col-12 q-pa-none q-ma-none"></q-separator>
       <div class="q-my-md">
         <q-btn text-color="white" :loading="isCreatingCompany" class="q-pa-sm q-mb-sm bg-orange-8"
-            label="Guardar empresa"  title="Guardar empresa" icon="save" @click.prevent="addCompany">
+            label="Guardar empresa"  title="Guardar empresa" icon="save" @click.prevent="saveCompany">
           <template v-slot:loading>
             <q-spinner></q-spinner>
           </template>
@@ -223,9 +223,9 @@ export default {
       },
       userModel: {
         id: 0,
-        company_id: 1,
-        cost_center_id: 1,
-        address_id: 1,
+        company_id: 0,
+        cost_center_id: 0,
+        address_id: 0,
         role_id: 2,
         status_id: 1,
         username: '', // 'Jose Ramón',
@@ -254,25 +254,30 @@ export default {
 
   methods: {
 
-    addCompany () {
+    saveCompany () {
       if (!this.validateCompanyModel() || !this.validateAddressModel() || this.isCreatingCompany) {
         return
       }
 
       this.isCreatingCompany = true
-      WebService.put('web/criateFullCompany', {
+      var url = (this.action === 'insert') ? 'criateFullCompany' : 'updateFullCompany'
+      if (this.companyModel.CostCenters) { delete this.companyModel.CostCenters }
+      if (this.companyModel.Address) { delete this.companyModel.Address }
+      if (this.companyModel.Admin) { delete this.companyModel.Admin }
+      WebService.put('web/' + url, {
         company: this.companyModel,
         address: this.addressModel,
         admin: this.selectedAdmin
       })
         .then(response => {
-          console.log(response.data)
           this.isCreatingCompany = false
-          this.$q.notify({ type: 'positive', color: 'teal-3', message: `Empresa cadastrada com sucesso.`, position: 'top-right' })
+          var text = (this.action === 'insert') ? 'cadastrada' : 'atualizada'
+          this.$q.notify({ type: 'positive', color: 'teal-3', message: `Empresa ` + text + ` com sucesso.`, position: 'top-right' })
           this.$emit('reloadCompanies')
         })
         .catch(error => {
-          this.$q.notify({ type: 'negative', message: `Erro cadastrando empresa.`, position: 'top-right' })
+          var text = (this.action === 'insert') ? 'cadastrando' : 'atualizando'
+          this.$q.notify({ type: 'negative', message: `Erro ` + text + ` empresa.`, position: 'top-right' })
           this.isCreatingCompany = false
           console.log(error)
         })
@@ -287,6 +292,9 @@ export default {
       }
       this.isCreatingAdmin = true
       this.userModel.password = 'tmp'
+      delete this.userModel.address_id
+      delete this.userModel.cost_center_id
+      delete this.userModel.company_id
       WebService.put('web/criateFullUser', {
         'userModel': this.userModel,
         'sendRegisterEmail': this.sendRegisterEmail
@@ -310,11 +318,16 @@ export default {
     },
 
     prepareToUpdateCompany () {
-      // --------------
-    },
-
-    updateCompany () {
-      // --------------
+      if (this.company.Address) {
+        this.addressModel = this.company.Address
+      }
+      if (this.company.Admin) {
+        this.userModel = this.company.Admin
+        this.selectedAdminEmail = this.userModel.email
+      }
+      if (this.company) {
+        this.companyModel = this.company
+      }
     },
 
     getAdmins () {
@@ -565,6 +578,9 @@ export default {
 
   beforeMount () {
     this.getAdmins()
+    if (this.action === 'edit') {
+      this.prepareToUpdateCompany()
+    }
   },
 
   mounted () {

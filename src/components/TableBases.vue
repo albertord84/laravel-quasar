@@ -35,15 +35,11 @@
         <template v-slot:body="props">
           <q-tr :props="props">
               <q-td key="origin_id" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.origin_id }}
+                  {{ props.row.BaseOrigin.name }}
               </q-td>
 
               <q-td key="company_id" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.company_id }}
-              </q-td>
-
-              <q-td key="criator_id" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.criator_id }}
+                  {{ props.row.Company.fantasy_name}}
               </q-td>
 
               <q-td key="name" :props="props" class="q-pa-none q-ma-none">
@@ -168,12 +164,6 @@ export default {
           align: 'center'
         },
         {
-          label: 'Criador',
-          field: 'criator_id',
-          name: 'criator_id',
-          align: 'center'
-        },
-        {
           label: 'Nome',
           field: 'name',
           name: 'name',
@@ -236,7 +226,9 @@ export default {
     deleteBase () {
       if (this.base) {
         this.isDeleting = true
-        WebService.delete('web/' + 'bases/' + this.base.id)
+        WebService.delete('web/deleteFullBase', {
+          base: this.base
+        })
           .then(response => {
             this.modalConfirmDelete = false
             this.$q.notify({ type: 'positive', message: `Base eliminada com sucesso.`, position: 'top-right' })

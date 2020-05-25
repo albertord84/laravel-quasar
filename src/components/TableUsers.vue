@@ -41,19 +41,15 @@
               </q-td>
 
               <q-td key="company_id" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.company_id }}
+                  {{ (props.row.Company) ? props.row.Company.fantasy_name : ''}}
               </q-td>
 
-              <q-td key="cost_center_id" :props="props" class="q-pa-none q-ma-none">
+              <!-- <q-td key="cost_center_id" :props="props" class="q-pa-none q-ma-none">
                   {{ props.row.cost_center_id }}
-              </q-td>
-
-              <q-td key="address_id" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.address_id }}
-              </q-td>
+              </q-td> -->
 
               <q-td key="role_id" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.role_id }}
+                  {{ props.row.UsersRole.name }}
               </q-td>
 
               <q-td key="created_at" :props="props" class="q-pa-none q-ma-none">
@@ -176,12 +172,6 @@ export default {
           align: 'center'
         },
         {
-          label: 'Endereço',
-          field: 'address_id',
-          name: 'address_id',
-          align: 'center'
-        },
-        {
           label: 'Role',
           field: 'role_id',
           name: 'role_id',
@@ -266,7 +256,9 @@ export default {
     deleteUser () {
       if (this.user) {
         this.isDeleting = true
-        WebService.delete('web/' + 'users/' + this.user.id)
+        WebService.delete('web/deleteFullUser', {
+          user: this.user
+        })
           .then(response => {
             this.modalConfirmDelete = false
             this.$q.notify({ type: 'positive', message: `Usuário eliminado com sucesso.`, position: 'top-right' })

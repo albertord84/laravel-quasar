@@ -32,7 +32,6 @@ class BasesController extends AppBaseController
       $input = $request->all();
       $bases = $this->basesRepository->filterBases($input);
       return $bases->toJson();
-
       // $bases = $this->basesRepository->all();
         // return view('bases.index')
         //     ->with('bases', $bases);
@@ -126,9 +125,11 @@ class BasesController extends AppBaseController
 
         $bases = $this->basesRepository->update($request->all(), $id);
 
-        Flash::success('Bases updated successfully.');
+        return $bases->toJson();
 
-        return redirect(route('bases.index'));
+        // Flash::success('Bases updated successfully.');
+
+        // return redirect(route('bases.index'));
     }
 
     /**
@@ -168,5 +169,10 @@ class BasesController extends AppBaseController
         return $resultFileInputCSV;
       }
       return null;
+    }
+
+    public function deleteFullBase(Request $request)
+    {
+      return $this->basesRepository->deleteFullBase($request);
     }
 }
