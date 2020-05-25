@@ -89,6 +89,12 @@ const routes = [
         name: 'superadmin.campaigns',
         component: () => import('pages/private/common/GerenciateCampaigns.vue'),
         meta: { requiresAuth: false }
+      },
+      {
+        path: '/superadmin/recompenses',
+        name: 'superadmin.recompenses',
+        component: () => import('pages/private/common/GerenciateRecompenses.vue'),
+        meta: { requiresAuth: false }
       }
     ]
   },
@@ -132,12 +138,6 @@ const routes = [
         path: '/admin/bases',
         name: 'admin.bases',
         component: () => import('pages/private/common/GerenciateBases.vue'),
-        meta: { requiresAuth: false }
-      },
-      {
-        path: '/admin/recompenses', // ---
-        name: 'admin.recompenses',
-        component: () => import('pages/private/common/GerenciateRecompenses.vue'),
         meta: { requiresAuth: false }
       },
       {

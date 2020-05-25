@@ -400,7 +400,7 @@ export default {
     },
 
     abortFilterFnUF () {
-      this.addressModel.uf = ''
+      // this.optionsUF.uf = ''
     },
 
     socialReason () {
