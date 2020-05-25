@@ -12,6 +12,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
+
 /**
  * Class UsersRepository
  * @package App\Repositories
@@ -46,7 +47,8 @@ class UsersRepository extends BaseRepository
     }
 
     public function filterUsers($input) {
-      dd(Auth::guard('web'));
+      dd($user = Auth::user());
+      // dd(Auth::guard('web'));
       // $userLogued->role_id = 2;
 
       $filter = $input['filter'] ?? '';
