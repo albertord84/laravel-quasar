@@ -47,7 +47,7 @@ class UsersRepository extends BaseRepository
     }
 
     public function filterUsers($input) {
-      dd($user = Auth::user());
+      // TODO-JR: filtar segundo role do usuario logado
       // dd(Auth::guard('web'));
       // $userLogued->role_id = 2;
 

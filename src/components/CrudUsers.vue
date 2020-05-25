@@ -594,7 +594,7 @@ export default {
   },
 
   beforeMount () {
-    this.userLoggued.role_id = 2 // TODO-JR: obter o usuário logado
+    this.userLoggued.role_id = 1 // TODO-JR: obter o usuário logado
     this.getUsersRoles()
     this.getUsersStatus()
     this.getCompanies()
