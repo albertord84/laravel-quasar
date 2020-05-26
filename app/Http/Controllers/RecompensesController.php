@@ -125,9 +125,11 @@ class RecompensesController extends AppBaseController
 
         $recompenses = $this->recompensesRepository->update($request->all(), $id);
 
-        Flash::success('Recompenses updated successfully.');
+        return $recompenses->toJson();
 
-        return redirect(route('recompenses.index'));
+        // Flash::success('Recompenses updated successfully.');
+
+        // return redirect(route('recompenses.index'));
     }
 
     /**

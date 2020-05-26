@@ -3,8 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\OptionsResponses;
+use App\Models\Planes;
 use App\Models\Questionnaires;
 use App\Models\Questions;
+use App\Models\Users;
 use App\Repositories\QuestionsRepository;
 use App\Repositories\BaseRepository;
 
@@ -103,23 +105,35 @@ class QuestionnairesRepository extends BaseRepository
           ->get()
           ->slice($start, $page_length)
           ->each(function(Questionnaires $Questionnary) {
+              $Questionnary->pages = Questions
+                    ::where('questionnaire_id', $Questionnary->id)
+                    ->get()
+                    ->each(function(Questions $Question) {
+                        $Question->responseOptions = OptionsResponses::where('question_id', $Question->id)->get();
+                    });
+              $Questionnary->Plane = Planes::where('id', $Questionnary->plane_id)->get()->first();
+              $Questionnary->Criator = Users::where('id', $Questionnary->criator_id)->get()->first();
+              $Questionnary->Updater = Users::where('id', $Questionnary->updater_id)->get()->first();
       });
     }
 
     public function fullQuestionary($questionaryId) {
       // 1. buscar o questionário
-      $Questionary = $this->find($questionaryId);
-      if($Questionary){
+      $Questionnary = $this->find($questionaryId);
+      if($Questionnary){
         // 2. buscar as questões do questionário
-        $Questionary->pages = Questions
+        $Questionnary->pages = Questions
               ::where('questionnaire_id', $questionaryId)
               ->get()
               ->each(function(Questions $Question) {
                   $Question->responseOptions = OptionsResponses::where('question_id', $Question->id)->get();
               });
+        $Questionnary->Plane = Planes::where('id', $Questionnary->plane_id)->get()->first();
+        $Questionnary->Criator = Users::where('id', $Questionnary->criator_id)->get()->first();
+        $Questionnary->Updater = Users::where('id', $Questionnary->updater_id)->get()->first();
 
         // 3. buscar as OptionsResponses de cada questão
-        return $Questionary;
+        return $Questionnary;
       } else {
         return null;
       }

@@ -2,7 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Models\Campaigns;
+use App\Models\Companies;
+use App\Models\Planes;
+use App\Models\Questionnaires;
 use App\Models\Recompenses;
+use App\Models\Users;
 use App\Repositories\BaseRepository;
 
 /**
@@ -91,7 +96,12 @@ class RecompensesRepository extends BaseRepository
           ->get()
           ->slice($start, $page_length)
           ->each(function(Recompenses $Recompense) {
-            // $Questions->Questions = null;
+                $Recompense->User = Users::where('id', $Recompense->user_id)->get()->first();
+                $Recompense->Questionary = Questionnaires::where('id', $Recompense->questionnaire_id)->get()->first();
+                $Recompense->Questionary->Plane = Planes::where('id', $Recompense->Questionary->plane_id)->get()->first();
+                $Recompense->Campaign = Campaigns::where('id', $Recompense->campaign_id)->get()->first();
+                $CampaignCriator = Users::where('id', $Recompense->Campaign->criator_id)->get()->first();
+                $Recompense->Company = Companies::where('id', $CampaignCriator->company_id)->get()->first();
       });
     }
 

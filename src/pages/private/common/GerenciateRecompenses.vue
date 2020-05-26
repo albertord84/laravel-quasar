@@ -8,7 +8,7 @@
       <q-card no-bordered flat>
         <q-tabs v-model="tab" dense class="text-grey" active-color="orange-10" indicator-color="orange-10" align="left" caps inline-label>
             <q-tab name="showRecompenses" class="text-dark" icon="horizontal_split"  label="Recompensas" @click="showTabRecompenses"/>
-            <q-tab name="crudRecompenses" class="text-dark" :icon="iconActionRecompenses" :label="crudTabTitle" />
+            <q-tab name="crudRecompenses" class="text-dark" :icon="iconActionRecompenses" @click.prevent="1" :label="crudTabTitle" />
         </q-tabs>
 
         <q-separator/>

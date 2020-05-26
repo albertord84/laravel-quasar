@@ -160,21 +160,14 @@ class CampaignsController extends AppBaseController
     }
 
     public function criateFullCampaign(Request $request) {
-      $campaign = $request['campaign'];
-      // $User = Auth::check()? Auth::user():session('logged_user');
+      return $this->campaignsRepository->criateFullCampaign($request);
+    }
 
-      // 2020-05-24 23:59
-      // $campaign['invitations_send_date'] = (new Carbon($campaign['invitations_send_date']));//->toFormattedDateString('Y-m-d H:i:s');
-      // $campaign['start_date'] = (new Carbon($campaign['start_date']));//->toFormattedDateString('Y-m-d H:i:s');
-      // $campaign['end_date'] = (new Carbon($campaign['end_date']));//->toFormattedDateString('Y-m-d H:i:s');
+    public function updateFullCampaign(Request $request) {
+      return $this->campaignsRepository->updateFullCampaign($request);
+    }
 
-
-      $campaign['invitations_send_date'] = Carbon::parse( $campaign['invitations_send_date']. ':00')->format('Y-m-d H:i:s');
-      $campaign['start_date'] = Carbon::parse( $campaign['start_date']. ':00')->format('Y-m-d H:i:s');
-      $campaign['end_date'] = Carbon::parse( $campaign['end_date']. ':00')->format('Y-m-d H:i:s');
-      // dd($campaign);
-      $Campaign = (new CampaignsRepository(app()))->create($campaign);
-
-      return $Campaign;
+    public function deleteFullCampaign(Request $request) {
+      $this->campaignsRepository->deleteFullCampaign($request);
     }
 }

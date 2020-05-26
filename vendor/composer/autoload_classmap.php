@@ -39,6 +39,7 @@ return array(
     'App\\Http\\Controllers\\RecompensesController' => $baseDir . '/app/Http/Controllers/RecompensesController.php',
     'App\\Http\\Controllers\\ResponsesController' => $baseDir . '/app/Http/Controllers/ResponsesController.php',
     'App\\Http\\Controllers\\ResponsesTypesController' => $baseDir . '/app/Http/Controllers/ResponsesTypesController.php',
+    'App\\Http\\Controllers\\TestController' => $baseDir . '/app/Http/Controllers/TestController.php',
     'App\\Http\\Controllers\\UsersBasesController' => $baseDir . '/app/Http/Controllers/UsersBasesController.php',
     'App\\Http\\Controllers\\UsersController' => $baseDir . '/app/Http/Controllers/UsersController.php',
     'App\\Http\\Controllers\\UsersRolesController' => $baseDir . '/app/Http/Controllers/UsersRolesController.php',

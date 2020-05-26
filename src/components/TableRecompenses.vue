@@ -34,34 +34,34 @@
 
         <template v-slot:body="props">
           <q-tr :props="props">
-              <q-td key="origin_id" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.origin_id }}
-              </q-td>
-
-              <q-td key="company_id" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.company_id }}
-              </q-td>
-
-              <q-td key="criator_id" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.criator_id }}
-              </q-td>
-
               <q-td key="name" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.name }}
+                  {{ props.row.User.username }}
               </q-td>
 
-              <q-td key="decription" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.decription }}
+              <q-td key="email" :props="props" class="q-pa-none q-ma-none">
+                  {{ props.row.User.email }}
               </q-td>
 
-              <q-td key="created_at" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.created_at.substr(0,10) }}
+              <q-td key="campaign_name" :props="props" class="q-pa-none q-ma-none">
+                  <span :title="props.row.Campaign.name"> {{ (props.row.Campaign.name.length > 25) ? props.row.Campaign.name.slice(0, 25) + ' ...' : props.row.Campaign.name }} </span>
+              </q-td>
+
+              <q-td key="questionary_name" :props="props" class="q-pa-none q-ma-none">
+                  <span :title="props.row.Questionary.name"> {{ (props.row.Questionary.name.length > 25) ? props.row.Questionary.name.slice(0, 25) + ' ...' : props.row.Questionary.name }} </span>
+              </q-td>
+
+              <q-td key="questionary_plane" :props="props" class="q-pa-none q-ma-none">
+                  {{ props.row.Questionary.Plane.name }}
+              </q-td>
+
+              <q-td key="recompense_value" :props="props" class="q-pa-none q-ma-none">
+                  {{ props.row.value }}
               </q-td>
 
               <q-td key="actions" :props="props" class="q-pa-none q-ma-none">
                 <div style="margin-left:-3px">
-                  <q-icon color="primary" size="sm" class="pointer-hover q-mr-sm" title="Ver/Editar" name="account_balance_wallet" @click="editBase(props.row)"/>
-                  <q-icon color="red" size="sm" class="pointer-hover" name="delete" title="Eliminar" @click="confirmDeleteBase(props.row)"/>
+                  <q-icon color="primary" size="sm" class="pointer-hover q-mr-sm" title="Ver/Editar" name="account_balance_wallet" @click="editRecompense(props.row)"/>
+                  <q-icon color="red" size="sm" class="pointer-hover" name="delete" title="Eliminar" @click="confirmDeleteRecompense(props.row)"/>
                 </div>
               </q-td>
 
@@ -96,7 +96,7 @@
         <q-card>
           <q-card-section class="row items-center">
             <q-icon name="warning" class="text-red" style="font-size: 1.9rem;" />
-            <span v-if="base" class="q-ml-sm">Confirma que deseja eliminar a base "{{base.name}}"?</span>
+            <span v-if="recompense" class="q-ml-sm">Confirma que deseja eliminar essa recompensa?</span>
           </q-card-section>
 
           <q-card-section v-show="isDeleting" class="text-center">
@@ -104,7 +104,7 @@
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="Eliminar" color="orange-8" @click.prevent="deleteBase">
+            <q-btn flat label="Eliminar" color="orange-8" @click.prevent="deleteRecompense">
             </q-btn>
             <q-btn flat label="Cancelar" color="gray" v-close-popup />
           </q-card-actions>
@@ -138,7 +138,7 @@ function wrapCsvValue (val, formatFn) {
 }
 
 export default {
-  name: 'TableBases',
+  name: 'TableRecompenses',
 
   props: {
   },
@@ -148,47 +148,46 @@ export default {
 
   data () {
     return {
-      base: null,
+      recompense: null,
       action: '',
       data: [],
       columns: [
         {
-          label: 'Origem',
-          field: 'origin_id',
-          name: 'origin_id',
+          label: 'Nome target',
+          field: 'name',
+          name: 'name',
           required: true,
           align: 'left',
-          format: val => `${val}`,
           sortable: true
         },
         {
-          label: 'Empresa',
-          field: 'company_id',
-          name: 'company_id',
+          label: 'Email target',
+          field: 'email',
+          name: 'email',
           align: 'center'
         },
         {
-          label: 'Criador',
-          field: 'criator_id',
-          name: 'criator_id',
+          label: 'Campanha',
+          field: 'campaign_name',
+          name: 'campaign_name',
           align: 'center'
         },
         {
-          label: 'Nome',
-          field: 'name',
-          name: 'name',
+          label: 'Questionário',
+          field: 'questionary_name',
+          name: 'questionary_name',
           align: 'center'
         },
         {
-          label: 'Descrição',
-          field: 'decription',
-          name: 'decription',
+          label: 'Plano',
+          field: 'questionary_plane',
+          name: 'questionary_plane',
           align: 'center'
         },
         {
-          label: 'Criação',
-          field: 'created_at',
-          name: 'created_at',
+          label: 'Valor',
+          field: 'recompense_value',
+          name: 'recompense_value',
           align: 'center'
         },
         {
@@ -212,7 +211,7 @@ export default {
   methods: {
     getRecompenses (page) {
       this.isLoading = true
-      WebService.get('web/' + 'bases', {
+      WebService.get('web/' + 'recompenses', {
         'filter': this.filter,
         'page': page
       })
@@ -229,17 +228,17 @@ export default {
         })
     },
 
-    editBase (base) {
-      this.$emit('editBase', base)
+    editRecompense (recompense) {
+      this.$emit('editRecompense', recompense)
     },
 
-    deleteBase () {
-      if (this.base) {
+    deleteRecompense () {
+      if (this.recompense) {
         this.isDeleting = true
-        WebService.delete('web/' + 'bases/' + this.base.id)
+        WebService.delete('web/' + 'recompenses/' + this.recompense.id)
           .then(response => {
             this.modalConfirmDelete = false
-            this.$q.notify({ type: 'positive', message: `Base eliminada com sucesso.`, position: 'top-right' })
+            this.$q.notify({ type: 'positive', message: `Recompensa eliminada com sucesso.`, position: 'top-right' })
             this.getRecompenses(this.page)
           })
           .catch(errors => {
@@ -250,8 +249,8 @@ export default {
       }
     },
 
-    confirmDeleteBase (base) {
-      this.base = base
+    confirmDeleteRecompense (recompense) {
+      this.recompense = recompense
       this.modalConfirmDelete = true
     },
 

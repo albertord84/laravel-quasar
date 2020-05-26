@@ -2,8 +2,14 @@
 
 namespace App\Repositories;
 
+use App\Http\Controllers\CampaignsStatusController;
+use App\Models\Bases;
 use App\Models\Campaigns;
+use App\Models\CampaignsStatus;
+use App\Models\Questionnaires;
+use App\Models\Users;
 use App\Repositories\BaseRepository;
+use Carbon\Carbon;
 
 /**
  * Class CampaignsRepository
@@ -135,12 +141,38 @@ class CampaignsRepository extends BaseRepository
           ->get()
           ->slice($start, $page_length)
           ->each(function(Campaigns $Campaign) {
-                $Campaign->StatusCampaign = null; //TODO-Alberto
-                $Campaign->Questionnaire = null; //TODO-Alberto: una campanha pode ter 0 ou 1 questionario
-                $Campaign->UserCriator = null; //TODO-Alberto: usuário criador da campanha
-                $Campaign->UserUpdater = null; //TODO-Alberto: usuário atualizador da campanha
-                $Campaign->Base = null; //TODO-Alberto: base de usuário  campanha
+                $Campaign->StatusCampaign = CampaignsStatus::where('id', $Campaign->status_id)->get()->first();
+                $Campaign->Questionnaire = Questionnaires::where('id', $Campaign->questionary_id)->get()->first();
+                $Campaign->UserCriator = Users::where('id', $Campaign->criator_id)->get()->first();
+                $Campaign->UserUpdater = Users::where('id', $Campaign->updater_id)->get()->first();
+                $Campaign->Base = Bases::where('id', $Campaign->base_id)->get()->first();
           });
+    }
+
+    public function criateFullCampaign($request) {
+      $campaign = $request['campaign'];
+
+      $campaign['invitations_send_date'] = Carbon::parse( $campaign['invitations_send_date']. ':00')->format('Y-m-d H:i:s');
+      $campaign['start_date'] = Carbon::parse( $campaign['start_date']. ':00')->format('Y-m-d H:i:s');
+      $campaign['end_date'] = Carbon::parse( $campaign['end_date']. ':00')->format('Y-m-d H:i:s');
+      $Campaign = $this->create($campaign);
+
+      return $Campaign;
+    }
+
+    public function updateFullCampaign($request) {
+      $campaign = $request['campaign'];
+
+      $campaign['invitations_send_date'] = Carbon::parse( $campaign['invitations_send_date']. ':00')->format('Y-m-d H:i:s');
+      $campaign['start_date'] = Carbon::parse( $campaign['start_date']. ':00')->format('Y-m-d H:i:s');
+      $campaign['end_date'] = Carbon::parse( $campaign['end_date']. ':00')->format('Y-m-d H:i:s');
+
+      return $this->update($campaign, $campaign['id']);
+    }
+
+    public function deleteFullCampaign($request) {
+      $campaign = $request['campaign'];
+      return $this->model->find($campaign['id'])->delete();
     }
 
 

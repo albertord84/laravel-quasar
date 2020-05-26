@@ -24,6 +24,8 @@
 
 Route::get('/', 'WelcomeController@index');
 
+Route::get('test', 'TestController@index');
+
 Route::post('register', 'Auth\RegisterController@store');
 
 Route::post('/oauth/token', 'Auth\LoginController@login')
@@ -62,12 +64,14 @@ Route::resource('usersBases', 'UsersBasesController');
 
 Route::resource('campaigns', 'CampaignsController');
 Route::put('criateFullCampaign', 'CampaignsController@criateFullCampaign');
+Route::put('updateFullCampaign', 'CampaignsController@updateFullCampaign');
+Route::post('deleteFullCampaign', 'CampaignsController@deleteFullCampaign');
 
 Route::resource('campaignsStatuses', 'CampaignsStatusController');
 
 Route::resource('planes', 'PlanesController');
 Route::resource('questionnaires', 'QuestionnairesController');
-Route::get('fullQuestionary/{id}', 'QuestionnairesController@fullQuestionary');
+// Route::get('fullQuestionary/{id}', 'QuestionnairesController@fullQuestionary');
 
 Route::resource('questions', 'QuestionsController');
 

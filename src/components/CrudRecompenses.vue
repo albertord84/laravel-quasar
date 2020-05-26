@@ -8,58 +8,48 @@
 
       <!-- Para superadmins: Origem da base -->
       <div class="col-6 q-px-xs q-mt-lg" v-if="userLoggued.role_id == 1">
-        <span>Origem da base (*) </span>
-        <q-select v-model="selectedBaseOrigin" :options="optionsBasesOrg" @filter="filterFnAutoselectBaseOrigin" @filter-abort="abortFilterFnBasesOrigin" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
+        <span>Email do Target (*) </span>
+        <q-select v-model="selectedTargetEmail" :options="optionsTargets" @filter="filterFnAutoselectTarget" @filter-abort="abortFilterFnTarget" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
           <template v-slot:no-option>
             <q-item>
               <q-item-section class="text-grey">
-                Origem das bases
+                Email do target a ser recompensado
               </q-item-section>
             </q-item>
           </template>
         </q-select>
       </div>
 
-      <!-- Empresa -->
-      <div class="col-6 q-px-xs q-mt-lg" v-if="userLoggued.role_id == 1">
-        <span>Atribuir empresa (*) </span>
-        <q-select v-model="selectedBaseCompany" :options="optionsCompanies" @filter="filterFnAutoselectCompany" @filter-abort="abortFilterFnCompany" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
+      <!-- Campanha -->
+      <div class="col-6 q-px-xs q-mt-lg">
+        <span>Campanha respondida (*)</span>
+        <q-select v-model="selectedCampaignRecompense" :options="optionsCampaign" @input="getFullQuestionaryByCampaignId" @filter="filterFnAutoselectCompany" @filter-abort="abortFilterFnCompany" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
           <template v-slot:no-option>
             <q-item>
               <q-item-section class="text-grey">
-                Empresas cadastradas
+                Campanha respondida
               </q-item-section>
             </q-item>
           </template>
         </q-select>
       </div>
 
-      <!-- Nome -->
+      <!-- Questionário -->
       <div class="col-6 q-px-xs q-mt-lg">
-        <span>Nome (*)</span>
-        <q-input filled square v-model="baseModel.name" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm"/>
+        <span>Questionário desta campanha</span>
+        <q-input filled square v-model="questionary.name" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm" disable/>
       </div>
 
-      <!-- Descrição -->
-      <div class="col-6 q-px-xs q-mt-lg">
-        <span>Descrição</span>
-        <q-input filled square v-model="baseModel.decription" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm"/>
+      <!-- Valor -->
+      <div class="col-3 q-px-xs q-mt-lg">
+        <span>Plano do questionário</span>
+        <q-input filled square v-model="questionary.Plane.name" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm" disable/>
       </div>
 
-      <!-- Arquivo csv para base -->
-      <div class="col-5 q-px-xs q-mt-lg">
-        <span>Selecionar arquivo CSV da base (*) <q-icon color="primary" size="1.2rem" name="help" class="q-mb-sm q-ml-xs" @click="modalHelpCSVFile = true"/></span>
-        <q-input filled square v-model="fileInputCSVFullPath" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm" >
-          <template v-slot:append>
-            <q-icon v-show="fileInputCSV" name="cancel" color="grey-8" style="font-size:1.7rem" class="pointer-hover" @click.prevent="fileInputCSV = null, fileInputCSVFullPath = ''"/>
-          </template>
-        </q-input>
-      </div>
-      <div class="col-1 q-mt-xl">
-        <input ref="fileInputCSV" style="display:none" type="file" @change.prevent="getFileSelected" accept=".csv"/>
-        <q-btn text-color="white" class="q-pa-sm q-mt-sm q-mb-sm bg-orange-8" style="margin-top: 0.8rem"
-            label="" title="Selecionar arquivo CSV" icon="vertical_align_top" @click="triggerEvent">
-        </q-btn>
+      <!-- Valor -->
+      <div class="col-3 q-px-xs q-mt-lg">
+        <span>Valor da recompensa</span>
+        <q-input filled square v-model="questionary.Plane.recompense" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm" disable/>
       </div>
 
       <!-- ----------------------------------------------------------------------------------- -->
@@ -69,31 +59,13 @@
       </div>
       <q-separator  class="col-12 q-pa-none q-ma-none"></q-separator>
       <div class="q-my-md">
-        <q-btn text-color="white" :loading="isCreatingBase" class="q-pa-sm q-mb-sm bg-orange-8"
-            label="Guardar base"  title="Guardar base" icon="save" @click.prevent="addBase">
+        <q-btn text-color="white" :loading="isCreatingRecompense" class="q-pa-sm q-mb-sm bg-orange-8"
+            label="Guardar recompensa"  title="Guardar base" icon="save" @click.prevent="saveRecompense">
           <template v-slot:loading>
             <q-spinner></q-spinner>
           </template>
         </q-btn>
       </div>
-
-      <q-dialog v-model="modalHelpCSVFile" persistent transition-show="flip-down" transition-hide="flip-up">
-        <q-card>
-          <q-card-section class="row items-center">
-            <q-icon name="info" class="text-primary" style="font-size: 1.9rem;" />
-              <span class="q-ml-sm">Aqui você deve selecionar o arquivo com extensão .csv (<i>comma-separated-values</i>) com os dados dos usuários da base que está sendo criada.
-              <br>Esse arquivo deve possuir uma formatação espefífica. Descarregue a planilha template e preencha com os dados dos usuários da base.</span>
-          </q-card-section>
-
-          <q-card-actions align="right">
-            <a :href="'http://' + app_host + '/external_files/planilha_base_usuarios.csv'" ref="lnkDownloadTemplate" download></a>
-            <q-btn flat label="Descarregar planilha" color="orange-8" @click="downloadTemplate">
-            </q-btn>
-            <q-btn flat label="Cancelar" color="gray" v-close-popup />
-          </q-card-actions>
-
-        </q-card>
-      </q-dialog>
 
   </div>
 </template>
@@ -106,103 +78,111 @@ export default {
 
   props: {
     action: null,
-    base: null
+    recompense: null
   },
 
   data () {
     return {
-      baseModel: {
+      recompenseModel: {
         id: 0,
-        origin_id: 0,
-        company_id: 0,
-        criator_id: 0,
-        name: '',
-        description: '',
-        json_data: '',
-        created_at: '',
-        updated_at: ''
+        user_id: 0,
+        questionnaire_id: 0,
+        campaign_id: 0,
+        value: ''
       },
-      fileInputCSV: null,
-      fileInputCSVFullPath: '',
-      modalHelpCSVFile: false,
 
-      selectedBaseOrigin: '',
-      selectedBaseOrg: {},
-      listBasesOrg: [],
-      stringOptionsBaseOrg: [],
-      optionsBasesOrg: [],
+      questionary: {
+        Plane: {
+          name: '',
+          recompense: ''
+        }
+      },
 
-      selectedBaseCompany: '',
-      selectedCompany: {},
-      listCompanies: [],
-      stringOptionsCompanies: [],
-      optionsCompanies: [],
+      selectedTargetEmail: '',
+      selectedTarget: {},
+      listTargets: [],
+      stringOptionsTargets: [],
+      optionsTargets: [],
+
+      selectedCampaignRecompense: '',
+      selectedCampaign: {},
+      listCampaign: [],
+      stringOptionsCampaign: [],
+      optionsCampaign: [],
 
       userLoggued: {
         role_id: 1
       },
 
-      isCreatingBase: false,
-      app_host: ''
+      isCreatingRecompense: false
     }
   },
 
   methods: {
 
-    addBase () {
-      if (!this.validateBaseModel() || this.isCreatingBase) {
+    saveRecompense () {
+      if (!this.validateRecompenseModel() || this.isCreatingRecompense) {
         return
       }
-      this.isCreatingBase = true
-      WebService.post('web/bases', this.baseModel)
-        .then(response => {
-          this.sendSCVFile(response.data.id)
-        })
-        .catch(error => {
-          this.$q.notify({ type: 'negative', message: `Erro criando base.`, position: 'top-right' })
-          this.isCreatingBase = false
-          console.log(error)
-        })
-        .finally(() => {
-          this.isCreatingBase = false
-        })
-    },
 
-    sendSCVFile (baseId) {
-      let formData = new FormData()
-      formData.append('fileInputCSV', this.fileInputCSV)
-      WebService.put('web/bases/' + baseId + '/baseFromCSV', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-        .then(response => {
-          this.isCreatingBase = false
-          this.$q.notify({ type: 'positive', color: 'teal-3', message: `Base criada com sucesso.`, position: 'top-right' })
-          this.$emit('reloadBases')
-        })
-        .catch(error => {
-          this.$q.notify({ type: 'negative', message: `Erro criando base.`, position: 'top-right' })
-          this.isCreatingBase = false
-          console.log(error)
-        })
-        .finally(() => {
-          this.isCreatingBase = false
-        })
-    },
+      delete this.recompenseModel.User
+      delete this.recompenseModel.Campaign
+      delete this.recompenseModel.Questionary
+      delete this.recompenseModel.User
+      delete this.recompenseModel.Company
+      delete this.recompenseModel.updated_at
+      delete this.recompenseModel.created_at
+      delete this.recompenseModel.deleted_at
+      console.log(this.recompenseModel)
+      this.isCreatingRecompense = true
 
-    prepareToUpdateBase () {
-      // --------------
-    },
-
-    updateBase () {
-      // --------------
-    },
-
-    getBasesOrigins () {
-      WebService.get('web/' + 'basesOrigins')
-        .then(response => {
-          this.stringOptionsBaseOrg = []
-          response.data.some((item, i) => {
-            this.stringOptionsBaseOrg.push(item.name)
+      if (this.action === 'insert') {
+        WebService.post('web/recompenses', this.recompenseModel)
+          .then(response => {
+            this.isCreatingRecompense = false
+            this.$q.notify({ type: 'positive', color: 'teal-3', message: `Recompensa criada com sucesso.`, position: 'top-right' })
+            this.$emit('reloadRecompenses')
           })
-          this.listBasesOrg = response.data
+          .catch(error => {
+            this.$q.notify({ type: 'negative', message: `Erro criando recompensa.`, position: 'top-right' })
+            this.isCreatingRecompense = false
+            console.log(error)
+          })
+          .finally(() => {
+            this.isCreatingRecompense = false
+          })
+      } else if (this.action === 'edit') {
+        WebService.put('web/recompenses/' + this.recompenseModel.id, this.recompenseModel)
+          .then(response => {
+            this.isCreatingRecompense = false
+            this.$q.notify({ type: 'positive', color: 'teal-3', message: `Recompensa atualizada com sucesso.`, position: 'top-right' })
+            this.$emit('reloadRecompenses')
+          })
+          .catch(error => {
+            this.$q.notify({ type: 'negative', message: `Erro atualizando recompensa.`, position: 'top-right' })
+            this.isCreatingRecompense = false
+            console.log(error)
+          })
+          .finally(() => {
+            this.isCreatingRecompense = false
+          })
+      }
+    },
+
+    prepareToUpdateRecompense () {
+      this.selectedTargetEmail = this.recompense.User.email
+      this.selectedCampaignRecompense = this.recompense.Campaign.name
+      this.questionary = this.recompense.Questionary
+      this.recompenseModel = this.recompense
+    },
+
+    getFullQuestionaryByCampaignId () {
+      this.selectedCampaign = this.selectedCampaignByName(this.selectedCampaignRecompense)
+      WebService.get('web/' + 'questionnaires', {
+        id: this.selectedCampaign.id
+      })
+        .then(response => {
+          this.questionary = response.data[0]
         })
         .catch(errors => {
         })
@@ -210,14 +190,16 @@ export default {
         })
     },
 
-    getCompanies () {
-      WebService.get('web/' + 'companies')
+    getTargets () {
+      WebService.get('web/' + 'users', {
+        role_id: 3
+      })
         .then(response => {
-          this.stringOptionsCompanies = []
+          this.stringOptionsTargets = []
           response.data.some((item, i) => {
-            this.stringOptionsCompanies.push(item.fantasy_name)
+            this.stringOptionsTargets.push(item.email)
           })
-          this.listCompanies = response.data
+          this.listTargets = response.data
         })
         .catch(errors => {
         })
@@ -225,42 +207,57 @@ export default {
         })
     },
 
-    selectedBaseOriginByName (BasesOrigins) {
-      if (BasesOrigins.trim() === '') {
+    getCampaigns () {
+      WebService.get('web/' + 'campaigns')
+        .then(response => {
+          this.stringOptionsCampaign = []
+          response.data.some((item, i) => {
+            this.stringOptionsCampaign.push(item.name)
+          })
+          this.listCampaign = response.data
+        })
+        .catch(errors => {
+        })
+        .then(() => {
+        })
+    },
+
+    selectedTargetByEmail (email) {
+      if (email.trim() === '') {
         return null
       }
       var resp = null
-      this.listBasesOrg.some((item, i) => {
-        if (item.name === BasesOrigins) {
+      this.listTargets.some((item, i) => {
+        if (item.email === email) {
           resp = item
         }
       })
       return resp
     },
 
-    selectedCompanyByName (company) {
-      if (company.trim() === '') {
+    selectedCampaignByName (name) {
+      if (name.trim() === '') {
         return null
       }
       var resp = null
-      this.listCompanies.some((item, i) => {
-        if (item.fantasy_name === company) {
+      this.listCampaign.some((item, i) => {
+        if (item.name === name) {
           resp = item
         }
       })
       return resp
     },
 
-    filterFnAutoselectBaseOrigin (val, update, abort) {
+    filterFnAutoselectTarget (val, update, abort) {
       // call abort() at any time if you can't retrieve data somehow
       setTimeout(() => {
         update(
           () => {
             if (val === '') {
-              this.optionsBasesOrg = this.stringOptionsBaseOrg
+              this.optionsTargets = this.stringOptionsTargets
             } else {
               const needle = val.toLowerCase()
-              this.optionsBasesOrg = this.stringOptionsBaseOrg.filter(v => v.toLowerCase().indexOf(needle) > -1)
+              this.optionsTargets = this.stringOptionsTargets.filter(v => v.toLowerCase().indexOf(needle) > -1)
             }
           },
           // next function is available in Quasar v1.7.4+;
@@ -275,8 +272,8 @@ export default {
       }, 300)
     },
 
-    abortFilterFnBasesOrigin () {
-      this.selectedBaseOrigin = ''
+    abortFilterFnTarget () {
+      this.selectedTargetEmail = ''
     },
 
     filterFnAutoselectCompany (val, update, abort) {
@@ -285,10 +282,10 @@ export default {
         update(
           () => {
             if (val === '') {
-              this.optionsCompanies = this.stringOptionsCompanies
+              this.optionsCampaign = this.stringOptionsCampaign
             } else {
               const needle = val.toLowerCase()
-              this.optionsCompanies = this.stringOptionsCompanies.filter(v => v.toLowerCase().indexOf(needle) > -1)
+              this.optionsCampaign = this.stringOptionsCampaign.filter(v => v.toLowerCase().indexOf(needle) > -1)
             }
           },
           // next function is available in Quasar v1.7.4+;
@@ -304,58 +301,28 @@ export default {
     },
 
     abortFilterFnCompany () {
-      this.selectedBaseCompany = ''
+      this.selectedCampaignRecompense = ''
     },
 
-    validateBaseModel () {
-      if (this.userLoggued.role_id === 1) {
-        this.selectedBaseOrg = this.selectedBaseOriginByName(this.selectedBaseOrigin)
-        if (!this.selectedBaseOrg) {
-          this.$q.notify({ type: 'negative', message: `O campo Origem da base é obrigatório.`, position: 'top-right' })
-          return false
-        } else {
-          this.baseModel.origin_id = this.selectedBaseOrg.id
-        }
-      }
-
-      if (this.userLoggued.role_id === 1) {
-        this.selectedCompany = this.selectedCompanyByName(this.selectedBaseCompany)
-        if (!this.selectedCompany) {
-          this.$q.notify({ type: 'negative', message: `O campo Atribuir empresa é obrigatório.`, position: 'top-right' })
-          return false
-        } else {
-          this.baseModel.company_id = this.selectedCompany.id
-        }
-      }
-
-      if (this.baseModel.name.trim() === '') {
-        this.$q.notify({ type: 'negative', message: `O campo Nome é obrigatório.`, position: 'top-right' })
+    validateRecompenseModel () {
+      this.selectedTarget = this.selectedTargetByEmail(this.selectedTargetEmail)
+      if (!this.selectedTarget) {
+        this.$q.notify({ type: 'negative', message: `Selecione um Target válido.`, position: 'top-right' })
         return false
+      } else {
+        this.recompenseModel.user_id = this.selectedTarget.id // user_id
       }
-
-      if (!this.fileInputCSV) {
-        this.$q.notify({ type: 'negative', message: `Deve selecionar um arquivo CSV com a base de usuários.`, position: 'top-right' })
+      this.selectedCampaign = this.selectedCampaignByName(this.selectedCampaignRecompense)
+      if (!this.selectedCampaign) {
+        this.$q.notify({ type: 'negative', message: `O campo Atribuir empresa é obrigatório.`, position: 'top-right' })
         return false
+      } else {
+        this.recompenseModel.campaign_id = this.selectedCampaign.id // campaign_id
+        this.recompenseModel.questionnaire_id = this.questionary.id
+        this.recompenseModel.value = this.questionary.Plane.recompense
       }
 
       return true
-    },
-
-    triggerEvent () {
-      this.fileInputCSV = null
-      this.$refs.fileInputCSV.click()
-    },
-
-    getFileSelected (e) {
-      this.fileInputCSV = e.target.files[0]
-      if (this.fileInputCSV) {
-        this.fileInputCSVFullPath = this.fileInputCSV.name
-      }
-    },
-
-    downloadTemplate () {
-      this.modalHelpCSVFile = false
-      this.$refs.lnkDownloadTemplate.click()
     }
   },
 
@@ -363,10 +330,12 @@ export default {
   },
 
   beforeMount () {
-    this.getBasesOrigins()
-    this.getCompanies()
-    this.app_host = process.env.HOST
-    // this.app_host = process.env.MIX_APP_URL  // TODO: Jose R
+    this.getTargets()
+    this.getCampaigns()
+
+    if (this.action === 'edit') {
+      this.prepareToUpdateRecompense()
+    }
 
     this.userLoggued.role_id = 1 // TODO-JR: obter o usuário logado
   },

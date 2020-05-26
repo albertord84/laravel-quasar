@@ -5,9 +5,10 @@
             :data="data"
             :columns="columns"
             row-key="id"
+            dense
             binary-state-sort
             :card-container-style="{ backgroundColor: '#ff0000' }"
-            :dense="$q.screen.lt.md"
+
             :loading="isLoading"
             :pagination="pagination"
             :rows-per-page-options="[0]"
@@ -38,9 +39,20 @@
                   {{ props.row.name }}
               </q-td>
 
-              <q-td key="response_limit" :props="props" class="q-pa-none q-ma-none">
-                  <span title="Quantidade"> {{ props.row.response_amount }} / </span>
-                  <span title="Limite"> {{ props.row.response_limit }} </span>
+              <q-td key="name" :props="props" class="q-pa-none q-ma-none">
+                  {{ props.row.StatusCampaign.name }}
+              </q-td>
+
+              <q-td key="requested_date" :props="props" class="q-pa-none q-ma-none">
+                {{ props.row.requested_date.substr(0,10) }}
+              </q-td>
+
+              <q-td key="analyzed_date" :props="props" class="q-pa-none q-ma-none">
+                {{ (props.row.analyzed_date === '2000-04-29') ? props.row.analyzed_date.substr(0,10) : '-' }}
+              </q-td>
+
+              <q-td key="invitations_send_date" :props="props" class="q-pa-none q-ma-none">
+                {{ props.row.invitations_send_date.substr(0,10) }}
               </q-td>
 
               <q-td key="invitations_sent" :props="props" class="q-pa-none q-ma-none">
@@ -49,25 +61,24 @@
                 <span title="Enviados" > {{ props.row.invitations_sent }}</span>
               </q-td>
 
-              <q-td key="requested_date" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.requested_date.substr(0,10) }}
-              </q-td>
-
-              <q-td key="analyzed_date" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.analyzed_date.substr(0,10) }}
-              </q-td>
-
               <q-td key="start_date" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.start_date.substr(0,10) }}
+                {{ props.row.start_date.substr(0,10) }} / {{ props.row.end_date.substr(0,10) }}
               </q-td>
 
-              <q-td key="end_date" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.end_date.substr(0,10) }}
+              <q-td key="response_limit" :props="props" class="q-pa-none q-ma-none">
+                  <span title="Quantidade"> {{ props.row.response_amount }} / </span>
+                  <span title="Limite"> {{ props.row.response_limit }} </span>
               </q-td>
 
+              <!--
               <q-td key="created_at" :props="props" class="q-pa-none q-ma-none">
                 {{ props.row.created_at.substr(0,10) }}
+              </q-td> -->
+
+              <!-- <q-td key="analyzed_date" :props="props" class="q-pa-none q-ma-none">
+                {{ props.row.analyzed_date.substr(0,10) }}
               </q-td>
+              -->
 
               <q-td key="actions" :props="props" class="q-pa-none q-ma-none">
                 <div style="margin-left:-3px">
@@ -171,15 +182,9 @@ export default {
           sortable: true
         },
         {
-          label: 'Respostas',
-          field: 'response_limit',
-          name: 'response_limit',
-          align: 'center'
-        },
-        {
-          label: 'Convites',
-          field: 'invitations_sent',
-          name: 'invitations_sent',
+          label: 'Status',
+          field: 'status',
+          name: 'status',
           align: 'center'
         },
         {
@@ -195,22 +200,27 @@ export default {
           align: 'center'
         },
         {
-          label: 'Início',
+          label: 'Convites data',
+          field: 'invitations_send_date',
+          name: 'invitations_send_date',
+          align: 'center'
+        },
+        {
+          label: 'Convites',
+          field: 'invitations_sent',
+          name: 'invitations_sent',
+          align: 'center'
+        },
+        {
+          label: 'Início / Fim',
           field: 'start_date',
           name: 'start_date',
           align: 'center'
         },
         {
-          label: 'Fim',
-          field: 'end_date',
-          name: 'end_date',
-          align: 'center'
-        },
-
-        {
-          label: 'Criado',
-          field: 'created_at',
-          name: 'created_at',
+          label: 'Respostas',
+          field: 'response_limit',
+          name: 'response_limit',
           align: 'center'
         },
         {
@@ -264,7 +274,9 @@ export default {
     deleteCampaign () {
       if (this.campaign) {
         this.isDeleting = true
-        WebService.delete('web/' + 'campaigns/' + this.campaign.id)
+        WebService.post('web/deleteFullCampaign', {
+          campaign: this.campaign
+        })
           .then(response => {
             this.modalConfirmDelete = false
             this.$q.notify({ type: 'positive', message: `Campanha eliminada com sucesso.`, position: 'top-right' })

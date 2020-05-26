@@ -9,7 +9,7 @@ class WelcomeController extends Controller
 {
 		public function index(Request $request)
 		{
-      dd(Auth::guard('web'));
+      // dd(Auth::guard('web'));
       return view('app');
 		}
 }

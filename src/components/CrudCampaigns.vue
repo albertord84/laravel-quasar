@@ -21,7 +21,7 @@
       <!-- Descrição -->
       <div class="col-6 q-px-xs q-mt-lg">
         <span>Descrição </span>
-        <q-input autogrow filled square v-model="campaignModel.decription" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm"/>
+        <q-input autogrow filled square v-model="campaignModel.description" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm"/>
       </div>
 
       <!-- Observação -->
@@ -163,7 +163,7 @@
       <q-separator  class="col-12 q-pa-none q-ma-none"></q-separator>
       <div class="q-my-md">
         <q-btn text-color="white" :loading="isCreatingCampaign" class="q-pa-sm q-mb-sm bg-orange-8"
-            label="Guardar campanha"  title="Guardar campanha" icon="save" @click.prevent="addCampaign">
+            label="Guardar campanha"  title="Guardar campanha" icon="save" @click.prevent="saveCampaign">
           <template v-slot:loading>
             <q-spinner></q-spinner>
           </template>
@@ -181,7 +181,7 @@ export default {
 
   props: {
     action: null,
-    company: null
+    campaign: null
   },
 
   data () {
@@ -254,22 +254,30 @@ export default {
 
   methods: {
 
-    addCampaign () {
+    saveCampaign () {
       if (!this.validateCampaignModel()) {
         return
       }
       this.campaignModel.updater_id = this.campaignModel.criator_id
       this.isCreatingCampaign = true
-      WebService.put('web/criateFullCampaign', {
+      if (this.campaign.UserCriator) { delete this.campaign.UserCriator }
+      if (this.campaign.UserUpdater) { delete this.campaign.UserUpdater }
+      if (this.campaign.StatusCampaign) { delete this.campaign.StatusCampaign }
+      if (this.campaign.Questionnaire) { delete this.campaign.Questionnaire }
+      if (this.campaign.Base) { delete this.campaign.Base }
+      var url = (this.action === 'insert') ? 'criateFullCampaign' : 'updateFullCampaign'
+      WebService.put('web/' + url, {
         campaign: this.campaignModel
       })
         .then(response => {
           this.isCreatingCampaign = false
-          this.$q.notify({ type: 'positive', color: 'teal-3', message: `Campanha criada com sucesso.`, position: 'top-right' })
+          var text = (this.action === 'insert') ? 'criada' : 'atualizada'
+          this.$q.notify({ type: 'positive', color: 'teal-3', message: `Campanha ` + text + ` com sucesso.`, position: 'top-right' })
           this.$emit('reloadCampaigns')
         })
         .catch(error => {
-          this.$q.notify({ type: 'negative', message: `Erro cadastrando campanha.`, position: 'top-right' })
+          var text = (this.action === 'insert') ? 'cadastrando' : 'atualizando'
+          this.$q.notify({ type: 'negative', message: `Erro ` + text + ` campanha.`, position: 'top-right' })
           this.isCreatingCampaign = false
           console.log(error)
         })
@@ -279,7 +287,27 @@ export default {
     },
 
     prepareToUpdateCompany () {
-      // --------------
+      if (this.campaign.UserCriator) {
+        this.selectedAdminEmail = this.campaign.UserCriator.email
+      }
+      if (this.campaign.StatusCampaign) {
+        this.selectedCampaignStatus = this.campaign.StatusCampaign.name
+      }
+      if (this.campaign.Questionnaire) {
+        this.selectedCampaignQuestionnary = this.campaign.Questionnaire.name
+      }
+      if (this.campaign.Base) {
+        this.selectedCampaignBase = this.campaign.Base.name
+      }
+      this.campaign.invitations_send_date = this.campaign.invitations_send_date.slice(0, 16)
+      this.campaign.start_date = this.campaign.start_date.slice(0, 16)
+      this.campaign.end_date = this.campaign.end_date.slice(0, 16)
+      // ---------------------
+      this.campaign.invitations_send_date = '2020-05-27 10:00'
+      this.campaign.start_date = '2020-05-28 10:00'
+      this.campaign.end_date = '2020-05-29 10:00'
+      // ---------------------
+      this.campaignModel = this.campaign
     },
 
     updateCompany () {
@@ -555,6 +583,7 @@ export default {
         this.campaignModel.questionary_id = this.selectedQuestionnary.id
       }
 
+      this.campaignModel.response_limit = String(this.campaignModel.response_limit)
       if (this.campaignModel.response_limit.trim() === '' || this.campaignModel.response_limit.trim() === 0 || this.campaignModel.response_limit.trim() === '0') {
         this.$q.notify({ type: 'negative', message: `O campo Limite de respostas é inválido.`, position: 'top-right' })
         return false
@@ -662,6 +691,9 @@ export default {
     this.now()
     if (this.action === 'insert') {
       this.modelTimes()
+    }
+    if (this.action === 'edit') {
+      this.prepareToUpdateCompany()
     }
 
     this.userLoggued.role_id = 1 // TODO-JR: obter o usuário logado
