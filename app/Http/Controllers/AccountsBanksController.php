@@ -61,9 +61,11 @@ class AccountsBanksController extends AppBaseController
 
         $accountsBanks = $this->accountsBanksRepository->create($input);
 
-        Flash::success('Accounts Banks saved successfully.');
+        return $$accountsBanks->toJson();
 
-        return redirect(route('accountsBanks.index'));
+        // Flash::success('Accounts Banks saved successfully.');
+
+        // return redirect(route('accountsBanks.index'));
     }
 
     /**
@@ -126,9 +128,11 @@ class AccountsBanksController extends AppBaseController
 
         $accountsBanks = $this->accountsBanksRepository->update($request->all(), $id);
 
-        Flash::success('Accounts Banks updated successfully.');
+        return $$accountsBanks->toJson();
 
-        return redirect(route('accountsBanks.index'));
+        // Flash::success('Accounts Banks updated successfully.');
+
+        // return redirect(route('accountsBanks.index'));
     }
 
     /**
@@ -152,8 +156,8 @@ class AccountsBanksController extends AppBaseController
 
         $this->accountsBanksRepository->delete($id);
 
-        Flash::success('Accounts Banks deleted successfully.');
+        // Flash::success('Accounts Banks deleted successfully.');
 
-        return redirect(route('accountsBanks.index'));
+        // return redirect(route('accountsBanks.index'));
     }
 }

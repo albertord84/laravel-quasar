@@ -63,9 +63,11 @@ class AddressController extends AppBaseController
 
         $address = $this->addressRepository->create($input);
 
-        Flash::success('Address saved successfully.');
+        return $$address->toJson();
 
-        return redirect(route('addresses.index'));
+        // Flash::success('Address saved successfully.');
+
+        // return redirect(route('addresses.index'));
     }
 
     /**
@@ -128,9 +130,11 @@ class AddressController extends AppBaseController
 
         $address = $this->addressRepository->update($request->all(), $id);
 
-        Flash::success('Address updated successfully.');
+        return $$address->toJson();
 
-        return redirect(route('addresses.index'));
+        // Flash::success('Address updated successfully.');
+
+        // return redirect(route('addresses.index'));
     }
 
     /**
@@ -154,9 +158,9 @@ class AddressController extends AppBaseController
 
         $this->addressRepository->delete($id);
 
-        Flash::success('Address deleted successfully.');
+        // Flash::success('Address deleted successfully.');
 
-        return redirect(route('addresses.index'));
+        // return redirect(route('addresses.index'));
     }
 
     public function getAddressByCEP($cep){

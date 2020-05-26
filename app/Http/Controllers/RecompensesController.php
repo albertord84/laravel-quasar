@@ -60,9 +60,11 @@ class RecompensesController extends AppBaseController
 
         $recompenses = $this->recompensesRepository->create($input);
 
-        Flash::success('Recompenses saved successfully.');
+        return $recompenses->toJson();
 
-        return redirect(route('recompenses.index'));
+        // Flash::success('Recompenses saved successfully.');
+
+        // return redirect(route('recompenses.index'));
     }
 
     /**
@@ -153,8 +155,8 @@ class RecompensesController extends AppBaseController
 
         $this->recompensesRepository->delete($id);
 
-        Flash::success('Recompenses deleted successfully.');
+        // Flash::success('Recompenses deleted successfully.');
 
-        return redirect(route('recompenses.index'));
+        // return redirect(route('recompenses.index'));
     }
 }

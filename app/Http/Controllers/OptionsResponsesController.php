@@ -61,9 +61,11 @@ class OptionsResponsesController extends AppBaseController
 
         $optionsResponses = $this->optionsResponsesRepository->create($input);
 
-        Flash::success('Options Responses saved successfully.');
+        return $optionsResponses->toJson();
 
-        return redirect(route('optionsResponses.index'));
+        // Flash::success('Options Responses saved successfully.');
+
+        // return redirect(route('optionsResponses.index'));
     }
 
     /**
@@ -126,9 +128,11 @@ class OptionsResponsesController extends AppBaseController
 
         $optionsResponses = $this->optionsResponsesRepository->update($request->all(), $id);
 
-        Flash::success('Options Responses updated successfully.');
+        return $optionsResponses->toJson();
 
-        return redirect(route('optionsResponses.index'));
+        // Flash::success('Options Responses updated successfully.');
+
+        // return redirect(route('optionsResponses.index'));
     }
 
     /**
@@ -152,8 +156,8 @@ class OptionsResponsesController extends AppBaseController
 
         $this->optionsResponsesRepository->delete($id);
 
-        Flash::success('Options Responses deleted successfully.');
+        // Flash::success('Options Responses deleted successfully.');
 
-        return redirect(route('optionsResponses.index'));
+        // return redirect(route('optionsResponses.index'));
     }
 }

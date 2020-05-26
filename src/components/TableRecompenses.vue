@@ -235,7 +235,7 @@ export default {
     deleteRecompense () {
       if (this.recompense) {
         this.isDeleting = true
-        WebService.delete('web/' + 'recompenses/' + this.recompense.id)
+        WebService.delete('web/recompenses/' + this.recompense.id)
           .then(response => {
             this.modalConfirmDelete = false
             this.$q.notify({ type: 'positive', message: `Recompensa eliminada com sucesso.`, position: 'top-right' })

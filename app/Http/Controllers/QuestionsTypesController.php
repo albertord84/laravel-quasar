@@ -64,9 +64,11 @@ class QuestionsTypesController extends AppBaseController
 
         $questionsTypes = $this->questionsTypesRepository->create($input);
 
-        Flash::success('Questions Types saved successfully.');
+        return $questionsTypes->toJson();
 
-        return redirect(route('questionsTypes.index'));
+        // Flash::success('Questions Types saved successfully.');
+
+        // return redirect(route('questionsTypes.index'));
     }
 
     /**
@@ -129,9 +131,11 @@ class QuestionsTypesController extends AppBaseController
 
         $questionsTypes = $this->questionsTypesRepository->update($request->all(), $id);
 
-        Flash::success('Questions Types updated successfully.');
+        return $questionsTypes->toJson();
 
-        return redirect(route('questionsTypes.index'));
+        // Flash::success('Questions Types updated successfully.');
+
+        // return redirect(route('questionsTypes.index'));
     }
 
     /**
@@ -155,8 +159,8 @@ class QuestionsTypesController extends AppBaseController
 
         $this->questionsTypesRepository->delete($id);
 
-        Flash::success('Questions Types deleted successfully.');
+        // Flash::success('Questions Types deleted successfully.');
 
-        return redirect(route('questionsTypes.index'));
+        // return redirect(route('questionsTypes.index'));
     }
 }

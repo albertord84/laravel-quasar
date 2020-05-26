@@ -66,9 +66,11 @@ class UsersStatusController extends AppBaseController
 
         $usersStatus = $this->usersStatusRepository->create($input);
 
-        Flash::success('Users Status saved successfully.');
+        return $usersStatus->toJson();
 
-        return redirect(route('usersStatuses.index'));
+        // Flash::success('Users Status saved successfully.');
+
+        // return redirect(route('usersStatuses.index'));
     }
 
     /**
@@ -131,9 +133,11 @@ class UsersStatusController extends AppBaseController
 
         $usersStatus = $this->usersStatusRepository->update($request->all(), $id);
 
-        Flash::success('Users Status updated successfully.');
+        return $usersStatus->toJson();
 
-        return redirect(route('usersStatuses.index'));
+        // Flash::success('Users Status updated successfully.');
+
+        // return redirect(route('usersStatuses.index'));
     }
 
     /**
@@ -157,8 +161,8 @@ class UsersStatusController extends AppBaseController
 
         $this->usersStatusRepository->delete($id);
 
-        Flash::success('Users Status deleted successfully.');
+        // Flash::success('Users Status deleted successfully.');
 
-        return redirect(route('usersStatuses.index'));
+        // return redirect(route('usersStatuses.index'));
     }
 }

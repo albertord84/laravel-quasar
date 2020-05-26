@@ -65,9 +65,11 @@ class CampaignsStatusController extends AppBaseController
 
         $campaignsStatus = $this->campaignsStatusRepository->create($input);
 
-        Flash::success('Campaigns Status saved successfully.');
+        return $campaignsStatus->toJson();
 
-        return redirect(route('campaignsStatuses.index'));
+        // Flash::success('Campaigns Status saved successfully.');
+
+        // return redirect(route('campaignsStatuses.index'));
     }
 
     /**
@@ -130,9 +132,11 @@ class CampaignsStatusController extends AppBaseController
 
         $campaignsStatus = $this->campaignsStatusRepository->update($request->all(), $id);
 
-        Flash::success('Campaigns Status updated successfully.');
+        return $campaignsStatus->toJson();
 
-        return redirect(route('campaignsStatuses.index'));
+        // Flash::success('Campaigns Status updated successfully.');
+
+        // return redirect(route('campaignsStatuses.index'));
     }
 
     /**
@@ -156,8 +160,8 @@ class CampaignsStatusController extends AppBaseController
 
         $this->campaignsStatusRepository->delete($id);
 
-        Flash::success('Campaigns Status deleted successfully.');
+        // Flash::success('Campaigns Status deleted successfully.');
 
-        return redirect(route('campaignsStatuses.index'));
+        // return redirect(route('campaignsStatuses.index'));
     }
 }

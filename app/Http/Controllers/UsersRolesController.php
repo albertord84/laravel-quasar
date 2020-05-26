@@ -63,9 +63,11 @@ class UsersRolesController extends AppBaseController
 
         $usersRoles = $this->usersRolesRepository->create($input);
 
-        Flash::success('Users Roles saved successfully.');
+        return $usersRoles->toJson();
 
-        return redirect(route('usersRoles.index'));
+        // Flash::success('Users Roles saved successfully.');
+
+        // return redirect(route('usersRoles.index'));
     }
 
     /**
@@ -128,9 +130,11 @@ class UsersRolesController extends AppBaseController
 
         $usersRoles = $this->usersRolesRepository->update($request->all(), $id);
 
-        Flash::success('Users Roles updated successfully.');
+        return $usersRoles->toJson();
 
-        return redirect(route('usersRoles.index'));
+        // Flash::success('Users Roles updated successfully.');
+
+        // return redirect(route('usersRoles.index'));
     }
 
     /**
@@ -154,8 +158,8 @@ class UsersRolesController extends AppBaseController
 
         $this->usersRolesRepository->delete($id);
 
-        Flash::success('Users Roles deleted successfully.');
+        // Flash::success('Users Roles deleted successfully.');
 
-        return redirect(route('usersRoles.index'));
+        // return redirect(route('usersRoles.index'));
     }
 }

@@ -59,9 +59,11 @@ class ExtractionsStatusController extends AppBaseController
 
         $extractionsStatus = $this->extractionsStatusRepository->create($input);
 
-        Flash::success('Extractions Status saved successfully.');
+        return $extractionsStatus->toJson();
 
-        return redirect(route('extractionsStatuses.index'));
+        // Flash::success('Extractions Status saved successfully.');
+
+        // return redirect(route('extractionsStatuses.index'));
     }
 
     /**
@@ -124,9 +126,11 @@ class ExtractionsStatusController extends AppBaseController
 
         $extractionsStatus = $this->extractionsStatusRepository->update($request->all(), $id);
 
-        Flash::success('Extractions Status updated successfully.');
+        return $extractionsStatus->toJson();
 
-        return redirect(route('extractionsStatuses.index'));
+        // Flash::success('Extractions Status updated successfully.');
+
+        // return redirect(route('extractionsStatuses.index'));
     }
 
     /**
@@ -150,8 +154,8 @@ class ExtractionsStatusController extends AppBaseController
 
         $this->extractionsStatusRepository->delete($id);
 
-        Flash::success('Extractions Status deleted successfully.');
+        // Flash::success('Extractions Status deleted successfully.');
 
-        return redirect(route('extractionsStatuses.index'));
+        // return redirect(route('extractionsStatuses.index'));
     }
 }

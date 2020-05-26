@@ -60,9 +60,11 @@ class ResponsesController extends AppBaseController
 
         $responses = $this->responsesRepository->create($input);
 
-        Flash::success('Responses saved successfully.');
+        return $responses->toJson();
 
-        return redirect(route('responses.index'));
+        // Flash::success('Responses saved successfully.');
+
+        // return redirect(route('responses.index'));
     }
 
     /**
@@ -125,9 +127,11 @@ class ResponsesController extends AppBaseController
 
         $responses = $this->responsesRepository->update($request->all(), $id);
 
-        Flash::success('Responses updated successfully.');
+        return $responses->toJson();
 
-        return redirect(route('responses.index'));
+        // Flash::success('Responses updated successfully.');
+
+        // return redirect(route('responses.index'));
     }
 
     /**
@@ -151,8 +155,8 @@ class ResponsesController extends AppBaseController
 
         $this->responsesRepository->delete($id);
 
-        Flash::success('Responses deleted successfully.');
+        // Flash::success('Responses deleted successfully.');
 
-        return redirect(route('responses.index'));
+        // return redirect(route('responses.index'));
     }
 }

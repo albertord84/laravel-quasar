@@ -60,9 +60,11 @@ class UsersBasesController extends AppBaseController
 
         $usersBases = $this->usersBasesRepository->create($input);
 
-        Flash::success('Users Bases saved successfully.');
+        return $usersBases->toJson();
 
-        return redirect(route('usersBases.index'));
+        // Flash::success('Users Bases saved successfully.');
+
+        // return redirect(route('usersBases.index'));
     }
 
     /**
@@ -125,9 +127,11 @@ class UsersBasesController extends AppBaseController
 
         $usersBases = $this->usersBasesRepository->update($request->all(), $id);
 
-        Flash::success('Users Bases updated successfully.');
+        return $usersBases->toJson();
 
-        return redirect(route('usersBases.index'));
+        // Flash::success('Users Bases updated successfully.');
+
+        // return redirect(route('usersBases.index'));
     }
 
     /**
@@ -151,8 +155,8 @@ class UsersBasesController extends AppBaseController
 
         $this->usersBasesRepository->delete($id);
 
-        Flash::success('Users Bases deleted successfully.');
+        // Flash::success('Users Bases deleted successfully.');
 
-        return redirect(route('usersBases.index'));
+        // return redirect(route('usersBases.index'));
     }
 }

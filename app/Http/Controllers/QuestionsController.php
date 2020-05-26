@@ -60,9 +60,11 @@ class QuestionsController extends AppBaseController
 
         $questions = $this->questionsRepository->create($input);
 
-        Flash::success('Questions saved successfully.');
+        return $questions->toJson();
 
-        return redirect(route('questions.index'));
+        // Flash::success('Questions saved successfully.');
+
+        // return redirect(route('questions.index'));
     }
 
     /**
@@ -125,9 +127,11 @@ class QuestionsController extends AppBaseController
 
         $questions = $this->questionsRepository->update($request->all(), $id);
 
-        Flash::success('Questions updated successfully.');
+        return $questions->toJson();
 
-        return redirect(route('questions.index'));
+        // Flash::success('Questions updated successfully.');
+
+        // return redirect(route('questions.index'));
     }
 
     /**
@@ -151,8 +155,8 @@ class QuestionsController extends AppBaseController
 
         $this->questionsRepository->delete($id);
 
-        Flash::success('Questions deleted successfully.');
+        // Flash::success('Questions deleted successfully.');
 
-        return redirect(route('questions.index'));
+        // return redirect(route('questions.index'));
     }
 }

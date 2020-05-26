@@ -61,9 +61,11 @@ class ExtractionsController extends AppBaseController
 
         $extractions = $this->extractionsRepository->create($input);
 
-        Flash::success('Extractions saved successfully.');
+        return $extractions->toJson();
 
-        return redirect(route('extractions.index'));
+        // Flash::success('Extractions saved successfully.');
+
+        // return redirect(route('extractions.index'));
     }
 
     /**
@@ -126,9 +128,11 @@ class ExtractionsController extends AppBaseController
 
         $extractions = $this->extractionsRepository->update($request->all(), $id);
 
-        Flash::success('Extractions updated successfully.');
+        return $extractions->toJson();
 
-        return redirect(route('extractions.index'));
+        // Flash::success('Extractions updated successfully.');
+
+        // return redirect(route('extractions.index'));
     }
 
     /**
@@ -152,8 +156,8 @@ class ExtractionsController extends AppBaseController
 
         $this->extractionsRepository->delete($id);
 
-        Flash::success('Extractions deleted successfully.');
+        // Flash::success('Extractions deleted successfully.');
 
-        return redirect(route('extractions.index'));
+        // return redirect(route('extractions.index'));
     }
 }

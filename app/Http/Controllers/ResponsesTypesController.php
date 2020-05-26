@@ -66,9 +66,11 @@ class ResponsesTypesController extends AppBaseController
 
         $responsesTypes = $this->responsesTypesRepository->create($input);
 
-        Flash::success('Responses Types saved successfully.');
+        return $responsesTypes->toJson();
 
-        return redirect(route('responsesTypes.index'));
+        // Flash::success('Responses Types saved successfully.');
+
+        // return redirect(route('responsesTypes.index'));
     }
 
     /**
@@ -131,9 +133,11 @@ class ResponsesTypesController extends AppBaseController
 
         $responsesTypes = $this->responsesTypesRepository->update($request->all(), $id);
 
-        Flash::success('Responses Types updated successfully.');
+        return $responsesTypes->toJson();
 
-        return redirect(route('responsesTypes.index'));
+        // Flash::success('Responses Types updated successfully.');
+
+        // return redirect(route('responsesTypes.index'));
     }
 
     /**
@@ -157,8 +161,8 @@ class ResponsesTypesController extends AppBaseController
 
         $this->responsesTypesRepository->delete($id);
 
-        Flash::success('Responses Types deleted successfully.');
+        // Flash::success('Responses Types deleted successfully.');
 
-        return redirect(route('responsesTypes.index'));
+        // return redirect(route('responsesTypes.index'));
     }
 }

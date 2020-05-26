@@ -60,9 +60,11 @@ class CostsCentersController extends AppBaseController
 
         $costsCenters = $this->costsCentersRepository->create($input);
 
-        Flash::success('Costs Centers saved successfully.');
+        return $costsCenters->toJson();
 
-        return redirect(route('costsCenters.index'));
+        // Flash::success('Costs Centers saved successfully.');
+
+        // return redirect(route('costsCenters.index'));
     }
 
     /**
@@ -125,9 +127,11 @@ class CostsCentersController extends AppBaseController
 
         $costsCenters = $this->costsCentersRepository->update($request->all(), $id);
 
-        Flash::success('Costs Centers updated successfully.');
+        return $costsCenters->toJson();
 
-        return redirect(route('costsCenters.index'));
+        // Flash::success('Costs Centers updated successfully.');
+
+        // return redirect(route('costsCenters.index'));
     }
 
     /**
@@ -151,8 +155,8 @@ class CostsCentersController extends AppBaseController
 
         $this->costsCentersRepository->delete($id);
 
-        Flash::success('Costs Centers deleted successfully.');
+        // Flash::success('Costs Centers deleted successfully.');
 
-        return redirect(route('costsCenters.index'));
+        // return redirect(route('costsCenters.index'));
     }
 }

@@ -153,9 +153,9 @@ class BasesController extends AppBaseController
 
         $this->basesRepository->delete($id);
 
-        Flash::success('Bases deleted successfully.');
+        // Flash::success('Bases deleted successfully.');
 
-        return redirect(route('bases.index'));
+        // return redirect(route('bases.index'));
     }
 
     public function baseFromCSV($id, Request $request)

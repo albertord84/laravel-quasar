@@ -59,9 +59,11 @@ class BasesOriginsController extends AppBaseController
 
         $basesOrigins = $this->basesOriginsRepository->create($input);
 
-        Flash::success('Bases Origins saved successfully.');
+        return $basesOrigins->toJson();
 
-        return redirect(route('basesOrigins.index'));
+        // Flash::success('Bases Origins saved successfully.');
+
+        // return redirect(route('basesOrigins.index'));
     }
 
     /**
@@ -124,9 +126,11 @@ class BasesOriginsController extends AppBaseController
 
         $basesOrigins = $this->basesOriginsRepository->update($request->all(), $id);
 
-        Flash::success('Bases Origins updated successfully.');
+        return $basesOrigins->toJson();
 
-        return redirect(route('basesOrigins.index'));
+        // Flash::success('Bases Origins updated successfully.');
+
+        // return redirect(route('basesOrigins.index'));
     }
 
     /**
@@ -150,8 +154,8 @@ class BasesOriginsController extends AppBaseController
 
         $this->basesOriginsRepository->delete($id);
 
-        Flash::success('Bases Origins deleted successfully.');
+        // Flash::success('Bases Origins deleted successfully.');
 
-        return redirect(route('basesOrigins.index'));
+        // return redirect(route('basesOrigins.index'));
     }
 }

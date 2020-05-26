@@ -130,11 +130,11 @@ class UsersController extends AppBaseController
     }
 
     public function updateFullUser(Request $request) {
-      return  $this->usersRepository->updateFullUser($request);
+        return  $this->usersRepository->updateFullUser($request);
     }
 
     public function deleteFullUser(Request $request) {
-      return  $this->usersRepository->deleteFullUser($request);
+        return  $this->usersRepository->deleteFullUser($request);
     }
 
 }

@@ -60,9 +60,11 @@ class QuestionnairesController extends AppBaseController
 
         $questionnaires = $this->questionnairesRepository->create($input);
 
-        Flash::success('Questionnaires saved successfully.');
+        return $questionnaires->toJson();
 
-        return redirect(route('questionnaires.index'));
+        // Flash::success('Questionnaires saved successfully.');
+
+        // return redirect(route('questionnaires.index'));
     }
 
     /**
@@ -125,9 +127,11 @@ class QuestionnairesController extends AppBaseController
 
         $questionnaires = $this->questionnairesRepository->update($request->all(), $id);
 
-        Flash::success('Questionnaires updated successfully.');
+        return $questionnaires->toJson();
 
-        return redirect(route('questionnaires.index'));
+        // Flash::success('Questionnaires updated successfully.');
+
+        // return redirect(route('questionnaires.index'));
     }
 
     /**
@@ -151,9 +155,9 @@ class QuestionnairesController extends AppBaseController
 
         $this->questionnairesRepository->delete($id);
 
-        Flash::success('Questionnaires deleted successfully.');
+        // Flash::success('Questionnaires deleted successfully.');
 
-        return redirect(route('questionnaires.index'));
+        // return redirect(route('questionnaires.index'));
     }
 
     public function fullQuestionary($questionaryId) {

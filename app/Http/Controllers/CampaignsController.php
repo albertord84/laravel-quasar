@@ -63,9 +63,11 @@ class CampaignsController extends AppBaseController
 
         $campaigns = $this->campaignsRepository->create($input);
 
-        Flash::success('Campaigns saved successfully.');
+        return $$campaigns->toJson();
 
-        return redirect(route('campaigns.index'));
+        // Flash::success('Campaigns saved successfully.');
+
+        // return redirect(route('campaigns.index'));
     }
 
     /**
@@ -128,9 +130,11 @@ class CampaignsController extends AppBaseController
 
         $campaigns = $this->campaignsRepository->update($request->all(), $id);
 
-        Flash::success('Campaigns updated successfully.');
+        return $$campaigns->toJson();
 
-        return redirect(route('campaigns.index'));
+        // Flash::success('Campaigns updated successfully.');
+
+        // return redirect(route('campaigns.index'));
     }
 
     /**
@@ -154,9 +158,9 @@ class CampaignsController extends AppBaseController
 
         $this->campaignsRepository->delete($id);
 
-        Flash::success('Campaigns deleted successfully.');
+        // Flash::success('Campaigns deleted successfully.');
 
-        return redirect(route('campaigns.index'));
+        // return redirect(route('campaigns.index'));
     }
 
     public function criateFullCampaign(Request $request) {

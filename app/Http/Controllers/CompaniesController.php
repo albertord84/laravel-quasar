@@ -70,7 +70,7 @@ class CompaniesController extends AppBaseController
 
         Flash::success('Companies saved successfully.');
 
-        $companies->toJson();
+        return $companies->toJson();
         // return redirect(route('companies.index'));
     }
 
@@ -136,7 +136,7 @@ class CompaniesController extends AppBaseController
 
         Flash::success('Companies updated successfully.');
 
-        $companies->toJson();
+        return $companies->toJson();
         // return redirect(route('companies.index'));
     }
 
@@ -161,9 +161,8 @@ class CompaniesController extends AppBaseController
 
         $this->companiesRepository->delete($id);
 
-        Flash::success('Companies deleted successfully.');
+        // Flash::success('Companies deleted successfully.');
 
-        return true;
         // return redirect(route('companies.index'));
     }
 

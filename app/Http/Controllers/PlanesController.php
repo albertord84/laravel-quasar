@@ -59,9 +59,11 @@ class PlanesController extends AppBaseController
 
         $planes = $this->planesRepository->create($input);
 
-        Flash::success('Planes saved successfully.');
+        return $planes->toJson();
 
-        return redirect(route('planes.index'));
+        // Flash::success('Planes saved successfully.');
+
+        // return redirect(route('planes.index'));
     }
 
     /**
@@ -124,9 +126,11 @@ class PlanesController extends AppBaseController
 
         $planes = $this->planesRepository->update($request->all(), $id);
 
-        Flash::success('Planes updated successfully.');
+        return $planes->toJson();
 
-        return redirect(route('planes.index'));
+        // Flash::success('Planes updated successfully.');
+
+        // return redirect(route('planes.index'));
     }
 
     /**
@@ -150,8 +154,8 @@ class PlanesController extends AppBaseController
 
         $this->planesRepository->delete($id);
 
-        Flash::success('Planes deleted successfully.');
+        // Flash::success('Planes deleted successfully.');
 
-        return redirect(route('planes.index'));
+        // return redirect(route('planes.index'));
     }
 }
