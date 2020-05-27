@@ -12,7 +12,7 @@ use Response;
 
 class UsersStatusController extends AppBaseController
 {
-  const BEGINNER = 1;
+    const BEGINNER = 1;
     const ACTIVE = 2;
     const DELETED = 3;
     const INACTIVE = 4;

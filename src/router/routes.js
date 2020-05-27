@@ -95,6 +95,12 @@ const routes = [
         name: 'superadmin.recompenses',
         component: () => import('pages/private/common/GerenciateRecompenses.vue'),
         meta: { requiresAuth: false }
+      },
+      {
+        path: '/superadmin/payments',
+        name: 'superadmin.payments',
+        component: () => import('pages/private/common/GerenciateExtractions.vue'),
+        meta: { requiresAuth: false }
       }
     ]
   },

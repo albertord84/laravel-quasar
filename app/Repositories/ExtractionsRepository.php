@@ -2,7 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Models\AccountsBanks;
 use App\Models\Extractions;
+use App\Models\ExtractionsStatus;
+use App\Models\Users;
 use App\Repositories\BaseRepository;
 
 /**
@@ -83,7 +86,9 @@ class ExtractionsRepository extends BaseRepository
           ->get()
           ->slice($start, $page_length)
           ->each(function(Extractions $Extraction) {
-            // $Base->Admin = null;
+                $Extraction->ExtractionsStatus = ExtractionsStatus::where('id', $Extraction->status_id)->get()->first();
+                $Extraction->User = Users::where('id', $Extraction->user_id)->get()->first();
+                $Extraction->User->AccountBank = AccountsBanks::where('user_id', $Extraction->user_id)->get()->first();
       });
     }
 

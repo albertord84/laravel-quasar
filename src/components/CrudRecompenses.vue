@@ -55,7 +55,7 @@
       <!-- ----------------------------------------------------------------------------------- -->
       <!-- Boton de salvar -->
       <div class="col-12 flex q-my-md justify-between">
-        <span class="q-mt-sm" style="font-size:1.2rem">Finalizar {{(action === 'insert') ? 'criação' : 'edição'}} da base</span>
+        <span class="q-mt-sm" style="font-size:1.2rem">Finalizar {{(action === 'insert') ? 'criação' : 'edição'}} da recompensa</span>
       </div>
       <q-separator  class="col-12 q-pa-none q-ma-none"></q-separator>
       <div class="q-my-md">

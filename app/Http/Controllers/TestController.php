@@ -10,7 +10,7 @@ class TestController extends Controller
 
   public function index(Request $request)
   {
-    dd(Auth::guard('web')->user());
-
+    $user = json_decode(Auth::guard('web')->user()->toJson());
+    dd($user->email);
   }
 }

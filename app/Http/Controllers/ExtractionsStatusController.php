@@ -12,6 +12,11 @@ use Response;
 
 class ExtractionsStatusController extends AppBaseController
 {
+  const SOLICITED = 1;
+  const APPROVED = 1;
+  const TRANSFERRED = 1;
+  const DENIED = 1;
+
     /** @var  ExtractionsStatusRepository */
     private $extractionsStatusRepository;
 

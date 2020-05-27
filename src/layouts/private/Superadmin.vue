@@ -109,9 +109,16 @@ export default {
           separator: false
         },
         {
-          icon: 'money',
+          icon: 'transfer_within_a_station',
           label: 'Recompensas',
           link: '/superadmin/recompenses',
+          selected: false,
+          separator: false
+        },
+        {
+          icon: 'monetization_on',
+          label: 'Pagamentos',
+          link: '/superadmin/payments',
           selected: false,
           separator: false
         }
