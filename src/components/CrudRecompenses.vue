@@ -7,7 +7,7 @@
       <q-separator  class="col-12 q-pa-none q-ma-none"></q-separator>
 
       <!-- Para superadmins: Origem da base -->
-      <div class="col-6 q-px-xs q-mt-lg" v-if="userLoggued.role_id == 1">
+      <div class="col-6 q-px-xs q-mt-lg" v-if="userLogged.role_id == 1">
         <span>Email do Target (*) </span>
         <q-select v-model="selectedTargetEmail" :options="optionsTargets" @filter="filterFnAutoselectTarget" @filter-abort="abortFilterFnTarget" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
           <template v-slot:no-option>
@@ -110,7 +110,7 @@ export default {
       stringOptionsCampaign: [],
       optionsCampaign: [],
 
-      userLoggued: {
+      userLogged: {
         role_id: 1
       },
 
@@ -337,7 +337,7 @@ export default {
       this.prepareToUpdateRecompense()
     }
 
-    this.userLoggued.role_id = 1 // TODO-JR: obter o usuário logado
+    this.userLogged = this.$q.localStorage.getItem('user_data')
   },
 
   mounted () {

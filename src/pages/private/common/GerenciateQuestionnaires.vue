@@ -42,7 +42,8 @@ export default {
       questionary: {},
       crudTabTitle: '',
       action: '',
-      iconActionQuestionnaires: ''
+      iconActionQuestionnaires: '',
+      userLogged: {}
     }
   },
 
@@ -75,6 +76,7 @@ export default {
   },
 
   beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
     this.showTabQuestionnaires()
   },
 

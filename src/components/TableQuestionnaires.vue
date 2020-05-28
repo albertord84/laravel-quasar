@@ -206,7 +206,8 @@ export default {
       pagination: { rowsPerPage: 0 },
       modalConfirmDelete: false,
       isDeleting: false,
-      usersStatuses: []
+      usersStatuses: [],
+      userLogged: {}
     }
   },
 
@@ -286,6 +287,7 @@ export default {
   },
 
   beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
     this.getQuestionnaires(0)
   }
 }

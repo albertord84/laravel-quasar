@@ -28,9 +28,12 @@ export default {
   },
   userData (state) {
     let data = _.get(state, ['user_data', 'email'])
+    console.log('---------------------------------')
     if (!data && LocalStorage.has(master.getStorageUserDataName())) {
+      console.log(state)
       return LocalStorage.getItem(master.getStorageUserDataName()) || {}
     }
+    console.log(state)
     return data
   }
 }

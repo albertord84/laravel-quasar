@@ -31,7 +31,7 @@
       </div>
 
       <!-- Para superadmins: Admin -->
-      <div class="col-6 q-px-xs q-mt-lg" v-if="userLoggued.role_id == 1">
+      <div class="col-6 q-px-xs q-mt-lg" v-if="userLogged.role_id == 1">
         <span>Administrador da empressa (*)</span>
         <q-select v-model="selectedAdminEmail" :options="options" @filter="filterFnAutoselect" @filter-abort="abortFilterFn" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
           <template v-slot:no-option>
@@ -45,7 +45,7 @@
       </div>
 
       <!-- Para superadmins: Status -->
-      <div class="col-6 q-px-xs q-mt-lg" v-if="userLoggued.role_id == 1">
+      <div class="col-6 q-px-xs q-mt-lg" v-if="userLogged.role_id == 1">
         <span>Status da campanha (*)</span>
         <q-select v-model="selectedCampaignStatus" :options="optionsStatus" @filter="filterFnAutoselectStatus" @filter-abort="abortFilterFnStatus" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
           <template v-slot:no-option>
@@ -235,7 +235,7 @@ export default {
       stringOptionsQuestionnaires: [],
       optionsQuestionnaires: [],
 
-      userLoggued: {
+      userLogged: {
         role_id: 1
       },
 
@@ -547,7 +547,7 @@ export default {
         return false
       }
 
-      if (this.userLoggued.role_id === 1) {
+      if (this.userLogged.role_id === 1) {
         this.selectedAdmin = this.selectUserByEmail(this.selectedAdminEmail)
         if (!this.selectedAdmin) {
           this.$q.notify({ type: 'negative', message: `O campo Administrador é obrigatório.`, position: 'top-right' })
@@ -557,7 +557,7 @@ export default {
         }
       }
 
-      if (this.userLoggued.role_id === 1) {
+      if (this.userLogged.role_id === 1) {
         this.selectedStatus = this.selectedStatusByName(this.selectedCampaignStatus)
         if (!this.selectedStatus) {
           this.$q.notify({ type: 'negative', message: `O campo Status é obrigatório.`, position: 'top-right' })
@@ -696,7 +696,7 @@ export default {
       this.prepareToUpdateCompany()
     }
 
-    this.userLoggued.role_id = 1 // TODO-JR: obter o usuário logado
+    this.userLogged = this.$q.localStorage.getItem('user_data')
   },
 
   mounted () {

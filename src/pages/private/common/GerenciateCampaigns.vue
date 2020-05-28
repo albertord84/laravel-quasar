@@ -41,7 +41,8 @@ export default {
       campaign: [],
       crudTabTitle: '',
       action: '',
-      iconActionCCampaigns: ''
+      iconActionCCampaigns: '',
+      userLogged: {}
     }
   },
 
@@ -74,6 +75,7 @@ export default {
   },
 
   beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
     this.showTabCampaigns()
   },
 

@@ -237,7 +237,8 @@ export default {
       strFilter: 0,
       pagination: { rowsPerPage: 0 },
       modalConfirmDelete: false,
-      isDeleting: false
+      isDeleting: false,
+      userLogged: {}
     }
   },
 
@@ -327,6 +328,7 @@ export default {
   },
 
   beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
     this.getCampaigns(0)
   }
 }

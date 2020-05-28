@@ -20,7 +20,8 @@ export default {
 
   data () {
     return {
-      loader: false
+      loader: false,
+      userLogged: {}
     }
   },
 
@@ -33,7 +34,10 @@ export default {
   },
 
   computed: {
-    // ...mapGetters('auth', ['isAuth'])
+  },
+
+  beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
   },
 
   created () {

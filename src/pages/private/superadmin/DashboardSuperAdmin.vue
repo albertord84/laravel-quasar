@@ -6,6 +6,10 @@
 </template>
 
 <script>
+// import { mapActions } from 'vuex'
+// import { mapGetters } from 'vuex'
+// import { mapActions, mapGetters } from 'vuex'
+// import { AuthService } from '../../../services/AuthService'
 
 export default {
   name: 'DashboardSuperAdmin',
@@ -21,6 +25,10 @@ export default {
 
   methods: {
 
+    ola () {
+
+    }
+
   },
 
   watch: {
@@ -28,7 +36,7 @@ export default {
   },
 
   computed: {
-
+    // ...mapGetters('auth', ['isAuth'])
   },
 
   created () {
@@ -45,6 +53,10 @@ export default {
         vm.$router.replace({ name: 'public.index' })
       }
     })
+  },
+
+  mounted () {
+    this.ola()
   },
 
   meta () {

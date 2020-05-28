@@ -9,7 +9,8 @@ const AuthService = {
     return axios.post(master.api('oauth/token'), form)
   },
   logout () {
-    return axios.get(master.api('oauth/logout')) // JR
+    // return axios.get(master.api('oauth/logout')) // JR
+    return axios.post(master.api('api/v1/oauth/logout')) // JR2
     // return axios.post(master.api('oauth/logout')) // ORG
   },
   getAuthUser () {

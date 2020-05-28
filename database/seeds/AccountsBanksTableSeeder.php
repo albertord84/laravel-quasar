@@ -28,7 +28,7 @@ class AccountsBanksTableSeeder extends Seeder
       AccountsBanks::create([
           'id' => '1',
           'user_id' => '7', //id do target
-          'bank' => 'BB',
+          'bank' => '003',
           'agency' => '44598',
           'account' => '12521',
           'account_type' => '003', //corrente
@@ -41,7 +41,7 @@ class AccountsBanksTableSeeder extends Seeder
       AccountsBanks::create([
           'id' => '2',
           'user_id' => '8', //id do target
-          'bank' => 'BB',
+          'bank' => '003',
           'agency' => '44598',
           'account' => '12532',
           'account_type' => '003', //corrente

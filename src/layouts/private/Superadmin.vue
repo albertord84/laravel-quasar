@@ -8,13 +8,9 @@
               <q-toolbar-title><b class="hover-pointer">PhysiBack</b></q-toolbar-title>
               <q-btn-dropdown stretch shrink  flat icon="account_circle">
                   <q-list>
-                      <q-item clickable v-close-menu tabindex="0">
-                          <!-- <q-item-section avatar>
-                            <q-avatar icon="folder" color="secondary" text-color="white" ></q-avatar>
-                          </q-item-section> -->
+                      <q-item clickable tabindex="0">
                           <q-item-section>
                             <q-item-label>Editar perfil</q-item-label>
-                            <!-- <q-item-label caption>February 22, 2016</q-item-label> -->
                           </q-item-section>
                           <q-item-section side>
                             <q-icon name="edit" class="cl-orange-14" ></q-icon>
@@ -122,9 +118,11 @@ export default {
           selected: false,
           separator: false
         }
-      ]
+      ],
+      userLogged: {}
     }
   },
+
   methods: {
     setSelected: function (index) {
       this.menuList.some((item, i) => {
@@ -136,6 +134,10 @@ export default {
     },
 
     ...mapActions('auth', ['logout'])
+  },
+
+  beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
   }
 }
 </script>

@@ -81,14 +81,14 @@ export default {
       },
       form_rules: {
         username: 'required|max:50',
-        password: 'required|min:8',
+        password: 'required|min:5',
         grant_type: 'required'
       }
     }
   },
 
   methods: {
-    ...mapActions('auth', ['setAuthStatus', 'setUserData', 'storeToken']),
+    ...mapActions('auth', ['setAuthStatus', 'setUserData', 'storeToken', 'getUserData']),
 
     async submit () {
       const isValid = await this.$refs.observer.validate()
@@ -106,11 +106,12 @@ export default {
       this.loader = true
       AuthService.login(this.form)
         .then(response => {
-          console.log('------------------------------------')
-          console.log(response.data.email)
           this.storeToken(response)
           this.setAuthStatus(true)
-          this.setUserData(_.get(response, ['data', 'user_data'], {}))
+
+          // this.setUserData(_.get(response, ['data', 'user_data'], {}))
+          this.setUserData(response.data)
+
           // let redirect = _.get(this.$route, ['query', 'redirect'])
           // if (redirect) {
           //   this.$router.replace(redirect)
@@ -118,9 +119,15 @@ export default {
           //   this.$router.replace({ name: 'auth.user' })
           // }
 
-          this.$router.replace({ name: 'superadmin.companies' })
-          // this.$router.replace({ name: 'admin.dashboard' })
-          // this.$router.replace({ name: 'target.dashboard' })
+          if (response.data.role_id === 1) {
+            this.$router.replace({ name: 'superadmin.dashboard' })
+          }
+          if (response.data.role_id === 2) {
+            this.$router.replace({ name: 'admin.dashboard' })
+          }
+          if (response.data.role_id === 3) {
+            this.$router.replace({ name: 'target.dashboard' })
+          }
         })
         .catch(errors => {
           let errArray = master.hasErrors(errors)

@@ -166,9 +166,7 @@ export default {
       stringExtractionsStatus: [],
       optionsExtractionsStatus: [],
 
-      userLoggued: {
-        role_id: 1
-      },
+      userLogged: {},
       AccountBanks: {},
       isCreatingPayment: false
     }
@@ -285,7 +283,7 @@ export default {
     }
     this.AccountBanks = AccountBanks
 
-    this.userLoggued.role_id = 1 // TODO-JR: obter o usuário logado
+    this.userLogged = this.$q.localStorage.getItem('user_data')
   },
 
   mounted () {

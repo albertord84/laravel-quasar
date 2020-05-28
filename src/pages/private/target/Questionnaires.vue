@@ -154,7 +154,8 @@ export default {
         backgroundColor: '#027be3',
         width: '5px',
         opacity: 0.75
-      }
+      },
+      userLogged: {}
     }
   },
 
@@ -257,6 +258,7 @@ export default {
   },
 
   beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
     this.getQuestionaries()
   },
 

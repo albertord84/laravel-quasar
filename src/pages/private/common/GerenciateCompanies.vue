@@ -41,7 +41,8 @@ export default {
       companies: [],
       crudTabTitle: '',
       action: '',
-      iconActionCompany: ''
+      iconActionCompany: '',
+      userLogged: {}
     }
   },
 
@@ -64,6 +65,7 @@ export default {
     },
 
     reloadCompanies () {
+      this.userLogged = this.$q.localStorage.getItem('user_data')
       this.showTabCompanies()
     }
   },

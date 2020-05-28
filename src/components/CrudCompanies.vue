@@ -248,7 +248,8 @@ export default {
 
       isValidatingCEP: false,
       isCreatingCompany: false,
-      isCreatingAdmin: false
+      isCreatingAdmin: false,
+      userLogged: {}
     }
   },
 
@@ -577,6 +578,7 @@ export default {
   },
 
   beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
     this.getAdmins()
     if (this.action === 'edit') {
       this.prepareToUpdateCompany()

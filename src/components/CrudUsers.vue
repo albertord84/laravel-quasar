@@ -47,7 +47,7 @@
       </div>
 
       <!-- Empresa -->
-      <div class="col-6 q-px-xs q-mt-lg" v-if="userLoggued.role_id === 1">
+      <div class="col-6 q-px-xs q-mt-lg" v-if="userLogged.role_id === 1">
         <span>Atribuir empresa (*) </span>
         <q-select v-model="selectedUserCompany" :options="optionsCompanies" @filter="filterFnAutoselectCompany" @filter-abort="abortFilterFnCompany" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
           <template v-slot:no-option>
@@ -207,7 +207,7 @@ export default {
       optionsUF: [],
       isValidatingCEP: false,
 
-      userLoggued: {
+      userLogged: {
         role_id: 1
       },
 
@@ -278,7 +278,7 @@ export default {
           this.stringOptionsUserRol = []
           response.data.some((item, i) => {
             if (item.id === 1) {
-              if (this.userLoggued.role_id === 1) {
+              if (this.userLogged.role_id === 1) {
                 this.stringOptionsUserRol.push(item.name)
               }
             } else {
@@ -594,7 +594,7 @@ export default {
   },
 
   beforeMount () {
-    this.userLoggued.role_id = 1 // TODO-JR: obter o usuário logado
+    this.userLogged = this.$q.localStorage.getItem('user_data')
     this.getUsersRoles()
     this.getUsersStatus()
     this.getCompanies()

@@ -30,7 +30,8 @@ export default {
       loader: false,
       message: {
         subject: '',
-        content: ''
+        content: '',
+        userLogged: {}
       }
     }
   },
@@ -44,6 +45,10 @@ export default {
   },
 
   computed: {
+  },
+
+  beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
   },
 
   created () {

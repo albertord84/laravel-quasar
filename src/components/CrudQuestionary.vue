@@ -261,8 +261,8 @@ export default {
 
       questionaryModel: {
         plane_id: 0,
-        criator_id: 0, // userLoggued.id
-        updater_id: 0, // userLoggued.id
+        criator_id: 0, // userLogged.id
+        updater_id: 0, // userLogged.id
         name: '',
         description: '',
         observation: '',
@@ -308,7 +308,8 @@ export default {
 
       selectedPageIndex: -1,
       showPainelPageList: false,
-      tab: 'contentTab'
+      tab: 'contentTab',
+      userLogged: {}
     }
   },
 
@@ -527,6 +528,7 @@ export default {
   },
 
   beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
     if (this.action === 'edit') {
       this.getFullQuestionary(this.questionary.id)
       this.showPlanesComponent = false

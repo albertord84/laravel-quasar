@@ -30,12 +30,10 @@ class UsersTableSeeder extends Seeder
       User::create([
           'id' => 1,
           'company_id' => 1,
-          // 'cost_center_id' => 1,
           'address_id' => 1,
           'username' => 'Sidnei',
           'email' => 'sidnei.bertozzi@gmail.com',
           'password' => 'sidnei.bertozzi123',
-          // 'password' => bcrypt('sidnei.bertozzi123'),
           'role_id' => 1,
           'status_id' => 2,
       ]);
@@ -44,12 +42,10 @@ class UsersTableSeeder extends Seeder
       User::create([
           'id' => 2,
           'company_id' => 1,
-          // 'cost_center_id' => 1,
           'address_id' => 1,
           'username' => 'Andrê',
           'email' => 'almmarques@gmail.com',
           'password' => 'almmarques123',
-          // 'password' => bcrypt('almmarques123'),
           'role_id' => 1,
           'status_id' => 2,
       ]);
@@ -58,12 +54,10 @@ class UsersTableSeeder extends Seeder
       User::create([
           'id' => 3,
           'company_id' => 1,
-          // 'cost_center_id' => 1,
           'address_id' => 1,
           'username' => 'Igor',
           'email' => 'ibuenaga@gmail.com',
           'password' => 'ibuenaga123',
-          // 'password' => bcrypt('ibuenaga123'),
           'role_id' => 1,
           'status_id' => 2,
       ]);
@@ -72,12 +66,10 @@ class UsersTableSeeder extends Seeder
       User::create([
           'id' => 4,
           'company_id' => 1,
-          // 'cost_center_id' => 1,
           'address_id' => 1,
           'username' => 'josergm86',
           'email' => 'josergm86@gmail.com',
           'password' => 'jr24666gm',
-          // 'password' => bcrypt('jr24666gm'),
           'role_id' => 1,
           'status_id' => 2,
       ]);
@@ -86,62 +78,58 @@ class UsersTableSeeder extends Seeder
       User::create([
           'id' => 5,
           'company_id' => 1,
-          // 'cost_center_id' => 1,
           'address_id' => 1,
           'username' => 'alberto',
           'email' => 'albertord84@gmail.com',
           'password' => '12345678',
-          // 'password' => bcrypt('12345678'),
           'role_id' => 1,
           'status_id' => 2,
       ]);
       $this->command->info('Admin created: [user: albertord84]');
     }
 
+
+
     public function createAdmins(){
       User::create([
           'id' => 6,
           'company_id' => 1,
-          // 'cost_center_id' => 1,
           'address_id' => 1,
           'username' => 'Admin',
           'email' => 'admin@physiback.com',
           'password' => 'admin',
-          // 'password' => bcrypt('admin'),
           'role_id' => 2,
           'status_id' => 2,
       ]);
       $this->command->info('Admin created: [user: admin@physiback.com]');
     }
 
+
+
     public function createTargets(){
       User::create([
         'id' => 7,
         'company_id' => 1,
-        // 'cost_center_id' => 1,
         'address_id' => 1,
         'username' => 'Target1',
         'email' => 'target1@physiback.com',
         'password' => 'target1',
-        // 'password' => bcrypt('target1'),
         'role_id' => 3,
         'status_id' => 2,
-    ]);
-    $this->command->info('Admin created: [user: target1@physiback.com]');
+      ]);
+      $this->command->info('Admin created: [user: target1@physiback.com]');
 
       User::create([
-        'id' => 8,
-        'company_id' => 1,
-        // 'cost_center_id' => 1,
-        'address_id' => 1,
-        'username' => 'Target2',
-        'email' => 'target2@physiback.com',
-        'password' => 'target2',
-        // 'password' => bcrypt('target2'),
-        'role_id' => 3,
-        'status_id' => 2,
-    ]);
-    $this->command->info('Admin created: [user: target2@physiback.com]');
+          'id' => 8,
+          'company_id' => 1,
+          'address_id' => 1,
+          'username' => 'Target2',
+          'email' => 'target2@physiback.com',
+          'password' => 'target2',
+          'role_id' => 3,
+          'status_id' => 2,
+      ]);
+      $this->command->info('Admin created: [user: target2@physiback.com]');
     }
 
 }

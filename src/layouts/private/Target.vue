@@ -107,7 +107,8 @@ export default {
           selected: false,
           separator: false
         }
-      ]
+      ],
+      userLogged: {}
     }
   },
   methods: {
@@ -121,6 +122,10 @@ export default {
     },
 
     ...mapActions('auth', ['logout'])
+  },
+
+  beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
   }
 }
 </script>

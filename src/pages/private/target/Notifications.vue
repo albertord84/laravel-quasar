@@ -33,7 +33,8 @@ export default {
       window: {
         width: 0,
         height: 0
-      }
+      },
+      userLogged: {}
     }
   },
 
@@ -47,6 +48,10 @@ export default {
 
   computed: {
 
+  },
+
+  beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
   },
 
   created () {

@@ -215,7 +215,8 @@ export default {
       modalConfirmDelete: false,
       isDeleting: false,
       AccountBanks: {},
-      usersStatuses: []
+      usersStatuses: [],
+      userLogged: {}
     }
   },
 
@@ -294,6 +295,7 @@ export default {
   },
 
   beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
     this.getPayments(0)
     this.AccountBanks = AccountBanks
   }

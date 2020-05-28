@@ -9,7 +9,7 @@
               <q-btn-dropdown stretch shrink  flat icon="account_circle">
                   <q-list>
                       <!-- <q-item-label header>Folders</q-item-label> -->
-                      <q-item clickable v-close-menu tabindex="0">
+                      <q-item clickable tabindex="0">
                           <!-- <q-item-section avatar>
                             <q-avatar icon="folder" color="secondary" text-color="white" ></q-avatar>
                           </q-item-section> -->
@@ -115,9 +115,11 @@ export default {
           selected: false,
           separator: false
         }
-      ]
+      ],
+      userLogged: {}
     }
   },
+
   methods: {
     setSelected: function (index) {
       this.menuList.some((item, i) => {
@@ -129,6 +131,10 @@ export default {
     },
 
     ...mapActions('auth', ['logout'])
+  },
+
+  beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
   }
 }
 </script>

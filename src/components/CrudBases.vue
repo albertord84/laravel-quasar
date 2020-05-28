@@ -7,7 +7,7 @@
       <q-separator  class="col-12 q-pa-none q-ma-none"></q-separator>
 
       <!-- Para superadmins: Origem da base -->
-      <div class="col-6 q-px-xs q-mt-lg" v-if="userLoggued.role_id == 1">
+      <div class="col-6 q-px-xs q-mt-lg" v-if="userLogged.role_id == 1">
         <span>Origem da base (*) </span>
         <q-select v-model="selectedBaseOrigin" :options="optionsBasesOrg" @filter="filterFnAutoselectBaseOrigin" @filter-abort="abortFilterFnBasesOrigin" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
           <template v-slot:no-option>
@@ -21,7 +21,7 @@
       </div>
 
       <!-- Para superadmins: Empresa -->
-      <div class="col-6 q-px-xs q-mt-lg" v-if="userLoggued.role_id == 1">
+      <div class="col-6 q-px-xs q-mt-lg" v-if="userLogged.role_id == 1">
         <span>Atribuir empresa (*) </span>
         <q-select v-model="selectedBaseCompany" :options="optionsCompanies" @filter="filterFnAutoselectCompany" @filter-abort="abortFilterFnCompany" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
           <template v-slot:no-option>
@@ -138,7 +138,7 @@ export default {
       stringOptionsCompanies: [],
       optionsCompanies: [],
 
-      userLoggued: {
+      userLogged: {
         role_id: 1
       },
 
@@ -330,7 +330,7 @@ export default {
     },
 
     validateBaseModel () {
-      if (this.userLoggued.role_id === 1) {
+      if (this.userLogged.role_id === 1) {
         this.selectedBaseOrg = this.selectedBaseOriginByName(this.selectedBaseOrigin)
         if (!this.selectedBaseOrg) {
           this.$q.notify({ type: 'negative', message: `O campo Origem da base é obrigatório.`, position: 'top-right' })
@@ -340,7 +340,7 @@ export default {
         }
       }
 
-      if (this.userLoggued.role_id === 1) {
+      if (this.userLogged.role_id === 1) {
         this.selectedCompany = this.selectedCompanyByName(this.selectedBaseCompany)
         if (!this.selectedCompany) {
           this.$q.notify({ type: 'negative', message: `O campo Atribuir empresa é obrigatório.`, position: 'top-right' })
@@ -389,7 +389,7 @@ export default {
     this.getCompanies()
     this.app_host = process.env.HOST
 
-    this.userLoggued.role_id = 1 // TODO-JR: obter o usuário logado
+    this.userLogged = this.$q.localStorage.getItem('user_data')
     if (this.action === 'edit') {
       this.prepareToUpdateBase()
     }
