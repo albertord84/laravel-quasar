@@ -9,6 +9,7 @@ import { mapActions, mapGetters } from 'vuex'
 import { AuthService } from '../../../services/AuthService'
 import { master } from '../../../helpers/master'
 import _ from 'lodash'
+import { Roles } from '../helpers/roles.js'
 
 export default {
   name: 'Questionaries',
@@ -108,15 +109,15 @@ export default {
 
   beforeMount () {
     this.userLogged = this.$q.localStorage.getItem('user_data')
+    if (this.userLogged.role_id > Roles.Superdmin) {
+      this.$router.replace({ name: 'public.denied' })
+    }
   },
 
   created () {
-    // window.addEventListener('resize', this.handleResize)
-    // this.handleResize()
   },
 
   destroyed () {
-    // window.removeEventListener('resize', this.handleResize)
   },
 
   beforeRouteEnter (to, from, next) {

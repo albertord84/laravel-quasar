@@ -139,6 +139,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import { exportFile } from 'quasar'
+import { Roles } from '../helpers/roles.js'
 
 function wrapCsvValue (val, formatFn) {
   let formatted = formatFn !== void 0
@@ -330,6 +331,9 @@ export default {
   beforeMount () {
     this.userLogged = this.$q.localStorage.getItem('user_data')
     this.getCampaigns(0)
+    if (this.userLogged.role_id > Roles.Admin) {
+      this.$router.replace({ name: 'public.denied' })
+    }
   }
 }
 </script>

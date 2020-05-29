@@ -21,6 +21,12 @@ const routes = [
         meta: { requiresAuth: false }
       },
       {
+        path: '/denied',
+        name: 'public.denied',
+        component: () => import('pages/Error500.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
         path: '/register',
         name: 'public.register',
         component: () => import('pages/public/Register.vue'),
@@ -58,13 +64,13 @@ const routes = [
         path: '/superadmin/dashboard',
         name: 'superadmin.dashboard',
         component: () => import('pages/private/superadmin/DashboardSuperAdmin.vue'),
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
       },
       {
         path: '/superadmin/companies',
         name: 'superadmin.companies',
         component: () => import('pages/private/common/GerenciateCompanies.vue'),
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
       },
       {
         path: '/superadmin/bases',
@@ -76,19 +82,19 @@ const routes = [
         path: '/superadmin/users',
         name: 'superadmin.users',
         component: () => import('pages/private/common/GerenciateUsers.vue'),
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
       },
       {
         path: '/superadmin/questionnaires',
         name: 'superadmin.questionnaires',
         component: () => import('pages/private/common/GerenciateQuestionnaires.vue'),
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
       },
       {
         path: '/superadmin/campaigns',
         name: 'superadmin.campaigns',
         component: () => import('pages/private/common/GerenciateCampaigns.vue'),
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
       },
       {
         path: '/superadmin/recompenses',

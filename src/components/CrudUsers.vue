@@ -148,6 +148,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import validation from '../services/ValidationService.js'
+import { Roles } from '../helpers/roles.js'
 
 export default {
   name: 'CrudUsers',
@@ -603,6 +604,9 @@ export default {
 
     if (this.action === 'edit') {
       this.prepareUserToUpdate()
+    }
+    if (this.userLogged.role_id > Roles.Admin) {
+      this.$router.replace({ name: 'public.denied' })
     }
   },
 

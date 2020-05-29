@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { Roles } from '../../../helpers/roles.js'
 
 export default {
   name: 'DashboardAdmin',
@@ -33,6 +34,9 @@ export default {
 
   beforeMount () {
     this.userLogged = this.$q.localStorage.getItem('user_data')
+    if (this.userLogged.role_id > Roles.Admin) {
+      this.$router.replace({ name: 'public.denied' })
+    }
   },
 
   created () {

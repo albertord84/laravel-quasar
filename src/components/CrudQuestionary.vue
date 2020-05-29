@@ -241,6 +241,7 @@
 
 <script>
 import { WebService } from '../services/WebService.js'
+import { Roles } from '../helpers/roles.js'
 
 export default {
   name: 'CrudQuestionary',
@@ -316,6 +317,9 @@ export default {
   methods: {
     // -------------------questionary functions-----------------------
     addQuestionary () {
+      if (this.userLogged.role_id > Roles.Admin) {
+        this.$router.replace({ name: 'public.denied' })
+      }
       if (this.questionaryModel.released) {
         this.releasedQuestionaryExplanation()
       } else {
@@ -366,7 +370,6 @@ export default {
     showSelectedPage (index) {
       this.isCreatingNewPage = false
       this.selectedPageIndex = index
-      console.log(this.questionaryModel.pages[index])
       this.tab = 'contentTab'
     },
 
@@ -472,6 +475,7 @@ export default {
       })) return true
       else return false
     },
+
     isVideo (str) {
       if (this.videoExtensions.some((ext, i) => {
         if (str.includes(ext)) {
@@ -480,6 +484,7 @@ export default {
       })) return true
       else return false
     },
+
     responseOptionExplanation () {
       this.$q.dialog({
         title: 'Sobre as Opções de resposta',
@@ -490,6 +495,7 @@ export default {
         ok: 'Aceitar'
       })
     },
+
     releasedQuestionaryExplanation () {
       this.$q.dialog({
         title: 'Questionário já liberado',
@@ -500,11 +506,13 @@ export default {
         ok: 'Aceitar'
       })
     },
+
     // -------------------plane functions--------------------
     selectedPlane (plane) {
       this.plane = plane
       this.showPlanesComponent = false
     },
+
     getPlaneArrayByPlaneId (planeId) {
       var plane
       switch (planeId) {
@@ -523,7 +531,6 @@ export default {
       }
       return plane
     }
-
   },
 
   watch: {
@@ -538,6 +545,10 @@ export default {
     if (this.action === 'insert') {
       this.plane = this.getPlaneArrayByPlaneId(0)
       this.showPlanesComponent = true
+    }
+
+    if (this.userLogged.role_id > Roles.Superdmin) {
+      this.$router.replace({ name: 'public.denied' })
     }
   },
 

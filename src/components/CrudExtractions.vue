@@ -117,6 +117,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import { AccountBanks } from '../services/AccountBanks.js'
+import { Roles } from '../helpers/roles.js'
 
 export default {
   name: 'CrudCampaigns',
@@ -175,6 +176,9 @@ export default {
   methods: {
 
     saveRecompense () {
+      if (this.userLogged.role_id > Roles.Superdmin) {
+        this.$router.replace({ name: 'public.denied' })
+      }
       if (!this.validateExtractionModel() || this.isCreatingPayment) {
         return
       }
@@ -286,6 +290,10 @@ export default {
     this.AccountBanks = AccountBanks
 
     this.userLogged = this.$q.localStorage.getItem('user_data')
+
+    if (this.userLogged.role_id > Roles.Superdmin) {
+      this.$router.replace({ name: 'public.denied' })
+    }
   },
 
   mounted () {

@@ -122,6 +122,7 @@
 import { WebService } from '../services/WebService.js'
 import { AccountBanks } from '../services/AccountBanks.js'
 import { exportFile } from 'quasar'
+import { Roles } from '../helpers/roles.js'
 
 function wrapCsvValue (val, formatFn) {
   let formatted = formatFn !== void 0
@@ -298,6 +299,10 @@ export default {
     this.userLogged = this.$q.localStorage.getItem('user_data')
     this.getPayments(0)
     this.AccountBanks = AccountBanks
+
+    if (this.userLogged.role_id > Roles.Superdmin) {
+      this.$router.replace({ name: 'public.denied' })
+    }
   }
 }
 </script>

@@ -188,6 +188,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import validation from '../services/ValidationService.js'
+import { Roles } from '../helpers/roles.js'
 
 export default {
   name: 'CrudQuestionary',
@@ -256,6 +257,9 @@ export default {
   methods: {
 
     saveCompany () {
+      if (this.userLogged.role_id > Roles.Superadmin) {
+        this.$router.replace({ name: 'public.denied' })
+      }
       if (!this.validateCompanyModel() || !this.validateAddressModel() || this.isCreatingCompany) {
         return
       }
@@ -583,6 +587,9 @@ export default {
     this.getAdmins()
     if (this.action === 'edit') {
       this.prepareToUpdateCompany()
+    }
+    if (this.userLogged.role_id > Roles.Superdmin) {
+      this.$router.replace({ name: 'public.denied' })
     }
   },
 

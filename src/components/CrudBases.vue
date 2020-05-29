@@ -100,6 +100,7 @@
 
 <script>
 import { WebService } from '../services/WebService.js'
+import { Roles } from '../helpers/roles.js'
 
 export default {
   name: 'CrudCampaigns',
@@ -394,6 +395,10 @@ export default {
     this.userLogged = this.$q.localStorage.getItem('user_data')
     if (this.action === 'edit') {
       this.prepareToUpdateBase()
+    }
+
+    if (this.userLogged.role_id > Roles.Admin) {
+      this.$router.replace({ name: 'public.denied' })
     }
   },
 

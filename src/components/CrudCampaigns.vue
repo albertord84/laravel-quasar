@@ -175,6 +175,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import validation from '../services/ValidationService.js'
+import { Roles } from '../helpers/roles.js'
 
 export default {
   name: 'CrudCampaigns',
@@ -699,6 +700,10 @@ export default {
     }
 
     this.userLogged = this.$q.localStorage.getItem('user_data')
+
+    if (this.userLogged.role_id > Roles.Admin) {
+      this.$router.replace({ name: 'public.denied' })
+    }
   },
 
   mounted () {

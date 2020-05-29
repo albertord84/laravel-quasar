@@ -10,6 +10,7 @@
 // import { mapGetters } from 'vuex'
 // import { mapActions, mapGetters } from 'vuex'
 // import { AuthService } from '../../../services/AuthService'
+import { Roles } from '../../../helpers/roles.js'
 
 export default {
   name: 'DashboardSuperAdmin',
@@ -19,7 +20,8 @@ export default {
 
   data () {
     return {
-      loader: false
+      loader: false,
+      userLogged: {}
     }
   },
 
@@ -37,6 +39,13 @@ export default {
 
   computed: {
     // ...mapGetters('auth', ['isAuth'])
+  },
+
+  beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
+    if (this.userLogged.role_id > Roles.Superadmin) {
+      this.$router.replace({ name: 'public.denied' })
+    }
   },
 
   created () {
