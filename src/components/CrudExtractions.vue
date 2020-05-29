@@ -183,6 +183,7 @@ export default {
       // delete this.extractionModel.statusName
       this.extractionModel.payed_value = this.extractionModel.requested_value
       this.isCreatingPayment = true
+      this.$q.loading.show()
       WebService.put('web/extractions/' + this.extractionModel.id, this.extractionModel)
         .then(response => {
           this.isCreatingPayment = false
@@ -196,6 +197,7 @@ export default {
         })
         .finally(() => {
           this.isCreatingPayment = false
+          this.$q.loading.hide()
         })
     },
 

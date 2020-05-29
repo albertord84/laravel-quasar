@@ -260,6 +260,7 @@ export default {
       }
       this.campaignModel.updater_id = this.campaignModel.criator_id
       this.isCreatingCampaign = true
+      this.$q.loading.show()
       if (this.campaign.UserCriator) { delete this.campaign.UserCriator }
       if (this.campaign.UserUpdater) { delete this.campaign.UserUpdater }
       if (this.campaign.StatusCampaign) { delete this.campaign.StatusCampaign }
@@ -283,6 +284,7 @@ export default {
         })
         .finally(() => {
           this.isCreatingCampaign = false
+          this.$q.loading.hide()
         })
     },
 

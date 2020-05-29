@@ -160,8 +160,7 @@ class BasesController extends AppBaseController
 
     public function baseFromCSV($id, Request $request)
     {
-      $fileInputCSV = $request->file('fileInputCSV');
-      dd($fileInputCSV);
+      $fileInputCSV = $request->file('file');
       if ($fileInputCSV) {
         try {
           $resultFileInputCSV = $this->basesRepository->inputUserFromCSV($fileInputCSV, $id);

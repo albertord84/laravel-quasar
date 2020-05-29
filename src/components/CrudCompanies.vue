@@ -259,8 +259,8 @@ export default {
       if (!this.validateCompanyModel() || !this.validateAddressModel() || this.isCreatingCompany) {
         return
       }
-
       this.isCreatingCompany = true
+      this.$q.loading.show()
       var url = (this.action === 'insert') ? 'criateFullCompany' : 'updateFullCompany'
       if (this.companyModel.CostCenters) { delete this.companyModel.CostCenters }
       if (this.companyModel.Address) { delete this.companyModel.Address }
@@ -284,6 +284,7 @@ export default {
         })
         .finally(() => {
           this.isCreatingCompany = false
+          this.$q.loading.hide()
         })
     },
 

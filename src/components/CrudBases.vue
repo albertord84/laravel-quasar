@@ -154,6 +154,7 @@ export default {
         return
       }
       this.isCreatingBase = true
+      this.$q.loading.show()
       if (this.action === 'insert') {
         WebService.post('web/bases', this.baseModel)
           .then(response => {
@@ -192,8 +193,8 @@ export default {
 
     sendSCVFile (baseId) {
       let formData = new FormData()
-      formData.append('fileInputCSV', this.fileInputCSV)
-      WebService.put('web/bases/' + baseId + '/baseFromCSV', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+      formData.append('file', this.fileInputCSV)
+      WebService.post('web/bases/' + baseId + '/baseFromCSV', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
         .then(response => {
           this.isCreatingBase = false
           var text = (this.action === 'insert') ? 'criada' : 'atualizada'
@@ -208,6 +209,7 @@ export default {
         })
         .finally(() => {
           this.isCreatingBase = false
+          this.$q.loading.hide()
         })
     },
 

@@ -226,6 +226,7 @@ export default {
         return
       }
       this.isCreatingUser = true
+      this.$q.loading.show()
       let url = (this.action === 'insert') ? 'criateFullUser' : 'updateFullUser'
       WebService.put('web/' + url, {
         'userModel': this.userModel,
@@ -246,6 +247,7 @@ export default {
         })
         .finally(() => {
           this.isCreatingUser = false
+          this.$q.loading.hide()
         })
     },
 

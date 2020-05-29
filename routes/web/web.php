@@ -56,7 +56,7 @@ Route::delete('deleteFullUser', 'UsersController@deleteFullUser');
 
 Route::resource('bases', 'BasesController');
 Route::delete('deleteFullBase', 'BasesController@deleteFullBase');
-Route::put('bases/{id}/baseFromCSV', 'BasesController@baseFromCSV');
+Route::post('bases/{id}/baseFromCSV', 'BasesController@baseFromCSV');
 
 Route::resource('basesOrigins', 'BasesOriginsController');
 Route::resource('usersBases', 'UsersBasesController');

@@ -104,15 +104,15 @@ class BasesRepository extends BaseRepository
           });
     }
 
-    public function inputUserFromCSV($fileInputCSV, $base_id){
+    public function inputUserFromCSV($file, $base_id){
         // $User = Auth::check() ? Auth::user() : session('logged_user');
-        $file = $fileInputCSV->file('file');
         if (!$file) {
           abort(302, "Error uploading file!");
         } else {
             //1. Converter o arquivo a um array de usuários
             $wrongCSVContent = false;
             $Users = $this->csv_to_array($file->getRealPath(), ',');
+
             if($Users){
               if(count($Users)>1 && count($Users[1])<2 ){
                 $Users = $this->csv_to_array($file->getRealPath(), ';');
@@ -148,8 +148,8 @@ class BasesRepository extends BaseRepository
                     if (!isset($user['Email']) && filter_var($user['Email'], FILTER_VALIDATE_EMAIL)  && isset($user['Nome']) && preg_match("/^[a-z A-Z0-9çÇáÁéÉíÍóÓúÚàÀèÈìÌòÒùÙãÃõÕâÂêÊôÔûÛñ\._-]{2,250}$/" , $user['Nome']) ) {
                       $cntUserInvalid++;
                     } else{
-                        // - formatar o objeto de dados do usuário
-                        $User = Users::where('email', $user['email'])->first();
+                          // - formatar o objeto de dados do usuário
+                        $User = Users::where('email', $user['Email'])->get()->first();
                         $newUserFlag = false;
                         if(!$User){
                           $newUserFlag = true;
@@ -160,12 +160,18 @@ class BasesRepository extends BaseRepository
                         }
                         $User->username = $user['Nome'];
                         $User->json_data = json_encode($json_data);
-
                         $User->save();
-                        $User = $User->where('email', $user['email'])->first();
+                        $User = Users::where('email', $user['Email'])->get()->first();
+
+                        $UsersBases = UsersBases::where('base_id', $base_id)->where('user_id', $User->id)->get()->first();
+                        if (!$UsersBases) {
+                          $UsersBases = new UsersBases();
+                          $UsersBases->base_id = $base_id;
+                          $UsersBases->user_id = $User->id;
+                          $UsersBases->save();
+                        }
 
                         if($newUserFlag){
-                          UsersBasesRepository::create( ['base_id' => $base_id, 'user_id' => $User->id]);
                           $cntUserCriated++;
                         }else {
                           $cntUserUpdated++;

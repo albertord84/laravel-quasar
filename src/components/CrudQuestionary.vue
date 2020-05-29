@@ -325,6 +325,7 @@ export default {
 
     getFullQuestionary (questionarId) {
       this.isLoading = true
+      this.$q.loading.show()
       WebService.get('web/' + 'fullQuestionary/' + questionarId)
         .then(response => {
           this.selectedPageIndex = (response.data.pages && response.data.pages.length) ? 0 : -1
@@ -340,6 +341,7 @@ export default {
         })
         .then(() => {
           this.isLoading = false
+          this.$q.loading.hide()
         })
     },
 

@@ -133,9 +133,8 @@ export default {
       delete this.recompenseModel.updated_at
       delete this.recompenseModel.created_at
       delete this.recompenseModel.deleted_at
-      console.log(this.recompenseModel)
       this.isCreatingRecompense = true
-
+      this.$q.loading.show()
       if (this.action === 'insert') {
         WebService.post('web/recompenses', this.recompenseModel)
           .then(response => {
@@ -165,6 +164,7 @@ export default {
           })
           .finally(() => {
             this.isCreatingRecompense = false
+            this.$q.loading.false()
           })
       }
     },
