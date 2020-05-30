@@ -101,6 +101,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import { Roles } from '../helpers/roles.js'
+import { BasesOrigins } from '../helpers/basesOrigins.js'
 
 export default {
   name: 'CrudCampaigns',
@@ -157,6 +158,11 @@ export default {
       this.isCreatingBase = true
       this.$q.loading.show()
       if (this.action === 'insert') {
+        if (this.userLogged.role_id === Roles.Admin) {
+          this.baseModel.origin_id = BasesOrigins.PRIVATE
+          this.baseModel.company_id = this.userLogged.company_id
+        }
+        this.baseModel.criator_id = this.userLogged.id
         WebService.post('web/bases', this.baseModel)
           .then(response => {
             this.sendSCVFile(response.data.id)
@@ -388,17 +394,16 @@ export default {
   },
 
   beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
+    if (this.userLogged.role_id > Roles.Admin) {
+      this.$router.replace({ name: 'public.denied' })
+    }
     this.getBasesOrigins()
     this.getCompanies()
     this.app_host = process.env.HOST
 
-    this.userLogged = this.$q.localStorage.getItem('user_data')
     if (this.action === 'edit') {
       this.prepareToUpdateBase()
-    }
-
-    if (this.userLogged.role_id > Roles.Admin) {
-      this.$router.replace({ name: 'public.denied' })
     }
   },
 

@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Users;
+use App\User;
 
 class EmailSigninUser extends Mailable
 {
@@ -19,7 +19,7 @@ class EmailSigninUser extends Mailable
      *
      * @return void
      */
-    public function __construct(Users $User, String $Subject)
+    public function __construct(User $User, String $Subject)
     {
       $this->User=$User;
       $this->Subject=$Subject;

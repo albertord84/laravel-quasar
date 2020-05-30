@@ -8,6 +8,7 @@ use App\Repositories\QuestionnairesRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 class QuestionnairesController extends AppBaseController
@@ -30,11 +31,14 @@ class QuestionnairesController extends AppBaseController
     public function index(Request $request)
     {
         $input = $request->all();
-        $questionnaires = $this->questionnairesRepository->filterQuestionnaires($input);
+
+        //TODO: userLoggued
+        $userLogged = json_decode(Auth::guard('web')->user());
+        $userLogged = json_decode($request['userLogged']);
+
+        $questionnaires = $this->questionnairesRepository->filterQuestionnaires($input, $userLogged);
         return $questionnaires->toJson();
 
-        // return view('questionnaires.index')
-        //     ->with('questionnaires', $questionnaires);
     }
 
     /**

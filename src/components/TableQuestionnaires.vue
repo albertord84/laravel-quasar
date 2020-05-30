@@ -216,12 +216,10 @@ export default {
       this.isLoading = true
       WebService.get('web/' + 'questionnaires', {
         'filter': this.filter,
-        'page': page
+        'page': page,
+        'userLogged': this.userLogged
       })
         .then(response => {
-          // response.data.some((item, i) => {
-          //   item.statusName = this.usersStatuses[item.status_id]
-          // })
           let tmp = Object.values(response.data)
           this.data = tmp
           this.page = page

@@ -236,9 +236,7 @@ export default {
       stringOptionsQuestionnaires: [],
       optionsQuestionnaires: [],
 
-      userLogged: {
-        role_id: 1
-      },
+      userLogged: {},
 
       isCreatingCampaign: false,
 
@@ -350,7 +348,20 @@ export default {
     },
 
     getBases () {
-      WebService.get('web/' + 'bases')
+      var origins
+      var company
+      if (this.userLogged.role_id === Roles.Superadmin) {
+        origins = JSON.stringify([1, 2, 3])
+        company = 0
+      }
+      if (this.userLogged.role_id === Roles.Admin) {
+        origins = JSON.stringify([1, 2])
+        company = this.userLogged.company_id
+      }
+      WebService.get('web/' + 'bases', {
+        'origin_id': origins,
+        'company_id': company
+      })
         .then(response => {
           this.stringOptionsBases = []
           response.data.some((item, i) => {
@@ -686,6 +697,11 @@ export default {
   },
 
   beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
+    if (this.userLogged.role_id > Roles.Admin) {
+      this.$router.replace({ name: 'public.denied' })
+    }
+
     this.getAdmins()
     this.getCampaignsStatus()
     this.getBases()
@@ -697,12 +713,6 @@ export default {
     }
     if (this.action === 'edit') {
       this.prepareToUpdateCompany()
-    }
-
-    this.userLogged = this.$q.localStorage.getItem('user_data')
-
-    if (this.userLogged.role_id > Roles.Admin) {
-      this.$router.replace({ name: 'public.denied' })
     }
   },
 

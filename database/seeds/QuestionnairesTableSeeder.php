@@ -30,6 +30,7 @@ class QuestionnairesTableSeeder extends Seeder
           'plane_id' => '1',
           'criator_id' => '6',
           'updater_id' => '6',
+          'company_id' => '2',
           'name' => 'Avaliação da hidroxocloroquina no tratamento da COVID-19',
           'description' => 'Questionário para avaliar o uso da hidroxocloroquina no tratamento da COVID-19 e seus impatos nos pacientes',
           'observation' => 'Esse questionário deve ser aplicado apenas a médicos intensivistas de UPAs',

@@ -162,11 +162,11 @@ export default {
     return {
       userModel: {
         id: 1,
-        company_id: 1,
-        cost_center_id: 1,
-        address_id: 1,
-        role_id: 1,
-        status_id: 1,
+        company_id: 0,
+        cost_center_id: 0,
+        address_id: 0,
+        role_id: 0,
+        status_id: 0,
         username: '',
         email: '',
         json_datas: ''

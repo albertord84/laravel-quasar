@@ -7,7 +7,9 @@ use App\Http\Requests\UpdateBasesRequest;
 use App\Repositories\BasesRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use App\Models\Users;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 class BasesController extends AppBaseController
@@ -30,11 +32,17 @@ class BasesController extends AppBaseController
     public function index(Request $request)
     {
       $input = $request->all();
-      $bases = $this->basesRepository->filterBases($input);
+
+      //TODO: userLoggued
+      $userLogged = json_decode(Auth::guard('web')->user());
+      $userLogged = json_decode($request['userLogged']);
+
+      if ($userLogged->role_id == UsersRolesController::SUPERADMIN)
+        $bases = $this->basesRepository->filterBasesSuperadmin($input, $userLogged);
+      else
+        $bases = $this->basesRepository->filterBasesAdmin($input, $userLogged);
+
       return $bases->toJson();
-      // $bases = $this->basesRepository->all();
-        // return view('bases.index')
-        //     ->with('bases', $bases);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Controllers\BasesOriginsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UsersRolesController;
 use App\Http\Controllers\UsersStatusController;
@@ -11,6 +12,8 @@ use App\Models\Companies;
 use App\Repositories\BaseRepository;
 use App\Models\Users;
 use App\Models\UsersBases;
+use Illuminate\Support\Facades\Auth;
+use stdClass;
 
 /**
  * Class BasesRepository
@@ -42,7 +45,7 @@ class BasesRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
-    public function filterBases($input) {
+    public function filterBasesSuperadmin($input, $userLogged) {
       $filter = $input['filter'] ?? '';
       $page = $input['page'] ??  0;
       $id = $input['id'] ?? 0;
@@ -65,36 +68,72 @@ class BasesRepository extends BaseRepository
               ->orWhere('decription', 'LIKE', '%'. $filter.'%')
               ->orWhere('json_data', 'LIKE', '%'. $filter.'%');
             }})
-          ->where(function($query) use ($id){
-            if ($id) {
-              $query->where('id', $id);
-            }})
-          ->where(function($query) use ($origin_id){
+          ->orWhere(function($query) use ($origin_id){
             if ($origin_id) {
-              $query->where('origin_id', $origin_id);
+              $query->orWhere('origin_id', $origin_id);
             }})
-          ->where(function($query) use ($company_id){
+          ->orWhere(function($query) use ($company_id){
             if ($company_id) {
-              $query->where('company_id', $company_id);
+              $query->orWhere('company_id', $company_id);
             }})
-          ->where(function($query) use ($criator_id){
+
+          ->orWhere(function($query) use ($id){
+            if ($id) {
+              $query->orWhere('id', $id);
+            }})
+          ->orWhere(function($query) use ($criator_id){
             if ($criator_id) {
-              $query->where('criator_id', $criator_id);
+              $query->orWhere('criator_id', $criator_id);
             }})
-          ->where(function($query) use ($deleted_at){
+          ->orWhere(function($query) use ($deleted_at){
             if ($deleted_at) {
               $query->where('deleted_at', '>=', $deleted_at[0])
                     ->where('deleted_at', '<=', $deleted_at[1]);
             }})
-          ->where(function($query) use ($created_at){
+          ->orWhere(function($query) use ($created_at){
             if ($created_at) {
               $query->where('created_at', '>=', $created_at[0])
                     ->where('created_at', '<=', $created_at[1]);
             }})
-          ->where(function($query) use ($updated_at){
+          ->orWhere(function($query) use ($updated_at){
             if ($updated_at) {
               $query->where('updated_at', '>=', $updated_at[0])
                     ->where('updated_at', '<=', $updated_at[1]);
+            }})
+          ->get()
+          ->slice($start, $page_length)
+          ->each(function(Bases $Base) {
+                $Base->BaseOrigin = BasesOrigins::where('id', $Base->origin_id)->get()->first();
+                $Base->Company = Companies::where('id', $Base->company_id)->get()->first();
+          });
+    }
+
+    public function filterBasesAdmin($input, $userLogged) {
+      $filter = $input['filter'] ?? '';
+      $page = $input['page'] ??  0;
+      $id = $input['id'] ?? 0;
+
+      $origin_id = $input['origin_id'] ?? 0;
+      $criator_id = $input['criator_id'] ?? 0;
+      $company_id = $userLogged->company_id;
+
+      $page_length = env('APP_PAGE_LENGTH', 100);
+      $start = $page_length * $page;
+
+      return $this->model()
+          ::where('origin_id', BasesOriginsController::PUBLIC)
+          ->orWhere(function($query) use ($company_id) {
+              $query->where('origin_id', BasesOriginsController::PRIVATE)
+                    ->where('company_id', $company_id);
+            })
+          ->where(function($query) use ($filter){
+            if ($filter != '') {
+              $query->where('name', 'LIKE', '%'. $filter.'%')
+              ->orWhere('decription', 'LIKE', '%'. $filter.'%');
+            }})
+          ->where(function($query) use ($id){
+            if ($id) {
+              $query->where('id', $id);
             }})
           ->get()
           ->slice($start, $page_length)

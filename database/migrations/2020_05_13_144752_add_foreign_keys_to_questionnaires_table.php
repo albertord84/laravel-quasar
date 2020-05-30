@@ -26,6 +26,10 @@ class AddForeignKeysToQuestionnairesTable extends Migration
                 ->references('id')->on('users')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
+          $table->foreign('updater_id', 'fk_questionnaires_companies') //questionnaires x users
+                ->references('id')->on('users')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
         });
     }
 
@@ -40,6 +44,7 @@ class AddForeignKeysToQuestionnairesTable extends Migration
                 $table->dropForeign('fk_questionnaires_planes');
                 $table->dropForeign('fk_questionnaires_users_criator');
                 $table->dropForeign('fk_questionnaires_users_updater');
+                $table->dropForeign('fk_questionnaires_companies');
         });
     }
 }

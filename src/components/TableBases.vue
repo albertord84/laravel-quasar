@@ -206,7 +206,8 @@ export default {
       this.isLoading = true
       WebService.get('web/' + 'bases', {
         'filter': this.filter,
-        'page': page
+        'page': page,
+        'userLogged': JSON.stringify(this.userLogged)
       })
         .then(response => {
           let tmp = Object.values(response.data)
@@ -274,10 +275,10 @@ export default {
 
   beforeMount () {
     this.userLogged = this.$q.localStorage.getItem('user_data')
-    this.getBases(0)
     if (this.userLogged.role_id > Roles.Admin) {
       this.$router.replace({ name: 'public.denied' })
     }
+    this.getBases(0)
   }
 }
 </script>

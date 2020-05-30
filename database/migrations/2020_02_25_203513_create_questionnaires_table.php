@@ -19,6 +19,7 @@ class CreateQuestionnairesTable extends Migration
             $table->integer('plane_id')->nullable()->index('fk_questionnaires_planes');
             $table->integer('criator_id')->nullable()->index('fk_questionnaires_users_criator');
             $table->integer('updater_id')->nullable()->index('fk_questionnaires_users_updater');
+            $table->integer('company_id')->nullable()->index('fk_questionnaires_companies');
 
             $table->string('name',200)->nullable();
             $table->string('description',300)->nullable();

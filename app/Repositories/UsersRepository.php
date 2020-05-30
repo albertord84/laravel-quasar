@@ -11,6 +11,7 @@ use App\Models\UsersStatus;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\User;
 
 
 /**
@@ -132,20 +133,17 @@ class UsersRepository extends BaseRepository
       if ($Address){
         $userModel['address_id'] = $Address->id;
       }
-      $User = $this->model()::create($userModel); // $User= $this->model()::find(4);
+      $password = rand(100001, 999999);
+      $userModel['password'] = $password;
+      $User = User::create($userModel);
+      $User->password = $password; // TODO-Alberto: essa asignacion no esta funcionando, mismo ese campo siendo fillable en la clase
 
       // 2. envia credenciais de acesso por email
-      $User->password = rand(100001, 999999);
       if ($sendRegisterEmail && $sendRegisterEmail == 'Sim'){
-        Mail
-          ::to($User->email)
+        Mail::to($User->email)
           // ->cc('copy@email.com')
           ->send(new EmailSigninUser($User, 'Cadastro Physiback'));
       }
-      // $User->password = bcrypt($User->password);
-
-      // 3. Salvar senha cifrada
-      $User->save();
 
       return $User;
     }

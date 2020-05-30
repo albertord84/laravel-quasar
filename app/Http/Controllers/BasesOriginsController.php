@@ -12,6 +12,11 @@ use Response;
 
 class BasesOriginsController extends AppBaseController
 {
+
+    const PUBLIC = 1;
+    const PRIVATE = 2;
+    const PROTECTED = 3;
+
     /** @var  BasesOriginsRepository */
     private $basesOriginsRepository;
 

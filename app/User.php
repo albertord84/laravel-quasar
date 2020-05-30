@@ -18,7 +18,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'username' ,'password',
+        'name',
+        'email',
+        'username',
+        'password',
+        'role_id',
+        'status_id',
+        'company_id',
+        'address_id',
+        'json_data'
     ];
 
     /**
@@ -41,6 +49,12 @@ class User extends Authenticatable
         'email' => 'string',
         // 'password' => 'string',
         'email_verified_at' => 'datetime',
+
+        'role_id' => 'integer',
+        'status_id' => 'integer',
+        'company_id' => 'integer',
+        'address_id' => 'integer',
+        'json_data'=> 'string'
     ];
 
     // METHODS
@@ -74,7 +88,7 @@ class User extends Authenticatable
         return [
             'email' => 'required|string|email|max:50|confirmed|unique:users',
             'username' => 'required|string|alpha_num|max:50|unique:users',
-            'password' => 'required|string|confirmed|min:8|regex:/(^[\S]{8,}$)/'
+            'password' => 'required|string|confirmed|min:8|regex:/(^[\S]{4,}$)/'
         ];
     }
 
@@ -82,7 +96,7 @@ class User extends Authenticatable
     {
         return [
             'username' => 'required|string|max:50',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:4',
             'grant_type' => 'required|string|in:password'
         ];
     }

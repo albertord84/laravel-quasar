@@ -8,7 +8,6 @@
             dense
             binary-state-sort
             :card-container-style="{ backgroundColor: '#ff0000' }"
-
             :loading="isLoading"
             :pagination="pagination"
             :rows-per-page-options="[0]"
@@ -39,7 +38,7 @@
                   {{ props.row.name }}
               </q-td>
 
-              <q-td key="name" :props="props" class="q-pa-none q-ma-none">
+              <q-td key="status" :props="props" class="q-pa-none q-ma-none">
                   {{ props.row.StatusCampaign.name }}
               </q-td>
 

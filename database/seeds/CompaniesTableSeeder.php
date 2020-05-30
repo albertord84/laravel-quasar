@@ -39,20 +39,34 @@ class CompaniesTableSeeder extends Seeder
       ]);
       $this->command->info('Company Physiback created');
 
-      for($i=2; $i<120; $i++){
-        Companies::create([
-          'id' => "$i",
-          'responsible_id' => '1',
-          'address_id' => '1',
-          'social_reason' => "Company $i",
-          'fantasy_name' => "Company $i Fantasy name",
-          'cnpj' => '88495263000161',
-          'phone' => '5521965913089',
-          'phone2' => '',
-          'decription' => 'Gestão de enquetes online',
-          'observation' => 'Gestão de enquetes online'
-        ]);
-        $this->command->info("Company $i created");
-      }
+      Companies::create([
+        'id' => '2',
+        'responsible_id' => '6',
+        'address_id' => '1',
+        'social_reason' => 'Empresa 1',
+        'fantasy_name' => 'Empresa 1',
+        'cnpj' => '88495263000161',
+        'phone' => '5521965913089',
+        'phone2' => '',
+        'decription' => 'Gestão de Cloriquina',
+        'observation' => 'Gestão de Cloriquina'
+      ]);
+      $this->command->info('Company Empresa 1 created');
+
+      // for($i=2; $i<120; $i++){
+      //   Companies::create([
+      //     'id' => "$i",
+      //     'responsible_id' => '1',
+      //     'address_id' => '1',
+      //     'social_reason' => "Company $i",
+      //     'fantasy_name' => "Company $i Fantasy name",
+      //     'cnpj' => '88495263000161',
+      //     'phone' => '5521965913089',
+      //     'phone2' => '',
+      //     'decription' => 'Gestão de enquetes online',
+      //     'observation' => 'Gestão de enquetes online'
+      //   ]);
+      //   $this->command->info("Company $i created");
+      // }
     }
 }

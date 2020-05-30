@@ -1,6 +1,6 @@
 <template>
     <q-page class="bg-gray q-pa-md">
-      <h6>Dashboard</h6>
+      <h6>Dashboard do Admin</h6>
     </q-page>
 </template>
 
