@@ -117,7 +117,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import { AccountBanks } from '../services/AccountBanks.js'
-import { Roles } from '../helpers/userRoles.js'
+import { Roles } from '../helpers/constants.js'
 
 export default {
   name: 'CrudCampaigns',

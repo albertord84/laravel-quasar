@@ -72,7 +72,7 @@
 
 <script>
 import { WebService } from '../services/WebService.js'
-import { Roles } from '../helpers/userRoles.js'
+import { Roles } from '../helpers/constants.js'
 
 export default {
   name: 'CrudCampaigns',

@@ -9,7 +9,7 @@ import { mapActions, mapGetters } from 'vuex'
 import { AuthService } from '../../../services/AuthService'
 import { master } from '../../../helpers/master'
 import _ from 'lodash'
-import { Roles } from '../helpers/userRoles.js'
+import { Roles } from '../helpers/constants.js'
 
 export default {
   name: 'Questionaries',

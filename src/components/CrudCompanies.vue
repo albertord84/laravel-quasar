@@ -188,7 +188,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import validation from '../services/ValidationService.js'
-import { Roles } from '../helpers/userRoles.js'
+import { Roles } from '../helpers/constants.js'
 
 export default {
   name: 'CrudQuestionary',
