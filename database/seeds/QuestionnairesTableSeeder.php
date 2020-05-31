@@ -41,8 +41,9 @@ class QuestionnairesTableSeeder extends Seeder
       Questionnaires::create([
           'id' => '2',
           'plane_id' => '2',
-          'criator_id' => '6',
-          'updater_id' => '6',
+          'criator_id' => '7',
+          'updater_id' => '7',
+          'company_id' => '2',
           'name' => 'Uso da Cannabis Sativa na restauração neurológica em paciente com ELA',
           'description' => 'Questionário para avaliar o uso da Cannabis Sativa na restauração neurológica em paciente com Esclerose Lateral Amiotrófica (ELA)',
           'observation' => 'Esse questionário deve ser aplicado apenas a médicos neurologistas',
@@ -53,8 +54,9 @@ class QuestionnairesTableSeeder extends Seeder
       Questionnaires::create([
           'id' => '3',
           'plane_id' => '3',
-          'criator_id' => '6',
-          'updater_id' => '6',
+          'criator_id' => '8',
+          'updater_id' => '8',
+          'company_id' => '3',
           'name' => 'Uso do Captopril em pacientes com hiper-tensão arterial',
           'description' => 'Questionário para avaliar o uso do Captopril em pacientes com hiper-tensão arterial que apresentam doenças cardíacas congênitas',
           'observation' => 'Esse questionário deve ser aplicado apenas a médicos cardiologistas',

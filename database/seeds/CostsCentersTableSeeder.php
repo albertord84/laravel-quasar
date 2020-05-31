@@ -27,9 +27,33 @@ class CostsCentersTableSeeder extends Seeder
     public function createCostsCenters(){
       CostsCenters::create([
           'id' => '1',
-          'company_id' => '1',
-          'admin_id' => '1',
-          'name' => '',
+          'company_id' => '2',
+          'admin_id' => '6',
+          'name' => 'CentroCusto1 da Empresa2',
+      ]);
+      $this->command->info('CostsCenter criated');
+
+      CostsCenters::create([
+          'id' => '2',
+          'company_id' => '2',
+          'admin_id' => '7',
+          'name' => 'CentroCusto2 da Empresa2',
+      ]);
+      $this->command->info('CostsCenter criated');
+
+      CostsCenters::create([
+          'id' => '3',
+          'company_id' => '3',
+          'admin_id' => '8',
+          'name' => 'CentroCusto1 da Empresa3',
+      ]);
+      $this->command->info('CostsCenter criated');
+
+      CostsCenters::create([
+          'id' => '4',
+          'company_id' => '3',
+          'admin_id' => '9',
+          'name' => 'CentroCusto2 da Empresa3',
       ]);
       $this->command->info('CostsCenter criated');
     }

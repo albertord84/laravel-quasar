@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Controllers\UsersRolesController;
 use App\Mail\EmailSigninUser;
 use App\Models\Address;
 use App\Models\Companies;
@@ -47,11 +48,7 @@ class UsersRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
-    public function filterUsers($input) {
-      // TODO-JR: filtar segundo role do usuario logado
-      // dd(Auth::guard('web'));
-      // $userLogued->role_id = 2;
-
+    public function filterUsers($input, $userLogged) {
       $filter = $input['filter'] ?? '';
       $role_id = $input['role_id'] ?? 0;
       $id = $input['id'] ?? 0;
@@ -59,6 +56,8 @@ class UsersRepository extends BaseRepository
       $company_id = $input['company_id'] ?? 0;
       $cost_center_id = $input['cost_center_id'] ?? 0;
       $status_id = $input['status_id'] ?? 0;
+
+      $company_id  = (!$company_id && $userLogged->role_id == UsersRolesController::ADMIN) ? $userLogged->company_id : 0;
 
       $page = $input['page'] ?? 0;
       $deleted_at = $input['deleted'] ?? 0;
@@ -119,7 +118,7 @@ class UsersRepository extends BaseRepository
           });
     }
 
-    public function criateFullUser($input) {
+    public function criateFullUser($input, $userLogged) {
       $userModel = $input['userModel'];
       $addressModel = (isset($input['addressModel']) && isset($input['addressModel']['cep']) && $input['addressModel']['cep']!= '') ? $input['addressModel'] : null;
       $sendRegisterEmail = $input['sendRegisterEmail'] ?? null;
@@ -133,7 +132,9 @@ class UsersRepository extends BaseRepository
       if ($Address){
         $userModel['address_id'] = $Address->id;
       }
+      $company_id  = ($userLogged->role_id == UsersRolesController::ADMIN) ? $userLogged->company_id : null;
       $password = rand(100001, 999999);
+      $userModel['company_id'] = $company_id;
       $userModel['password'] = $password;
       $User = User::create($userModel);
       $User->password = $password; // TODO-Alberto: essa asignacion no esta funcionando, mismo ese campo siendo fillable en la clase

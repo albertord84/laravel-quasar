@@ -217,7 +217,7 @@ export default {
       WebService.get('web/' + 'questionnaires', {
         'filter': this.filter,
         'page': page,
-        'userLogged': this.userLogged
+        'userLogged': JSON.stringify(this.userLogged)
       })
         .then(response => {
           let tmp = Object.values(response.data)

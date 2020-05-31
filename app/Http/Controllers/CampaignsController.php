@@ -33,11 +33,13 @@ class CampaignsController extends AppBaseController
     public function index(Request $request)
     {
         $input = $request->all();
-        $users = $this->campaignsRepository->filterCampaigns($input);
-        return $users->toJson();
 
-        // return view('campaigns.index')
-        //     ->with('campaigns', $campaigns);
+        //TODO: userLoggued
+        $userLogged = json_decode(Auth::guard('web')->user());
+        $userLogged = json_decode($request['userLogged']);
+
+        $users = $this->campaignsRepository->filterCampaigns($input, $userLogged);
+        return $users->toJson();
     }
 
     /**

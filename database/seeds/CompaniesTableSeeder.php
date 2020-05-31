@@ -43,30 +43,28 @@ class CompaniesTableSeeder extends Seeder
         'id' => '2',
         'responsible_id' => '6',
         'address_id' => '1',
-        'social_reason' => 'Empresa 1',
-        'fantasy_name' => 'Empresa 1',
-        'cnpj' => '88495263000161',
+        'social_reason' => 'Empresa 2',
+        'fantasy_name' => 'Empresa 2',
+        'cnpj' => '52.877.976/0001-40',
         'phone' => '5521965913089',
         'phone2' => '',
-        'decription' => 'Gestão de Cloriquina',
-        'observation' => 'Gestão de Cloriquina'
+        'decription' => 'Drogarias São Paulo',
+        'observation' => 'Drogarias São Paulo'
       ]);
       $this->command->info('Company Empresa 1 created');
 
-      // for($i=2; $i<120; $i++){
-      //   Companies::create([
-      //     'id' => "$i",
-      //     'responsible_id' => '1',
-      //     'address_id' => '1',
-      //     'social_reason' => "Company $i",
-      //     'fantasy_name' => "Company $i Fantasy name",
-      //     'cnpj' => '88495263000161',
-      //     'phone' => '5521965913089',
-      //     'phone2' => '',
-      //     'decription' => 'Gestão de enquetes online',
-      //     'observation' => 'Gestão de enquetes online'
-      //   ]);
-      //   $this->command->info("Company $i created");
-      // }
+      Companies::create([
+        'id' => '3',
+        'responsible_id' => '6',
+        'address_id' => '1',
+        'social_reason' => 'Empresa 3',
+        'fantasy_name' => 'Empresa 3',
+        'cnpj' => '96.748.178/0001-94',
+        'phone' => '5521965913089',
+        'phone2' => '',
+        'decription' => 'Drogaria Pachecos',
+        'observation' => 'Drogaria Pachecos'
+      ]);
+      $this->command->info('Company Empresa 1 created');
     }
 }

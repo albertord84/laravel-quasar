@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Http\Controllers\UsersRolesController;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends AppBaseController
 {
@@ -28,11 +29,13 @@ class UsersController extends AppBaseController
      */
     public function index(Request $request){
         $input = $request->all();
-        $users = $this->usersRepository->filterUsers($input);
-        return $users->toJson();
 
-        // return view('users.index')
-        //     ->with('users', $users);
+        //TODO: userLoggued
+        $userLogged = json_decode(Auth::guard('web')->user());
+        $userLogged = json_decode($request['userLogged']);
+
+        $users = $this->usersRepository->filterUsers($input, $userLogged);
+        return $users->toJson();
     }
 
     /**
@@ -125,7 +128,12 @@ class UsersController extends AppBaseController
 
     public function criateFullUser(Request $request) {
         $input = $request->all();
-        $user = $this->usersRepository->criateFullUser($input);
+
+        //TODO: userLoggued
+        $userLogged = json_decode(Auth::guard('web')->user());
+        $userLogged = json_decode($request['userLogged']);
+
+        $user = $this->usersRepository->criateFullUser($input, $userLogged);
         return $user->toJson();
     }
 

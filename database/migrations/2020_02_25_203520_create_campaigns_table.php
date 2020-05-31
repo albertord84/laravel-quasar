@@ -21,6 +21,7 @@ class CreateCampaignsTable extends Migration
             $table->integer('updater_id')->nullable()->index('fk_campaigns_users_updater');
             $table->integer('questionary_id')->nullable()->index('fk_campaigns_questionnaires');
             $table->integer('base_id')->nullable()->index('fk_campaigns_bases');
+            $table->integer('company_id')->nullable()->index('fk_campaigns_companies');
 
             $table->string('name',200)->nullable(false);
             $table->string('objetive',300)->nullable();

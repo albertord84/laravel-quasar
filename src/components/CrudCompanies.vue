@@ -584,12 +584,12 @@ export default {
 
   beforeMount () {
     this.userLogged = this.$q.localStorage.getItem('user_data')
+    if (this.userLogged.role_id > Roles.Superdmin) {
+      this.$router.replace({ name: 'public.denied' })
+    }
     this.getAdmins()
     if (this.action === 'edit') {
       this.prepareToUpdateCompany()
-    }
-    if (this.userLogged.role_id > Roles.Superdmin) {
-      this.$router.replace({ name: 'public.denied' })
     }
   },
 

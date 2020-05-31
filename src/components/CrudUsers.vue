@@ -232,7 +232,8 @@ export default {
       WebService.put('web/' + url, {
         'userModel': this.userModel,
         'addressModel': this.addressModel,
-        'sendRegisterEmail': this.sendRegisterEmail
+        'sendRegisterEmail': this.sendRegisterEmail,
+        'userLogged': JSON.stringify(this.userLogged)
       })
         .then(response => {
           this.isCreatingUser = false

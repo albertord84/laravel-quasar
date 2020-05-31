@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Controllers\UsersRolesController;
 use App\Models\OptionsResponses;
 use App\Models\Planes;
 use App\Models\Questionnaires;
@@ -41,15 +42,19 @@ class QuestionnairesRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
-    public function filterQuestionnaires($input) {
+    public function filterQuestionnaires($input, $userLogged) {
+
       $filter = $input['filter'] ?? '';
       $page = $input['page'] ??  0;
       $id = $input['id'] ?? 0;
 
       $plane_id = $input['plane_id'] ?? 0;
+      $company_id = $input['company_id'] ?? 0;
       $criator_id = $input['criator_id'] ?? 0;
       $updater_id = $input['updater_id'] ?? 0;
       $released = $input['released'] ?? 0;
+
+      $company_id  = (!$company_id && $userLogged->role_id == UsersRolesController::ADMIN) ? $userLogged->company_id : 0;
 
       $deleted_at = $input['deleted'] ?? 0;
       $created_at = $input['created'] ?? 0;
@@ -69,7 +74,10 @@ class QuestionnairesRepository extends BaseRepository
             if ($id) {
               $query->where('id', $id);
             }})
-
+          ->where(function($query) use ($company_id){
+            if ($company_id) {
+              $query->where('company_id', $company_id);
+            }})
           ->where(function($query) use ($plane_id){
             if ($plane_id) {
               $query->where('plane_id', $plane_id);

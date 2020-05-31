@@ -297,12 +297,11 @@ export default {
 
   beforeMount () {
     this.userLogged = this.$q.localStorage.getItem('user_data')
-    this.getPayments(0)
-    this.AccountBanks = AccountBanks
-
     if (this.userLogged.role_id > Roles.Superdmin) {
       this.$router.replace({ name: 'public.denied' })
     }
+    this.getPayments(0)
+    this.AccountBanks = AccountBanks
   }
 }
 </script>

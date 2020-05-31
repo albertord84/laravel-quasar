@@ -35,5 +35,27 @@ class BasesTableSeeder extends Seeder
           'json_data' => '',
       ]);
       $this->command->info('Base ORGANIC_TARGETS Base criated');
+
+      Bases::create([
+          'id' => '2',
+          'origin_id' => '2',
+          'company_id' => '2',
+          'criator_id' => '6',
+          'name' => 'TARGETS_Empresa2',
+          'decription' => 'Base de targets da empresa 2',
+          'json_data' => '',
+      ]);
+      $this->command->info('Base TARGETS_Empresa2 Base criated');
+
+      Bases::create([
+          'id' => '3',
+          'origin_id' => '2',
+          'company_id' => '3',
+          'criator_id' => '8',
+          'name' => 'TARGETS_Empresa3',
+          'decription' => 'Base de targets da empresa 3',
+          'json_data' => '',
+      ]);
+      $this->command->info('Base TARGETS_Empresa2 Base criated');
     }
 }

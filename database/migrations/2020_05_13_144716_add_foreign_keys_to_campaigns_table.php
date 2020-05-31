@@ -34,6 +34,10 @@ class AddForeignKeysToCampaignsTable extends Migration
                 ->references('id')->on('bases')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
+          $table->foreign('company_id', 'fk_campaigns_companies') //campaigns x companies
+                ->references('id')->on('companies')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
         });
     }
 
@@ -50,6 +54,7 @@ class AddForeignKeysToCampaignsTable extends Migration
           $table->dropForeign('fk_campaigns_users_updater');
           $table->dropForeign('fk_campaigns_questionnaires');
           $table->dropForeign('fk_campaigns_bases');
+          $table->dropForeign('fk_campaigns_companies');
         });
     }
 }

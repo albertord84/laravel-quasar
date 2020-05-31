@@ -283,17 +283,16 @@ export default {
   },
 
   beforeMount () {
+    this.userLogged = this.$q.localStorage.getItem('user_data')
+    if (this.userLogged.role_id > Roles.Superdmin) {
+      this.$router.replace({ name: 'public.denied' })
+    }
+
     this.getExtractionsStatus()
     if (this.action === 'edit') {
       this.prepareToUpdatePayment()
     }
     this.AccountBanks = AccountBanks
-
-    this.userLogged = this.$q.localStorage.getItem('user_data')
-
-    if (this.userLogged.role_id > Roles.Superdmin) {
-      this.$router.replace({ name: 'public.denied' })
-    }
   },
 
   mounted () {

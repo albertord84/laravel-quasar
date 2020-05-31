@@ -247,7 +247,8 @@ export default {
       this.isLoading = true
       WebService.get('web/' + 'campaigns', {
         'filter': this.filter,
-        'page': page
+        'page': page,
+        'userLogged': JSON.stringify(this.userLogged)
       })
         .then(response => {
           let tmp = Object.values(response.data)

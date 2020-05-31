@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Http\Controllers\CampaignsStatusController;
+use App\Http\Controllers\UsersRolesController;
 use App\Models\Bases;
 use App\Models\Campaigns;
 use App\Models\CampaignsStatus;
@@ -54,7 +55,7 @@ class CampaignsRepository extends BaseRepository
         return $this->fieldSearchable;
     }
 
-    public function filterCampaigns($input) {
+    public function filterCampaigns($input, $userLogged) {
       $filter = $input['filter'] ?? '';
       $page = $input['page'] ?? 0;
       $id = $input['id'] ?? 0;
@@ -67,6 +68,8 @@ class CampaignsRepository extends BaseRepository
       $analyzed_date = $input['analyzed_date'] ?? 0;
       $start_date = $input['start_date'] ?? 0;
       $end_date = $input['end_date'] ?? 0;
+
+      $company_id  = ($userLogged->role_id == UsersRolesController::ADMIN) ? $userLogged->company_id : 0;
 
       $deleted_at = $input['deleted_at'] ?? 0;
       $created_at = $input['created_at'] ?? 0;
@@ -87,6 +90,10 @@ class CampaignsRepository extends BaseRepository
             if ($id) {
               $query->where('id', $id);
             }})
+          ->where(function($query) use ($company_id){
+              if ($company_id) {
+                $query->where('company_id', $company_id);
+              }})
           ->where(function($query) use ($status_id){
             if ($status_id) {
               $query->where('status_id', $status_id);

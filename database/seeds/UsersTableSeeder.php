@@ -93,43 +93,95 @@ class UsersTableSeeder extends Seeder
     public function createAdmins(){
       User::create([
           'id' => 6,
-          'company_id' => 1,
+          'company_id' => 2,
           'address_id' => 1,
-          'username' => 'Admin',
-          'email' => 'admin@physiback.com',
+          'username' => 'admin1company2',
+          'email' => 'admin1@company2.com',
           'password' => 'admin',
           'role_id' => 2,
           'status_id' => 2,
       ]);
-      $this->command->info('Admin created: [user: admin@physiback.com]');
+      $this->command->info('Admin created: [user: admin1@company2.com]');
+
+      User::create([
+          'id' => 7,
+          'company_id' => 2,
+          'address_id' => 1,
+          'username' => 'admin2company2',
+          'email' => 'admin2@company2.com',
+          'password' => 'admin',
+          'role_id' => 2,
+          'status_id' => 2,
+      ]);
+      $this->command->info('Admin created: [user: admin2@company2.com]');
+
+      User::create([
+          'id' => 8,
+          'company_id' => 3,
+          'address_id' => 1,
+          'username' => 'admin1company3',
+          'email' => 'admin1@company3.com',
+          'password' => 'admin',
+          'role_id' => 2,
+          'status_id' => 2,
+      ]);
+      $this->command->info('Admin created: [user: admin1@company3.com]');
+
+      User::create([
+          'id' => 9,
+          'company_id' => 3,
+          'address_id' => 1,
+          'username' => 'admin2company3',
+          'email' => 'admin2@company3.com',
+          'password' => 'admin',
+          'role_id' => 2,
+          'status_id' => 2,
+      ]);
+      $this->command->info('Admin created: [user: admin2@company3.com]');
     }
 
 
 
     public function createTargets(){
       User::create([
-        'id' => 7,
-        'company_id' => 1,
-        'address_id' => 1,
-        'username' => 'Target1',
-        'email' => 'target1@physiback.com',
-        'password' => 'target1',
+        'id' => 10,
+        'username' => 'target1company2',
+        'email' => 'target1@company2.com',
+        'password' => 'target',
         'role_id' => 3,
-        'status_id' => 2,
+        'status_id' => 1,
       ]);
-      $this->command->info('Admin created: [user: target1@physiback.com]');
+      $this->command->info('Admin created: [user: target1@company2.com]');
 
       User::create([
-          'id' => 8,
-          'company_id' => 1,
-          'address_id' => 1,
-          'username' => 'Target2',
-          'email' => 'target2@physiback.com',
-          'password' => 'target2',
+          'id' => 11,
+          'username' => 'target2company2',
+          'email' => 'target2@company2.com',
+          'password' => 'target',
           'role_id' => 3,
           'status_id' => 2,
       ]);
-      $this->command->info('Admin created: [user: target2@physiback.com]');
+      $this->command->info('Admin created: [user: target2@company2.com]');
+
+      User::create([
+        'id' => 12,
+        'username' => 'target1company3',
+        'email' => 'target1@company3.com',
+        'password' => 'target',
+        'role_id' => 3,
+        'status_id' => 1,
+      ]);
+      $this->command->info('Admin created: [user: target1@company3.com]');
+
+      User::create([
+          'id' => 13,
+          'username' => 'target2company3',
+          'email' => 'target2@company3.com',
+          'password' => 'target',
+          'role_id' => 3,
+          'status_id' => 2,
+      ]);
+      $this->command->info('Admin created: [user: target2@company3.com]');
     }
 
 }

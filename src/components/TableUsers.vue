@@ -216,7 +216,8 @@ export default {
       this.isLoading = true
       WebService.get('web/' + 'users', {
         'filter': this.filter,
-        'page': page
+        'page': page,
+        'userLogged': JSON.stringify(this.userLogged)
       })
         .then(response => {
           response.data.some((item, i) => {
