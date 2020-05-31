@@ -64,12 +64,13 @@ class CampaignsRepository extends BaseRepository
       $criator_id = $input['criator_id'] ?? 0;
       $updater_id = $input['updater_id'] ?? 0;
       $base_id = $input['base_id'] ?? 0;
+      $company_id = $input['company_id'] ?? 0;
       $requested_date = $input['requested_date'] ?? 0;
       $analyzed_date = $input['analyzed_date'] ?? 0;
       $start_date = $input['start_date'] ?? 0;
       $end_date = $input['end_date'] ?? 0;
 
-      $company_id  = ($userLogged->role_id == UsersRolesController::ADMIN) ? $userLogged->company_id : 0;
+      $company_id  = (!$company_id && $userLogged->role_id == UsersRolesController::ADMIN) ? $userLogged->company_id : 0;
 
       $deleted_at = $input['deleted_at'] ?? 0;
       $created_at = $input['created_at'] ?? 0;

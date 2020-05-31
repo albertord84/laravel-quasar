@@ -32,6 +32,10 @@
 
         <template v-slot:body="props">
           <q-tr :props="props">
+              <q-td key="name" :props="props" class="q-pa-none q-ma-none">
+                {{ props.row.username }}
+              </q-td>
+
               <q-td key="email" :props="props" class="q-pa-none q-ma-none">
                 {{ props.row.email }}
               </q-td>
@@ -43,10 +47,6 @@
               <q-td key="company_id" :props="props" class="q-pa-none q-ma-none">
                   {{ (props.row.Company) ? props.row.Company.fantasy_name : ''}}
               </q-td>
-
-              <!-- <q-td key="cost_center_id" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.cost_center_id }}
-              </q-td> -->
 
               <q-td key="role_id" :props="props" class="q-pa-none q-ma-none">
                   {{ props.row.UsersRole.name }}
@@ -151,13 +151,19 @@ export default {
       data: [],
       columns: [
         {
-          label: 'Email',
-          field: 'email',
-          name: 'email',
+          label: 'Nome',
+          field: 'name',
+          name: 'name',
           required: true,
           align: 'left',
           format: val => `${val}`,
           sortable: true
+        },
+        {
+          label: 'Email',
+          field: 'email',
+          name: 'email',
+          align: 'center'
         },
         {
           label: 'Status',

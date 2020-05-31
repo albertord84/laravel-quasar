@@ -188,7 +188,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import validation from '../services/ValidationService.js'
-import { Roles } from '../helpers/roles.js'
+import { Roles } from '../helpers/userRoles.js'
 
 export default {
   name: 'CrudQuestionary',
@@ -237,11 +237,11 @@ export default {
       selectedAdminEmail: '',
       selectedAdmin: {},
       listAdmins: [],
+      stringOptions: [],
+      options: [],
 
       modalCriateAdmin: false,
 
-      stringOptions: [],
-      options: [],
       stringOptionsUF: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO', 'DF'],
       optionsUF: [],
 
@@ -303,7 +303,8 @@ export default {
       delete this.userModel.company_id
       WebService.put('web/criateFullUser', {
         'userModel': this.userModel,
-        'sendRegisterEmail': this.sendRegisterEmail
+        'sendRegisterEmail': this.sendRegisterEmail,
+        'userLogged': JSON.stringify(this.userLogged)
       })
         .then(response => {
           this.isCreatingCompany = false
@@ -338,7 +339,7 @@ export default {
 
     getAdmins () {
       WebService.get('web/' + 'users', {
-        'role_id': 2
+        'role_id': Roles.Admin
       })
         .then(response => {
           this.stringOptions = []

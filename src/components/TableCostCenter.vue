@@ -17,14 +17,16 @@
           <div class="col-4">
             <q-input  v-model="filter" label-color="orange-8" color="orange-8" placeholder="Buscar ..."/>
           </div>
+
           <div class="col-4 text-center">
-            <q-btn flat dense class="q-ml-lg" icon-right="navigate_before"  title="Página anterior" no-caps @click="getPayments(page-1)" :disable="page==0"/>
+            <q-btn flat dense class="q-ml-lg" icon-right="navigate_before"  title="Página anterior" no-caps @click="getCostCenters(page-1)" :disable="page==0"/>
             <q-btn flat dense class="q-px-sm "  title="Página atual" no-caps>
               <span v-if="!isLoading" color="orange">{{page+1}}</span>
               <q-spinner-pie v-if="isLoading" color="orange" />
             </q-btn>
-            <q-btn flat dense icon-right="navigate_next"  title="Página seguinte" no-caps @click="getPayments(page+1)" :disable="!hasMorePage"/>
+            <q-btn flat dense icon-right="navigate_next"  title="Página seguinte" no-caps @click="getCostCenters(page+1)" :disable="!hasMorePage"/>
           </div>
+
           <div class="col-4 text-right">
             <q-btn color="orange-8" icon-right="archive" label="Exportar" title="Exportar para CSV" no-caps @click="exportTable"/>
           </div>
@@ -33,37 +35,21 @@
         <template v-slot:body="props">
           <q-tr :props="props">
               <q-td key="name" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.User.username }}
+                {{ props.row.name }}
               </q-td>
 
-              <q-td key="email" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.User.email }}
+              <q-td key="adminName" :props="props" class="q-pa-none q-ma-none">
+                  {{ props.row.Admin.username}}
               </q-td>
 
-              <q-td key="statusName" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.ExtractionsStatus.name }}
-              </q-td>
-
-              <q-td key="value" :props="props" class="q-pa-none q-ma-none">
-                  {{ props.row.requested_value}}
-              </q-td>
-
-              <q-td key="accountBank" :props="props" class="q-pa-none q-ma-none">
-                  <span :title="AccountBanks[props.row.User.AccountBank.bank]">{{ props.row.User.AccountBank.bank}}</span> / <span title="Agência">{{ props.row.User.AccountBank.agency}}</span> / <span title="Conta">{{ props.row.User.AccountBank.account}}</span>-<span title="Dígito da conta">{{ props.row.User.AccountBank.dig}}</span>: <span :title="(props.row.User.AccountBank.account_type === 'CC') ? 'Conta Corrente': 'Conta Poupança'">{{ props.row.User.AccountBank.account_type}}</span>
-              </q-td>
-
-              <q-td key="created_at" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.created_at.substr(0,10) }}
-              </q-td>
-
-              <q-td key="updated_at" :props="props" class="q-pa-none q-ma-none">
-                {{ props.row.updated_at.substr(0,10) }}
+              <q-td key="adminEmail" :props="props" class="q-pa-none q-ma-none">
+                  {{ props.row.Admin.email}}
               </q-td>
 
               <q-td key="actions" :props="props" class="q-pa-none q-ma-none">
                 <div style="margin-left:-3px">
-                  <q-icon color="primary" size="sm" class="pointer-hover q-mr-sm" title="Ver/Editar" name="account_balance_wallet" @click="editPayment(props.row)"/>
-                  <q-icon color="red" size="sm" class="pointer-hover" name="delete" title="Eliminar" @click="confirmDeletePayment(props.row)"/>
+                  <q-icon color="primary" size="sm" class="pointer-hover q-mr-sm" title="Ver/Editar" name="account_balance_wallet" @click="editCostCenter(props.row)"/>
+                  <q-icon color="red" size="sm" class="pointer-hover" name="delete" title="Eliminar" @click="confirmDeleteCostCenter(props.row)"/>
                 </div>
               </q-td>
 
@@ -72,11 +58,11 @@
 
         <template v-slot:bottom>
           <div class="col-12 text-center q-mt-md">
-            <q-btn flat dense class="q-ml-lg" icon-right="navigate_before"  title="Página anterior" no-caps @click="getPayments(page-1)" :disable="page==0"/>
+            <q-btn flat dense class="q-ml-lg" icon-right="navigate_before"  title="Página anterior" no-caps @click="getCostCenters(page-1)" :disable="page==0"/>
             <q-btn flat dense class="q-px-sm "  title="Página atual" no-caps>
               {{page+1}}
             </q-btn>
-            <q-btn flat dense icon-right="navigate_next"  title="Página seguinte" no-caps @click="getPayments(page+1)" :disable="!hasMorePage"/>
+            <q-btn flat dense icon-right="navigate_next"  title="Página seguinte" no-caps @click="getCostCenters(page+1)" :disable="!hasMorePage"/>
           </div>
         </template>
 
@@ -98,7 +84,7 @@
         <q-card>
           <q-card-section class="row items-center">
             <q-icon name="warning" class="text-red" style="font-size: 1.9rem;" />
-            <span v-if="user" class="q-ml-sm">Confirma que deseja eliminar esse pagamento?</span>
+            <span v-if="costCenter" class="q-ml-sm">Confirma que deseja eliminar o centro de custo "{{costCenter.name}}"?</span>
           </q-card-section>
 
           <q-card-section v-show="isDeleting" class="text-center">
@@ -106,7 +92,7 @@
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="Eliminar" color="orange-8" @click.prevent="deletePayment">
+            <q-btn flat label="Eliminar" color="orange-8" @click.prevent="deleteCostCenter">
             </q-btn>
             <q-btn flat label="Cancelar" color="gray" v-close-popup />
           </q-card-actions>
@@ -120,7 +106,6 @@
 
 <script>
 import { WebService } from '../services/WebService.js'
-import { AccountBanks } from '../services/AccountBanks.js'
 import { exportFile } from 'quasar'
 import { Roles } from '../helpers/userRoles.js'
 
@@ -142,7 +127,7 @@ function wrapCsvValue (val, formatFn) {
 }
 
 export default {
-  name: 'TablePayments',
+  name: 'TableCenterCust',
 
   props: {
   },
@@ -152,53 +137,30 @@ export default {
 
   data () {
     return {
-      user: null,
+      costCenter: null,
       action: '',
       data: [],
       columns: [
         {
-          label: 'Nome',
+          label: 'Centro de custo',
           field: 'name',
           name: 'name',
           required: true,
           align: 'left',
+          format: val => `${val}`,
           sortable: true
         },
         {
-          label: 'Email',
-          field: 'email',
-          name: 'email',
-          align: 'center'
+          label: 'Nome do administrador',
+          field: 'adminName',
+          name: 'adminName',
+          align: 'left'
         },
         {
-          label: 'Status',
-          field: 'statusName',
-          name: 'statusName',
-          align: 'center'
-        },
-        {
-          label: 'Valor',
-          field: 'value',
-          name: 'value',
-          align: 'center'
-        },
-        {
-          label: 'Conta bancária',
-          field: 'accountBank',
-          name: 'accountBank',
-          align: 'center'
-        },
-        {
-          label: 'Solicitado',
-          field: 'created_at',
-          name: 'created_at',
-          align: 'center'
-        },
-        {
-          label: 'Atualizado',
-          field: 'updated_at',
-          name: 'updated_at',
-          align: 'center'
+          label: 'Email do administrador',
+          field: 'adminEmail',
+          name: 'adminEmail',
+          align: 'left'
         },
         {
           label: 'Ações',
@@ -215,23 +177,19 @@ export default {
       pagination: { rowsPerPage: 0 },
       modalConfirmDelete: false,
       isDeleting: false,
-      AccountBanks: {},
-      usersStatuses: [],
       userLogged: {}
     }
   },
 
   methods: {
-    getPayments (page) {
+    getCostCenters (page) {
       this.isLoading = true
-      WebService.get('web/' + 'extractions', {
+      WebService.get('web/' + 'costsCenters', {
         'filter': this.filter,
-        'page': page
+        'page': page,
+        'userLogged': JSON.stringify(this.userLogged)
       })
         .then(response => {
-          response.data.some((item, i) => {
-            item.statusName = this.usersStatuses[item.status_id]
-          })
           let tmp = Object.values(response.data)
           this.data = tmp
           this.page = page
@@ -244,20 +202,20 @@ export default {
         })
     },
 
-    editPayment (user) {
-      this.$emit('editPayment', user)
+    editCostCenter (costCenter) {
+      this.$emit('editCostCenter', costCenter)
     },
 
-    deletePayment () {
-      if (this.user) {
+    deleteCostCenter () {
+      if (this.costCenter) {
         this.isDeleting = true
-        WebService.delete('web/deleteFullUser', {
-          user: this.user
+        WebService.delete('web/deleteFullCostCenter', {
+          costCenter: this.costCenter
         })
           .then(response => {
             this.modalConfirmDelete = false
-            this.$q.notify({ type: 'positive', message: `Usuário eliminado com sucesso.`, position: 'top-right' })
-            this.getPayments(this.page)
+            this.$q.notify({ type: 'positive', message: `Centro de custo eliminado com sucesso.`, position: 'top-right' })
+            this.getCostCenters(this.page)
           })
           .catch(errors => {
           })
@@ -267,8 +225,8 @@ export default {
       }
     },
 
-    confirmDeletePayment (user) {
-      this.user = user
+    confirmDeleteCostCenter (costCenter) {
+      this.costCenter = costCenter
       this.modalConfirmDelete = true
     },
 
@@ -291,17 +249,16 @@ export default {
 
   watch: {
     filter (value) {
-      this.getPayments(0)
+      this.getCostCenters(0)
     }
   },
 
   beforeMount () {
     this.userLogged = this.$q.localStorage.getItem('user_data')
-    if (this.userLogged.role_id > Roles.Superdmin) {
+    if (this.userLogged.role_id > Roles.Admin) {
       this.$router.replace({ name: 'public.denied' })
     }
-    this.getPayments(0)
-    this.AccountBanks = AccountBanks
+    this.getCostCenters(0)
   }
 }
 </script>

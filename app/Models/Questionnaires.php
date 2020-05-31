@@ -23,7 +23,7 @@ class Questionnaires extends Model
     use SoftDeletes;
 
     public $table = 'questionnaires';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -36,6 +36,7 @@ class Questionnaires extends Model
         'plane_id',
         'criator_id',
         'updater_id',
+        'company_id',
         'name',
         'description',
         'observation',
@@ -52,6 +53,7 @@ class Questionnaires extends Model
         'plane_id' => 'integer',
         'criator_id' => 'integer',
         'updater_id' => 'integer',
+        'company_id' => 'integer',
         'name' => 'string',
         'description' => 'string',
         'observation' => 'string',
@@ -64,8 +66,8 @@ class Questionnaires extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }

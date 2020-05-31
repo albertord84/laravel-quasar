@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Http\Controllers\UsersRolesController;
 use App\Models\CostsCenters;
+use App\Models\Users;
 use App\Repositories\BaseRepository;
 
 /**
@@ -33,13 +35,15 @@ class CostsCentersRepository extends BaseRepository
     }
 
 
-    public function filterCostsCenters($input) {
+    public function filterCostsCenters($input, $userLogged) {
       $filter = $input['filter'] ?? '';
       $page = $input['page'] ??  0;
       $id = $input['id'] ?? 0;
 
       $company_id = $input['company_id'] ?? 0;
       $admin_id = $input['admin_id'] ?? 0;
+
+      $company_id  = (!$company_id && $userLogged->role_id == UsersRolesController::ADMIN) ? $userLogged->company_id : 0;
 
       $deleted_at = $input['deleted'] ?? 0;
       $created_at = $input['created'] ?? 0;
@@ -82,8 +86,8 @@ class CostsCentersRepository extends BaseRepository
             }})
           ->get()
           ->slice($start, $page_length)
-          ->each(function(CostsCenters $CostCente) {
-            // $Base->Admin = null;
+          ->each(function(CostsCenters $CostCenter) {
+                $CostCenter->Admin = Users::where('id', $CostCenter->admin_id)->get()->first();
         });
     }
 

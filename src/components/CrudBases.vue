@@ -100,7 +100,7 @@
 
 <script>
 import { WebService } from '../services/WebService.js'
-import { Roles } from '../helpers/roles.js'
+import { Roles } from '../helpers/userRoles.js'
 import { BasesOrigins } from '../helpers/basesOrigins.js'
 
 export default {

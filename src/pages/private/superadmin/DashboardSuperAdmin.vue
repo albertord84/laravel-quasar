@@ -10,7 +10,7 @@
 // import { mapGetters } from 'vuex'
 // import { mapActions, mapGetters } from 'vuex'
 // import { AuthService } from '../../../services/AuthService'
-import { Roles } from '../../../helpers/roles.js'
+import { Roles } from '../../../helpers/userRoles.js'
 
 export default {
   name: 'DashboardSuperAdmin',

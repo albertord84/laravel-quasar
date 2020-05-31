@@ -148,7 +148,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import validation from '../services/ValidationService.js'
-import { Roles } from '../helpers/roles.js'
+import { Roles } from '../helpers/userRoles.js'
 
 export default {
   name: 'CrudUsers',

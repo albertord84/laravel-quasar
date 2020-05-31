@@ -8,6 +8,7 @@ use App\Repositories\CostsCentersRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 class CostsCentersController extends AppBaseController
@@ -30,7 +31,12 @@ class CostsCentersController extends AppBaseController
     public function index(Request $request)
     {
         $input = $request->all();
-        $costsCenters = $this->costsCentersRepository->filterCostsCenters($input);
+
+        //TODO: userLoggued
+        $userLogged = json_decode(Auth::guard('web')->user());
+        $userLogged = json_decode($request['userLogged']);
+
+        $costsCenters = $this->costsCentersRepository->filterCostsCenters($input, $userLogged);
         return $costsCenters->toJson();
 
         // return view('costs_centers.index')

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { Roles } from '../../../helpers/roles.js'
+import { Roles } from '../../../helpers/userRoles.js'
 
 export default {
   name: 'DashboardAdmin',

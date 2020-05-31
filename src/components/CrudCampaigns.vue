@@ -175,7 +175,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import validation from '../services/ValidationService.js'
-import { Roles } from '../helpers/roles.js'
+import { Roles } from '../helpers/userRoles.js'
 
 export default {
   name: 'CrudCampaigns',
@@ -266,6 +266,7 @@ export default {
       if (this.campaign.Questionnaire) { delete this.campaign.Questionnaire }
       if (this.campaign.Base) { delete this.campaign.Base }
       var url = (this.action === 'insert') ? 'criateFullCampaign' : 'updateFullCampaign'
+      this.campaignModel.status_id = (this.action === 'insert') ? 1 : this.campaignModel.status_id
       WebService.put('web/' + url, {
         campaign: this.campaignModel
       })
@@ -317,7 +318,8 @@ export default {
 
     getAdmins () {
       WebService.get('web/' + 'users', {
-        'role_id': 2
+        'role_id': 2,
+        'userLogged': JSON.stringify(this.userLogged)
       })
         .then(response => {
           this.stringOptions = []
@@ -360,7 +362,8 @@ export default {
       }
       WebService.get('web/' + 'bases', {
         'origin_id': origins,
-        'company_id': company
+        'company_id': company,
+        'userLogged': JSON.stringify(this.userLogged)
       })
         .then(response => {
           this.stringOptionsBases = []
@@ -376,7 +379,9 @@ export default {
     },
 
     getQuestionnaires () {
-      WebService.get('web/' + 'questionnaires')
+      WebService.get('web/' + 'questionnaires', {
+        'userLogged': JSON.stringify(this.userLogged)
+      })
         .then(response => {
           this.stringOptionsQuestionnaires = []
           response.data.some((item, i) => {

@@ -119,7 +119,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import { exportFile } from 'quasar'
-import { Roles } from '../helpers/roles.js'
+import { Roles } from '../helpers/userRoles.js'
 
 function wrapCsvValue (val, formatFn) {
   let formatted = formatFn !== void 0
