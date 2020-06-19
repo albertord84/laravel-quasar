@@ -13,7 +13,7 @@
       </div>
 
       <!-- Administrador -->
-      <div class="col-5 q-px-xs q-mt-lg">
+      <div class="col-6 q-px-xs q-mt-lg">
         <span>Administrador (*)</span>
         <q-select v-model="selectedAdminEmail" :options="options" @filter="filterFnAutoselect" @filter-abort="abortFilterFn" filled class="col-12 q-mt-sm" label-color="orange-8" color="orange-8" hide-selected fill-input input-debounce="0" label=""  clearable use-input>
           <template v-slot:no-option>
@@ -24,14 +24,6 @@
             </q-item>
           </template>
         </q-select>
-      </div>
-
-      <div class="col-1">
-        <div class="q-mt-xl">
-          <q-btn text-color="white" class="q-pa-sm q-mt-sm q-mb-sm bg-orange-8"
-              label="" title="Criar administrador" icon="person_add" @click.prevent="isCreatingAdmin = false, modalCriateAdmin = true">
-          </q-btn>
-        </div>
       </div>
 
       <!-- ----------------------------------------------------------------------------------- -->
@@ -48,49 +40,11 @@
           </template>
         </q-btn>
       </div>
-
-      <!-- ----------------------------------------------------------------------------------- -->
-      <!-- Modal para adicionar Admin -->
-      <q-dialog v-model="modalCriateAdmin" persistent transition-show="flip-down"  transition-hide="flip-up">
-        <q-card>
-          <q-card-section class="row items-center">
-            <q-icon name="person" class="text-dark" style="font-size: 1.9rem;" />
-            <span v-if="costCenter" class="q-ml-sm">Criando administrador da empresa</span>
-          </q-card-section>
-
-          <q-card-section class="text-left">
-            <div class="col-12 q-px-xs">
-              <span>Nome completo (*)</span>
-              <q-input filled square v-model="userModel.username" style="min-width:400px; max-width:80%" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm"/>
-            </div>
-            <div class="col-12 q-px-xs q-mt-lg">
-              <span>Email (*)</span>
-              <q-input filled square v-model="userModel.email" style="min-width:400px; max-width:80%" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm"/>
-            </div>
-            <div class="col-12 q-px-xs q-mt-lg">
-              <span>Enviar email de cadastro? </span>
-              <q-select v-model="sendRegisterEmail" :options="['Sim', 'Não']" filled class="col-6 q-mt-sm" label-color="orange-8" color="orange-8" fill-input input-debounce="0" label=" "></q-select>
-            </div>
-          </q-card-section>
-
-          <q-card-actions align="right">
-            <q-btn flat label="Criar" :loading="isCreatingAdmin" color="orange-8" style="width:120px" @click.prevent="createAdmin">
-              <template v-slot:loading>
-                <q-spinner></q-spinner>
-              </template>
-            </q-btn>
-            <q-btn flat label="Cancelar" color="gray" style="width:120px" v-close-popup />
-          </q-card-actions>
-
-        </q-card>
-      </q-dialog>
-
   </div>
 </template>
 
 <script>
 import { WebService } from '../services/WebService.js'
-import validation from '../services/ValidationService.js'
 import { Roles } from '../helpers/constants.js'
 
 export default {
@@ -107,16 +61,6 @@ export default {
         id: 0,
         company_id: 0,
         name: ''
-      },
-      userModel: {
-        id: 0,
-        company_id: 0,
-        cost_center_id: 0,
-        address_id: 0,
-        role_id: 2,
-        status_id: 1,
-        username: '',
-        email: ''
       },
 
       selectedAdminEmail: '',
@@ -161,7 +105,7 @@ export default {
             this.$q.loading.hide()
           })
       } else {
-        WebService.put('web/costsCenters', this.costCenterModel)
+        WebService.put('web/costsCenters/' + this.costCenterModel.id, this.costCenterModel)
           .then(response => {
             this.isCreatingCostCenter = false
             this.$q.notify({ type: 'positive', color: 'teal-3', message: `Centro de custo atualizando com sucesso.`, position: 'top-right' })
@@ -180,9 +124,8 @@ export default {
     },
 
     prepareToUpdateCostCenter () {
-      // this.costCenterModel = this.base
-      // this.selectedBaseOrigin = this.base.BaseOrigin.name
-      // this.selectedBaseCompany = this.base.Company.fantasy_name
+      this.costCenterModel = this.costCenter
+      this.selectedAdminEmail = this.costCenter.Admin.email
     },
 
     getAdmins () {
@@ -199,38 +142,6 @@ export default {
         .catch(errors => {
         })
         .then(() => {
-        })
-    },
-
-    createAdmin () {
-      if (!this.validateUserModel()) {
-        return
-      }
-      this.isCreatingAdmin = true
-      this.userModel.password = 'tmp'
-      delete this.userModel.address_id
-      delete this.userModel.cost_center_id
-      delete this.userModel.company_id
-      WebService.put('web/criateFullUser', {
-        'userModel': this.userModel,
-        'sendRegisterEmail': this.sendRegisterEmail,
-        'userLogged': JSON.stringify(this.userLogged)
-      })
-        .then(response => {
-          this.isCreatingCompany = false
-          this.userModel = response.data
-          this.$q.notify({ type: 'positive', color: 'teal-3', message: `Administrador criado com sucesso.`, position: 'top-right' })
-          this.modalCriateAdmin = false
-          this.getAdmins()
-        })
-        .catch(error => {
-          this.isCreatingCompany = false
-          if (error.message.includes('Request failed with status code 500')) {
-            this.$q.notify({ type: 'negative', message: `O nome ou o email informado já existe no banco de dados.`, position: 'top-right' })
-          }
-        })
-        .finally(() => {
-          this.isCreatingAdmin = false
         })
     },
 
@@ -288,27 +199,8 @@ export default {
         this.costCenterModel.admin_id = this.selectedAdmin.id
       }
       return true
-    },
-
-    validateUserModel () {
-      var check
-      if (this.userModel.username.trim() === '') {
-        this.$q.notify({ type: 'negative', message: `O campo Nome completo é obrigatório.`, position: 'top-right' })
-        return false
-      }
-
-      if (this.userModel.email.trim() === '') {
-        this.$q.notify({ type: 'negative', message: `O campo Email é obrigatório.`, position: 'top-right' })
-        return false
-      } else {
-        check = validation.check('email', this.userModel.email)
-        if (check.success === false) {
-          this.$q.notify({ type: 'negative', message: `O email informado é inválido.`, position: 'top-right' })
-          return false
-        }
-      }
-      return true
     }
+
   },
 
   watch: {

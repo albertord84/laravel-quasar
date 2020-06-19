@@ -40,6 +40,10 @@
                 <q-item-section><q-item-label>Adição de videos</q-item-label></q-item-section>
                 <q-item-section avatar><q-icon color="red-7" name="cancel" /></q-item-section>
               </q-item>
+              <q-item >
+                <q-item-section><q-item-label>Adição de URLs</q-item-label></q-item-section>
+                <q-item-section avatar><q-icon color="red-7" name="cancel" /></q-item-section>
+              </q-item>
               <q-separator />
           </q-list>
           <div>
@@ -87,6 +91,10 @@
                 <q-item-section><q-item-label>Adição de videos</q-item-label></q-item-section>
                 <q-item-section avatar><q-icon color="red-7" name="cancel" /></q-item-section>
               </q-item>
+              <q-item >
+                <q-item-section><q-item-label>Adição de URLs</q-item-label></q-item-section>
+                <q-item-section avatar><q-icon color="red-7" name="cancel" /></q-item-section>
+              </q-item>
               <q-separator />
           </q-list>
           <div>
@@ -132,6 +140,10 @@
               <q-separator />
               <q-item >
                 <q-item-section><q-item-label>Adição de videos</q-item-label></q-item-section>
+                <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
+              </q-item>
+              <q-item >
+                <q-item-section><q-item-label>Adição de URLs</q-item-label></q-item-section>
                 <q-item-section avatar><q-icon color="green" name="check_circle" /></q-item-section>
               </q-item>
               <q-separator />

@@ -15,7 +15,7 @@
 
         <q-tab-panels v-model="tab" animated>
             <q-tab-panel name="showCostCenters" class="q-pa-none">
-              <TableCostCenter  @editCenterCust="editCenterCust" ></TableCostCenter>
+              <TableCostCenter  @editCostCenter="editCostCenter" ></TableCostCenter>
             </q-tab-panel>
 
             <q-tab-panel name="crudCostCenters">
@@ -56,7 +56,7 @@ export default {
       this.tab = 'showCostCenters'
     },
 
-    editCenterCust (costCenter) {
+    editCostCenter (costCenter) {
       this.costCenter = Object.assign({}, costCenter)
       this.crudTabTitle = 'Editar centro de custo'
       this.action = 'edit'

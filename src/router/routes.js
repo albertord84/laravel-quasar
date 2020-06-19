@@ -109,6 +109,13 @@ const routes = [
         meta: { requiresAuth: false }
       }
     ]
+    // ,
+    //   {
+    //     path: '/superadmin/dnd',
+    //     name: 'superadmin.dnd',
+    //     component: () => import('pages/private/superadmin/dnd.vue'),
+    //     meta: { requiresAuth: false }
+    //   }
   },
 
   // Admins routes

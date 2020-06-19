@@ -71,7 +71,9 @@ Route::resource('campaignsStatuses', 'CampaignsStatusController');
 
 Route::resource('planes', 'PlanesController');
 Route::resource('questionnaires', 'QuestionnairesController');
-// Route::get('fullQuestionary/{id}', 'QuestionnairesController@fullQuestionary');
+Route::post('criateFullQuestionnaire', 'QuestionnairesController@criateFullQuestionnaire');
+Route::post('updateFullQuestionnaire', 'QuestionnairesController@updateFullQuestionnaire');
+Route::post('deleteFullQuestionnaire', 'QuestionnairesController@deleteFullQuestionnaire');
 
 Route::resource('questions', 'QuestionsController');
 

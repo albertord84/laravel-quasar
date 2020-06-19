@@ -173,7 +173,7 @@ export default {
       },
       addressModel: {
         id: 0,
-        cep: '', // '24020206',
+        cep: '',
         street: '',
         number: '',
         complement: '',
@@ -542,12 +542,16 @@ export default {
         this.userModel.status_id = this.selectedUserStatu.id
       }
 
-      this.selectedCompany = this.selectedCompanyByName(this.selectedUserCompany)
-      if (!this.selectedCompany) {
-        this.$q.notify({ type: 'negative', message: `O campo Atribuir empresa é obrigatório.`, position: 'top-right' })
-        return false
+      if (this.userLogged.role_id === Roles.Superadmin) {
+        this.selectedCompany = this.selectedCompanyByName(this.selectedUserCompany)
+        if (!this.selectedCompany) {
+          this.$q.notify({ type: 'negative', message: `O campo Atribuir empresa é obrigatório.`, position: 'top-right' })
+          return false
+        } else {
+          this.userModel.company_id = this.selectedCompany.id
+        }
       } else {
-        this.userModel.company_id = this.selectedCompany.id
+        this.userModel.company_id = this.userLogged.company_id
       }
 
       return true

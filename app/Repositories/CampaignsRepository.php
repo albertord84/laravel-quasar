@@ -163,6 +163,7 @@ class CampaignsRepository extends BaseRepository
       $campaign['invitations_send_date'] = Carbon::parse( $campaign['invitations_send_date']. ':00')->format('Y-m-d H:i:s');
       $campaign['start_date'] = Carbon::parse( $campaign['start_date']. ':00')->format('Y-m-d H:i:s');
       $campaign['end_date'] = Carbon::parse( $campaign['end_date']. ':00')->format('Y-m-d H:i:s');
+      $campaign['requested_date'] = Carbon::now();
       $Campaign = $this->create($campaign);
 
       return $Campaign;

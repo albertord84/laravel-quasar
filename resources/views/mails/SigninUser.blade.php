@@ -45,7 +45,7 @@
                     Prezado {{$User->username}},
 
                     <br><br>
-                    O cadastro da sua conta de Administrador na empresa Physiback foi criado com sucesso.
+                    O cadastro da sua conta de Administrador na ferramenta Physiback foi criado com sucesso.
 
                     <br><br>
                     As suas credenciais para acesso ao nosso <a href="">sistema</a> são:

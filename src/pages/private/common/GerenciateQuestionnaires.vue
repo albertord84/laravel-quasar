@@ -8,17 +8,17 @@
       <q-card no-bordered flat>
         <q-tabs v-model="tab" dense class="text-grey" active-color="orange-10" indicator-color="orange-10" align="left" caps inline-label>
           <q-tab name="showQuestionaries" class="text-dark" icon="horizontal_split"  label="Questionários" @click="showTabQuestionnaires" />
-          <q-tab name="crudQuestionary" class="text-dark" :icon="iconActionQuestionnaires" :label="crudTabTitle"/>
+          <q-tab name="crudQuestionnaire" class="text-dark" :icon="iconActionQuestionnaires" :label="crudTabTitle"/>
         </q-tabs>
         <q-separator/>
         <q-tab-panels v-model="tab" animated>
 
           <q-tab-panel name="showQuestionaries" class="q-pa-none">
-            <TableQuestionnaires @editQuestionary="editQuestionary"></TableQuestionnaires>
+            <TableQuestionnaires @editQuestionnaire="editQuestionnaire"></TableQuestionnaires>
           </q-tab-panel>
 
-          <q-tab-panel name="crudQuestionary">
-            <CrudQuestionary :action="action" :questionary="questionary" @reloadQuestionnaires="reloadQuestionnaires"></CrudQuestionary>
+          <q-tab-panel name="crudQuestionnaire">
+            <CrudQuestionnaire :action="action" :questionnaire="questionnaire" @reloadQuestionnaires="reloadQuestionnaires"></CrudQuestionnaire>
           </q-tab-panel>
 
         </q-tab-panels>
@@ -33,13 +33,13 @@ export default {
 
   components: {
     'TableQuestionnaires': require('../../../components/TableQuestionnaires.vue').default,
-    'CrudQuestionary': require('../../../components/CrudQuestionary.vue').default
+    'CrudQuestionnaire': require('../../../components/CrudQuestionnaire.vue').default
   },
 
   data () {
     return {
       tab: '',
-      questionary: {},
+      questionnaire: {},
       crudTabTitle: '',
       action: '',
       iconActionQuestionnaires: '',
@@ -49,19 +49,19 @@ export default {
 
   methods: {
     showTabQuestionnaires () {
-      this.questionary = {}
+      this.questionnaire = {}
       this.crudTabTitle = 'Novo questionário'
       this.action = 'insert'
       this.iconActionQuestionnaires = 'add'
       this.tab = 'showQuestionaries'
     },
 
-    editQuestionary (questionary) {
-      this.questionary = Object.assign({}, questionary)
+    editQuestionnaire (questionnaire) {
+      this.questionnaire = Object.assign({}, questionnaire)
       this.crudTabTitle = 'Editar questionário'
       this.action = 'edit'
       this.iconActionQuestionnaires = 'edit'
-      this.tab = 'crudQuestionary'
+      this.tab = 'crudQuestionnaire'
     },
 
     reloadQuestionnaires () {

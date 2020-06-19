@@ -58,9 +58,9 @@
 
               <q-td key="actions" :props="props" class="q-pa-none q-ma-none">
                 <div style="margin-left:-3px; text-align: right">
-                  <q-icon color="green-9" size="sm" v-show="props.row.released" class="pointer-hover q-mr-sm" title="Criar uma copia" name="dynamic_feed" @click="duplicateQuestionary(props.row)" />
-                  <q-icon color="primary" size="sm" class="pointer-hover q-mr-sm" title="Ver/Editar" name="account_balance_wallet" @click="editQuestionary(props.row)" />
-                  <q-icon color="red" size="sm" class="pointer-hover" name="delete" title="Eliminar" @click="confirmDeleteQuestionary(props.row)"/>
+                  <q-icon color="green-9" size="sm" v-show="props.row.released" class="pointer-hover q-mr-sm" title="Criar uma copia" name="dynamic_feed" @click="duplicateQuestionnaire(props.row)" />
+                  <q-icon color="primary" size="sm" class="pointer-hover q-mr-sm" title="Ver/Editar" name="account_balance_wallet" @click="editQuestionnaire(props.row)" />
+                  <q-icon color="red" size="sm" class="pointer-hover" name="delete" title="Eliminar" @click="confirmDeleteQuestionnaire(props.row)"/>
                 </div>
               </q-td>
 
@@ -95,7 +95,7 @@
         <q-card>
           <q-card-section class="row items-center">
             <q-icon name="warning" class="text-red" style="font-size: 1.9rem;" />
-            <span v-if="questionary" class="q-ml-sm">Confirma que deseja eliminar o questionário "{{questionary.name}}"?</span>
+            <span v-if="questionnaire" class="q-ml-sm">Confirma que deseja eliminar o questionário "{{questionnaire.name}}"?</span>
           </q-card-section>
 
           <q-card-section v-show="isDeleting" class="text-center">
@@ -103,7 +103,7 @@
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="Eliminar" color="orange-8" @click.prevent="deleteQuestionary">
+            <q-btn flat label="Eliminar" color="orange-8" @click.prevent="deleteQuestionnaire">
             </q-btn>
             <q-btn flat label="Cancelar" color="gray" v-close-popup />
           </q-card-actions>
@@ -146,7 +146,7 @@ export default {
 
   data () {
     return {
-      questionary: null,
+      questionnaire: null,
       action: '',
       data: [],
       columns: [
@@ -232,17 +232,17 @@ export default {
         })
     },
 
-    duplicateQuestionary () {
+    duplicateQuestionnaire () {
     },
 
-    editQuestionary (questionary) {
-      this.$emit('editQuestionary', questionary)
+    editQuestionnaire (questionnaire) {
+      this.$emit('editQuestionnaire', questionnaire)
     },
 
-    deleteQuestionary () {
-      if (this.questionary) {
+    deleteQuestionnaire () {
+      if (this.questionnaire) {
         this.isDeleting = true
-        WebService.delete('web/' + 'questionnaires/' + this.questionary.id)
+        WebService.delete('web/' + 'questionnaires/' + this.questionnaire.id)
           .then(response => {
             this.modalConfirmDelete = false
             this.$q.notify({ type: 'positive', message: `Questionário eliminado com sucesso.`, position: 'top-right' })
@@ -256,8 +256,8 @@ export default {
       }
     },
 
-    confirmDeleteQuestionary (questionary) {
-      this.questionary = questionary
+    confirmDeleteQuestionnaire (questionnaire) {
+      this.questionnaire = questionnaire
       this.modalConfirmDelete = true
     },
 

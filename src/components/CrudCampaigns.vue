@@ -175,7 +175,7 @@
 <script>
 import { WebService } from '../services/WebService.js'
 import validation from '../services/ValidationService.js'
-import { Roles } from '../helpers/constants.js'
+import { Roles, CampaignsStatus } from '../helpers/constants.js'
 
 export default {
   name: 'CrudCampaigns',
@@ -194,6 +194,7 @@ export default {
         updater_id: 0,
         questionary_id: 0,
         base_id: 0,
+        company_id: 0,
         name: '',
         objetive: '',
         description: '',
@@ -257,7 +258,6 @@ export default {
       if (!this.validateCampaignModel()) {
         return
       }
-      this.campaignModel.updater_id = this.campaignModel.criator_id
       this.isCreatingCampaign = true
       this.$q.loading.show()
       if (this.campaign.UserCriator) { delete this.campaign.UserCriator }
@@ -266,7 +266,12 @@ export default {
       if (this.campaign.Questionnaire) { delete this.campaign.Questionnaire }
       if (this.campaign.Base) { delete this.campaign.Base }
       var url = (this.action === 'insert') ? 'criateFullCampaign' : 'updateFullCampaign'
-      this.campaignModel.status_id = (this.action === 'insert') ? 1 : this.campaignModel.status_id
+      if (this.action === 'insert') {
+        this.campaignModel.status_id = (!this.campaignModel.status_id) ? CampaignsStatus.CREATED : this.campaignModel.status_id
+        this.campaignModel.criator_id = (!this.campaignModel.criator_id) ? this.userLogged.id : this.campaignModel.criator_id
+        this.campaignModel.company_id = (!this.campaignModel.company_id) ? this.userLogged.company_id : this.campaignModel.company_id
+      }
+      this.campaignModel.updater_id = this.userLogged.id
       WebService.put('web/' + url, {
         campaign: this.campaignModel
       })
@@ -677,6 +682,7 @@ export default {
       var month = d.getMonth() + 1
       month = (month < 11) ? '0' + month : month
       var year = d.getFullYear()
+      if (date < 10) date = '0' + date
       this.campaignModel.invitations_send_date = year + '-' + month + '-' + date + ' ' + '00:00'
 
       d = new Date()
@@ -685,6 +691,7 @@ export default {
       month = d.getMonth() + 1
       month = (month < 11) ? '0' + month : month
       year = d.getFullYear()
+      if (date < 10) date = '0' + date
       this.campaignModel.start_date = year + '-' + month + '-' + date + ' ' + '00:00'
 
       d = new Date()
@@ -693,6 +700,7 @@ export default {
       month = d.getMonth() + 1
       month = (month < 11) ? '0' + month : month
       year = d.getFullYear()
+      if (date < 10) date = '0' + date
       this.campaignModel.end_date = year + '-' + month + '-' + date + ' ' + '23:59'
     }
 

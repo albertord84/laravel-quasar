@@ -61,7 +61,7 @@ class Campaigns extends Model
         // 'invitations_accepted',
         // 'invitations_declined',
         'invitations_send_date',
-        // 'requested_date',
+        'requested_date',
         // 'analyzed_date',
         'start_date',
         'end_date'

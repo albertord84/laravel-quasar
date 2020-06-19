@@ -119,6 +119,14 @@ export default {
           separator: false
         }
       ],
+      // ,
+      //   {
+      //     icon: 'monetization_on',
+      //     label: 'DnD',
+      //     link: '/superadmin/dnd',
+      //     selected: false,
+      //     separator: false
+      //   }
       userLogged: {}
     }
   },

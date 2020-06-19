@@ -112,36 +112,36 @@ class QuestionnairesRepository extends BaseRepository
             }})
           ->get()
           ->slice($start, $page_length)
-          ->each(function(Questionnaires $Questionnary) {
-              $Questionnary->pages = Questions
-                    ::where('questionnaire_id', $Questionnary->id)
+          ->each(function(Questionnaires $Questionnaire) {
+              $Questionnaire->Pages = Questions
+                    ::where('questionnaire_id', $Questionnaire->id)
                     ->get()
                     ->each(function(Questions $Question) {
-                        $Question->responseOptions = OptionsResponses::where('question_id', $Question->id)->get();
+                        $Question->ResponseOptions = OptionsResponses::where('question_id', $Question->id)->get();
                     });
-              $Questionnary->Plane = Planes::where('id', $Questionnary->plane_id)->get()->first();
-              $Questionnary->Criator = Users::where('id', $Questionnary->criator_id)->get()->first();
-              $Questionnary->Updater = Users::where('id', $Questionnary->updater_id)->get()->first();
+              $Questionnaire->Plane = Planes::where('id', $Questionnaire->plane_id)->get()->first();
+              $Questionnaire->Criator = Users::where('id', $Questionnaire->criator_id)->get()->first();
+              $Questionnaire->Updater = Users::where('id', $Questionnaire->updater_id)->get()->first();
       });
     }
 
     public function fullQuestionary($questionaryId) {
       // 1. buscar o questionário
-      $Questionnary = $this->find($questionaryId);
-      if($Questionnary){
+      $Questionnaire = $this->find($questionaryId);
+      if($Questionnaire){
         // 2. buscar as questões do questionário
-        $Questionnary->pages = Questions
+        $Questionnaire->pages = Questions
               ::where('questionnaire_id', $questionaryId)
               ->get()
               ->each(function(Questions $Question) {
-                  $Question->responseOptions = OptionsResponses::where('question_id', $Question->id)->get();
+                  $Question->ResponseOptions = OptionsResponses::where('question_id', $Question->id)->get();
               });
-        $Questionnary->Plane = Planes::where('id', $Questionnary->plane_id)->get()->first();
-        $Questionnary->Criator = Users::where('id', $Questionnary->criator_id)->get()->first();
-        $Questionnary->Updater = Users::where('id', $Questionnary->updater_id)->get()->first();
+        $Questionnaire->Plane = Planes::where('id', $Questionnaire->plane_id)->get()->first();
+        $Questionnaire->Criator = Users::where('id', $Questionnaire->criator_id)->get()->first();
+        $Questionnaire->Updater = Users::where('id', $Questionnaire->updater_id)->get()->first();
 
         // 3. buscar as OptionsResponses de cada questão
-        return $Questionnary;
+        return $Questionnaire;
       } else {
         return null;
       }
