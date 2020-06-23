@@ -94,3 +94,7 @@
     <a href="{{ route('optionsResponses.index') }}"><i class="fa fa-edit"></i><span>Options Responses</span></a>
 </li>
 
+<li class="{{ Request::is('invitations*') ? 'active' : '' }}">
+    <a href="{{ route('invitations.index') }}"><i class="fa fa-edit"></i><span>Invitations</span></a>
+</li>
+

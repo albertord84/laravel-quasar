@@ -180,9 +180,9 @@ const routes = [
         meta: { requiresAuth: false }
       },
       {
-        path: '/target/questionnaires',
-        name: 'target.questionnaires',
-        component: () => import('pages/private/target/Questionnaires.vue'),
+        path: '/target/invitations',
+        name: 'target.invitations',
+        component: () => import('pages/private/target/TableInvitations.vue'),
         meta: { requiresAuth: false }
       },
       {

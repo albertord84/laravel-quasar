@@ -70,7 +70,7 @@ class CampaignsRepository extends BaseRepository
       $start_date = $input['start_date'] ?? 0;
       $end_date = $input['end_date'] ?? 0;
 
-      $company_id  = (!$company_id && $userLogged->role_id == UsersRolesController::ADMIN) ? $userLogged->company_id : 0;
+      $company_id  = (!$company_id &&  $userLogged && $userLogged->role_id == UsersRolesController::ADMIN) ? $userLogged->company_id : 0;
 
       $deleted_at = $input['deleted_at'] ?? 0;
       $created_at = $input['created_at'] ?? 0;
@@ -150,7 +150,8 @@ class CampaignsRepository extends BaseRepository
           ->slice($start, $page_length)
           ->each(function(Campaigns $Campaign) {
                 $Campaign->StatusCampaign = CampaignsStatus::where('id', $Campaign->status_id)->get()->first();
-                $Campaign->Questionnaire = Questionnaires::where('id', $Campaign->questionary_id)->get()->first();
+                $arr =array('id' => $Campaign->questionary_id);
+                $Campaign->Questionnaire = (new QuestionnairesRepository(app()))->filterQuestionnaires($arr, null)[0];
                 $Campaign->UserCriator = Users::where('id', $Campaign->criator_id)->get()->first();
                 $Campaign->UserUpdater = Users::where('id', $Campaign->updater_id)->get()->first();
                 $Campaign->Base = Bases::where('id', $Campaign->base_id)->get()->first();

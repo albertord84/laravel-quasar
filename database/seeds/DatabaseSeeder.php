@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OptionsResponsesTableSeeder::class);
 
         $this->call(CampaignsTableSeeder::class);
+        $this->call(InvitationsTableSeeder::class);
 
         $this->call(ResponsesTableSeeder::class);
 

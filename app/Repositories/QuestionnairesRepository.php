@@ -54,7 +54,7 @@ class QuestionnairesRepository extends BaseRepository
       $updater_id = $input['updater_id'] ?? 0;
       $released = $input['released'] ?? 0;
 
-      $company_id  = (!$company_id && $userLogged->role_id == UsersRolesController::ADMIN) ? $userLogged->company_id : 0;
+      $company_id  = (!$company_id && $userLogged && $userLogged->role_id == UsersRolesController::ADMIN) ? $userLogged->company_id : 0;
 
       $deleted_at = $input['deleted'] ?? 0;
       $created_at = $input['created'] ?? 0;

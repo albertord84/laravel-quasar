@@ -28,9 +28,10 @@
                   </q-list>
               </q-btn-dropdown>
           </q-toolbar>
+
           <q-toolbar class="flex justify-between q-px-md xs">
             <q-btn :to="'/target/dashboard'"  flat round dense icon="home" class="q-mr-sm"/>
-            <q-btn :to="'/target/questionnaires'"  flat round dense icon="list_alt" class="q-mr-sm">
+            <q-btn :to="'/target/invitations'"  flat round dense icon="list_alt" class="q-mr-sm">
               <q-badge color="green-13" text-color="white" multi-line floating>2</q-badge>
             </q-btn>
             <q-btn :to="'/target/payment'"  flat round dense icon="money" class="q-mr-sm"/>
@@ -39,6 +40,7 @@
             </q-btn>
             <q-btn :to="'/target/contactus'"  flat round dense icon="mail_outline" class="q-mr-sm"/>
           </q-toolbar>
+
       </q-header>
 
       <q-drawer  v-model="leftDrawer" side="left" :breakpoint="500" bordered content-class="bg-grey-8">
@@ -81,8 +83,8 @@ export default {
         },
         {
           icon: 'list_alt',
-          label: 'Questionários',
-          link: '/target/questionnaires',
+          label: 'Campanhas',
+          link: '/target/invitations',
           selected: false,
           separator: false
         },
@@ -126,6 +128,13 @@ export default {
 
   beforeMount () {
     this.userLogged = this.$q.localStorage.getItem('user_data')
+    if (this.$q.platform.is.mobile) {
+      this.leftDrawer = false
+    }
+  },
+
+  mounted () {
+
   }
 }
 </script>

@@ -87,3 +87,9 @@ Route::resource('extractions', 'ExtractionsController');
 
 Route::resource('recompenses', 'RecompensesController');
 
+
+
+Route::resource('invitations', 'InvitationsController');
+Route::put('criateFullCampaign', 'CampaignsController@criateFullCampaign');
+Route::put('updateFullCampaign', 'CampaignsController@updateFullCampaign');
+Route::post('deleteFullCampaign', 'CampaignsController@deleteFullCampaign');
