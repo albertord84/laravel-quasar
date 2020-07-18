@@ -339,7 +339,8 @@ export default {
 
     getAdmins () {
       WebService.get('web/' + 'users', {
-        'role_id': Roles.Admin
+        'role_id': Roles.Admin,
+        'userLogged': JSON.stringify(this.userLogged)
       })
         .then(response => {
           this.stringOptions = []

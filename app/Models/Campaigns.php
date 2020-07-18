@@ -107,7 +107,7 @@ class Campaigns extends Model
         'criator_id' => 'required',
         'questionary_id' => 'required',
         'name' => 'required',
-        'response_limit' => 'required'
+        // 'response_limit' => 'required'
     ];
 
 

@@ -1,54 +1,52 @@
 <template>
     <q-page class="bg-gray q-py-md">
-      <div class="q-ml-sm q-mb-sm">
-        <h6 v-show="!selectedInvitation" class="q-mb-none gt-sm">Campanhas</h6>
-        <p v-show="!selectedInvitation" class="q-mt-xl q-mb-none lt-md">Campanhas</p>
-      </div>
+
+      <!-- Desktop -->
       <q-card no-bordered flat class="q-mt-none gt-sm">
         <q-tab-panels value="invitations">
           <q-tab-panel name="invitations" class="q-pa-none">
-            <!-- <TableInvitations  :invitations="allInvitations" @edit="editInvitations" @delete="deleteInvitations" @reload="reloadInvitations" ></TableInvitations> -->
+            <!-- <TableInvitationsDesktop  :invitations="allInvitations" @edit="editInvitations" @delete="deleteInvitations" @reload="reloadInvitations" ></TableInvitationsDesktop> -->
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
 
-      <q-scroll-area v-show="!selectedInvitation" :thumb-style="thumbStyle" :content-style="contentStyle"  :content-active-style="contentActiveStyle" style="max-width: 100%;" class="fill-window lt-md">
-        <div  v-for="(invitation, index) in allInvitations" :key="index">
-          <q-item bordered clickable class="q-py-md" style="border-bottom:solid 1px #f5f5f5" @click.prevent="selectedInvitation = invitation">
-            <q-item-section v-if="invitation.accepted" top avatar class="text-center">
-                <q-avatar color="primary" rounded text-color="white" square icon="album" />
-                <span style="margin-left: 5px; font-size:0.55rem">ACEITA</span>
-                <span style="font-size:0.55rem; color:#4caf50">+ R$ {{invitation.Campaign.Questionnaire.Plane.recompense}}.00</span>
-            </q-item-section>
-            <q-item-section v-else top avatar class="text-center">
-                <q-avatar color="negative" rounded text-color="white" square icon="block" />
-                <span style="margin-left:-3px; font-size:0.55rem">REJEITADA</span>
-                <span style="font-size:0.55rem; color:#f44336; text-decoration: line-through;"> R$ {{invitation.Campaign.Questionnaire.Plane.recompense}}.00</span>
-            </q-item-section>
-
-            <q-item-section>
-              <q-item-label>{{invitation.Campaign.name}}</q-item-label>
-              <q-item-label caption style="font-size:0.7rem">Potenciado por: {{invitation.Company.fantasy_name}}</q-item-label>
-              <q-item-label caption class="q-mx-none q-px-none">{{invitation.Campaign.description.slice(0,86)}}...</q-item-label>
-            </q-item-section>
-          </q-item>
-        </div>
+      <!-- Mobile -->
+      <q-scroll-area v-if="!selectedInvitation && !answerInvitation" :thumb-style="thumbStyle"
+        :content-style="contentStyle" :content-active-style="contentActiveStyle" style="max-width: 100%;"
+        class="fill-window lt-md q-mt-xl">
+        <InvitationsMobile
+            :allInvitations="allInvitations"
+            @setSelectInvitation="setSelectInvitation">
+        </InvitationsMobile>
       </q-scroll-area>
 
-      <InvitationDatails v-show="selectedInvitation"  :selectedInvitation="selectedInvitation" @showAllInvitations="selectedInvitation = null"></InvitationDatails>
+      <InvitationMobileDatails
+            v-if="selectedInvitation"
+            :selectedInvitation="selectedInvitation"
+            @showAllInvitations="selectedInvitation = null"
+            @answerSelectedInvitation="answerSelectedInvitation">
+      </InvitationMobileDatails>
+
+      <InvitationsMobileAnswerQuestionnaire
+            v-if="answerInvitation"
+            :answerInvitation="answerInvitation"
+            @showAllInvitations="selectedInvitation = null, answerInvitation = null"
+            @saveResponse="saveResponse">
+      </InvitationsMobileAnswerQuestionnaire>
 
     </q-page>
 </template>
 
 <script>
-// import axios from 'axios'
 import { WebService } from '../../../services/WebService.js'
 
 export default {
   name: 'TableInvitations',
 
   components: {
-    'InvitationDatails': require('../../../components/InvitationDatails.vue').default
+    'InvitationsMobile': require('../../../components/InvitationsMobile.vue').default,
+    'InvitationMobileDatails': require('../../../components/InvitationMobileDatails.vue').default,
+    'InvitationsMobileAnswerQuestionnaire': require('../../../components/InvitationsMobileAnswerQuestionnaire.vue').default
   },
 
   data () {
@@ -56,6 +54,7 @@ export default {
       loader: false,
       allInvitations: [],
       selectedInvitation: null,
+      answerInvitation: null,
 
       filter: '',
       page: 0,
@@ -100,7 +99,6 @@ export default {
       })
         .then(response => {
           let tmp = Object.values(response.data)
-          console.log(response.data)
           this.data = tmp
           this.allInvitations = tmp
           this.page = page
@@ -111,6 +109,19 @@ export default {
         .then(() => {
           this.isLoading = false
         })
+    },
+
+    setSelectInvitation (invitation, index) {
+      this.selectedInvitation = invitation
+    },
+
+    answerSelectedInvitation () {
+      this.answerInvitation = Object.assign({}, this.selectedInvitation)
+      this.selectedInvitation = null
+    },
+
+    saveResponse (response) {
+
     }
 
   },

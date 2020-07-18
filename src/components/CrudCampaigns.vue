@@ -87,10 +87,10 @@
       </div>
 
       <!-- Limite de respostas -->
-      <div class="col-6 q-px-xs q-mt-lg">
+      <!-- <div class="col-6 q-px-xs q-mt-lg">
         <span>Limite de respostas (*)</span>
         <q-input filled square v-model="campaignModel.response_limit" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm"/>
-      </div>
+      </div> -->
 
       <!-- Data para envio dos convites -->
       <div class="col-6 q-px-xs q-mt-lg">
@@ -607,11 +607,11 @@ export default {
         this.campaignModel.questionary_id = this.selectedQuestionnary.id
       }
 
-      this.campaignModel.response_limit = String(this.campaignModel.response_limit)
-      if (this.campaignModel.response_limit.trim() === '' || this.campaignModel.response_limit.trim() === 0 || this.campaignModel.response_limit.trim() === '0') {
-        this.$q.notify({ type: 'negative', message: `O campo Limite de respostas é inválido.`, position: 'top-right' })
-        return false
-      }
+      // this.campaignModel.response_limit = String(this.campaignModel.response_limit)
+      // if (this.campaignModel.response_limit.trim() === '' || this.campaignModel.response_limit.trim() === 0 || this.campaignModel.response_limit.trim() === '0') {
+      //   this.$q.notify({ type: 'negative', message: `O campo Limite de respostas é inválido.`, position: 'top-right' })
+      //   return false
+      // }
 
       if (this.campaignModel.invitations_send_date.trim() === '') {
         this.$q.notify({ type: 'negative', message: `O campo Data para envio dos convites é obrigatório.`, position: 'top-right' })

@@ -30,15 +30,15 @@
           </q-toolbar>
 
           <q-toolbar class="flex justify-between q-px-md xs">
-            <q-btn :to="'/target/dashboard'"  flat round dense icon="home" class="q-mr-sm"/>
-            <q-btn :to="'/target/invitations'"  flat round dense icon="list_alt" class="q-mr-sm">
-              <q-badge color="green-13" text-color="white" multi-line floating>2</q-badge>
-            </q-btn>
-            <q-btn :to="'/target/payment'"  flat round dense icon="money" class="q-mr-sm"/>
-            <q-btn :to="'/target/notifications'" flat round dense icon="notifications" class="q-mr-sm">
-              <q-badge color="red" text-color="white" multi-line floating>4</q-badge>
-            </q-btn>
-            <q-btn :to="'/target/contactus'"  flat round dense icon="mail_outline" class="q-mr-sm"/>
+              <q-btn :to="'/target/dashboard'"  flat round dense icon="home" class="q-mr-sm"/>
+              <q-btn :to="'/target/invitations'"  flat round dense icon="list_alt" class="q-mr-sm">
+                <q-badge color="green-13" text-color="white" multi-line floating>2</q-badge>
+              </q-btn>
+              <q-btn :to="'/target/payment'"  flat round dense icon="money" class="q-mr-sm"/>
+              <q-btn :to="'/target/notifications'" flat round dense icon="notifications" class="q-mr-sm">
+                <q-badge color="red" text-color="white" multi-line floating>4</q-badge>
+              </q-btn>
+              <q-btn :to="'/target/contactus'"  flat round dense icon="mail_outline" class="q-mr-sm"/>
           </q-toolbar>
 
       </q-header>

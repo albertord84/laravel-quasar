@@ -28,7 +28,7 @@ class CreateCampaignsTable extends Migration
             $table->string('description',300)->nullable();
             $table->string('observation',300)->nullable();
 
-            $table->integer('response_limit')->nullable(false);
+            $table->integer('response_limit')->nullable();
             $table->integer('response_amount')->nullable()->default(0);
             $table->integer('invitations_sent')->nullable()->default(0);
             $table->integer('invitations_accepted')->nullable()->default(0);

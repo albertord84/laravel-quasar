@@ -1,15 +1,16 @@
 <template>
-    <div v-if="selectedInvitation" style="margin-top:22px;">
-      <q-banner class="bg-white">
+    <div style="margin-top:22px;">
+      <q-banner class="bg-white flex justify-start">
         <template v-slot:avatar>
           <q-icon name="keyboard_arrow_left" size="md" color="dark" @click="showAllInvitations" />
         </template>
-        <span style="margin-left:30px !important">Detalhes desta campanha</span>
+        <div class="text-center">
+          <span style="margin-left:-20px">Detalhes</span>
+        </div>
       </q-banner>
 
       <q-card class="my-card q-mx-sm" flat bordered>
           <q-card-section >
-
             <!-- About campaign -->
             <div class="text-p title">Campanha</div>
             <q-separator />
@@ -49,47 +50,44 @@
 
             <div class="text-center q-pt-lg">
               <q-btn  text-color="white" class="q-pa-xs q-mb-xs bg-orange-8" label="Responder questionário"
-                      title="Responder questionário" icon="chrome_reader_mode" @click.prevent="answerQuestionnaire"/>
+                      title="Responder questionário" icon="chrome_reader_mode"
+                      @click.prevent="$emit('answerSelectedInvitation')"/>
             </div>
 
           </q-card-section>
       </q-card>
 
-        <q-dialog v-model="modalAceptInvitation" persistent transition-show="flip-down" transition-hide="flip-up">
-          <q-card>
-            <q-card-section class="row items-center">
-              <!-- <q-icon name="warning" class="text-red" style="font-size: 1.9rem;" /> -->
-              <span class="q-ml-sm">Confirma que deseja aceitar o convite para responder essa campanha?</span>
-            </q-card-section>
+      <q-dialog v-model="modalAceptInvitation" persistent transition-show="flip-down" transition-hide="flip-up">
+        <q-card>
+          <q-card-section class="row items-center">
+            <!-- <q-icon name="warning" class="text-red" style="font-size: 1.9rem;" /> -->
+            <span class="q-ml-sm">Confirma que deseja aceitar o convite para responder essa campanha?</span>
+          </q-card-section>
 
-            <q-card-section v-show="isAceptingInvitation" class="text-center">
-              <q-spinner-ios color="orange-8" size="1.9rem" />
-            </q-card-section>
+          <q-card-section v-show="isAceptingInvitation" class="text-center">
+            <q-spinner-ios color="orange-8" size="1.9rem" />
+          </q-card-section>
 
-            <q-card-actions align="right">
-              <q-btn flat label="Aceitar convite" color="orange-8" @click.prevent="aceptInvitation">
-              </q-btn>
-              <q-btn flat label="Cancelar" color="gray" v-close-popup />
-            </q-card-actions>
+          <q-card-actions align="right">
+            <q-btn flat label="Aceitar convite" color="orange-8" @click.prevent="aceptInvitation"></q-btn>
+            <q-btn flat label="Cancelar" color="gray" v-close-popup />
+          </q-card-actions>
 
-          </q-card>
-        </q-dialog>
+        </q-card>
+      </q-dialog>
     </div>
 </template>
 
 <script>
-// import { WebService } from '../../../services/WebService.js'
 
 export default {
-  name: 'InvitationDatails',
+  name: 'InvitationMobileDatails',
 
   props: {
     selectedInvitation: null
   },
 
   components: {
-    // 'AnswerQuestionnaire': require('AnswerQuestionnaire.vue').default
-
   },
 
   data () {
@@ -111,10 +109,6 @@ export default {
       this.isAceptingInvitation = true
       this.isAceptingInvitation = false
       this.modalAceptInvitation = false
-    },
-
-    answerQuestionnaire () {
-      this.$emit('answerQuestionnaire', this.selectedInvitation)
     }
   },
 
@@ -126,7 +120,6 @@ export default {
 
   beforeMount () {
     this.userLogged = this.$q.localStorage.getItem('user_data')
-    console.log(this.selectedInvitation)
   },
 
   beforeRouteEnter (to, from, next) {

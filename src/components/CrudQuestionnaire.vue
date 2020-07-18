@@ -126,7 +126,7 @@
                                       <q-input filled square autogrow v-model="questionnaireModel.Pages[selectedPageIndex].question" label-color="orange-8" color="orange-8" class="col-12 q-mt-sm" :disable="questionnaireModel.released === 1"/>
                                   </div>
 
-                                  <!-- Tipo de resposta -->
+                                  <!-- Selecção do tipo de resposta -->
                                   <div class="q-pt-md">
                                       <b>Tipo de resposta</b>
                                       <q-select filled square v-model="questionnaireModel.Pages[selectedPageIndex].response_type_id" :options="pageOptions"
@@ -135,6 +135,7 @@
                                       </q-select>
                                   </div>
 
+                                  <!-- Tipo de resposta: UNIQUE and MULTIPLE SELECTION -->
                                   <div v-if="[2, 3].includes(questionnaireModel.Pages[selectedPageIndex].response_type_id)" >
                                     <div class="flex justify-between q-pt-sm">
                                       <span class="q-pt-md"><b>Opções de resposta</b> <q-icon color="primary" size="1.2rem" name="help" class="q-mb-sm q-ml-xs pointer-hover" @click="responseOptionExplanation"/> </span>
@@ -149,8 +150,8 @@
                                             <template v-slot:prepend>
                                               <div>
                                                 <span style="font-size:1rem">{{index + 1}}. </span>
-                                                <q-checkbox v-model="option.truth" dense flat :title="option.truth ? 'Opção verdadeira': 'Opção falsa'" color="primary"
-                                                            @input="(questionnaireModel.Pages[selectedPageIndex].response_type_id === 2 && option.truth)? checkOnlyOption(index,1) : null"/>
+                                                <!-- <q-checkbox v-model="option.truth" dense flat :title="option.truth ? 'Opção verdadeira': 'Opção falsa'" color="primary"
+                                                            @input="(questionnaireModel.Pages[selectedPageIndex].response_type_id === 2 && option.truth)? checkOnlyOption(index,1) : null"/> -->
                                               </div>
                                             </template>
                                             <template v-slot:append>
@@ -168,7 +169,7 @@
                                         <div class="flex justify-between q-col-8 q-pt-sm">
                                           <q-input filled square v-model="newResponseOption.response" label=" " @keydown.enter.prevent="addResponseOption" label-color="orange-8" style="width:100%" color="orange-8" :disable="questionnaireModel.released === 1">
                                             <template v-slot:prepend>
-                                              <q-checkbox v-model="newResponseOption.truth" @input="(newResponseOption.truth)? checkOnlyOption(0,0) : null" title="Marcar somente se essa opção é verdadeira" dense color="primary" />
+                                              <!-- <q-checkbox v-model="newResponseOption.truth" @input="(newResponseOption.truth)? checkOnlyOption(0,0) : null" title="Marcar somente se essa opção é verdadeira" dense color="primary" /> -->
                                             </template>
                                             <template v-slot:after>
                                               <q-btn color="orange-8" @click.prevent="addResponseOption" class="q-py-sm" title="Adicionar opção de resposta">
@@ -180,6 +181,7 @@
                                     </div>
                                   </div>
 
+                                  <!-- Tipo de resposta: SCALE -->
                                   <div v-if="[4].includes(questionnaireModel.Pages[selectedPageIndex].response_type_id)">
                                     <div class="flex justify-between q-pt-sm">
                                       <b class="q-pt-md">{{(action === 'insert')? 'Estabelecer escala' : 'Escala estabelecida'}}</b>

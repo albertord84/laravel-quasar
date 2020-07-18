@@ -70,7 +70,11 @@ class BasesRepository extends BaseRepository
             }})
           ->orWhere(function($query) use ($origin_id){
             if ($origin_id) {
-              $query->orWhere('origin_id', $origin_id);
+              if (is_string($origin_id))
+                $origin_id = json_decode($origin_id);
+              foreach ($origin_id as $id) {
+                $query->orWhere('origin_id', $id);
+              }
             }})
           ->orWhere(function($query) use ($company_id){
             if ($company_id) {
