@@ -98,3 +98,7 @@
     <a href="{{ route('invitations.index') }}"><i class="fa fa-edit"></i><span>Invitations</span></a>
 </li>
 
+<li class="{{ Request::is('invitationsStatuses*') ? 'active' : '' }}">
+    <a href="{{ route('invitationsStatuses.index') }}"><i class="fa fa-edit"></i><span>Invitations Statuses</span></a>
+</li>
+

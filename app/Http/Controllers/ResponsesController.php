@@ -159,4 +159,22 @@ class ResponsesController extends AppBaseController
 
         // return redirect(route('responses.index'));
     }
+
+
+
+    
+    public function saveTargetResponses(Request $request)
+    {
+        $input = $request->all();
+
+        $userLogged = json_decode(Auth::guard('web')->user());
+        $userLogged = $input['userLogged'];
+
+        try {
+            $responses = $this->responsesRepository->saveTargetResponses($input,$userLogged);
+        } catch (\Throwable $th) {
+            return false;
+        }
+        return true;
+    }
 }

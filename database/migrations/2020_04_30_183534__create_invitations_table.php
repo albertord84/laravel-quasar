@@ -14,14 +14,15 @@ class CreateInvitationsTable extends Migration
     public function up()
     {
         Schema::create('invitations', function (Blueprint $table) {
-          $table->integer('id', true);
+        $table->integer('id', true);
 
-          $table->integer('user_id')->nullable(false)->index('fk_invitations_users')->default(1);
-          $table->integer('campaign_id')->nullable(false)->index('fk_invitations_campaigns')->default(1);
-          $table->integer('accepted')->nullable(false)->default(0);
+        $table->integer('user_id')->nullable(false)->index('fk_invitations_users')->default(1);
+        $table->integer('campaign_id')->nullable(false)->index('fk_invitations_campaigns')->default(1);
+        $table->integer('status_id')->nullable(false)->index('fk_invitations_status')->default(1);
+    //   $table->integer('accepted')->nullable(false)->default(0);
 
-          $table->timestamp('deleted_at')->nullable();
-          $table->timestamps();
+        $table->timestamp('deleted_at')->nullable();   
+        $table->timestamps();
         });
     }
 

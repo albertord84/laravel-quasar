@@ -298,7 +298,7 @@ class OptionsResponsesTableSeeder extends Seeder
         OptionsResponses::create([
             'id' => '29',
             'question_id' => '12',
-            'response' => '1',
+            'response' => '0',
             'truth' => true
         ]);
         $this->command->info('OptionsResponse 1 for Question 12 criated');

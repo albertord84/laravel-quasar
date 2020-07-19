@@ -16,7 +16,7 @@ class CreateExtractionsStatusesTable extends Migration
         Schema::create('extractions_status', function (Blueprint $table) {
           $table->integer('id', true);
 
-          $table->string('name', 15);
+          $table->string('name', 30);
           $table->string('decription', 300)->nullable();
 
           $table->timestamp('deleted_at')->nullable();

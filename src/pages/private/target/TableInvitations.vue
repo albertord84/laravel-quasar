@@ -11,28 +11,15 @@
       </q-card>
 
       <!-- Mobile -->
-      <q-scroll-area v-if="!selectedInvitation && !answerInvitation" :thumb-style="thumbStyle"
+      <q-scroll-area :thumb-style="thumbStyle"
         :content-style="contentStyle" :content-active-style="contentActiveStyle" style="max-width: 100%;"
         class="fill-window lt-md q-mt-xl">
         <InvitationsMobile
             :allInvitations="allInvitations"
-            @setSelectInvitation="setSelectInvitation">
+            @setSelectInvitation="setSelectInvitation"
+        >
         </InvitationsMobile>
       </q-scroll-area>
-
-      <InvitationMobileDatails
-            v-if="selectedInvitation"
-            :selectedInvitation="selectedInvitation"
-            @showAllInvitations="selectedInvitation = null"
-            @answerSelectedInvitation="answerSelectedInvitation">
-      </InvitationMobileDatails>
-
-      <InvitationsMobileAnswerQuestionnaire
-            v-if="answerInvitation"
-            :answerInvitation="answerInvitation"
-            @showAllInvitations="selectedInvitation = null, answerInvitation = null"
-            @saveResponse="saveResponse">
-      </InvitationsMobileAnswerQuestionnaire>
 
     </q-page>
 </template>
@@ -44,9 +31,7 @@ export default {
   name: 'TableInvitations',
 
   components: {
-    'InvitationsMobile': require('../../../components/InvitationsMobile.vue').default,
-    'InvitationMobileDatails': require('../../../components/InvitationMobileDatails.vue').default,
-    'InvitationsMobileAnswerQuestionnaire': require('../../../components/InvitationsMobileAnswerQuestionnaire.vue').default
+    'InvitationsMobile': require('../../../components/InvitationsMobile.vue').default
   },
 
   data () {
@@ -112,18 +97,15 @@ export default {
     },
 
     setSelectInvitation (invitation, index) {
-      this.selectedInvitation = invitation
-    },
-
-    answerSelectedInvitation () {
-      this.answerInvitation = Object.assign({}, this.selectedInvitation)
-      this.selectedInvitation = null
-    },
-
-    saveResponse (response) {
-
+      this.$router.push(
+        {
+          name: 'target.invitationMobileDatails',
+          params: {
+            invitation: invitation
+          }
+        }
+      )
     }
-
   },
 
   watch: {

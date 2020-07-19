@@ -2,8 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Http\Controllers\InvitationsStatusController;
 use App\Models\Responses;
 use App\Repositories\BaseRepository;
+use App\Models\Invitations;
+use App\Models\Planes;
+use App\Models\Recompenses;
 
 /**
  * Class ResponsesRepository
@@ -97,6 +101,41 @@ class ResponsesRepository extends BaseRepository
           ->each(function(Responses $Response) {
             // $Questions->Questions = null;
       });
+    }
+
+
+    public function saveTargetResponses($input, $userLogged) {
+        
+        $invitation = $input['invitation'];
+        $responses = $input['responses'];
+
+        //1. check invitationand and status of invitation isnt Responsed
+        if (!($inv = Invitations::find($invitation->id))) return;
+        if ($inv->status_id != InvitationsStatusController::ACCEPTED) return;
+        if (Recompenses::where('user_id', $userLogged->id)->where('questionnaire_id', $invitation->Campaign->Questionnaire->id)->where('campaign_id', $inv->campaign_id)->get()->first()) return;
+
+        //2. save reponses
+        foreach ($responses as $response) {
+          $this->create($response);
+        }
+        
+        //3. update invitation status to answered
+        $inv->status_id = InvitationsStatusController::ANSWERED;
+        $inv->save();
+
+        //4. generate recompense
+        //TODO: set percent of plane to recompense value
+        $value = Planes::find($invitation->Campaign->Questionnaire->plane_id) * 0.50; 
+        Recompenses::create([
+          'user_id' => $userLogged->id,
+          'questionnaire_id' => $invitation->Campaign->Questionnaire->id,
+          'campaign_id' => $inv->campaign_id,
+          'value' => $value
+        ]);
+
+        //5. return
+        return true;
+      
     }
 
     /**

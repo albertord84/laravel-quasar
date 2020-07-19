@@ -15,14 +15,18 @@ class AddForeignKeysToInvitationsTable extends Migration
     {
         Schema::table('invitations', function (Blueprint $table) {
           $table->foreign('user_id', 'fk_invitations_users') //invitations x users
-              ->references('id')->on('users')
-              ->onUpdate('NO ACTION')
-              ->onDelete('NO ACTION');
+            ->references('id')->on('users')
+            ->onUpdate('NO ACTION')
+            ->onDelete('NO ACTION');
           $table->foreign('campaign_id', 'fk_invitations_campaigns') //invitations x campaigns
-              ->references('id')->on('campaigns')
-              ->onUpdate('NO ACTION')
-              ->onDelete('NO ACTION');
-          });
+            ->references('id')->on('campaigns')
+            ->onUpdate('NO ACTION')
+            ->onDelete('NO ACTION');
+          $table->foreign('status_id', 'fk_invitations_status') //invitations x campaigns
+            ->references('id')->on('campaigns')
+            ->onUpdate('NO ACTION')
+            ->onDelete('NO ACTION');
+        });
     }
 
     /**
@@ -33,8 +37,9 @@ class AddForeignKeysToInvitationsTable extends Migration
     public function down()
     {
         Schema::table('invitations', function (Blueprint $table) {
-          $table->dropForeign('fk_invitations_users');
-          $table->dropForeign('fk_invitations_campaigns');
+                $table->dropForeign('fk_invitations_users');
+                $table->dropForeign('fk_invitations_campaigns');
+                $table->dropForeign('fk_invitations_status');
         });
     }
 }

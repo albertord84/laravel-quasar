@@ -32,7 +32,7 @@ class Invitations extends Model
     public $fillable = [
         'user_id',
         'campaign_id',
-        'accepted'
+        'status_id'
     ];
 
     /**
@@ -44,7 +44,7 @@ class Invitations extends Model
         'id' => 'integer',
         'user_id' => 'integer',
         'campaign_id' => 'integer',
-        'accepted' => 'integer'
+        'status_id' => 'integer'
     ];
 
     /**
@@ -55,7 +55,7 @@ class Invitations extends Model
     public static $rules = [
         'user_id' => 'required',
         'campaign_id' => 'required',
-        'accepted' => 'required'
+        'status_id' => 'required'
     ];
 
     /**

@@ -46,7 +46,7 @@ class InvitationsRepository extends BaseRepository
       $updated_at = $input['updated_at'] ?? 0;
       $deleted_at = $input['deleted'] ?? 0;
       $created_at = $input['created'] ?? 0;
-      $accepted = $input['accepted'] ?? 0;
+      $status_id = $input['status_id'] ?? 0;
 
       $page_length = env('APP_PAGE_LENGTH', 100);
       $start = $page_length * $page;
@@ -64,9 +64,9 @@ class InvitationsRepository extends BaseRepository
             if ($campaign_id) {
               $query->where('campaign_id', $campaign_id);
             }})
-          ->where(function($query) use ($accepted){
-            if ($accepted) {
-              $query->where('accepted', $accepted);
+          ->where(function($query) use ($status_id){
+            if ($status_id) {
+              $query->where('status_id', $status_id);
             }})
 
           ->where(function($query) use ($deleted_at){

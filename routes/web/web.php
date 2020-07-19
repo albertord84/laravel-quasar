@@ -80,6 +80,7 @@ Route::resource('questions', 'QuestionsController');
 Route::resource('questionsTypes', 'QuestionsTypesController');
 Route::resource('optionsResponses', 'OptionsResponsesController');
 Route::resource('responses', 'ResponsesController');
+Route::post('saveTargetResponses', 'ResponsesController@saveTargetResponses');
 Route::resource('responsesTypes', 'ResponsesTypesController');
 
 Route::resource('extractionsStatuses', 'ExtractionsStatusController');
@@ -87,9 +88,10 @@ Route::resource('extractions', 'ExtractionsController');
 
 Route::resource('recompenses', 'RecompensesController');
 
-
-
 Route::resource('invitations', 'InvitationsController');
 Route::put('criateFullCampaign', 'CampaignsController@criateFullCampaign');
 Route::put('updateFullCampaign', 'CampaignsController@updateFullCampaign');
 Route::post('deleteFullCampaign', 'CampaignsController@deleteFullCampaign');
+
+
+Route::resource('invitationsStatuses', 'InvitationsStatusController');

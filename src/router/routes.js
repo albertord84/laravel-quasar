@@ -179,12 +179,27 @@ const routes = [
         component: () => import('pages/private/target/DashboardTarget.vue'),
         meta: { requiresAuth: false }
       },
+
       {
         path: '/target/invitations',
         name: 'target.invitations',
         component: () => import('pages/private/target/TableInvitations.vue'),
         meta: { requiresAuth: false }
       },
+
+      {
+        path: '/target/invitationMobileDatails',
+        name: 'target.invitationMobileDatails',
+        component: () => import('pages/private/target/InvitationMobileDatails.vue'),
+        meta: { requiresAuth: false }
+      },
+      {
+        path: '/target/answerQuestionnaire',
+        name: 'target.answerQuestionnaire',
+        component: () => import('pages/private/target/InvitationsMobileAnswerQuestionnaire.vue'),
+        meta: { requiresAuth: false }
+      },
+
       {
         path: '/target/payment',
         name: 'target.payment',

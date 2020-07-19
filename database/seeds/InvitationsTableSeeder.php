@@ -30,7 +30,7 @@ class InvitationsTableSeeder extends Seeder
           'id' => '1',
           'user_id' => '10',
           'campaign_id' => '1', // this campaing has a released questionnaire
-          'accepted' => '1',
+          'status_id' => '1',
       ]);
       $this->command->info('Invitation 1 to target1company2 10 CREATED');
 
@@ -38,7 +38,7 @@ class InvitationsTableSeeder extends Seeder
           'id' => '2',
           'user_id' => '10',
           'campaign_id' => '2', // this campaing has a non-released questionnaire
-          'accepted' => '1',
+          'status_id' => '1',
       ]);
       $this->command->info('Invitation 2 to target1company2 10 CREATED');
 
@@ -46,7 +46,7 @@ class InvitationsTableSeeder extends Seeder
           'id' => '3',
           'user_id' => '10',
           'campaign_id' => '3', // this campaing has a non-released questionnaire
-          'accepted' => '0',
+          'status_id' => '3',
       ]);
       $this->command->info('Invitation 3 to target1company2 10 CREATED');
     }
@@ -56,7 +56,7 @@ class InvitationsTableSeeder extends Seeder
           'id' => '4',
           'user_id' => '12',
           'campaign_id' => '2', // this campaing has a non-released questionnaire
-          'accepted' => '1',
+          'status_id' => '1',
       ]);
       $this->command->info('Invitation 1 to target1company3 10 CREATED');
 
@@ -64,7 +64,7 @@ class InvitationsTableSeeder extends Seeder
           'id' => '5',
           'user_id' => '12',
           'campaign_id' => '3', // this campaing has a non-released questionnaire
-          'accepted' => '1',
+          'status_id' => '1',
       ]);
       $this->command->info('Invitation 2 to target1company3 10 CREATED');
     }
